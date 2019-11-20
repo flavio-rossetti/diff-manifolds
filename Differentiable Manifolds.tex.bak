@@ -1,0 +1,552 @@
+%&pdflatex
+\documentclass[a4paper,11pt,titlepage]{article}
+%\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+% usare latin1 con windows
+\usepackage[utf8]{inputenc}
+% usare utf8 con linux
+%\usepackage[uft8]{inputenc}
+\usepackage{color, graphicx}%per scrivere con diversi colori
+\usepackage{hyperref}
+\usepackage{amssymb,amsthm,amsmath,mathtools, tikz-cd}
+
+
+
+%%% Definizione degli ambienti tipo "Teorema"
+%\newtheorem{theorem}{Theorem}[chapter]
+
+%\theoremstyle{theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Remark}
+%\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{example}{Example}[section]
+
+
+
+% aumenta la spaziatura
+\linespread{1.2}
+
+% definisce nuovi operatori matematici
+%\DeclareMathOperator{\dist}{dist}
+%\DeclareMathOperator{\tr}{Tr}
+\newcommand{\rfield}{\mathbb{R}}
+%\renewcommand{\vec}[1]{\underline{#1}} %vettore con underline
+%\newcommand{\defeq}{\vcentcolon=} % :=
+%\newcommand{\eqdef}{=\vcentcolon} % =:
+%\newcommand{\sigmavec}{\vec{\sigma}}
+%\newcommand{\bj}{\beta J}
+%\newcommand{\eps}{\varepsilon}
+
+%\newcommand{\restrict}[2]{\left.{#1}\right|_{#2}}
+\newcommand{\restrict}[2]{{#1}\raisebox{-.5ex}{$|$}_{#2}}
+
+\begin{document}
+
+
+\begin{titlepage}
+\begin{center}
+ {\huge\bfseries Notes \\ Differentiable Manifolds \\ LMU Munich WS 19 \\}
+ % ----------------------------------------------------------------
+ \vspace{1.5cm}
+ {\Large\bfseries by Fla}\\[5pt]
+ flaviorossetti@outlook.com\\[14pt]
+  \vfill
+\end{center}
+\end{titlepage}
+
+\pagenumbering{Roman}
+\newpage
+\begin{center}
+ {\huge\bfseries Don't trust these notes! \\}
+
+  \vfill
+\end{center}
+\newpage
+
+% indice
+
+\tableofcontents
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{arabic}
+
+%\chapter{Part I}
+\section{Notations}
+
+In order to describe a map $f$ from a set $A$ to a set $B$, which assigns $f(a)$ to each $a \in A$, we will use the following notations:
+\begin{equation}
+f \colon A \rightarrow B
+\end{equation}
+Or, analogously:
+\begin{equation}
+a \mapsto f(a)
+\end{equation}
+(The arrows are different!)
+Or, if we want to be extra-precise:
+\begin{align}
+f \colon A &\rightarrow B \nonumber \\
+a &\mapsto f(a)
+\end{align}
+
+\section{Intro}
+
+From the Lee book \cite{Lee}: "The central idea of calculus is \textit{linear approximation}". A function of one variable can be approximated by its tangent line, a curve by a tangent vector (i.e. velocity vector), a surface in $\rfield^3$ can be approximated by its tangent plane, and a map from $\rfield^n$ to $\rfield^m$ by its total derivative.
+Here it comes the importance of tangent spaces.
+
+Main idea: in order to study tangent vectors, we identify them with "directional derivatives". In particular, there is a natural one-to-one correspondence between geometric tangent vectors and linear maps from $C^{\infty}(\rfield^n)$ to $\rfield$ satisfying the product rule. Such maps are called \textit{derivations}. With this as motivation, we can \textit{define} a tangent vector on a smooth manifold $M$ as a derivation of $C^{\infty}(M)$ at a point.
+
+
+\begin{remark} \label{pointorvec}
+Questions:
+\begin{itemize}
+\item \textbf{What are manifolds?} They will be defined later. For now, when we say that a vector is "tangent to a manifold about a point" let's think about a vector tangent to a curve, for instance.
+\item \textbf{Points or vectors?} We can think of elements of $\rfield^n$ either as points or vectors. As points, their only property is their location, given by the coordinates $(x_1, \ldots, x_n)$ on a chosen basis. As vectors, they are characterized by a direction and a magnitude, but its location is irrelevant (translational invariance). So given $v \in \rfield^n, v=v^ie_i$, it can be seen as an arrow with its initial point anywhere in $\rfield^n$. Under the hood, we are thinking about copies of $\rfield^n$. So, if we think about a vector tangent to the border of the sphere at a point $a$, we imagine the vector as living in a copy of $\rfield^n$ with its origin translated to a.
+\end{itemize}
+\end{remark}
+
+\section{Derivations}
+\begin{definition} \label{derivation}
+If $a$ is a point of $\rfield^n$, a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$ is called a \textit{derivation at a} if it is linear over $\rfield$ and satisfies the following product rule:
+$$\restrict{v(fg)}{a} = \restrict{f}{a} \restrict{v(g)}{a} + \restrict{g}{a} \restrict{v(f)}{a}$$
+\end{definition}
+
+\begin{remark}
+Directional derivatives obviously satisfy the above definition, and in these cases the product rule is also called Leibnitz rule.
+\end{remark}
+
+%\begin{definition} $T_{a}\rfield^n$ is the set of all derivations of $C^{\infty}(\rfield^n)$ at $a$. (And it is a vector space)
+%\end{definition}
+
+\section{Multilinear Forms}
+
+\begin{definition}[1-forms]
+Given a  vector space $V$ on a field $K$, a 1-form (or linear form) $\varphi \colon V \rightarrow K$ is a linear function from $V$ to $K$. $V^*$ (also denoted by $\Lambda V^*$) is the set of all linear forms on $V$.
+\end{definition}
+
+\begin{definition}[Dual basis]
+If $\{e_i\}_{i=1, \ldots, n}$ is a basis of $V$, then $\{ e^{*i} \}_{i=1}^n \subseteq V^*$ is called the \textit{dual basis} if $e^{*i}(e_j) = \delta^i_j$.
+\end{definition}
+
+\begin{remark}
+We could prove that the dual basis is indeed a basis of the dual space, so $\dim(V) = \dim(\Lambda V^*)$. Check proposition \ref{basisprop1}.
+\end{remark}
+
+
+\begin{example}
+Every vector in $\rfield^n$ about a point $p \in \rfield^n$ (i.e. such that its origin is the point $p$) "can be seen" as a directional derivative of a function evaluated at the point $p$. For the sake of simplicity, we think $p=0$ (but the following results are valid $\forall \, p \in \rfield^n$.
+\textbf{!Pay attention!} the sentence "can be seen" means that there is an isomorphism between such vectors and such linear forms. We notice that:
+\begin{itemize}
+\item Because of linearity, we just need to prove the isomorphism for the basis vectors $\{ e_i \}_{i=1,\ldots,n}$ of $\rfield^n$.
+%Indeed, if every basis vector $e_j$ is associated with a partial derivative $\frac{\partial}{\partial x_j}$,
+\item We need to find an isomorphism between vectors and derivations about a point (the latter are maps that take a function as argument and give out a number). In order to do this, we also consider an additional map:
+\begin{align} \label{coofunc}
+x_j \colon \rfield^n \rightarrow &R \\
+v=(v_1, \ldots, v_n) \mapsto &v_j \nonumber
+\end{align}
+where $v_1, \ldots, v_j$ are the coordinates of the vector $v$ in the canonical basis. The linear form $x_j$ (called \textit{coordinate function}) returns the $j$-th coordinate of a vector. So, given a vector $v \in \rfield^n$, every coordinate $v_j$ can be seen as $v_j = x_j(v)$
+\end{itemize}
+
+Now the isomorphism between basis vectors and directional derivatives is the following: given $e_j$ vector of the canonical basis, it is associated with the derivation
+\begin{align*}
+\restrict{\frac{\partial}{\partial x_j}}{p=0} \colon C^{\infty}(\rfield^n) &\rightarrow \rfield \\
+f &\mapsto \restrict{\frac{\partial}{\partial x_j}}{0} (f) \equiv \frac{\partial f}{\partial x_j} (0)
+\end{align*}
+Indeed, the map $x_j \rightarrow \restrict{\frac{\partial}{\partial x_j}}{0}$ (where $x_j$ is the coordinate function defined in \ref{coofunc}) is an isomorphism because it is bijective and it preserves the operations (because of the linearity of the derivations). Then, since there is again an isomorphism between $e_j$ (vector of the canonical basis) and $x_j$ (coordinate function), we have proved that every vector is (isomorphic to) a directional derivative.
+
+What is more: given $V_0$, set of all the vectors about $0$ (i.e. the set of all directional derivatives, because even if we make a translations we only care about the direction) we can consider its dual space $V_0^*$. This dual space represents the set of elements which are dual to the directional derivatives (whatever it means).
+
+What is a possible dual basis?  We want to find linear forms $$e^{*i} \colon V_0 \rightarrow \rfield$$ such that $e^{*i}(e_j) = \delta_j^i$.
+We have just discovered that we can consider vectors as directional derivatives. So, given $e_j$ vector of the canonical basis, we will call it $\restrict{\frac{\partial}{\partial x^j}}{0}$ (because of the isomorphism, they are quite the same mathematical object).
+
+Now, we want that
+\begin{equation} \label{dualbasisdelta}
+e^{*i}\left( \restrict{\frac{\partial}{\partial x^j}}{0} \right) = \delta_j^i
+\end{equation}
+Let's just define
+\begin{equation} \label{dualdef}
+e^{*i}\left( \restrict{\frac{\partial}{\partial x^j}}{0} \right) \equiv \restrict{\frac{\partial}{\partial x^j} x_i}{0} =\frac{\partial}{\partial x^j} x_i = \delta_j^i
+\end{equation}
+Where $x_i$ is the coordinate function defined in \ref{coofunc}. Now, it might seem that $e^{*i}$ does not take a vector as argument, but rather a function. Actually, this problem is solved by the isomorphism between vectors and directional derivatives proved above. If $\varphi$ is the name of such isomorphism, we could slightly change the definition \eqref{dualdef} in order to solve this ambiguity:
+\begin{equation}
+e^{*i}(e_j) \equiv \varphi(e_j) (x_i)
+\end{equation}
+where
+\begin{equation}
+\varphi(e_j) = \restrict{\frac{\partial}{\partial x^j}}{0}
+\end{equation}
+
+The vectors of the dual basis will also be called
+$$dx^i \equiv e^{*i}$$
+
+This will be important later: we will define exterior forms of degree $k$ and we'll use both notations. The set of all these forms is $\Lambda^k V^*$, and its basis is given by products (in particular, exterior products) of $e^{*i_1}, \ldots, e^{*i_k}$ (i.e. $dx^{i_1}, \ldots, dx^{i_k}$).
+
+
+
+\end{example}
+
+\begin{definition} [Set of vector fields] \label{setsfields}
+We denote by $\mathfrak{X}(\rfield^n)$ the set of al possible vector fields in $\rfield^n$, i.e.
+\begin{align}
+\mathfrak{X}(\rfield^n) = \text{Der}\mathbb{F}(\rfield^n) \equiv\{ v \colon \mathbb{F}(\rfield^n) \rightarrow \mathbb{F}(\rfield^n) \text{ such that } \nonumber \\
+ v \text{ is } \rfield\text{-linear and } v(fg) = v(f)g + fv(g)  \}
+\end{align}
+where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}$.
+\end{definition}
+
+\begin{remark} [Fields vs. Derivations] \label{fieldsvsder}
+  The above definition might seem a bit confusing at first. If $v$ is a vector field in $\rfield^n$, then $v$ assigns a vector to each element of $\rfield^n$ as a continuous function. So $v \colon \rfield^n \rightarrow \rfield^n$. So, the set of all vector fields should be (we will use a different symbol to denote it):
+  $$X(\rfield^n) = \left \{ v \colon \rfield^n \rightarrow \rfield^n \right \}$$
+  However, the definition \ref{setsfields} is a bit different. Why?
+  The fact is, we can consider a vector of $\rfield^n$ as a directional derivative (we are not considering any fixed point here, but the results do not change). Now, a derivation, as defined in def. \ref{derivation}, is a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$, i.e. we can say that a derivation is a very smooth element of $\mathbb{F}(\rfield^n) = \{ \text{functions } f \colon \rfield^n \rightarrow \rfield\}$. And so for the vectors. Then we also explained why in the definition of $\mathfrak{X}( \rfield^n)$ every element must satisfy the Leibnitz rule.
+
+  Now, a question arises: given $v$ vector field, should we write $v(p)$ (i.e. it takes vectors as argument) or should we write $v(f)$ (i.e. it takes smooth functions as arguments)? The answer is: it does not make any (serious) difference, since they are two different "$v$"s. Which is, we will use vectors in the former case, and functions in the latter. And we can choose which case to use, since we can identify every vector field with a derivation, and every derivation with a vector field (for more info, see pag. 181 of \cite{Lee}). Now, let us analyze how $v(f)$ is made in the latter case.
+  Given $v \in \mathfrak{X}(\rfield^n), f: \rfield^n \rightarrow \rfield$, we define the function $v(f)$ as
+  \begin{align} \label{vfpdef}
+    v(f) \colon \rfield^n &\rightarrow \rfield \nonumber \\
+    p & \mapsto v(f)(p) \equiv v_p f
+  \end{align}
+  Now, in coordinates:
+  \begin{equation}
+    v(f)(p) = v_p f = v^i(p)(e_i)_p f = v^i(p) \restrict{\frac{\partial}{\partial x^i}}{p} f = v^i(p) \frac{\partial f}{\partial x^i} (p)
+  \end{equation}
+  where we used summation convention. Why this definition? Because it lets us to identify vector fields with derivations and vice versa (see, again, pag. 181 of \cite{Lee}). So:
+  \begin{itemize}
+    \item $v(f)(p)$ is a number
+    \item $v(f)(\cdot)$ is a function from $\rfield^n$ to $\rfield$
+    \item $v(\cdot)$ is a function from $\mathbb{F}(\rfield^n)$ to $\mathbb{F}(\rfield^n)$
+  \end{itemize}
+We also notice that the mathematical object $e_i$ is not much different from $\restrict{(e_i)}{p}$ in this case: there is no difference if we think about them as directions, but it makes a difference if we think about them as directional derivatives, because the latter notation gives info about the point in which the derivative is evaluated. So, we add the pedix "$p$" in order to make the isomorphism between vectors and directional derivatives more explicit. Check also the remark \ref{pointorvec}.
+\end{remark}
+
+%\begin{remark}
+%So, if $v \in \mathfrak{X}(\rfield^n)$, then $v(f)(p) = \restrict{v(f)}{p} = v^i(p)\restrict{(e_i)}{p} = v^i(p) \restrict{\frac{\partial}{\partial x^i}}{p} f = v^i(p) \frac{\partial}{\partial x^i} f(p)$, where
+%\end{remark}
+
+\section{Exterior Product and Generalisation}
+
+\begin{definition} [Exterior form of degree $k$]
+Given a vector space $V$ on a field $\mathbb{K}$, with $\dim(V) = n$, and with $k \le n$, an \textit{exterior form of degree $k$} (or $k$-linear form, or $k$-form) is a map $\omega$:
+\begin{equation*}
+\omega \colon \underbrace{V \times \ldots \times V}_{\text{k times}} \rightarrow \mathbb{K}
+\end{equation*}
+such that
+\begin{equation*}
+\omega(v_1, \ldots, v_k) = sgn(\pi)\omega(v_{\pi(1)}, \ldots, v_{\pi(k)})
+\end{equation*}
+and such that $\omega$ is multilinear. Where $\pi$ is a permutation of $k$ elements, i.e. $\pi \in S_k$.
+We will also write $\omega \in \Lambda ^k V^*$
+\end{definition}
+
+\begin{definition}[Exterior product between two 1-forms] \label{extprod}
+Given a vector space $V$ on a field $\mathbb{K}, \dim(V) \ge 2$, and given $\varphi^1, \varphi^2 \in \Lambda V^* $, then we define the exterior product (or wedge product) $\wedge$ as:
+\begin{align*}
+\wedge \colon \Lambda V^* \times \Lambda V^* &\rightarrow \Lambda^2 V^*  \\
+(\varphi^1, \varphi^2) &\mapsto \varphi^1 \wedge \varphi^2
+\end{align*}
+where:
+\begin{equation*}
+\varphi^1 \wedge \varphi^2 (x_1, x_2) = \varphi^1(x_1) \varphi^2(x_2) - \varphi^2(x_1) \varphi^1(x_2) = \det(\varphi^i (x_j))
+\end{equation*}
+for $i, j=1,2$.
+\end{definition}
+
+\begin{remark}[Exterior product between $k$ 1-forms]
+The exterior product $\wedge$ that we defined for $k=2$ in \ref{extprod} is an exterior form of degree 2. We want to generalize it for $k$ vector spaces. In order to extend the definition, we want it to be an exterior form of degree $k$, so:
+\begin{align*}
+  \wedge \colon \underbrace{\Lambda V^* \times \ldots \times \Lambda V^*}_{k \text{ times}} &\rightarrow \Lambda^k V^*  \\
+  (\varphi^1, \ldots, \varphi^k) &\mapsto \varphi^1 \wedge \ldots \wedge \varphi^k
+\end{align*}
+where, given $(x_1, \ldots, x_k) \in \underbrace{V \times \ldots \times V}_{k \text{ times}}$:
+\begin{equation*}
+  \varphi^1 \wedge \ldots \wedge \varphi^k (x_1, \ldots, x_k) =  \det(\varphi^i(x_j))
+\end{equation*}
+This is a particular case of exterior $k$-form (because the sign of determinant changes if we swap two rows or two columns).
+\end{remark}
+
+
+
+\begin{proposition}\label{basisprop1}
+  If $\{e_i\}_{i=1,\ldots,n}$ is a basis in $V$, then $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}_{i_1 < \ldots < i_k, k \le n}$ forms a basis of $\Lambda ^k V^*$
+\end{proposition}
+
+\begin{remark}
+  The above proposition proves that $\dim(\Lambda^k V^*)=\binom{n}{k}$. Moreover, it means that any $\alpha \in \Lambda^k V^*$ can be written as:
+  \begin{equation*}
+    \alpha = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} e^{*i_1} \wedge \cdots \wedge e^{*i_k}
+  \end{equation*}
+  where $a_{i_1 \cdots i_k} \in \mathbb{K}$, $\mathbb{K}$ field of the vector space.
+\end{remark}
+
+Now, we want to define the exterior product between a $k$-form and a $p$-form (and it will return a ($p+k$)-form).
+
+\begin{definition}[Exterior product between a $k$-form and a $p$-form]
+  Given $\alpha \in \Lambda ^k V^*, \beta \in \Lambda^p V^*$, the exterior product between them is defined as:
+  \begin{align}
+    \wedge \colon \Lambda ^k V^* \times \Lambda ^p V^* &\rightarrow \Lambda^{k+p} V^* \nonumber \\
+    (\alpha, \beta) &\mapsto \alpha \wedge \beta \nonumber
+  \end{align}
+  with:
+  $$\alpha \wedge \beta = \sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p}} \alpha_{i_1 \cdots i_k}\beta_{j_1 \cdots j_k} e^{*i_1} \wedge \cdots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \cdots \wedge e^{*j_k} $$
+  where $\alpha_{i_1 \cdots i_k},\beta_{j_1 \cdots j_k} \in \mathbb{K}$
+
+\end{definition}
+
+Let's check some properties about $k$-forms:
+\begin{proposition}
+  $\alpha \in \Lambda^k V^*, \beta \in \Lambda^p V^*, \gamma \in \Lambda ^q V^*$, then:
+  \begin{enumerate}
+    \item $(\alpha \wedge \beta) \wedge \gamma = \alpha \wedge (\beta \wedge \gamma)$
+    \item $\alpha \wedge (\beta + \gamma) = \alpha \wedge \beta + \alpha \wedge \gamma$
+    \item $\alpha \wedge \beta = (-1)^{kp} \beta \wedge \alpha$
+  \end{enumerate}
+\end{proposition}
+
+\section{Differential Forms}
+\begin{definition} [Field of exterior forms, geometric definition] \label{geomkforms}
+  (A field of) exterior forms of degree $k$, $k \le n$ is a map $\omega$ that associates to each point $p \in \rfield^n$ an element $\omega(p) \in \Lambda^{k}V_p^*$.
+  Choosing a basis, we have:
+  \begin{equation}
+    \omega(p) = \sum\limits_{i_1 < \ldots < i_k} \underbrace{a_{i_1 \cdots i_k}(p)}_{\text{now it is a function!}} e^{*i_1} \wedge \cdots \wedge e^{*i_k}
+    \end{equation}
+    $\omega$ is a differential form if $a_{i_1 \cdots i_k}$ are differentiable. The set of differential $k$-forms is denoted by $\Omega^k(\rfield^n)$
+\end{definition}
+
+Another (equivalent) definition:
+
+\begin{definition} [Algebraic definition of differential $k$-form] \label{algkforms}
+  A differential $k$-form is a map:
+  \begin{align}
+    \mathfrak{X}(U) \times \ldots \times \mathfrak{X}(U) \rightarrow \mathbb{F}(U)
+  \end{align}
+  $C^\infty(U)$ linear.
+\end{definition}
+
+We want to generalize the concept of differential of a function.
+\begin{definition}[Differential] \label{differential}
+  Let $f$ be a function $f \colon U \subseteq \rfield^n \rightarrow \rfield$, $f$ differentiable. Let $v \in \mathfrak{X}(\rfield^n) = \text{Der} \mathbb{F}(\rfield^n)$. The exterior derivative of $f$ is its differential $d$, defined as a 1-form such that:
+  $$df(v) = v(f)$$
+\end{definition}
+
+\begin{remark}[differential expression in coordinates]
+  We want to verify that the above definition of differential is equivalent to our usual definition for $C^1(\rfield^n)$ function, which is:
+  \begin{equation}
+    df = \sum\limits_{i=1}^n \frac{\partial f}{\partial x_i} dx^i = \frac{\partial f}{\partial x_i} dx^i
+  \end{equation}
+  In order to prove that, we first consider a pointwise definition. Given $p \in \rfield^n$:
+  \begin{equation} \label{diffdefp}
+    df_p(v) = v(f), \forall\,\, v \in T_p \rfield^n \cong \rfield^n
+  \end{equation}
+  ($T_p \rfield^n$ is the tangent space to $\rfield^n$ at $p$). Now, we can write $v(f)$ in coordinates (the gray part is the one we don't care about):
+  \begin{equation} \label{diffcoordinates}
+    df_p = \textcolor{lightgray}{v(f) = \text{ }} x_i(p) (\lambda^i)_p
+  \end{equation}
+  where $(\lambda^i)_p$ is a dual basis at $p$ (later, we will prove that $(\lambda^i)_p = (dx^i)_p$ so you can also think of them as $dx^i$). Now, applying $df$ to a particular vector (i.e. directional derivative) at $p$:
+  \begin{equation} \label{diffpart1}
+    df_p \left (\restrict{\frac{\partial}{\partial x^i}} {p} \right) = x_i(p)
+  \end{equation}
+  where we used the property of the dual basis
+  $$(\lambda^i)_p \restrict{\frac{\partial}{\partial x^j}} {p} = \delta^i_j $$
+   and then:
+   $$\textcolor{lightgray}{df_p \left (\restrict{\frac{\partial}{\partial x^i}} {p} \right) = \text{ }} x_i(p) (\lambda^i)_p \restrict{\frac{\partial}{\partial x^i}} {p} = x_i(p)$$
+   On the other hand, by definition \eqref{diffdefp} we know that:
+   \begin{equation} \label{diffpart2}
+     df_p \left (\restrict{\frac{\partial}{\partial x^i}} {p} \right)  = \restrict{\frac{\partial}{\partial x^i}} {p} f = \frac{\partial f}{\partial x^i} (p)
+   \end{equation}
+   Hence, using \eqref{diffpart1} and \eqref{diffpart2} we get:
+   \begin{equation}
+     x_i (p) = \frac{\partial f}{\partial x^i} (p)
+   \end{equation}
+   Then, by the expression of differential in coordinates \eqref{diffcoordinates}:
+   \begin{equation}
+     df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p
+   \end{equation}
+   Applying the definition to $f = x^j$ (coordinate function, as defined in \eqref{coofunc}), we get:
+   \begin{equation}
+     df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p = \frac{\partial f}{\partial x^i} (p) (dx^i)_p
+   \end{equation}
+   And then:
+   \begin{equation}
+     df = \frac{\partial f}{\partial x^i} (dx^i)
+   \end{equation}
+   Indeed, if $f = x^j$ then, as before:
+   \begin{equation}
+     (dx^j)_p = \frac{\partial x^j}{\partial x^i} (p) \restrict{(\lambda^i)}{p} = \delta^i_j \restrict{(\lambda^i)}{p} = \restrict{(\lambda^j)}{p}
+   \end{equation}
+(Or could we use \eqref{vfpdef} ?? AND CHECK INDICES)
+NO: in $v(f)(p)$, $v$ is a vector field, in $d_p f = v(f)$, $v$ is a vector tangent to ... at $p$. Since it is a vector, it can be seen as directional derivative. Then $v(f)$ is the directional derivative of $f$, and it's still a function because it is not evaluated anywhere ($p$ is only the point where we fix our vector, NOT where we evaluate the function).
+\end{remark}
+
+In the above definition, $f$ was a 0-form (i.e. a function). What is the generalization of the differential to $k$-forms?
+
+\begin{definition}[Exterior derivative] \label{extder}
+  If $k > 0$, then the exterior derivative (acting on $k$-forms) is a map
+  \begin{align*}
+    d \colon \Omega^k(\rfield^n) & \rightarrow \Omega^{k+1}(\rfield^n) \\
+    \omega &\mapsto d(\omega) \equiv d \omega
+  \end{align*}
+  where
+  \begin{equation*}
+    d \omega = \sum\limits_{j_1 < \ldots < j_k} \left (da_{j_1, \ldots, j_k} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k}
+  \end{equation*}
+With $da_{j_1, \ldots, j_k}$ differential of the function $a_{j_1, \ldots, j_k}$.
+\end{definition}
+
+Some properties:
+\begin{proposition}[Properties of exterior derivatives]
+  $\omega_1 \in \Omega^k(\rfield^n), \omega_2 \in \Omega^p(\rfield^n)$. Then:
+  \begin{itemize}
+    \item $d(\omega_1 +\omega_2) = d\omega_1 + d\omega_2$
+    \item $d(\omega_1 \wedge \omega_2) = d\omega_1 \wedge \omega_2 + (-1)^k \omega_1 \wedge d\omega_2$
+    \item $d(d\omega_1)  = 0 = d(d\omega_2)$
+  \end{itemize}
+\end{proposition}
+
+\begin{remark} \label{abusenot1}
+  In the above proposition, we claimed that $d(d\omega)  = 0$ if $\omega \in \Omega^k(\rfield^n)$. The notation here is not very precise, since the inner "d" is acting on a $k$-form, whereas the outer "d" is acting on a ($k+1$)-form (so, even if they share the same name, they are different maps). However the behaviour of both "d"s is clear, so we will continue with this abuse of notation.
+\end{remark}
+
+\begin{remark}
+  The exterior derivative increases the degree of a $k$-form by 1 (the $k$-form becomes a ($k+1$)-form). Can we get backwards, which is, can we decrease the degree of a $k$-form? Answer: yes.
+\end{remark}
+
+\begin{definition}[Interior derivative] \label{intder}
+  $z \in \mathfrak{X}(\rfield^n)$ (i.e.  $z$ is a vector field), then we define the \textit{interior derivative} $i_z$ (acting on differential $k$-forms) as:
+  \begin{align*}
+    i_z \colon \Omega^k(\rfield^n) &\rightarrow \Omega^{k-1}(\rfield^n) \\
+    \omega &\mapsto i_z(\omega) \equiv i_z \omega
+  \end{align*}
+  where
+  $$i_z \omega (v_1, \ldots, v_{k-1}) = \omega(z, v_1, \ldots, v_{k-1}), \forall \, v_i \in \mathfrak{X}(\rfield^n)$$
+\end{definition}
+
+\begin{remark}
+  In the definition \ref{intder} above, we used the algebraic definition of differential $k$-forms, i.e. definition \ref{algkforms}
+\end{remark}
+
+Now some properties of interior derivatives.
+
+\begin{proposition}
+  $\omega \in \Omega^k(\rfield^n), \eta \in \Omega^p(\rfield^n), z \in \mathfrak{X}(\rfield^n)$, then:
+  \begin{itemize}
+    \item $i_z (\omega \wedge \eta) = (i_z \omega) \wedge \eta + (-1)^k \omega \wedge (i_z \eta)$
+    \item $i_z^2 w = i_z(i_z \omega) = 0$
+  \end{itemize}
+\end{proposition}
+
+\begin{remark}
+  In the above proposition there is an abuse of notation when we claimed $i_z(i_z \omega) = 0$, see also remark \ref{abusenot1}.
+\end{remark}
+
+Now, let's talk about \textit{pullbacks} and \textit{pushforwards}.
+
+\begin{definition}[Pullback]
+  Let $f \colon U \rightarrow V$ (with $U, V \subseteq \rfield^n$) be a differentiable map. Let us suppose that $\dim(U) = \dim(V) = n$ (just for the sake of simplicity, since it is not necessary). Then the \textit{pullback} of a $k$-form (from $V$) to $U$ is the map:
+  \begin{align*} \label{pullbackdef}
+    f^* \colon \Omega^k(V) & \rightarrow \Omega^k(U) \\
+    \omega & \mapsto f^*w
+  \end{align*}
+  such that
+  \begin{equation*}
+    (f^* \omega)(p) (u_1, \ldots, u_k) = \omega (f(p)) (df(u_1), \ldots, df(u_k)), \forall\, \, p \in \rfield^n, \forall \,\, u_i \in \mathfrak{X}(U)
+  \end{equation*}
+\end{definition}
+
+Now, we want to give another name to the differential of a function.
+\begin{definition}[Pushforward]
+  Given $f \colon U \rightarrow V$ as before, we will also call the differential of $f$ at $p \in \rfield^n$, i.e. $df_p = df(p)$, as the \textit{pushforward} of $f$ at $p$, and it will be denoted by the symbol $(f_*)_p$.
+
+  \textcolor{gray}{In our mind, we'll think of $df_p = (f_*)_p$, at least until this concept is generalized}.
+\end{definition}
+
+In particular, using the pullback definition above, we can write the pushforward map as:
+\begin{align*}
+  df_p \equiv (f_*)_p \colon U \subset \rfield^n &\rightarrow V \subset \rfield^m \\
+    v & \mapsto (f_*)_p (v)
+\end{align*}
+By definition of differential, $df_p(v) = v(f)$, where $v$ is a vector tangent to $\rfield^n$ at $p$ (and $v$ is not a vector field! Change notations!). Since vector are like directional derivatives, $v(f)$ is the directional derivative of $f$ with respect to $v$, but it's not evaluated at any point! ($p$ only tells us where the vector $v$ is). In particular, if we apply the definition to a point $h(q)$, where $h \in C^{\infty}(\rfield^n, \rfield^m)$ (CHECK) and $q \in \rfield^n$, we have:
+$$(f_*)_p (v)(h)(q) = (f_*)_p (v)(h(q)) = v(h(f(q))) = v(h \circ f) (q) = v (f^* h) (q)$$
+In the last passage, we used the pullback for a differentiable function, which is completely legal since we defined it for differentiable $k$-forms, and a differentiable function is just a 0-form.
+
+\begin{remark}
+Using the pushforward, we can define the pullback of a differential form using a different notation (i.e. using $f_*$ instead of $df$):
+  \begin{equation}
+    (f^* \omega)(p) (u_1, \ldots, u_k) = \omega (f(p)) (f_*(u_1), \ldots, f_*(u_k)), \forall\, \, p \in \rfield^n, \forall \,\, u_i \in \mathfrak{X}(U)
+  \end{equation}
+\end{remark}
+
+Now, some properties of the pullback.
+
+\begin{proposition} \label{pullbackprop}
+  $g, f \in C^1(\rfield^n, \rfield)$, $\omega, \varphi \in \Omega^k(\rfield^n)$, $h\colon \rfield^n \rightarrow \rfield$. Then:
+  \begin{enumerate}
+    \item $f^*(\omega + \varphi) = f^*(\omega) + f^*(\varphi)$
+    \item $f^*(h \omega) = f^*(h)f^*(\omega)$
+    \item $(f \circ g)^* = g^*(f^*(\omega))$
+    \item If $\varphi^1, \ldots, \varphi^k \in \Omega^1(\rfield^n)$, then $f^*(\varphi^1 \wedge \ldots \wedge \varphi^k) = f^*(\varphi^1) \wedge \ldots \wedge f^*(\varphi^k)$
+    \item $df^*(\omega) = f^*(d\omega)$
+  \end{enumerate}
+  From property (4) also follows that $f^*(\omega \wedge \phi) = (f^*\omega) \wedge (f^* \phi)$
+\end{proposition}
+
+
+\begin{remark}
+We can express the pullback of a differential form in the following way:
+\begin{align*}
+(f^* \omega)(p) &= \sum\limits_{1 \le i_1 < i_2 < \cdots < i_k \le n} (f^*a_{i_1, \ldots i_k} (p)) f^*dy^{i_1} \wedge f^* dy^{i_2} \wedge \cdots \wedge f^* dy^{i_k} = \\
+& = \sum\limits_{1 \le i_1 < i_2 < \cdots < i_k \le n} a_{i_1, \ldots, i_k} (f(p)) df^{i_1} \wedge df^{i_2} \wedge \cdots \wedge df^{i_k}
+\end{align*}
+where $f^i = y^i(f)$. We used properties (2) and (4) of proposition \ref{pullbackprop}
+\end{remark}
+
+\begin{remark}
+  From our definition of pullback, it is not necessary that $f_*$ is invertible.
+\end{remark}
+
+
+\section{Integration of differential forms}
+
+Let $\omega$ be a differential form of degree $n$ in $\rfield^n$. Then $\omega$ is necessarily of the form
+\begin{equation}
+  \omega = \underbrace{a(p)}_{\text{it's a function}} dx^1 \wedge \ldots \wedge dx^n
+\end{equation}
+Such a form can be integrated:
+\begin{equation}
+  \int_{f(D)} \omega = \int_D f^* \omega
+\end{equation}
+
+\section{More on Vector Fields}
+\begin{definition}(Tangent bundle)
+The tangent bundle over an open subset $U \subset \mathbb{R}^n$ is defined as 
+\begin{equation}
+	TU \equiv \sqcup
+\end{equation}
+\end{definition}
+
+\clearpage
+\begin{thebibliography}{AA}
+\addcontentsline{toc}{section}{Bibliography}
+\bibitem{Lee}
+{J.} M. Lee, Introduction to Smooth Manifolds, Springer
+\bibitem{Notes}
+Lecture notes (Differentiable Manifolds Saachs, Vogel WS 19)
+\end{thebibliography}
+
+\end{document}
