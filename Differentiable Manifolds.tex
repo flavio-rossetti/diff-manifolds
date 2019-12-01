@@ -105,6 +105,166 @@ Main idea: in order to study tangent vectors, we identify them with "directional
 
 \end{remark}
 
+\section{Quick review: Basic Algebraic Structures}
+
+\begin{definition} [Operation]
+Let $G$ be a set. $\cdot$ is called a (binary) operation on $G$ if it is a map
+\begin{align*}
+\cdot \, \colon G &\times G \longrightarrow G \\
+(&a, b) \longmapsto a \cdot b
+\end{align*}
+Such a map is usually denoted by the symbol $\cdot$ or, analogously, with the symbol $+$.
+\end{definition}
+
+\begin{definition} [Group] Given a set $G$ and an operation $\cdot$ on such set, we will call such set with the operation  (i.e. the couple $(G, \cdot)$) a group if the following properties are satisfied (for $a, b, c \in G$):
+\begin{itemize}
+\item $ a \cdot b \in G$ (closure property, which often follows from the definition of our operation)
+\item $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ (associativity)
+\item $\exists\, \mathbf{1} \in G$ such that $\mathbf{1} \cdot g = g, \, \forall\, g \in G$ (existence of the identity element)
+\item $\forall\, g \in G, \exists\, g^{-1} \in G$ such that $g \cdot g^{-1} = g^{-1} \cdot g = \mathbf{1}$ (existence of the inverse element)
+\end{itemize}
+For the sake of simplicity, we will often call $G$ a group, without referring to the operation on it.
+\end{definition}
+
+\begin{example}
+$(\mathbb{Z}, +)$ is a group.
+\end{example}
+
+\begin{example}
+$(\mathbb{R}, +)$ is a group. Also: $(\mathbb{R}, \cdot)$ is a group.
+\end{example}
+
+\begin{example}
+$(\mathbb{N}, +)$ is not a group!
+\end{example}
+
+\begin{remark}
+The identity element of a group is often denoted as $\mathbf{1}$ if the operation is denoted by the symbol $\cdot$, whereas it is denoted as $\mathbf{0}$ if the operation is denoted by the symbol $+$.
+In a similar way, the inverse element is often denoted as $g^{-1}$ if the operation is denoted by the symbol $\cdot$, whereas it is denoted as $-g$ if the operation is denoted by the symbol $+$.
+
+\end{remark}
+
+\begin{definition} [Abelian group]
+A group $(G, \cdot)$ is called abelian if its elements commute according to the operation $\cdot$, i.e. $a \cdot b = b \cdot a, \forall \,  a, b \in G$.
+\end{definition}
+
+Often we can consider sets with two operations, like $(\mathbb{R}, + , \cdot)$. If they satisfy some properties, they are called rings. If they satisfy even more properties, they are called fields. In particular:
+
+\begin{definition} [Ring]
+Given a set $R$ and two operations: $+$ (usually called "additive operation") and $\cdot$ (called "multiplicative operation") on it, we will call the set with the two operations, i.e. $(R, +, \cdot)$, a ring if the following properties are satisfied:
+\begin{itemize}
+\item $(R, +)$ is an abelian group
+\item $\cdot$ is associative, i.e. $a \cdot (b \cdot c) = (a \cdot b) \cdot c, \, \forall\, a, b, c, \in R$
+\item the multiplicative identity $\mathbf{1}$ exists, i.e. $\exists\, \mathbf{1} \in R$ such that $\mathbf{1} \cdot r = r, \, \forall\, r \in R$
+\item $\cdot$ is distributive with respect to $+$, i.e. $a \cdot (b + c) = a \cdot b + a \cdot c$
+\end{itemize}
+\end{definition}
+
+\begin{definition} [Commutative ring] $(R, +, \cdot)$ is a commutative ring if the multiplication operation $\cdot$ is commutative
+\end{definition}
+
+\begin{definition} [Unitary ring]
+$(R, +, \cdot)$ is a unitary ring if it contains the multiplication inverse, i.e. the inverse element according to the operation $\cdot$.
+\end{definition}
+
+\begin{definition} [Field]
+A unitary, commutative ring is called a field.
+\end{definition}
+
+\begin{example}
+The set of $2 \times 2$ matrices made by real coefficients is a ring with the operation of sum between matrices and with the matrix multiplication. The ring is not commutative because the matrix multiplication is not a commutative operation. Nor it is unitary, since not all the matrices are invertible.
+\end{example}
+
+\begin{example}
+The set of $2 \times 2$ matrices made by real coefficients is a ring with the operation of sum between matrices and with the matrix multiplication. The ring is not commutative because the matrix multiplication is not a commutative operation. Nor it is unitary, since not all the matrices are invertible.
+\end{example}
+
+\begin{example}
+$(\mathbb{Z}, +, \cdot)$ is a commutative ring. It is not unitary since the inverse element for $\cdot$ is often in the rational numbers, i.e. $3^{-1}$ is the multiplicative inverse of $3$.
+\end{example}
+
+\begin{example}
+$(\mathbb{R}, +, \cdot)$ is a field
+\end{example}
+\newpage
+
+\section{Quick review: Morphisms}
+\begin{definition}[Homomorphism]
+A homomorphism $h$ between two sets endowed with operations (think about two groups, for instance) is a map which preserves the operations, i.e.:
+\begin{equation*}
+h \colon (G, +) \longrightarrow (H, \circ)
+\end{equation*}
+such that $h(a + b) = h(a) \circ h(b), \forall\, a, b, \in G$, where $(G, +)$ and $(H, \circ)$ are two groups. The definition for rings and fields is analogous. Sometimes these maps are just called morphisms (there is some difference between morphisms and homomorphisms but it usually matters only if you are dealing with more abstract algebraic structures).
+\end{definition}
+
+And now, some particular types of homomorphisms.
+
+\begin{remark} [Monomorphism, epimorphisms and isomorphisms]
+A monomorphism is an injective homomorphism. An epimorphism is a surjective homomorphism. An isomorphism is a bijective homomorphism (thus, it is both a monomorphism and an epimorphism).
+\end{remark}
+
+\begin{remark} [Endomorphism, automorphism]
+An endomorphism is a homomorphism from one algebraic structure to itself. If such morphism is bijective, it is called automorphism.
+\end{remark}
+
+\begin{remark}
+Don't get confused with hom\textbf{e}omorphisms! A homeomorphism is a continuous and bijective map between two topological space, such that its inverse is also continuous. In general it is not a homomorphism (without the \textbf{e}), because a topological space is not necessarily associated with an operation on it. (However if it has an operation, the continuity of the map implies that it is also a homomorphism).
+\end{remark}
+\newpage
+
+\section{Quick review: Equivalence Classes, Quotient Spaces}
+\begin{definition}[Binary relation]
+  Given a set $E$, a (binary) relation $\sim$ on $E$ is a set of couples $(a, b) \in E \times E$. In other words, a binary relation is a subset of $E \times E$. Moreover, if $(a, b) \in \, \sim\,  \subset E \times E$, we use the following notation: $a \sim b$.
+\end{definition}
+
+\begin{definition}[Equivalence relation]
+  Given a set $E$, an equivalence relation $\sim$ is a binary relation which satisfies the following properties:
+  \begin{itemize}
+    \item $a \sim a, \forall\, a \in E$ (reflexive property)
+    \item $a \sim b \Rightarrow b \sim a, \forall\, a, b \in E$ (symmetric property)
+    \item $a \sim b, b \sim c \Rightarrow a \sim c, \forall \, a, b, c \in E$ (transitive property)
+  \end{itemize}
+\end{definition}
+
+\begin{example}
+  The following are examples (or counter-examples) of equivalence relations:
+  \begin{itemize}
+  \item "\textit{Being equal to}" (i.e. "$\sim$" is "$=$") is an equivalence relation on $\rfield$: $x=x \, \forall\, x \in \rfield; x=y \Rightarrow y=x \, \forall\, x, y \in \rfield$, etc.
+  \item "\textit{Has the same birthday as}" on the set of all people in the world is an equivalence relation.
+  \item "\textit{Having mutual friends on Facebook}" on the set of Facebook users is not an equivalence relation (there is some problem with transitive property)
+  \item "\textit{Being greater or equal to}" on $\rfield$ is not an equivalence relation (it is not symmetric, however it is antisymmetric and so it is called "partial order relation")
+\end{itemize}
+\end{example}
+
+\begin{definition}[Equivalence class]
+  Given a set $E$ and an equivalence relation $\sim$ on $E$, the equivalence class of $x \in E$ is the set $[x]$, where
+  \begin{equation}
+    [x] \equiv \left \{ y \in E \,|\, y \sim x \right \}
+  \end{equation}
+  The equivalence class $[x]$ always contains $x$ itself, by definition of equivalence relation.
+\end{definition}
+
+\begin{example} \label{modulo4ex}
+  If we consider the equivalence relation "$x \sim y$ if $x-y = 4n$ for some $n \in \mathbb{N} \cup \{0\}$" on the set of $\mathbb{Z}$, the equivalence class of 1 is $[1] = \{\ldots, -7, -3, 1, 5, 9, \ldots\}$. We can also write "$x-y = 4n$ for some $n$" as $x \equiv_4 y$ (congruence modulo $4$)
+\end{example}
+
+\begin{definition}[Quotient space]
+  Given a set $E$, an equivalence relation $\sim$ on $E$, the quotient space with respect to $\sim$ is denoted by $\faktor{E}{\sim}$ and it is the set of all equivalence classes:
+  \begin{equation}
+     \faktor{E}{\sim} \equiv \left \{ [x] \,|\, x \in E \right \}
+  \end{equation}
+\end{definition}
+
+\begin{example} \label{quotientexample}
+  Let's consider two examples:
+  \begin{itemize}
+    \item If we consider the example \ref{modulo4ex}, $\faktor{\mathbb{Z}}{\sim} = \{[0], [1], [2], [3]\}$. In this case, we also write $\faktor{\mathbb{Z}}{\sim} = \faktor{\mathbb{Z}}{4\mathbb{Z}}$
+    \item If $V$ is a vector space and $U$ is a vector subspace of $V$, then we can consider the equivalence relation "$x \sim y$ if $x-y \in U$". We notice that $x \sim x$ for each $x \in V$ since $x-x = 0 \in U$, because $U$ is a vector space as well. Then, $\faktor{V}{\sim}$ is isomorphic to $V'$, where $V'$ is $V$ without its subspace $U$ (every element of $U$ is identified with 0 in the quotient space, because every element of $U$ is in the same equivalence class of 0).
+    \item If we consider two groups instead of vector spaces, finding the quotient space requires a bit more effort.
+  \end{itemize}
+\end{example}
+\newpage
+
 \section{Derivations}
 \begin{definition}[Derivation] \label{derivation}
 If $a$ is a point of $\rfield^n$, a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$ is called a \textit{derivation at a} if it is linear over $\rfield$ and satisfies the following product rule:
@@ -117,7 +277,7 @@ Directional derivatives obviously satisfy the above definition, and in these cas
 
 %\begin{definition} $T_{a}\rfield^n$ is the set of all derivations of $C^{\infty}(\rfield^n)$ at $a$. (And it is a vector space)
 %\end{definition}
-
+\newpage
 \section{Multilinear Forms}
 
 \begin{definition}[1-forms]
@@ -228,7 +388,7 @@ We also notice that the mathematical object $e_i$ is not much different from $\r
 %\begin{remark}
 %So, if $v \in \mathfrak{X}(\rfield^n)$, then $v(f)(p) = \restrict{v(f)}{p} = v^i(p)\restrict{(e_i)}{p} = v^i(p) \restrict{\frac{\partial}{\partial x^i}}{p} f = v^i(p) \frac{\partial}{\partial x^i} f(p)$, where
 %\end{remark}
-
+\newpage
 \section{Exterior Product and Generalisation}
 
 \begin{definition} [Exterior form of degree $k$]
@@ -307,7 +467,7 @@ Let's check some properties about $k$-forms:
     \item $\alpha \wedge \beta = (-1)^{kp} \beta \wedge \alpha$
   \end{enumerate}
 \end{proposition}
-
+\newpage
 \section{Differential Forms}
 \begin{definition} [Field of exterior forms, geometric definition] \label{geomkforms}
   (A field of) exterior forms of degree $k$, $k \le n$ is a map $\omega$ that associates to each point $p \in \rfield^n$ an element $\omega(p) \in \Lambda^{k}V_p^*$.
@@ -522,7 +682,7 @@ where $f^i = y^i(f)$. We used properties (2) and (4) of proposition \ref{pullbac
   From our definition of pullback, it is not necessary that $f_*$ is invertible.
 \end{remark}
 
-
+\newpage
 \section{Integration of differential forms}
 
 Let $\omega$ be a differential form of degree $n$ in $\rfield^n$. Then $\omega$ is necessarily of the form
@@ -533,7 +693,7 @@ Such a form can be integrated:
 \begin{equation}
   \int_{f(D)} \omega = \int_D f^* \omega
 \end{equation}
-
+\newpage
 \section{More on Vector Fields}
 \begin{definition}[Tangent space]
   $U \subset \rfield^n, U$ is an open set. $p \in U$, then the set of all derivations of $C^\infty(U)$ (cf. def \ref{derivation}) is called tangent space to $U$ at $p$ and is denoted by $T_p U$. An element of $T_p U$ is called a tangent vector at $p$, and it is often denoted by $v_p$.
@@ -565,7 +725,7 @@ So, every element of the tangent bundle is a couple made of a tangent space to a
   \end{equation}
   such that $\pr(v_p) = p, \forall \, p \in U$ %add command for pr
 \end{definition}
-
+\newpage
 \begin{remark} [Space of sections]
   The set of all vector fields $\mathfrak{X}(U) \equiv \{ C^\infty(U, TU) \, | \\ \, \pr(v_p) = p \}$ is also called the space of sections in $TU$.
 \end{remark}
@@ -644,7 +804,7 @@ By fixing either the time or the starting point of the flow, we can consider two
   %In components we have: ...to do
   Useful formula: $L_z \omega = (\d2 \i2_z + \i2_z \d2) \omega$
 \end{remark}
-
+\newpage
 \section{Lie derivative of a vector field}
 \begin{definition}[pullback of a vector field]
   %(move all definitions of pullback together)
@@ -691,7 +851,7 @@ Let $u, v \in \mathfrak{X}(\rfield^n)$. The Lie derivative of $v$ in direction $
     \item $\varphi_*[u, v] = [\varphi_* v, \varphi_* u]$
   \end{enumerate}
 \end{lemma}
-
+\newpage
   \section{Stokes' Theorem on $\rfield^n$}
 
 \begin{itemize}
@@ -741,7 +901,7 @@ So, the most general result that we achieved is the following:
   \end{equation}
   where $dV$ is the unoriented volume element.
 \end{corollary}
-
+\newpage
 \section{Poincarè Theorem of 1-forms}
 \begin{definition} [Closed and exact forms]
   If $\omega \in \Omega^{k}(U)$ such that $\d2\omega = 0$, then $\omega$ is closed. If there exists $\alpha \in \Omega ^{k-1}(V), V \subset U$ such that $\omega = \d2\alpha$ in $V$ then $\omega$ is exact.
@@ -845,7 +1005,16 @@ Then we can extend Poincarè lemma to $k$-forms:
 
 Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independent of the choice of $\gamma$?
 
-\begin{definition}[Homotopic curves 1]
+\begin{definition}[Homotopy between curves]
+  Two continuous curves $\gamma_1$ and $\gamma_2$, $\gamma_i \colon [a, b] \rightarrow U, i=1,2, U \subset \rfield^n$ are freely homotopic if there exists a continuous map $H$
+  \begin{align*}
+    H \colon [a, b] &\times [0, 1] \rightarrow U &\text{ such that:}\\
+    H(s, 0) &= \gamma_1(s), &\forall\, s \in [a, b] \\
+    H(s, 1) &= \gamma_2(s), &\forall\, s \in [a, b] \\
+  \end{align*}
+\end{definition}
+
+\begin{definition}[Homotopy between closed curves with same endpoints]
   Two continuous curves $\gamma_1$ and $\gamma_2$, $\gamma_i \colon [a, b] \rightarrow U, i=1,2, U \subset \rfield^n$, with $\gamma_1(a) = \gamma_2(a)$ and $\gamma_1(b) = \gamma_2(b)$ are homotopic relatively to $\{\gamma_1(a), \gamma_2(b)\}$ if there exists a continuous map $H$
   \begin{align*}
     H \colon [a, b] &\times [0, 1] \rightarrow U &\text{ such that:}\\
@@ -864,14 +1033,16 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
 \end{theorem}
 
 What if $\gamma_1(a) \not = \gamma_2(a), \gamma_1(b) \not = \gamma_2(b)$
-\begin{definition}[Homotopic curves 2]
+\begin{definition}[Homotopy between closed curves]
 $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are freely homotopic if there exists a continuous map
 \begin{align*}
   H \colon [a, b] \times [0, 1] &\rightarrow U &\text{ such that:} \\
   H(s, 0) &= \gamma_1(s) &\forall\, s \in [a, b] \\
-  H(s, 1) &= \gamma_2(s) &\forall\, s \in [a, b]
+  H(s, 1) &= \gamma_2(s) &\forall\, s \in [a, b] \\
+  H(a, t) &= H(b, t) &\forall\, t \in [0, 1]
 \end{align*}
 \end{definition}
+
 \begin{proposition}
   If $\omega$ is a closed 1-form on $U$, $\gamma_1$ and $\gamma_2$ two closed curves, freely homotopic in $U$, then:
   \begin{equation}
@@ -897,6 +1068,19 @@ $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are 
   Every closed form on a simply connected subset $U$ of $\rfield^n$ is exact.
 \end{remark}
 
+\begin{lemma}
+  A connected open subset $U$ of $\rfield^n$ is simply connected if every closed curve in $U$ is homotopic to a point in $U$.
+\end{lemma}
+
+We can limit ourselves to consider continuous curves, thanks to the two following results:
+\begin{theorem}[Whitney approximation on $\rfield^n$]
+  If $\gamma$ is a continuous map between $U, V \subsetneq \rfield^n$, then $\gamma$ is homotopic to a smooth map $\tilde \gamma$. If $\gamma$ is smooth on a closed subset $A$ of $U$, then the homotopy can be taken relatively to $A$.
+\end{theorem}
+
+\begin{theorem}
+  If $\gamma_1$ and $\gamma_2$ are homotopic maps between $U$ and $V$ then they are smoothly homotopic. %TO CHECK
+\end{theorem}
+\newpage
 \section{de Rham Cohomology}
 We can think of $\Omega^k(U)$ as a vector space over $\rfield$
 
@@ -912,6 +1096,95 @@ We can think of $\Omega^k(U)$ as a vector space over $\rfield$
     \item The $k$-th \textit{de Rham cohomology group} $H^k(U, \rfield)$ is defined as: $$H^k(U, \rfield) = \faktor{Z^k(U, \rfield)}{B^k(U, \rfield)}$$
   \end{itemize}
 \end{definition}
+
+\begin{remark}
+  $H^k(U, \rfield)$ contains the closed $k$-forms defined on $U$ which are not exact. See also the example \ref{quotientexample}.
+\end{remark}
+
+\begin{example}
+  Let's consider the following examples:
+  \begin{itemize}
+    \item If $U$ is contractible, then $H^k(U, \rfield) = \{0\}$ by Poincarè lemma.
+    \item $U=\rfield^2 \setminus \{0\}$, $H^0(\rfield^2 \setminus \{0\}, \rfield) = \rfield$ (constant functions)
+    \item $H^1(\rfield^2 \setminus \{0\}, \rfield) = \rfield$
+    \item $H^2(\rfield^2 \setminus \{0\}, \rfield) = \{0\}$
+    \item Torus $T$: $H^0(T) = \rfield$,  $H^1(T) = \rfield \oplus \rfield$, $H^2(T) = \rfield$
+  \end{itemize}
+\end{example}
+
+\begin{definition}
+  $M \subset \rfield^n, \Omega^*(M, \rfield) = \oplus_{k=0}^n \Omega^k(M, \rfield)$
+\end{definition}
+
+\begin{remark}
+  $\wedge \colon \Omega^* \times \Omega^* \rightarrow \Omega^*$ endows $\Omega^*$ with the structure of a ring.
+\end{remark}
+
+\begin{definition}[de Rham Complex]
+  The de Rham Complex is defined by $\Omega^*(M, \rfield)$ together with the sequence
+  $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0$$
+  with $Im(d_k) \subset Ker(d_{k+1})$ since $d^2 = d \circ d = 0$
+\end{definition}
+
+\begin{remark}
+  $H^k(M) = \faktor{Ker(d_{k+1})}{Im(d_k)}$
+\end{remark}
+
+\begin{definition} [exact sequence]
+  If $H^k(M, \rfield) = 0, k=1, \ldots, n$, then
+    $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
+    is an exact sequence if and only if $Ker(d_{k+1}) = Im(d_k)$
+\end{definition}
+
+\begin{remark}
+  For $k=0$, $\Omega^0 = \{\text{functions}\}$, then $H^0 = 0$
+\end{remark}
+
+\begin{definition}[Cohomology ring]
+  The cohomology ring is defined as
+  $$H^*(M, \rfield) = \oplus_{k=0}^n H^k(M, \rfield)$$
+\end{definition}
+
+\begin{example}
+  $H^*(T^2, \rfield) = \rfield \oplus \rfield$, where $T^2$ is the torus.
+\end{example}
+
+\begin{remark}
+  If $\phi \colon U \rightarrow V$, $U, V$ subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$ forms. By the construction above, we can also define such pullback on $H^K$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms.
+  If $\phi$ is a diffeomorphism, then $\phi^*$ is an isomorphism. Thus, $H^k(V) \cong H^k(U)$.
+  Question: what if $U$ and $V$ are not diffeomorphic, but only homotopic equivalent? We want to show that the final result is the same.
+ \end{remark}
+
+\begin{definition}[Homotopy between maps]
+  Two maps $\phi, \psi \colon U \rightarrow V$ are homotopic if there exists a continuous map $H$
+  \begin{align*}
+    H \colon [0,1] &\times U \rightarrow V &\text{ such that:}\\
+    H(0, \cdot) &\colon U \rightarrow V &\text{ with } H(0, \cdot) = \phi(\cdot) \\
+    H(1, \cdot) &\colon U \rightarrow V &\text{ with } H(1, \cdot) = \psi(\cdot)
+  \end{align*}
+\end{definition}
+
+ \begin{definition}[Homotopy equivalence between sets]
+   Two subsets $U$ and $V$ of $\rfield^n$ are homotopic equivalent if there exist continuous maps $f \colon U \rightarrow V$ and $g \colon V \rightarrow U$ such that the compositions $g \circ f$ and $f \circ g$ are homotopic to the identity in $U$. $f$ and $g$ are called homotopy equivalences.
+ \end{definition}
+
+ \begin{example}
+   Let's consider the following examples:
+   \begin{itemize}
+     \item Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse (i.e. inverse up to a homotopy) $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point)
+     \item A circle is homotopy equivalent to $\rfield^2 \setminus \{0\}$
+     \item $S^{n-1}$ is homotopy equivalent to $\rfield^n \setminus \{0\}$
+     \item A solid torus is homotopy equivalent to a tea cup
+   \end{itemize}
+ \end{example}
+
+ \begin{lemma}
+   Let $\phi, id \colon V \rightarrow V$ be two smoothly homotopic maps. Then $\restrict{\phi^*}{H^*(V, \rfield)} = \restrict{id^*}{H^*(V, \rfield)}$
+ \end{lemma}
+
+ \begin{theorem}
+   Let $\phi \colon U \rightarrow V$ be a homotopy equivalence between $U$ and $V$ with homotopy inverse $\psi$. Then $\phi^*$ is an isomorphism between $H^k(U)$ and $H^k(V)$
+ \end{theorem}
 
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
