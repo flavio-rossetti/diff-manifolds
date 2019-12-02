@@ -11,7 +11,7 @@
 \usepackage{hyperref}
 \usepackage{faktor}
 \usepackage[makeroom]{cancel}
-\usepackage{amssymb,amsthm,amsmath,mathtools, tikz-cd}
+\usepackage{braket, bbold, amssymb,amsthm,amsmath,mathtools, tikz-cd}
 
 
 
@@ -31,22 +31,23 @@
 \numberwithin{equation}{section}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[section]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
+\newtheorem{definition}[theorem]{Definition}
 
 \theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
-\newtheorem{example}{Example}[section]
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
 
 
 
 % aumenta la spaziatura
 \linespread{1.2}
 
+\DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\Der}{Der}
 \DeclareMathOperator{\Diff}{Diff}
@@ -104,6 +105,7 @@ Main idea: in order to study tangent vectors, we identify them with "directional
 \textbf{Points or vectors?} We can think of elements of $\rfield^n$ either as points or vectors. As points, their only property is their location, given by the coordinates $(x_1, \ldots, x_n)$ on a chosen basis. As vectors, they are characterized by a direction and a magnitude, but their location is irrelevant (translational invariance). So given $v \in \rfield^n, v=v^ie_i$, it can be seen as an arrow with its initial point anywhere in $\rfield^n$. So, if we think about a vector tangent to the border of the sphere at a point $a$, we imagine the vector as living in a copy of $\rfield^n$ with its origin translated to a.
 
 \end{remark}
+\newpage
 
 \section{Quick review: Basic Algebraic Structures}
 
@@ -284,6 +286,18 @@ Directional derivatives obviously satisfy the above definition, and in these cas
 Given a  vector space $V$ on a field $K$, a 1-form (or linear form) $\varphi \colon V \rightarrow K$ is a linear function from $V$ to $K$. $V^*$ (also denoted by $\Lambda V^*$) is the set of all linear forms on $V$.
 \end{definition}
 
+\begin{remark}
+  The set of linear forms on $V$ has the structure of a vector space. Indeed, if $\mathbb{K}$ is the field of the vector space $V$, $\forall\, a, a_1, a_2 \in \mathbb{K}, \forall\, \varphi, \varphi_1, \varphi_2 \in V^*$:
+  \begin{enumerate}
+    \item $a(\varphi_1 + \varphi_2) = a \varphi_1 + a\varphi_2$ (because we define the map $a_1\varphi_1 + a_2\varphi_2$ as $a_1\varphi_1 + a_2\varphi_2 (x) \equiv a_1 \varphi_1(x) + a_2 \varphi_2(x), \forall\, x \in V$)
+    \item $(a+b)\varphi(x) = (a\varphi + b \varphi)(x)$
+    \item $\varphi=0$ if $\varphi(x) = 0 \forall\, x \in V$
+    \item $-\varphi(x) = \varphi(-x)$
+    \item $\mathbb{1}\varphi(x) = \varphi(x)$
+    \item $ab\varphi(x) = ba \varphi(x)$
+  \end{enumerate}
+\end{remark}
+
 \begin{definition}[Dual basis]
 If $\{e_i\}_{i=1, \ldots, n}$ is a basis of $V$, then $\{ e^{*i} \}_{i=1}^n \subseteq V^*$ is called the \textit{dual basis} if $e^{*i}(e_j) = \delta^i_j$.
 \end{definition}
@@ -291,6 +305,47 @@ If $\{e_i\}_{i=1, \ldots, n}$ is a basis of $V$, then $\{ e^{*i} \}_{i=1}^n \sub
 \begin{remark}
 We could prove that the dual basis is indeed a basis of the dual space, so $\dim(V) = \dim(\Lambda V^*)$. Check proposition \ref{basisprop1}.
 \end{remark}
+
+\begin{example}
+  Let's consider three examples.
+  \begin{enumerate}
+    \item $p \in \rfield^3$, fixed. Let $V_p$ be the vector space $V_p \equiv \{ q-p \,|\, q \in \rfield^3 \}$. We will also denote it by $T_p\rfield^3$. We notice that $V_p = T_p\rfield^3 = \rfield^3$ (It is trivial to verify the inclusions "$\subseteq$" and "$\supseteq$"). Let $\left \{ (e_i)_p \right \}_{i=1,2,3}$ be a basis for $V_p$. If we consider the dual space $V_p^*$, we notice that $\left \{(dx^i)_p \right\}_{i=1,2,3}$ is a dual basis, where $(dx^i)_p (e_j) = \frac{\partial}{\partial x^j} x^i$. The index position is just a matter of notation, for now. Then, we can show that $V_p$ and $V_p^*$ are isomorphic, and the isomorphism is:
+    \begin{align}
+      g \colon V_p &\rightarrow V_p^* \\
+      x &\mapsto g(x, \cdot) \nonumber
+    \end{align}
+    where $g$ is the euclidean metric in $\rfield^3$, i.e. $g(x, y) = d(x, y) = \\ = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2 + (x_3 - y_3)^2}$
+    \item $V = \left \{ M \in M_2(\mathbb{C}) \, | \, M^{\dagger} = M, \tr(M) = 0 \right \}$ is a vector field on $\rfield$, where
+    $$M= \left ( \begin{matrix}
+    a &b \\
+    c &d
+  \end{matrix}\right ), M^{\dagger}= \left (\begin{matrix}
+    \bar a &\bar b \\
+    \bar c &\bar d
+    \end{matrix} \right ), a, \ldots, d \in \mathbb{C}$$
+
+  A basis for $V$ is $\{\sigma_i\}_{i=1,2,3}$, where
+  $$\sigma_1 = \left ( \begin{matrix}
+  0\, &1 \\
+  1\, &0
+\end{matrix}
+  \right), \sigma_2 = \left ( \begin{matrix}
+  0 &i \\
+  -i &0
+\end{matrix}
+  \right), \sigma_3 = \left ( \begin{matrix}
+  1 &0 \\
+  0 &-1
+\end{matrix}
+  \right)$$
+  and a dual basis is given by $e^{*i}(e_j) = \frac{1}{2} \tr(e_i, e_j)$ (using the matrix product).
+  \item Quantum Mechanics: $$V = \{ f \colon \rfield^3 \rightarrow \rfield \, | \, ||f|| = \int_{\rfield^3} |f|^2 d^3x < \infty \} = L^2(\rfield^3)$$ is a vector space. If we consider the Laplacian operator $\Delta = \frac{\partial^2}{(\partial x^1)^2} + \frac{\partial^2}{(\partial x^2)^2} + \frac{\partial^2}{(\partial x^3)^2}$, then a basis is given by $\{e_n\} = \{\frac{f_n}{||f_n||}\}$, where $f_n$ eigenfunctions of $\Delta$: $\Delta f_n = \lambda_n fn$.
+  A dual basis is given by $e^{*n} = \int_{\rfield^3} e_n$
+  Notice that both $V$ and $V^*$ are infinite-dimensional spaces.
+  Some notations:
+  $$e_n = |f_n \rangle, e^{*n} = \langle f_n |, e^{*n}(e_m) = \braket{f_n | f_m}$$
+  \end{enumerate}
+\end{example}
 
 
 \begin{remark}\label{vectorasder}
@@ -455,8 +510,25 @@ Now, we want to define the exterior product between a $k$-form and a $p$-form (a
   with:
   $$\alpha \wedge \beta = \sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p}} \alpha_{i_1 \cdots i_k}\beta_{j_1 \cdots j_k} e^{*i_1} \wedge \cdots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \cdots \wedge e^{*j_k} $$
   where $\alpha_{i_1 \cdots i_k},\beta_{j_1 \cdots j_k} \in \mathbb{K}$
-
 \end{definition}
+
+\begin{example}[Oriented area]
+  Let's consider the following examples:
+  \begin{enumerate}
+    \item $V = \rfield^3 \times \rfield^3$ with cartesian coordinates.
+    $$\varphi \equiv dx^1 \wedge dx^2 + dx^2 \wedge dx^4$$
+    Let's compute: $\varphi(e_i, e_j) = dx^1(e_i) dx^2(e_j) + dx^2(e_i)dx^4(e_j) + \\ - dx^2(e_i)dx^1(e_j) - dx^4(e_i)dx^2(e_j)$
+    \item $V = \rfield^2$ with cartesian coordinates $x^1, x^2$.
+    $$\varphi \equiv dx^1 \wedge dx^2$$
+    Let's compute $\varphi(ae_1, be_2)$, where $ a,b \in \rfield$:
+    \begin{align*}
+    \varphi(ae_1, be_2) &= dx^1 \wedge dx^2(ae_1, be_2) = ab dx^1 \wedge dx^2(e_1, e_2) = \\
+    &= ab (dx^1(e_1)dx^2(e_2) - \cancel{dx^2(e_1)} \cancel{dx^1(e^2)}) = ab = \\
+    &= \text{oriented area of the rectangle of sides } a \text{ and } b
+  \end{align*}
+  \end{enumerate}
+
+\end{example}
 
 Let's check some properties about $k$-forms:
 \begin{proposition}
@@ -570,6 +642,23 @@ In the above definition, $f$ was a 0-form (i.e. a function). What is the general
 With $\d2 a_{j_1, \ldots, j_k}$ differential of the function $a_{j_1, \ldots, j_k}$.
 \end{definition}
 
+\begin{example}[Computation of $d\omega$]
+  Let's consider the following examples:
+  \begin{enumerate}
+    \item Let $\omega$ be a 2-form on $\rfield^3$ (coordinates $x^1, x^2, x^3$):
+    $$\omega = dx^1 \wedge dx^2 + x^2 dx^1 \wedge dx^3$$
+    Then
+    $$\d2 \omega = dx^2 \wedge dx^1 \wedge dx^3$$
+    where we used that $\d2 (dx^1 \wedge dx^2) = 0$ because there is no 3-form on a 2-dimensional space (otherwise, we can use that $d^2=0$, but we still have to prove it!)
+    \item In $\rfield^n$, let's consider:
+    $$\omega = x^2 dx^1, \d2 \omega = dx^2 \wedge dx^1$$
+    where we computed  $\d2 \omega$ by using $\d2 g(v) = v(g)$ for a function $g$ and a vector field $v$. In fact, if $u,v \in \mathfrak{\rfield^n}$, then by definition of exterior product we have:
+    $$\d2 \omega (u, v) = dx^2(u)dx^1(v) - dx^2(v)dx^1(u)$$
+    On the other hand, using $dx^2(u)=u(x^2), v(x^2) = dx^2(v)$ (where $x^2$ is a function, the coordinate function defined in \eqref{coofunc}) we also have:
+    $$\d2 \omega (u, v) = u(x^2)dx^1(v) - v(x^2)dx^2(u)$$
+  \end{enumerate}
+\end{example}
+
 Some properties:
 \begin{proposition}[Properties of exterior derivatives]
   $\omega_1 \in \Omega^k(\rfield^n), \omega_2 \in \Omega^p(\rfield^n)$. Then:
@@ -598,6 +687,12 @@ Some properties:
   $$\i2_z \omega (v_1, \ldots, v_{k-1}) = \omega(z, v_1, \ldots, v_{k-1}), \forall \, v_i \in \mathfrak{X}(\rfield^n)$$
   $\i2_z \omega$ is also called the \textit{contraction} of $\omega$.
 \end{definition}
+
+\begin{example}[Some computations]
+  In $\rfield^2$, $e_x, e_y$ basis vectors (that can be seen as vector fields):
+  $$i_{e_x}(dx \wedge dy) = dy$$
+  $$i_{e_y}(dx \wedge dy) = - dx$$
+\end{example}
 
 \begin{remark}
   In the definition \ref{intder} above, we used the algebraic definition of differential $k$-forms, i.e. definition \ref{algkforms}
