@@ -1225,7 +1225,7 @@ We can think of $\Omega^k(U)$ as a vector space over $\rfield$
   $H^k(M) = \faktor{Ker(d_{k+1})}{Im(d_k)}$
 \end{remark}
 
-\begin{definition} [exact sequence]
+\begin{definition} [exact sequence] \label{exsequence}
   If $H^k(M, \rfield) = 0, k=1, \ldots, n$, then
     $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
     is an exact sequence if and only if $Ker(d_{k+1}) = Im(d_k)$
@@ -1281,6 +1281,132 @@ We can think of $\Omega^k(U)$ as a vector space over $\rfield$
    Let $\phi \colon U \rightarrow V$ be a homotopy equivalence between $U$ and $V$ with homotopy inverse $\psi$. Then $\phi^*$ is an isomorphism between $H^k(U)$ and $H^k(V)$
  \end{theorem}
 
+\begin{theorem}
+  Let $\phi \colon U \rightarrow V$ be a homotopy equivalence between $U$ and $V$ with homotopy inverse $\psi \colon V \rightarrow U$. then $\phi^*$ induces an isomorphism $\hat \phi^*$ such that:
+  \begin{equation}
+    H^n(V, \rfield) \cong H^n(U, \rfield), \forall\, n
+  \end{equation}
+\end{theorem}
+
+\begin{definition}[(co)chain map] %add def of (co)chain complex
+  Let $A^*$ and $B^*$ be two (co)chain complexes (a (co)chain complex is a generalization of a de Rham complex, e.g. think about $A^*=\Omega^*$).
+  A (co)chain map $\hat \phi^* \colon A^* \rightarrow B^*$ is a collection of maps $\phi^* \colon A^n \rightarrow B^n$ s.t. $d \circ \phi^* = \phi^* \circ d \colon A^n \rightarrow B^{n+1}$. We often denote $\hat \phi^*$ by $\phi^*$.
+\end{definition}
+
+\begin{example}
+  Let's consider:
+  \begin{align*}
+    A^* &= \Omega^*(U, \rfield) = \Omega^0(U, \rfield) \oplus \Omega^1(U, \rfield) \oplus \ldots \\
+    B^* &= \Omega^*(V, \rfield) = \Omega^0(V, \rfield) \oplus \Omega^1(V, \rfield) \oplus \ldots
+  \end{align*}
+  And we consider $\hat \phi^*\colon A^* \rightarrow B^*$, $\phi^* \colon \Omega^0(U, \rfield) \rightarrow \Omega^0(V, \rfield)$, $\phi^* \colon \Omega^1(U, \rfield) \rightarrow \Omega^1(V, \rfield)$, etc.
+\end{example}
+
+\begin{definition}
+  A short exact sequence (\textit{SES}) is a collection of (co)chain complexes $A^*, B^*, C^*$ and (co)chain maps $\phi^* \colon A^n \rightarrow B^n, \psi^* \colon B^n \rightarrow C^n$ such that for each $n$:
+  \begin{equation}
+    0 \longrightarrow A^n \overset{\phi^*}{\longrightarrow} B^n \overset{\psi^*}{\longrightarrow} C^n \longrightarrow 0
+  \end{equation}
+  is exact
+\end{definition}
+
+\begin{remark}
+  Remember the definition of exact sequence: it gives a condition on the kernel and the range of the maps (cf. definition \ref{exsequence}).
+  By this condition, we have that $\phi^*$ must be an injective map, and $\psi^*$ mjust be a surjective map in the above definition.
+\end{remark}
+
+\begin{example}\label{seqexample}
+  Let's consider the following example:\\
+  \begin{tikzcd}
+\Omega^0(U) \arrow[r, "d"] \arrow[d, "\phi^*"'] & \Omega^1(U) \arrow[r, "d"] \arrow[d, "\phi^*"'] & \Omega^2(U) \arrow[r] \arrow[d, "\phi^*"'] & \ldots & \} \textit{ sequence} \\
+\Omega^0(V) \arrow[r, "d"] \arrow[d, "\psi^*"'] & \Omega^1(V) \arrow[r, "d"] \arrow[d, "\psi^*"'] & \Omega^2(V) \arrow[r] \arrow[d, "\psi^*"'] & \ldots & \} \textit{ sequence} \\
+\Omega^0(W) \arrow[r, "d"]                      & \Omega^1(W) \arrow[r, "d"]                      & \Omega^2(W) \arrow[r]                      & \ldots & \} \textit{ sequence} \\
+\underbrace{}_{\textit{sequence}}               & \underbrace{}_{\textit{sequence}}               & \underbrace{}_{\textit{sequence}}          &        &
+\end{tikzcd}
+\end{example}
+
+\begin{lemma}[zig-zag lemma]
+  $\phi^*, \psi^*$ as in the previous definitions. Then there exists a linear map $\delta$ such that:
+  \begin{align*}
+    \ldots \longrightarrow &H^{n-1}(C^*) \overset{\delta}{\longrightarrow} H^n(A^*) \overset{\phi^*}{\longrightarrow} H^n(B^*) \overset{\psi^*}{\longrightarrow} \\
+    \overset{\psi^*}{\longrightarrow} &H^n(C^*) \overset{\delta}{\longrightarrow} H^{n+1}(A^*) \overset{\phi^*}{\longrightarrow} \ldots
+  \end{align*}
+  is an exact sequence.
+\end{lemma}
+
+\begin{example}
+  See also example \ref{seqexample}.\\
+  \begin{tikzcd}
+H^0(U) \arrow[r, "d"] \arrow[d, "\phi^*"']                                               & H^1(U) \arrow[r, "d"] \arrow[d, "\phi^*"']                                               & H^2(U) \arrow[r] \arrow[d, "\phi^*"']                                               & \ldots \\
+H^0(V) \arrow[r, "d"] \arrow[d, "\psi^*"']                                               & H^1(V) \arrow[r, "d"] \arrow[d, "\psi^*"']                                               & H^2(V) \arrow[r] \arrow[d, "\psi^*"']                                               & \ldots \\
+H^0(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, bend left] & H^1(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, bend left] & H^2(W) \arrow[r] \arrow[ruu, "\color{gray}{\delta}" description, dotted, bend left] & \ldots
+\end{tikzcd}
+\end{example}
+
+\begin{theorem}[Mayer-Vietoris]
+  Let $M \subset \rfield^n$ such that $M=f(U) \cup g(V), U, V$ open subsets in $\rfield^m, m \le n$. $f, g$ homeomorphisms.
+  Let:
+  $$i \colon U \cap V \rightarrow U \text{ (inclusion)}$$
+  $$j \colon U \cap V \rightarrow V \text{ (inclusion)}$$
+  Let:
+  \begin{align*}
+    (f^* \oplus g^*) \colon \Omega^k(M) &\rightarrow \Omega^k(U) \oplus \Omega^k(V) \\
+    \omega &\mapsto (f^*(\omega), g^*(\omega))
+  \end{align*}
+  \begin{align*}
+    (i^* - j^*) \colon \Omega^k(U) \oplus \Omega^k(V) &\rightarrow \Omega(U \cap V)\\
+    (\omega, \eta) &\mapsto i^* \omega - j^* \eta
+  \end{align*}
+  Then, for each $k$ there exists a linear map $\delta$ such that:
+  \begin{align*}
+    \ldots \longrightarrow &H^k(M) \overset{f^* \oplus g^*}{\longrightarrow} H^k(U) \oplus H^k(V) \overset{i^* - j^*}{\longrightarrow} H^k(U \cap V) \overset{\delta}{\longrightarrow} H^{k+1}(M) \longrightarrow \ldots
+  \end{align*}
+  is exact.
+\end{theorem}
+\newpage
+
+\section{Submanifolds of $\rfield^n$}
+We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ in $\rfield^n$ ($m \le n$).
+\begin{definition}[Submanifold - Local parametrization]
+  $\forall \, p \in M \subset rfield^n, \exists$ a neighbourhood $V$, $p \in V$, $V \subset \rfield^n$ and $U \subset \rfield^m, U, V$ open, $m \le n$, and a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
+  \begin{itemize}
+    \item $\phi \colon U \rightarrow M \cap V$ is a homeomorphism,
+    \item $\phi_* (x) \colon \rfield^m \rightarrow \rfield^n$ is injective $\forall \, x \in U$
+  \end{itemize}
+\end{definition}
+
+\begin{definition}[Submanifold - Locally flat]
+  $\forall p \in M, \exists$ a neighbourhood $V \subset \rfield^n, p \in V$ and a neighbourhood $W \subset \rfield^n$, $0 \in W$, and a diffeomorphism $\Phi, \Phi \colon W \rightarrow V$ such that
+  $$\Phi \left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right ) = V \cap M$$
+\end{definition}
+
+\begin{definition}[Submanifold - Locally  a zero set]
+$\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n, V$ open, and a smooth map $F \colon V \rightarrow \rfield^{n-m}$ such that
+$$V \cap M = \{x \in V \, | \, F(x) = 0\}$$
+and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
+\end{definition}
+
+\begin{definition}[Submanifold - Locally a graph]
+  $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n$ and a permutation $\sigma \colon \{1, \ldots, n\} \rightarrow \{1, \ldots, n\}$ and $U \subset \rfield^m, U$ open, together with a smooth map $g \colon U \rightarrow \rfield^{n-m}$ such that
+  \begin{align*}
+  V \cap M = \{ &(x_{\sigma(1)} \cdots x_{\sigma(n)}) \, |\, (x_1, \ldots, x_m) \in U \\
+   &\text{ and } (x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_n)\}
+\end{align*}
+  (g is called a \textit{graph}).
+\end{definition}
+
+\begin{theorem}
+  The four definitions above are equivalent.
+\end{theorem}
+
+\begin{corollary}
+  Let:
+  $$\phi \colon \rfield^m \supset U \rightarrow V \cap M$$
+  $$\phi' \colon \rfield^m \supset \rightarrow V' \cap M'$$
+  be local parametrizations. then
+  $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (V \cap V' \cap M) \rightarrow \phi^{-1}(V \cap V' \cap M)$$
+  is a diffeomorphism. %write that they are open sets?
+\end{corollary}
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
 \clearpage
