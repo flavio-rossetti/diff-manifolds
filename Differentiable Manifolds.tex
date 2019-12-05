@@ -1366,8 +1366,9 @@ H^0(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, be
 \newpage
 
 \section{Submanifolds of $\rfield^n$}
+\textbf{Premise:} We want to go outside $\rfield^n$, and analyze the so called manifolds. For now, we can think about them as generalizations of curves and surface of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
 We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ in $\rfield^n$ ($m \le n$).
-\begin{definition}[Submanifold - Local parametrization]
+\begin{definition}[(a) Submanifold - Local parametrization]
   $\forall \, p \in M \subset rfield^n, \exists$ a neighbourhood $V$, $p \in V$, $V \subset \rfield^n$ and $U \subset \rfield^m, U, V$ open, $m \le n$, and a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
   \begin{itemize}
     \item $\phi \colon U \rightarrow M \cap V$ is a homeomorphism,
@@ -1375,18 +1376,18 @@ We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ 
   \end{itemize}
 \end{definition}
 
-\begin{definition}[Submanifold - Locally flat]
+\begin{definition}[(b) Submanifold - Locally flat]
   $\forall p \in M, \exists$ a neighbourhood $V \subset \rfield^n, p \in V$ and a neighbourhood $W \subset \rfield^n$, $0 \in W$, and a diffeomorphism $\Phi, \Phi \colon W \rightarrow V$ such that
   $$\Phi \left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right ) = V \cap M$$
 \end{definition}
 
-\begin{definition}[Submanifold - Locally  a zero set]
+\begin{definition}[(c) Submanifold - Locally  a zero set]
 $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n, V$ open, and a smooth map $F \colon V \rightarrow \rfield^{n-m}$ such that
 $$V \cap M = \{x \in V \, | \, F(x) = 0\}$$
 and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
 \end{definition}
 
-\begin{definition}[Submanifold - Locally a graph]
+\begin{definition}[(d) Submanifold - Locally a graph]
   $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n$ and a permutation $\sigma \colon \{1, \ldots, n\} \rightarrow \{1, \ldots, n\}$ and $U \subset \rfield^m, U$ open, together with a smooth map $g \colon U \rightarrow \rfield^{n-m}$ such that
   \begin{align*}
   V \cap M = \{ &(x_{\sigma(1)} \cdots x_{\sigma(n)}) \, |\, (x_1, \ldots, x_m) \in U \\
@@ -1399,7 +1400,7 @@ and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
   The four definitions above are equivalent.
 \end{theorem}
 
-\begin{corollary}
+\begin{corollary} \label{corsubmanifold}
   Let:
   $$\phi \colon \rfield^m \supset U \rightarrow V \cap M$$
   $$\phi' \colon \rfield^m \supset \rightarrow V' \cap M'$$
@@ -1407,6 +1408,78 @@ and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
   $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (V \cap V' \cap M) \rightarrow \phi^{-1}(V \cap V' \cap M)$$
   is a diffeomorphism. %write that they are open sets?
 \end{corollary}
+
+\begin{example}[Submanifolds of $\rfield^n$]
+  Let's consider some examples.
+  \begin{enumerate}
+    \item An open subset of dimension $n$ in $\rfield^n$ is a submanifold (by definition (a), we just take $\phi = id$). For instance $B^n\subset \rfield^n$ is a submanifold of $\rfield^n$.
+    \item $S^{n-1} = \partial B^n$ is a submanifold of $\rfield^n$. Indeed, by definition (c), it is the zero set of the function:
+    $$F(\underline{x}) = (x^1)^2 + (x^2)^2 + \ldots + (x^n)^2 - 1 = \underline{x}^2 -1, \underline{x} \in \rfield^n$$
+    and $F_*$ is surjective: $F_*(\underline{x}) = 2 \underline{x}$
+    \item $O(n) = \{A \, | \, AA^t = E\} \subset Mat(n \times n, \rfield) \cong \rfield^{n^2}$, with $E$ identity matrix. $O(n)$ is a submanifold of dimension $\frac{n(n-1)}{2}$. Indeed, using definition (c), it is the zero set of the function:
+    \begin{align*}
+      F \colon Mat(n \times n, \rfield) &\rightarrow Symm(n, \rfield) \\
+      A &\mapsto AA^t - E
+    \end{align*}
+    What is more, $F_*$ is surjective. In order to prove that, we prove that "$\restrict{F_*}{A}(X)=0, \forall\, A \Rightarrow X = 0$" (then we know that for a linear map $L$ on a vector space $V$, $\dim(V) = \dim Ker(L) + \dim Ran(L)$, so the dimension of the range of $\restrict{F_*}{A}$ must be $\dim Mat(n\times n, \rfield)$, so the map is surjective).
+    In fact:
+    \begin{align*}
+    \restrict{F_*}{A} &= \restrict{\frac{d}{dt}}{t=0}F(A + tX) = \restrict{\frac{d}{dt}}{t=0} \left[ AA^t + tAX^t + tXA^t + t^2XX^t \right] = \\
+    & = AX^t + XA^t
+  \end{align*}
+    And the solution of:
+    $AX^t + XA^t = S \in Symm(n, \rfield)$
+    is $X = \frac{SA}{2}$ because $\frac{AA^t}{2}S + S\frac{AA^t}{2} = S$.
+    Then:
+    $$AX^t + XA^t = 0 \Longrightarrow X=0$$
+  \end{enumerate}
+\end{example}
+
+Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanifold} in order to introduce the concept of manifold.
+
+\begin{definition}[Atlas]
+  An (n-dimensional, smooth) atlas $\mathcal{A}$ on a set $M$ is a collection of maps (called charts)
+  \begin{align}
+    \phi_{\alpha} \colon \rfield^n &\overset{\sim}{\rightarrow} M \\
+    U_{\alpha} &\mapsto W_{\alpha} \nonumber
+  \end{align}
+  such that:
+  \begin{itemize}
+    \item $\cup_{\alpha \in I} W_{\alpha} = M$
+    \item $\forall\, \alpha, \beta \in I$ with $W_{\alpha} \cap W_{\beta} \not = \emptyset$,
+    $$\phi^{-1}_{\beta} \circ \phi_{\alpha} \colon \phi^{-1}_{\alpha}(W_{\alpha} \cap W_{\beta}) \rightarrow \phi_{\beta}^{-1}(W_{\alpha} \cap W_{\beta})$$
+    is a diffeomorphism.
+  \end{itemize}
+  where $\alpha \in I, I$ index set, and the $\sim$ above the arrow means that $\phi_{\alpha}$ is bijective.
+\end{definition}
+
+\begin{definition} [Equivalence relation on atlases]
+  Two atlases $\mathcal{A}$ and $\mathcal{A'}$ are equivalent $\Leftrightarrow$ $\mathcal{A} \cap \mathcal{A'}$ is an atlas ($\Leftrightarrow \phi_{\beta}^{-1} \circ \phi_{\alpha}'$ is a diffeomorphism, $\forall\, \phi_{\alpha}' \in \mathcal{A}', \phi_{\beta} \in \mathcal{A})$.
+\end{definition}
+
+\begin{definition}[\textbf{Preliminary} definition of manifold] \label{manifoldprel}
+  A manifold is a set $M$ with an equivalence class of atlases.
+\end{definition}
+
+\begin{remark}
+  The definition \ref{manifoldprel} above is "\textit{preliminary}" because we have not specified anything about the topology yet (we are still working on Euclidean topology). Moreover, in every equivalence class $\exists!$ maximal atlas (i.e. such that, if combined with an other atlas, it can't get any bigger). We also notice that, if the charts are smooth enough, we can pullback "everything" (e.g. all our vector fields, differential forms, etc. defined for subset of $\rfield^n$). However, in that case, everything is defined \textit{locally}. In order to patch them all together, we need some other result (like the partition of unity, coming soon).
+\end{remark}
+
+\begin{example}[Projective space]
+  $\mathbb{K} \in \{\rfield, \mathbb{C}\}$ ($\mathbb{K}$ is some field).
+  $$\mathbb{K}P^n \equiv \faktor{(\mathbb{K}^{n+1} \setminus \{0\})}{\sim}$$
+  where
+  \begin{align*}&(x_0, \ldots, x_n) \sim (x_0', \ldots, x_n') \Longleftrightarrow \\
+     \exists \, \lambda \in \mathbb{K}\setminus \{0\} &\text{ such that } (\lambda x_0, \ldots, \lambda x_n) = (x_0', \ldots, x_n')
+  \end{align*}
+  For instance, $\mathbb{C}P^1 = S^2$ (every point on a line passing through the origin is identified with the point on such line at distance 1 from the origin). We use the notation $[x_0, \ldots, x_n]$ for one equivalence class.
+  Let's consider the atlas $\mathcal{A} = \{\phi_i \colon \mathbb{K} \rightarrow \mathbb{K} P^n \}$. Where
+  \begin{align*}
+    \phi_i \colon \mathbb{K} &\rightarrow \mathbb{K}P^n \\
+    (x_1, \ldots, x_n) &\mapsto [x_1, \ldots, \underbrace{1}_{i-th}, \ldots, x_n]
+  \end{align*}
+  And $\phi_i(\mathbb{K}^n) = \left\{[x_0, \ldots, x_n] \in \mathbb{K}P^n \, | \, \text{ i-th entry is } \not = 0 \right \}$
+\end{example}
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
 \clearpage
