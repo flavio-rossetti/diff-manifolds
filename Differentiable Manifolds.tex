@@ -11,7 +11,11 @@
 \usepackage{hyperref}
 \usepackage{faktor}
 \usepackage[makeroom]{cancel}
-\usepackage{braket, bbold, amssymb,amsthm,amsmath,mathtools, tikz-cd}
+\usepackage{pgfplots}
+\usepgfplotslibrary{patchplots}
+\usetikzlibrary{patterns, positioning, arrows}
+\pgfplotsset{compat=1.15}
+\usepackage{float, subcaption, braket, bbold, amssymb,amsthm,amsmath,mathtools, tikz-cd}
 
 
 
@@ -1403,11 +1407,60 @@ and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
 \begin{corollary} \label{corsubmanifold}
   Let:
   $$\phi \colon \rfield^m \supset U \rightarrow V \cap M$$
-  $$\phi' \colon \rfield^m \supset \rightarrow V' \cap M'$$
+  $$\phi' \colon \rfield^m \supset \rightarrow V' \cap M$$
   be local parametrizations. then
   $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (V \cap V' \cap M) \rightarrow \phi^{-1}(V \cap V' \cap M)$$
-  is a diffeomorphism. %write that they are open sets?
+  is a diffeomorphism. %write that they are open sets? intersection color...check
 \end{corollary}
+
+\begin{tikzpicture}
+
+    % Functions i
+    \path[->] (-1, -2.9) edge [bend left] node[left, xshift=-2mm] {$\phi$} (0.8, 0);
+    \draw[white,fill=white] (0.06,-0.57) circle (.15cm);
+
+
+    % Functions j
+    \path[->] (6.2, -2.8) edge [bend right] node[right, xshift=2mm] {$\phi'$} (4.2, 0);
+    \draw[white, fill=white] (4.54,-0.12) circle (.15cm);
+
+    % Manifold
+    \draw[smooth cycle, tension=0.4, fill=white, pattern color=brown, pattern=north west lines, opacity=0.7] plot coordinates{(2,2) (-0.5,0) (3,-2) (5,1)} node at (3,2.3) {$M$};
+
+    % Help lines
+    %\draw[help lines] (-3,-6) grid (8,6);
+
+    % Subsets
+    \draw[smooth cycle]
+        plot coordinates {(1,0) (1.5, 1.2) (2.5,1.3) (2.6, 0.4)}
+        node [label={[label distance=-0.3cm, xshift=-2cm, fill=white]:$V \cap M$}] {};
+    \draw[smooth cycle]
+        plot coordinates {(4, 0) (3.7, 0.8) (3.0, 1.2) (2.5, 1.2) (2.2, 0.8) (2.3, 0.5) (2.6, 0.3) (3.5, 0.0)}
+        node [label={[label distance=-0.8cm, xshift=.75cm, yshift=1cm, fill=white]:$V' \cap M$}] {};
+
+    % First Axis
+    \draw[thick, ->] (-3,-5) -- (0, -5) node [label=above:$U$] {};
+    \draw[thick, ->] (-3,-5) -- (-3, -2) node [label=right:$\mathbb{R}^m$] {};
+
+    % Arrow from i to j
+    \draw[->] (0, -3.85) -- node[midway, above]{$\phi^{-1} \circ \phi'$} (4.5, -3.85);
+
+    % Second Axis
+    \draw[thick, ->] (5, -5) -- (8, -5) node [label=above:$U'$] {};
+    \draw[thick, ->] (5, -5) -- (5, -2) node [label=right:$\mathbb{R}^m$] {};
+
+    % Sets in R^m
+    \draw[white, ] (-0.67, -3.06) -- +(180:0.8) arc (180:270:0.8);
+    \fill[even odd rule, white] [smooth cycle] plot coordinates{(-2, -4.5) (-2, -3.2) (-0.8, -3.2) (-0.8, -4.5)} (-0.67, -3.06) -- +(180:0.8) arc (180:270:0.8);
+    \draw[smooth cycle] plot coordinates{(-2, -4.5) (-2, -3.2) (-0.8, -3.2) (-0.8, -4.5)};
+    \draw (-1.45, -3.06) arc (180:270:0.8);
+
+    \draw[white] (5.7, -3.06) -- +(-90:0.8) arc (-90:0:0.8);
+    \fill[even odd rule, white] [smooth cycle] plot coordinates{(7, -4.5) (7, -3.2) (5.8, -3.2) (5.8, -4.5)} (5.7, -3.06) -- +(-90:0.8) arc (-90:0:0.8);
+    \draw[smooth cycle] plot coordinates{(7, -4.5) (7, -3.2) (5.8, -3.2) (5.8, -4.5)};
+    \draw (5.69, -3.85) arc (-90:0:0.8);
+
+\end{tikzpicture}
 
 \begin{example}[Submanifolds of $\rfield^n$]
   Let's consider some examples.
@@ -1437,7 +1490,7 @@ and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
 
 Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanifold} in order to introduce the concept of manifold.
 
-\begin{definition}[Atlas]
+\begin{definition}[Atlas] \label{atlasdef}
   An (n-dimensional, smooth) atlas $\mathcal{A}$ on a set $M$ is a collection of maps (called charts)
   \begin{align}
     \phi_{\alpha} \colon \rfield^n &\overset{\sim}{\rightarrow} M \\
@@ -1478,8 +1531,234 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
     \phi_i \colon \mathbb{K} &\rightarrow \mathbb{K}P^n \\
     (x_1, \ldots, x_n) &\mapsto [x_1, \ldots, \underbrace{1}_{i-th}, \ldots, x_n]
   \end{align*}
-  And $\phi_i(\mathbb{K}^n) = \left\{[x_0, \ldots, x_n] \in \mathbb{K}P^n \, | \, \text{ i-th entry is } \not = 0 \right \}$
+  And $\phi_i(\mathbb{K}^n) = \left\{[x_0, \ldots, x_n] \in \mathbb{K}P^n \, | \, \text{ i-th entry is } \not = 0 \right \}$.
+  We notice that $\mathcal{A}$ is an atlas because $\phi_i$ satisfies the properties of the definition \ref{atlasdef}:
+  \begin{itemize}
+    \item $\phi$ is a bijection and its inverse is
+    \begin{align*}
+      \phi_i^{-1} \colon \phi_i(\mathbb{K}^n) & \rightarrow \mathbb{K^n} \\
+      [x_0, \ldots, x_{i-1}, \underbrace{x_i}_{\not = 0}, \ldots, x_n] &\mapsto \left( \frac{x_0}{x_i}, \frac{x_1}{x_i}, \ldots, \frac{x_{i-1}}{x_i}, \frac{x_{i+1}}{x_i}, \ldots, \frac{x_n}{x_i} \right)
+    \end{align*}
+    \item $\phi$ is also a diffeomorphism, because $\phi_j^{-1} \circ \phi_i$, defined as
+    \begin{align*}
+      \phi_j^{-1} \circ \phi_i \colon \phi_i^{-1} \left(\phi_i(\mathbb{K}^n) \cap \phi_j(\mathbb{K}^n) \right) &\rightarrow \phi_j^{-1} \left(\phi_i(\mathbb{K}^n) \cap \phi_j(\mathbb{K}^n) \right) \\
+      (x_1, \ldots, x_n) &\mapsto \Bigl( \frac{x_1}{x_j}, \ldots, \underbrace{\frac{1}{x_j}}_{i-th}, \ldots, \frac{x_n}{x_j} \Bigr)
+    \end{align*}
+    is a diffeomorphism (where $x_i \not = 0, x_j \not = 0$) because it is a differentiable map and the inverse is again differentiable.
+  \end{itemize}
 \end{example}
+
+\begin{remark}[Extension of analysis to manifolds]
+  The existence of an atlas allows us to define concepts from analysis to manifolds. For instance, we can define continuous and smooth functions on manifolds using the concepts of continuity and smoothness that we use in $\rfield^n$.
+\end{remark}
+
+\begin{definition}[Continuous/smooth function on a manifold]
+  Let $M$ be a manifold, a function $f \colon M \rightarrow \rfield$ is a continuous [smooth] function if and only if $f \circ \phi_{\alpha} \colon U_{\alpha} \rightarrow \rfield$ is continuous [smooth] function $\forall \, \alpha$. Such a function is well-defined, since the definition is independent on the local parametrization chosen, thanks to the definition of atlas.
+\end{definition}
+
+\begin{remark}[cut-off functions]
+  We can construct functions on a manifold in the following way: we consider a function defined on an open set in $M$ which is homeomorphic to an open set in $\rfield^n$. Then we extend it to zero outside such open set, but in order to have a differentiable function we smoothly bring it to zero using the so-called cut-off functions.
+  For instance, a smooth function from $\rfield$ to $[0, 1] \subset \rfield$ such that:
+  \begin{equation*}
+    h(x) = \begin{cases*}
+     1, & $x \le 1$ \\
+     \text{anything}, &  $1 \le x \le 2$ \\
+     0, & $x \ge 2$
+  \end{cases*}
+  \end{equation*}
+  is a cut-off function.
+  For example, given
+  \begin{equation*}
+    a(x) = \begin{cases*}
+     0, & $x \le 0$ \\
+     e^{-1/x}, & $x \ge 0$
+  \end{cases*}
+  \end{equation*}
+  we can consider
+  \begin{equation*}
+    h(x) = 1 - \frac{a(x)}{a(x) + a(1-x)}
+  \end{equation*}
+  Then we use the function
+  \begin{equation*}
+    h_{\epsilon}(x) \equiv h \left (\frac{x}{\epsilon} \right) =
+    \begin{cases*}
+      1, & $x \le \epsilon$ \\
+      0, & $x \ge 2 \epsilon$
+    \end{cases*}
+  \end{equation*}
+  Now, for $p \in M$, let
+  $$\phi \colon \rfield^n \supset U \rightarrow V \subset M$$
+  such that $\phi(0) = p$ (where $0 \in U$) and $\epsilon > 0$ such that $B_{3 \epsilon} \supset U $. %subset?check
+
+  \begin{figure}[H]
+          \centering
+  \begin{tikzpicture}
+      % Functions i
+      \path[->] (-1, -2.5) edge [bend left] node[left, xshift=-2mm] {$\phi$} (1, 0.5);
+      \draw[white,fill=white] (0.06,-0.57) circle (.15cm);
+
+      % Manifold
+      \draw[smooth cycle, tension=0.4, fill=white, pattern color=brown, pattern=north west lines, opacity=0.7] plot coordinates{(2,2) (-0.5,0) (3,-2) (5,1)} node at (3,2.3) {$M$};
+
+      % Help lines
+      %\draw[help lines] (-3,-6) grid (8,6);
+
+      % Subsets
+      %\draw[smooth cycle]
+          \draw (3, 0.5) arc (0:359:0.8) node [label=right: $V$]{};
+          \filldraw[black] (2.2, 0.5) circle (1pt) node[anchor=west] {$p$};
+          %\draw[white, pattern color=blue, pattern=crosshatch dots] (5.7, -3.06) -- +(-90:0.8) arc (-90:0:0.8);
+          %plot coordinates {(1,0) (1.5, 1.2) (2.5,1.3) (2.6, 0.4)}
+          %node [label={[label distance=-0.3cm, xshift=-2cm, fill=white]:$V \cap M$}] {};
+
+      % Sets in R^m
+      \draw (-0.67, -3.06)  arc (0:359:0.8) node [label=right: $B_{3 \epsilon}(0)$] {};
+      \draw (-1.07, -3.06)  arc (0:359:0.4) node [label=above: $U$] {};
+      \filldraw[black] (-1.47, -3.06) circle (1pt) node[anchor=east] {$0$};
+
+  \end{tikzpicture}
+\end{figure}
+  Then $g(x) = h_{\epsilon}(|x|)$ defines a smooth function $g \colon \rfield^n \rightarrow \rfield$ with supp$(g) = \overline{\{ x \, | \, g(x) \not =  0\}} \subset U$ and $g \circ \phi^{-1} \colon V \rightarrow \rfield$ extends (by zero) to a function $f \in \mathbb{F}(M)$ with supp$f \subset V$ and $f \equiv 1$ in a neighbourhood of $p$. In particular, this shows that $\mathbb{F}(M)$ is infinite-dimensional.
+
+  \begin{figure}
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{Images/cutoff_1.pdf}
+    \caption{$a(x)$}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{Images/cutoff_2}
+    \caption{$h(x)$}
+  \end{subfigure}
+  \end{figure}
+\end{remark}
+
+\begin{definition}[Vector fields on manifolds]
+  Vector fields are defined as before (we just replace $\mathbb{F}(\rfield^n)$ with $\mathbb{F}(M)$):
+  $$\restrict{\Der}{p} \mathbb{F}(M) = T_p M \ni v_p \colon \mathbb{F}(M) \rightarrow \rfield$$
+  And
+  $$\mathfrak{X}(M) = \Der \mathbb{F}(M) = TM \ni v \colon \mathbb{F}(M) \rightarrow \mathbb{F}(M)$$
+  $\rfield$-linear and satisfying Leibnitz rule.
+\end{definition}
+
+\begin{remark}[Representation of $v$ in $U_{\alpha}$]
+  Everything is done in $U_{\alpha} \subset \rfield^n$ (chart). Representation of $v$ in $U_{\alpha}$:
+  $$v_{(\alpha)} = v_{(\alpha)}^i \partial_{x_i}$$
+  where
+  $$v_{(\alpha)}^i(x) = v^i \circ \phi_{\alpha}(x)$$
+\end{remark}
+
+Notice that cut-off functions allow us to extend any smooth function on $V_{\alpha}$ (for some $\alpha \in I$) to all of $M$ through extension by zero outside $V_{\alpha}$.
+Suppose we are given a function on $M$. How do we decide if it is continuous (or smooth)?
+\begin{proposition}[Partition of unity]
+Let $M$ be a compact manifold and let $\{V_{\alpha}\}$ be a covering of $M$. Then there exists a family of differentiable functions $\varphi_1, \ldots, \varphi_m$ such that:
+\begin{itemize}
+  \item $\sum\limits_{i=1}^m \varphi_i \equiv 1$
+  \item $0 \le \varphi_i \le 1$ and supp$(\varphi_i) \subset V_{\alpha}$ for some $\alpha \in I$
+\end{itemize}
+(without proof)
+\end{proposition}
+
+\begin{remark}
+  Definition of compactness for a manifold: coming soon.
+\end{remark}
+
+\begin{definition}[Partition of unity]
+  The family $\{\varphi_i\}$ defined above is said to be a partition of unity subordinate to the covering $\{V_{\alpha}\}$.
+\end{definition}
+
+Now, if $f \colon M \rightarrow \rfield$, we can consider $f_i = \varphi_i f \colon v_{\alpha} \rightarrow \rfield$ for some $\alpha \in I$.
+
+\begin{definition}[Differential forms on M]
+  \begin{align}
+    \Omega^k(M) \ni \omega \colon \mathfrak{X}(M) \times \cdots \times \mathfrak{X}(M) &\rightarrow \mathbb{F}(M) \\
+    (v_1, \ldots, v_k) &\mapsto \omega(v_1, \ldots, v_k) \nonumber
+  \end{align}
+  linear, skew-symmetric (i.e. alternating) as already defined.
+\end{definition}
+
+\begin{remark}[Representation of $\omega$ in $U_{\alpha}$]
+  Representation of $\omega$ in $U_{\alpha}$:
+  $$\omega_{(\alpha)} = \sum\limits_{i_1 < \cdots < i_k} (a_{i_1 \cdots i_k})_{(\alpha)} dx^{i_1} \wedge \ldots \wedge dx^{i_k}$$
+  where $\{x^i\}$ are the coordinates on $U_{\alpha}$.
+  Moreover:
+  $$\omega_{(\alpha)} ((v_1)_{\alpha}, \ldots, (v_k)_{\alpha}) = \pm \sum\limits_{i_1 < \cdots < i_k} (a_{i_1\cdots i_k})_{\alpha} (v^{i_1})_{\alpha} \cdots (v^{i_k})_{\alpha}$$
+  where the $\pm$ sign depends on the orientation used.
+\end{remark}
+
+\begin{definition}[Curve on a manifold]
+  A curve $\gamma \colon (a, b) \rightarrow M$ is continuous [differentiable] if $\phi_{\alpha}^{-1} \circ \gamma \colon (a, b) \rightarrow U_{\alpha}$ is continuous [differentiable]
+\end{definition}
+\newpage
+
+\section{Integration of differential forms on a compact manifold}
+$\omega \in \Omega^n(M), M \text{ compact manifold }, \dim M=n$. Pick a partition of unity subordinate to a covering $\{V_{\alpha} \}$ (i.e. pick some maps $\varphi_i, i=1, \ldots, n, 0 \le \varphi_i \le 1, \sum_{i=1}^m \varphi_i \equiv 1, \text{ supp}(\varphi_i) \subset V_{\alpha(i)}$ for some $\alpha = \alpha(i)$). Then:
+\begin{align}
+  \int\limits_M \omega &= \int\limits_M \sum_{i=1}^m \varphi_i \omega = \sum_i \int\limits_M (\varphi_i \omega) = \sum_i \int\limits_{V_{\alpha(i)}} (\varphi_i \omega) = \nonumber \\
+  & = \sum_i \int\limits_{U_{\alpha(i)}} \phi^*_{\alpha(i)} (\varphi_i \omega)
+\end{align}
+where $V_{\alpha} = \phi_{\alpha}(U_{\alpha})$
+Notice that the integral is well-defined if $M$ is orientable (definition of orientable manifolds in the next pages).
+
+\begin{lemma}
+  $\int\limits_{M} \omega$ is independent of the choice $(V_{\alpha}, \varphi_i)$
+\end{lemma}
+
+\begin{remark}
+  What happens with boundaries? If $p \in \partial M$, there is no neighbourhood of $p$ homeomorphic to an open set $U \subset \rfield^n$.
+  Let's define the following set:
+  $$H^n = \{ (x^1, \ldots, x^n) \in \rfield^n \, | \, x^1 \ge 0 \}$$
+\end{remark}
+
+\begin{definition}[subset topology in $H^n$]
+  An open set in $H^n$ is the interesection of an open set in $\rfield^n$ with $H^n$.
+\end{definition}
+
+\begin{definition}[Functions on $H^n$]
+  A function $f \colon V \rightarrow \rfield, V$ open, $V \subset H^n$ is differentiable if $\exists$ an open set $U, \rfield^n \supset U \supset V$ and a differentiable function
+  $\bar f \colon U \rightarrow \rfield$ such that $\restrict{\bar f}{V} = \restrict{f}{V}$.
+  Furthermore, $(f_*)_p = (\bar f_*)_p, p \in V$.
+\end{definition}
+
+\begin{definition}[\textbf{Preliminary} definition of diff. manifold with boundary]
+  An $n$-dimensional differentiable manifold with a regular boundary is a set $M$ with an equivalence class of atlases, as usual, but with the difference that $\rfield^n$ in the definition \ref{atlasdef} is replaced by $H^n$ everywhere. The boundary is "regular" if it is described by a regular curve (no intersection, etc...)
+\end{definition}
+
+When is a point on the boundary of a manifold?
+\begin{definition} [Point on the boundary] \label{pointbdr}
+  A point $p \in M$ is on the boundary of $M$ if for some parametrisation $\phi \colon U \subset H^n \rightarrow M$ around $p$, we have $\phi(0, x^2, \ldots, x^n) = p$ for some $x^2, \ldots, x^n$.
+\end{definition}%insert picture here
+
+\begin{lemma}
+  The definition \ref{pointbdr} does not depend on the choice of parametrisation.
+\end{lemma}
+
+\begin{definition} [Orientable manifold]
+  $M$ is orientable if there exists an atlas $\mathcal{A} = \{\phi_{\alpha}, U_{\alpha}\}$ such that for each pair $\alpha, \beta$ with $\phi_{\alpha}(U_{\alpha}) \cap \phi_{\beta}(U_{\beta}) \not = \emptyset$, the differential
+  $$
+    (\phi_{\beta}^{-1} \circ \phi_{\alpha})_* \colon  U_{\beta} \rightarrow U_{\alpha}
+  $$
+  has positive determinant. Example of a non-orientable manifold: Möbius strip.
+\end{definition}
+
+\begin{proposition}
+  \begin{itemize}
+    \item The boundary $\partial M$ of a $n$-dimensional differentiable manifold with boundary is a $(n-1)$-dimensional differentiable manifold. %with boundary?check
+    \item The orientation on $M$ induces an orientation on $\partial M$
+  \end{itemize}
+\end{proposition}
+
+\begin{theorem}[Stokes theorem on manifolds]
+  $M$ orientable, then:
+  \begin{equation}
+    \int\limits_M d \omega = \int\limits_{\partial M} i^* \omega
+  \end{equation}
+\end{theorem}
+
+
+
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
 \clearpage
