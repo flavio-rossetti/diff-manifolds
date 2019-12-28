@@ -1373,7 +1373,7 @@ H^0(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, be
 \textbf{Premise:} We want to go outside $\rfield^n$, and analyze the so called manifolds. For now, we can think about them as generalizations of curves and surface of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
 We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ in $\rfield^n$ ($m \le n$).
 \begin{definition}[(a) Submanifold - Local parametrization]
-  $\forall \, p \in M \subset rfield^n, \exists$ a neighbourhood $V$, $p \in V$, $V \subset \rfield^n$ and $U \subset \rfield^m, U, V$ open, $m \le n$, and a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
+  $\forall \, p \in M \subset \rfield^n, \exists$ a neighbourhood $V$, $p \in V$, $V \subset \rfield^n$ and $U \subset \rfield^m, U, V$ open, $m \le n$, and a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
   \begin{itemize}
     \item $\phi \colon U \rightarrow M \cap V$ is a homeomorphism,
     \item $\phi_* (x) \colon \rfield^m \rightarrow \rfield^n$ is injective $\forall \, x \in U$
@@ -1395,7 +1395,7 @@ and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
   $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n$ and a permutation $\sigma \colon \{1, \ldots, n\} \rightarrow \{1, \ldots, n\}$ and $U \subset \rfield^m, U$ open, together with a smooth map $g \colon U \rightarrow \rfield^{n-m}$ such that
   \begin{align*}
   V \cap M = \{ &(x_{\sigma(1)} \cdots x_{\sigma(n)}) \, |\, (x_1, \ldots, x_m) \in U \\
-   &\text{ and } (x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_n)\}
+   &\text{ and } (x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m)\}
 \end{align*}
   (g is called a \textit{graph}).
 \end{definition}
@@ -1831,7 +1831,7 @@ Moreover:
 \end{remark}
 
 \begin{definition}[Product topology]
-Let $(M_i, \mathcal{O}_i), i \in I$ be topological spaces. Then the product topology on $\prod_{i \in I} M_i$ is the one such that all projections
+Let $(M_i, \mathcal{O}_i), i \in I$ be topological spaces. Then the product topology on $\prod_{i \in I} M_i$ is the smallest topology such that all projections
 $$
 \prod_{i \in I} M_i \rightarrow M_j
 $$
