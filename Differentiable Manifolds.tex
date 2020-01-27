@@ -1808,7 +1808,7 @@ A map $f \colon X \rightarrow Y$ between topological spaces is continuous if $f^
 Requiring that the pre-image of an open set is open is different from requiring that the image of an open set is open! If $f$ brings open sets to open sets, it is called open map (and it might not be continuous).
 \end{remark}
 
-\begin{example}
+\begin{example} \label{topexamples}
 Given a set $M$, we can always consider two simple topologies on it:
 \begin{enumerate}
 	\item $\mathcal{O}_M =  \mathcal{P}(M)$ is a topology, where $\mathcal{P}(M)$ is the power set of $M$ (i.e. the family of all subsets of $M$). Everything is open in $M$, so it is easy to see that any function going from $(M, \mathcal{O}_M)$ to any space $(Y, \mathcal{O}_Y)$ must be continuous.
@@ -1857,6 +1857,15 @@ x &\mapsto [x]
 \end{align*}
 is continuous. $\pi$ is also called canonical projection.
 \end{definition}
+
+\begin{remark}[Quotient topology pt. 2]
+We can also use another useful characterization of the quotient topology: a set $U \subset \faktor{M}{\sim}$ is open if and only if $\pi^{-1}(U) \in \mathcal{O_M}$. It is easy to prove that this definition is equivalent to the one above. Let's call $(1)$ the first definition and $(2)$ the last one.
+\begin{itemize}
+\item "$(1) \Rightarrow (2)$": $U$ open in the quotient topology, then $\pi^{-1}(U)$ is open in $M$ by (1), because $\pi$ is a continuous map. If $\pi^{-1}(U)$ is open in $M$, then $U$ is open in $\faktor{M}{\sim}$ because in $(1)$ we have defined the topology on $\faktor{M}{\sim}$ as the \textit{largest} topology such that $\pi$ is continuous!
+\item "$(2) \Rightarrow (1)$: $\pi$ is obviously continuous. And the topology we get is the \textit{largest} one such that $\pi$ is continuous because if $\pi^{-1}(U)$ is not open in $M$, then $U$ is not open in the quotient space (read also below).
+\end{itemize}
+\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that it exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. In the $"(1) \Rightarrow (2)"$ above it was true because in $Y$ we had the largest topology such that $f\colon X \rightarrow Y$ was continuous. It means that the topology on $Y$ had the same open sets of the "power set topology" (i.e. everything is open, cf. remark \ref{topexamples}) except for some sets. Which sets did we remove? We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
+\end{remark}
 
 \begin{example}[Cofinite topology]
 Let $M$ be a set. We define the following topology: the open sets are $\emptyset$ and the sets $U \not = \emptyset, U \subset M$ such that their complement in $M$ is finite. Another way to define the same topology is using closed sets: the only closed sets in this topology are $M$ and the finite sets. This topology is called cofinite topology. 
@@ -1910,7 +1919,7 @@ $$\varphi_i \circ \varphi_j^{-1} \colon \varphi_j(U_i \cap U_j) \rightarrow \var
 \bibitem{Lee}
 {J.} M. Lee, Introduction to Smooth Manifolds, Springer
 \bibitem{Notes}
-Lecture notes (Differentiable Manifolds Saachs, Vogel WS 19)
+Lecture notes (Differentiable Manifolds Sachs, Vogel WS 19)
 \end{thebibliography}
 
 
