@@ -19,7 +19,14 @@
 \usetikzlibrary{patterns, positioning, arrows}
 \pgfplotsset{compat=1.15}
 \usepackage{float, subcaption, braket, bbold, amssymb,amsthm,amsmath,mathtools, tikz-cd}
-\usepackage{stackengine} 
+\usepackage{stackengine}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt} 
 
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable}
@@ -51,6 +58,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{fact}[theorem]{Fact}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -64,11 +72,13 @@
 % aumenta la spaziatura
 \linespread{1.2}
 
+\DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\Der}{Der}
 \DeclareMathOperator{\Diff}{Diff}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\supp}{supp}
 % \DeclareMathOperator{i}{i}
 \newcommand{\rfield}{\mathbb{R}}
 
@@ -82,6 +92,20 @@
 %\newcommand{\restrict}[2]{\left.{#1}\right|_{#2}}
 
 \newcommand{\restrict}[2]{{#1}\raisebox{-.5ex}{$|$}_{#2}}
+
+\newcommand{\diondi}[1]{\frac{d}{d{#1}}}
+
+\newcommand{\difondi}[2]{\frac{d{#1}}{d{#2}}}
+
+\newcommand{\deonde}[1]{\frac{\partial}{\partial {#1}}}
+
+\newcommand{\defonde}[2]{\frac{\partial {#1}}{\partial {#2}}}
+
+\newcommand{\tangentgeom}[1]{T_{#1}^{\text{geom}}}
+
+\newcommand{\tangentphys}[1]{T_{#1}^{\text{phys}}}
+
+\newcommand{\tangentalg}[1]{T_{#1}^{\text{alg}}}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -1154,7 +1178,7 @@ $ $
 \end{itemize}
 \end{proof}
 
-\begin{lemma}
+\begin{lemma} \label{commlemma}
   Let $u, v$ be smooth vector fields on $\rfield^n$ and $\varphi \in \Diff(\rfield^n)$. Then:
   \begin{enumerate}
     \item $[u, v]$ is $\rfield-$bilinear (i.e. bilinear for a parameter $\lambda \in \rfield$)
@@ -1173,7 +1197,7 @@ See problem sheet 4, exercise 4.
 \begin{itemize}
   \item For a function $f$ (i.e. a 0-form) on $[a, b] \subset \rfield$ we have $\int_a^b df = \int_a^b \partial_x f dx = f(b) - f(a)$ (fundamental theorem of calculus).
   \item for $\omega = a_i dx^i$, a 1-form on $U = [0, 1] \times [0, 1] \subset \rfield^2$ we have:
-  $$\int_S d\omega = \int_S (\partial_{x^1} a_2) dx^1 \wedge dx^2 + (\partial_x^2 a_1) dx^2 \wedge dx^1 = \int_{\partial S} w$$
+  $$\int_S d\omega = \int_S (\partial_{x^1} a_2) dx^1 \wedge dx^2 + (\partial_{x^2} a_1) dx^2 \wedge dx^1 = \int_{\partial S} \omega$$
   where we used the fundamental theorem of calculus.
   \item More generally, if $S$ is a compact subset of $\rfield^2$ with piecewise regular boundary $\partial S$ (piecewise homeomorphic to intervals in $\rfield$) then we obtain by decomposing $S$ in terms of little squares and interpreting $\int_U d\omega$ as a Riemann sum over the square the result
   $$\int_U d\omega = \int_{\partial U} \omega$$
@@ -1188,13 +1212,14 @@ See problem sheet 4, exercise 4.
 So, the most general result that we achieved is the following:
 
 \begin{theorem}[Stokes]
-  $\omega \in \Omega^{m-1}(\rfield^n)$. Let $M$ be a closed compact subset of $\rfield^n$, $dim(M) = m \le n$, such that $M$ is homeomorphic to a closed subset $U \subset \rfield^m$. $\partial M$ is the boundary of $M$ and $i \colon \partial M \rightarrow M$ is the inclusion map of $\partial M$ into $M$. Then:
+  $\omega \in \Omega^{m-1}(\rfield^n)$. Let $M$ be a compact subset of $\rfield^n$, $dim(M) = m \le n$, such that $M$ is homeomorphic to a closed subset $U \subset \rfield^m$. $\partial M$ is the boundary of $M$ and $i \colon \partial M \rightarrow M$ is the inclusion map of $\partial M$ into $M$. Then:
   \begin{equation}
     \int_{\partial M} i^* \omega = \int_M d\omega
   \end{equation}
 \end{theorem}
 \begin{proof}[Sketch of the proof]
-The proof uses the naturality of the pullback "$f^*d = df^*$" and the results for open subsets of $\rfield^n$. [\textbf{TO DO}]
+First, we notice that $U$ is compact as well because it is homeomorphic to a compact set.
+Then, the proof uses the naturality of the pullback "$f^*d = df^*$" and the results for open subsets of $\rfield^n$. [\textbf{TO DO}]
 \end{proof}
 
 \begin{corollary}[Fundamental theorem of line integrals]
@@ -1302,14 +1327,14 @@ Now, we want to extend the above theorem to $k$-forms.
 \begin{definition} [Contractible set]
   An open subset $U \subset \rfield^n$ is contractible to some point $p_0 \in U$ if there exists a differentiable map
   \begin{align}
-    H \colon U \times R &\rightarrow U \\
+    H \colon U \times [0, 1] &\rightarrow U \\
     (p,t) &\mapsto H(p, t) \nonumber
   \end{align}
   such that $H(p, 1) = p, H(p, 0) = p_0, \forall\, p \in U$
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-  To every $\omega \in \Omega^k(U)$ we can associate a $k$-form $\bar\omega \in \Omega^k(U \times \rfield)$ defined as
+  If $U$ is contractible, we can associate a $k$-form $\bar\omega \in \Omega^k(U \times \rfield)$ to every $\omega \in \Omega^k(U)$. $\bar \omega$ is defined as
   \begin{equation}
     \bar\omega = H^* \omega
   \end{equation}
@@ -1317,7 +1342,7 @@ Now, we want to extend the above theorem to $k$-forms.
   \begin{equation}
     \bar \omega = \omega_1 + dt \wedge \eta
   \end{equation}
-  with $i_{\partial_t} \omega_1 = 0$ and $i_{\partial_t} \eta_1 = 0$.
+  with $i_{\partial_t} \omega_1 = 0$ and $i_{\partial_t} \eta = 0$.
   Conversely, we can associate a $k$-form $\omega \in \Omega^k(U)$ to each $\bar \omega \in \Omega^k(U \times \rfield)$ with the help of the inclusion map
   \begin{align}
     i_t \colon U &\rightarrow U \times \rfield \\
@@ -1356,8 +1381,8 @@ Now, we want to extend the above theorem to $k$-forms.
 \end{lemma}
 
 Then we can extend Poincarè lemma to $k$-forms:
-\begin{theorem}
-  Let $U$ be a contractible, open subset of $\rfield^n$ and $\omega \in \Omega^k(U)$ with $d\omega = 0$. Then there exists a $(k-1)$-form $\alpha \in \Omega^{k-1} (U)$ such that $\omega = d\alpha$.
+\begin{theorem} [Poincarè Lemma]
+  Let $k \ge 1$. Let $U$ be a contractible, open subset of $\rfield^n$ and $\omega \in \Omega^k(U)$ with $d\omega = 0$. Then there exists a $(k-1)$-form $\alpha \in \Omega^{k-1} (U)$ such that $\omega = d\alpha$.
 \end{theorem}
 
 Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independent of the choice of $\gamma$?
@@ -1438,10 +1463,10 @@ We can limit ourselves to consider continuous curves, thanks to the two followin
   If $\gamma_1$ and $\gamma_2$ are homotopic maps between $U$ and $V$ then they are smoothly homotopic. %TO CHECK
 \end{theorem}
 \section[de Rham Cohomology]{\crule[green!50!white]{0.3cm}{0.4cm}  de Rham Cohomology}
-We can think of $\Omega^k(U)$ as a vector space over $\rfield$
+Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vector space over $\rfield$. Indeed, if $\alpha, \beta \in \Omega^k(U)$, then $a \alpha + b \beta \in \Omega^k(U), \forall\, a, b, \in \rfield$. And also the remaining properties of a vector space are satisfied.
 
 \begin{remarkbox}\begin{remark}
-  We say that $\Omega^k(U, \mathbb{Z})$ forms a group (and not a vector space) since $\mathbb{Z}$ is not a field. In contrast, $\Omega^k(U, \rfield)$ is a vector space.
+  We say that $\Omega^k(U, \mathbb{Z}) = \{k\text{-forms on } U \text{ with coefficients in } \mathbb{Z}\}$  forms a group (and not a vector space) since $\mathbb{Z}$ is not a field. In contrast, $\Omega^k(U, \rfield)$ is a vector space.
 \end{remark}\end{remarkbox}
 
 \begin{definition}
@@ -1506,7 +1531,7 @@ We can think of $\Omega^k(U)$ as a vector space over $\rfield$
 \end{example}\end{tcolorbox}
 
 \begin{remarkbox}\begin{remark}
-  If $\phi \colon U \rightarrow V$, $U, V$ subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$ forms. By the construction above, we can also define such pullback on $H^K$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms.
+  If $\phi \colon U \rightarrow V$, $U, V$ subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$ forms. By the construction above, we can also define such pullback on $H^k$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms.
   If $\phi$ is a diffeomorphism, then $\phi^*$ is an isomorphism. Thus, $H^k(V) \cong H^k(U)$.
   Question: what if $U$ and $V$ are not diffeomorphic, but only homotopic equivalent? We want to show that the final result is the same.
  \end{remark}\end{remarkbox}
@@ -1625,7 +1650,7 @@ H^0(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, be
   is exact.
 \end{theorem}
 \section[Submanifolds of $\rfield^n$]{\crule[blue!30!white]{0.3cm}{0.4cm}  Submanifolds of $\rfield^n$}
-\textbf{Premise:} We want to go outside $\rfield^n$, and analyze the so called manifolds. For now, we can think about them as generalizations of curves and surface of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
+\textbf{Premise:} We want to go outside $\rfield^n$, and analyze more general topologies. For now, we can think about them as generalizations of curves and surface of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
 We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ in $\rfield^n$ ($m \le n$).
 \begin{definition}[(a) Submanifold - Local parametrization]
   $\forall \, p \in M \subset \rfield^n, \exists$ a neighbourhood $V$, $p \in V$, $V \subset \rfield^n$ and $U \subset \rfield^m, U, V$ open, $m \le n$, and a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
@@ -1643,7 +1668,7 @@ We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ 
 \begin{definition}[(c) Submanifold - Locally  a zero set]
 $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n, V$ open, and a smooth map $F \colon V \rightarrow \rfield^{n-m}$ such that
 $$V \cap M = \{x \in V \, | \, F(x) = 0\}$$
-and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
+and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
 \end{definition}
 
 \begin{definition}[(d) Submanifold - Locally a graph]
@@ -1662,7 +1687,7 @@ and $F_* \colon \rfield^n \rightarrow \rfield^{n-m}$ is surjective.
 \begin{corollary} \label{corsubmanifold}
   Let:
   $$\phi \colon \rfield^m \supset U \rightarrow V \cap M$$
-  $$\phi' \colon \rfield^m \supset \rightarrow V' \cap M$$
+  $$\phi' \colon \rfield^m \supset U' \rightarrow V' \cap M$$
   be local parametrizations. then
   $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (V \cap V' \cap M) \rightarrow \phi^{-1}(V \cap V' \cap M)$$
   is a diffeomorphism. %write that they are open sets? intersection color...check
@@ -1952,8 +1977,8 @@ $\omega \in \Omega^n(M), M \text{ compact manifold }, \dim M=n$. Pick a partitio
   \int\limits_M \omega &= \int\limits_M \sum_{i=1}^m \varphi_i \omega = \sum_i \int\limits_M (\varphi_i \omega) = \sum_i \int\limits_{V_{\alpha(i)}} (\varphi_i \omega) = \nonumber \\
   & = \sum_i \int\limits_{U_{\alpha(i)}} \phi^*_{\alpha(i)} (\varphi_i \omega)
 \end{align}
-where $V_{\alpha} = \phi_{\alpha}(U_{\alpha})$
-Notice that the integral is well-defined if $M$ is orientable (definition of orientable manifolds in the next pages).
+where $V_{\alpha} = \phi_{\alpha}(U_{\alpha})$.
+Notice that \textbf{the integral is well-defined if $M$ is orientable} (definition of orientable manifolds in the next pages).
 
 \begin{lemma}
   $\int\limits_{M} \omega$ is independent of the choice $(V_{\alpha}, \varphi_i)$
@@ -2103,7 +2128,7 @@ is continuous. $\pi$ is also called canonical projection.
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Quotient topology pt. 2]
-We can also use another useful characterization of the quotient topology: a set $U \subset \faktor{M}{\sim}$ is open if and only if $\pi^{-1}(U) \in \mathcal{O_M}$. It is easy to prove that this definition is equivalent to the one above. Let's call $(1)$ the first definition and $(2)$ the last one.
+We can also use another useful characterization of the quotient topology: a set $U \subset \faktor{M}{\sim}$ is open if and only if $\pi^{-1}(U) \in \mathcal{O}_M$. It is easy to prove that this definition is equivalent to the one above. Let's call $(1)$ the first definition and $(2)$ the last one.
 \begin{itemize}
 \item "$(1) \Rightarrow (2)$": $U$ open in the quotient topology, then $\pi^{-1}(U)$ is open in $M$ by (1), because $\pi$ is a continuous map. If $\pi^{-1}(U)$ is open in $M$, then $U$ is open in $\faktor{M}{\sim}$ because in $(1)$ we have defined the topology on $\faktor{M}{\sim}$ as the \textit{largest} topology such that $\pi$ is continuous!
 \item "$(2) \Rightarrow (1)$: $\pi$ is obviously continuous. And the topology we get is the \textit{largest} one such that $\pi$ is continuous because if $\pi^{-1}(U)$ is not open in $M$, then $U$ is not open in the quotient space (read also below).
@@ -2151,13 +2176,351 @@ If $A \subset M$ and $M$ has a countable basis, then the subspace topology on $A
 \end{lemma}
 
 \begin{definition}[Manifold]
-A manifold $M$ of dimension $n$ is a topological space which is Hausdorff, second countable and admits an (equivalence class of) atlas(es) $\varphi_i \colon U_i \rightarrow V_i$, where $V_i$ is an open subset of $\rfield^n$ and $U_i \subset M$ is open so that the transition functions
+A manifold $M$ of dimension $n$ is a topological space which is Hausdorff, second countable and admits an (equivalence class of) atlas(es) $\varphi_i \colon U_i \rightarrow V_i$, where the 
+$\varphi_i$ are homeomorphisms, $V_i$ is an open subset of $\rfield^n$ and $U_i \subset M$ is open so that the transition functions
 $$\varphi_i \circ \varphi_j^{-1} \colon \varphi_j(U_i \cap U_j) \rightarrow \varphi_i (U_i \cap U_j)$$ are smooth (i.e. $C^{\infty}$). We are considering equivalence classes. we recall that the equivalence relation is the following one: two atlases are equivalent if their union is still a smooth atlas.
+\end{definition}
+
+\begin{remarkbox} \begin{remark}[2nd Countable hypothesis for a manifold]
+We require the hypothesis of second countability for manifolds in order to apply several theorems or lemmas, e.g. Sard's theorem.
+\end{remark} \end{remarkbox}
+
+\begin{fact}
+Manifolds are metrizable, i.e. there exists a metric $d$ such that the topology on the manifold is the one induced by $d$.
+\end{fact}
+
+\begin{definition}[Cover]
+Let $J$ be a set of indices, either finite or infinite. A family of sets $\{U_i\}_{i \in J}$ is a cover for a topological space $X$ if $\cup_i U_i = X$ (the sets "cover" the entire space). It is an open cover if the $U_i$ are open sets in the topopolgy of $X$. A subcover is a subfamily of the initial cover which is still a cover.
+\end{definition}
+
+\begin{definition} [Compact space]
+A topological space $X$ is compact if every open cover $\{U_i\}_{i \in J}$ admits a finite subcover $\{U_i\}_{i=1}^k$.
+\end{definition}
+
+\begin{tcolorbox}
+\begin{example}
+If $(X, d)$ is a metric space and is compact, then $X$ is bounded (i.e. contained in a ball). Indeed: $U_i = B_i(x) = \{y \in X\, |\, d(x, y) < i\}$ is an open set. And for a fixed $x \in X$, $\cup_i U_i$ is an open cover: $\cup_{i \in \mathbb{N}} U_i = X$. Since the space is compact $\Rightarrow U_{i_1} \cup \ldots \cup U_{i_k} = X$ for some indices $i_1, \ldots, i_k$. These indices are the radii of the balls. Take $c = 2 \max\{i_1, \ldots, i_k\}$, then we have that $d(x, y) < c \, \forall\, y, \in X$, i.e. $X$ is bounded because it is contained in the ball $B_c(x)$.
+\end{example}
+\end{tcolorbox}
+
+\begin{theorem}[Heine-Borel]
+A subset of $\rfield^n$ is compact if and only if it is closed and bounded.
+\end{theorem}
+
+\begin{corollary} [Weierstrass]
+Let $X$ be a compact space, $f \colon X \rightarrow \rfield$ continuous, then $f$ attains its maximum (and minimum) in $X$.
+\end{corollary}
+
+\begin{lemma}[Closed in a compact] \label{closedincomp}
+$X$ is a compact topological space, $A \subset X$ closed $\Rightarrow A$ is compact (in subspace topology). 
+\end{lemma}
+\begin{proof}
+Let $\{U_i\}_{i \in I}$ be an open cover of $A$. There are open sets $V_i \subset X$ with $V_i \cap A = U_i$ by definition of open sets in the subspace topology. Moreover, $V_A \equiv X \setminus A$ is open because $A$ is closed. Since $\{U_i\}_{i \in I}$ is an open cover of $A$, we have that $\{U_i\}_{i \in I}$ and $V_A$ form an open cover of $X$. Since $X$ is compact, there is a finite number of indices $i_1, \ldots, i_k \in I$ such that $V_{i_1}, \ldots, V_{i_k}, V_A$ cover $X$. Since $V_A = X \setminus A$, it follows that the sets $V_{i_1}, \ldots V_{i_k}$ cover $A$. Since $U_i = V_i \cap A$, also $U_{i_1}, \ldots, U_{i_k}$ cover $A$. Then $A$ is compact because we proved that every open cover admits a finite subcover.
+\end{proof}
+
+\begin{lemma} [Cont. functions map compact sets to compact sets] \label{contcomp}
+If $A$ is compact and $f \colon A \rightarrow Y$ is continuous, then $f(A)$ is compact.
+\end{lemma}
+\begin{proof}
+Let $\{U_i\}_{i \in I}$ be an open cover of $f(A)$. Then $\exists\,  \{V_i\}_{i \in I}, V_i \subset Y$ open, so that $U_i = V_i \cap f(A)$ (by definition of open sets in subspace topology). Since $f$ is continuous, $f^{-1}(V) \subset A$ is open, and $f^{-1}(V)$ covers $A$. Since $A$ is compact, there exist $i_1, \ldots, i_k$ such that $f^{-1}(V_{i_1}), \ldots, f^{-1}(V_{i_k})$ still cover $A$. Thus, $V_{i_1},\ldots, V_{i_k}$ is a collection of open sets in $Y$ covering $f(A)$. In the subspace toplogy, $U_{i_1} = V_{i_1} \cap f(A), \ldots, U_{i_k} = V_{i_k} \cap f(A)$ cover $f(A)$.
+\end{proof}
+
+\begin{lemma}[Compact set in a Hausdorff] \label{compinhauss}
+Let $X$ be Hausdorff. Let $A \subset X$. Assume $A$ is compact. Then $A$ is closed.
+\end{lemma}
+\begin{proof}
+Let $x \in X \setminus A$. For every $a \in A$, there are $U_a \subset X, V_x(a) \subset X$ open sets such that $U_a \cap V_x(a) = \emptyset$ (because of the Hausdorff hypothesis). Here, w used the notation $V_x(a)$ to stress out the dependence of $V$ on $x$ and $a$. The sets $\{U_a \cap A\}_{a \in A}$ are form an open cover of $A$. Since $A$ is compact, there are finitely many $a_1, \ldots a_k$ so that $U_{a_1} \cap A, \ldots, U_{a_k} \cap A$ cover $A$. Now, $V_x = V_x(a_1) \cap \ldots \cap V_x(a_k)$ contains $x$ and it is open. Moreover, $V_x \,\cap A = \emptyset$ because $V_x$ is disjoint from each $U_{a_i} \Rightarrow X \setminus A$ is open, becuase for each point we can find an open set that contains the point and that is contained in $X \setminus A$.
+\end{proof}
+
+\begin{theorem} [How to get a homeomorphism]
+Let $f \colon X \rightarrow Y$ be a continuous function, $X$ compact, $Y$ Hausdorff and $f$ bijective. Then $f$ is a homeomorphism.
+\end{theorem}
+\begin{proof}
+The only thing which is left to prove is that $f^{-1}$ is a continuous function. First, we notice that an equivalent definition of continuous function is: "$f \colon X \rightarrow Y$ is continuous $\Leftrightarrow f^{-1}(C)$ is closed $\forall \, $ closed set $C \subset Y$". In order to prove that $f^{-1}$ is continuous, we need to show that $f(C) \subset Y$ is closed for all $C \subset X$ closed. This is true because: $C$ closed in $X \Rightarrow C$ compact because of lemma \ref{closedincomp} $\Rightarrow f(C)$ is compact in $Y$ because of lemma \ref{contcomp} $\Rightarrow f(C)$ is closed, using the lemma \ref{compinhauss}.
+\end{proof}
+
+\begin{remarkbox}
+\begin{remark}
+We can consider the concept of sequential compactness: $X$ is sequentially compact if every sequence in $X$ contians a convergent subsequence in $X$. In general, $X$ compact $\not \Rightarrow X$ sequentially compact. But, $X$ compact $+$ first countable $\Rightarrow X$ sequentially compact. Here, $X$ is first countable if $\forall\, x \in X\, \exists \,  N_1, N_2, \ldots, N_i$ (where $i \in I, I $) countable collection of neighbourhoods of $x$ such that every neighbourhood contains one of the $N_i$. Notice that manifolds are first countable! (CHECK)
+\end{remark}
+\end{remarkbox}
+
+\begin{definition}[Compact exhaustion]
+Let $X$ be a topological space. A compact exhaustion $\{K_i\}_{i \in \mathbb{N}}$ of $X$ is a countable collection of compact sets $K$ so that $\bar K_i \subset \mathring K_{i+1}$
+\end{definition}
+
+\begin{theorem}
+A manifold admits a compact exhaustion.
+\end{theorem}
+\begin{proof}
+The proof uses the second countability. We will skip it.
+\end{proof}
+
+\begin{definition}[Paracompactness]
+A topological space is paracompact if  every open cover admits a locally finite refinement. i.e. if $\{U_i\}_{i \in I}$ is an open cover of $X$, there is another open cover $\{V_j\}_{j \in J}$ of $X$ such that $V_j \subset U_i(j)$ (refinement) and every point $x$ has a neighbourhood $V_x$ such that $V_x$ intersects only a finite number of $V_j$ (locally finite).
+\end{definition}
+
+\begin{theorem}
+Manifolds are paracompact.
+\end{theorem}
+\begin{proof}
+The proof uses the second countability property. We will skip it here.
+\end{proof}
+
+\begin{definition}[Partition of unity]
+A partition of unity subordinate to an open cover $\{U_i\}_{i \in I}$ of $X$ is a collection of continuous functions $f_j \colon X \rightarrow [0, 1]$ such that $\forall \, x \exists \, V_x \ni x, V_x$ neighbourhood of $x$ so that the support $\supp(f_j) = \overline{f_j^{-1}((0, 1])}$ is contained in one of the $U_i$, and $V_x$ intersects only finitely many $\supp(f_j)$, and
+$$\sum\limits_{j \in J}f_j(x) \equiv 1$$
+\end{definition}
+
+\begin{theorem}
+Every open cover of a manifold admits a subordinate partition of unity which is smooth.
+\end{theorem}
+
+\begin{definition}[Smooth function from a manifold]
+Let $M$ be a smooth manifold, then $f \colon M \rightarrow \rfield $ is smooth at $p$ if for a chart $\varphi \colon U \rightarrow \rfield^n$, with $U \ni p$, we have that
+$$f \circ \varphi^{-1} \colon \varphi(U) \rightarrow \rfield$$
+is smooth near $\varphi(p)$
+\end{definition}
+
+\begin{remarkbox}
+\begin{remark}
+The definition does not depend on the chart chosen. In fact, let's choose another chart $(V, \psi)$, then:
+$$f \circ \psi^{-1} = \underbrace{f \circ \varphi^{-1}}_{\text{smooth}} \circ \underbrace{\varphi \circ \psi^{-1}}_{\text{smooth}}$$
+is smooth around $p$ because the composition of smooth functions is smooth.
+\end{remark}
+\end{remarkbox}
+
+\begin{definition}[Smooth function between manifolds]
+Let $M, N$ be smooth manifolds. Then $f \colon M \rightarrow N$ is smooth around $p$ if $f$ is continuous and for charts $(U, \varphi)$ around $p$ and $(V, \psi)$ around $f(p)$ we have that $\psi \circ f \circ \varphi^{-1}$ is smooth on a neighbourhood of $\varphi(p)$
+\end{definition}
+
+Now that we know when a map is smooth, we want to differentiate. For this, we want the concept of tangent vector. We will use three equivalent definitions.
+
+\begin{definition}[Equivalent curves] \label{equivcurves}
+Two curves $\gamma_0, \gamma_1 \colon (-\varepsilon, \varepsilon) \rightarrow M$ with $\gamma_0(0)=\gamma_1(0)=p$ are equivalent if for a chart $(U, \varphi)$ around $p$:
+\begin{equation*}
+\restrict{\diondi{t}}{t=0} \varphi \circ \gamma_0(t) = \restrict{\diondi{t}}{t=0} \varphi \circ \gamma_1(t)
+\end{equation*}
+And we notice that such definition does not depend on the chart chosen.
+\end{definition}
+
+\begin{definition}[Geom. tangent space] \label{geomtangent}
+We define the geometric tangent space at $p$ as:
+\begin{equation}
+\tangentgeom{p} M = \faktor{ 
+\left \{ \text{ smooth curves } \gamma \colon (-\varepsilon, \varepsilon) \rightarrow M \, | \, \gamma(0) = p, \varepsilon > 0 \right \}}
+{\sim}
+\end{equation}
+where $\sim$ is the equivalence relation described in def. \ref{equivcurves}. The elements of $\tangentgeom{p} M$ are called tangent vectors.  
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+Let's analyze def. \ref{geomtangent}: it is an intuitive definition of the tangent space but from it it's not obvious that $\tangentgeom{p} M$ is a vector space. The following definition of tangent space is more abstract, but on the other hand it will be evident that the tangent space is a vector space.
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Derivation - pt.2]
+A derivation $v$ on smooth functions $C^{\infty}(M)$ at $p$ is a $\rfield-$linear map $v \colon C^{\infty}(M) \rightarrow \rfield$ which satisfies the Leibnitz rule $v(fg) = \restrict{v(f)}{p} \restrict{g}{p} + \restrict{f}{p}\restrict{v(g)}{p}$
+\end{definition}
+
+\begin{definition}[Alg. tangent space]
+We define the algebraic tangent space at $p$ as:
+\begin{equation*}
+\tangentalg M = \{\text{derivations of } p \}
+\end{equation*}
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+$ $
+\begin{itemize}
+\item Instead of using $C^{\infty}(M)$ (which is a ring) we could have used the space $\mathcal{E}^{\infty}_p (M) = \faktor{C^{\infty}}{\sim}$ of germs of functions, where the equivalence relation is the following one:
+$$f \sim g \Leftrightarrow f \equiv g \text{ on a neighbourhood of } p$$
+In such cases, $v(f) = v(g)$ for $v \in \tangentalg{p} M$. In fact, let's consider a smooth function $h$ with support $\overline{h^{-1}(\rfield \setminus {0})}$ (so, $h(0) = 0$) and $h \equiv 1$ near $p$. Then:
+$$0 \overset{(1)} {=} v\left(h(f-g)\right) = v(h)\underbrace{\left(f(p) - g(p)\right)}_{=0} + \underbrace{h(p)}_{=1}\left (v(f) - v(g) \right)$$
+where we used: (1) $h(f-g) = h(0) = 0$ near $p$ and the derivative of a constant function is 0 by the Leibnitz rule: $v(1) = v(1\cdot 1) = v(1)+v(1) \Rightarrow v(1)=0$. (2) Leibnitz rule again.
+We also say that the derivation $v$ is local.
+\item As we already pointed out, $\tangentalg{p} M$ is a vector space. The only non-trivial thing to prove is that $\dim \tangentalg {p}M = n$ if the dimension of $M$ is $n$. 
+\end{itemize}
+\end{remark}\end{remarkbox}
+
+\begin{lemma} \label{usefullemma}
+Let $f \colon \rfield^N \supset B_{\varepsilon}(0) \rightarrow \rfield$ be smooth, then there are smooth functions $f_i$ on $B_{\varepsilon}(0)$ so that:
+\begin{equation}
+f(x) = f(0) + \sum\limits_i x^i f_i(x^1, \ldots, x^n)
+\end{equation}
+\end{lemma}
+\begin{proof}
+\begin{equation*}
+f(x)-f(0) = \int\limits_0^1 \diondi{t} f(tx^1, \ldots, x^n)\, dt = \int\limits_0^1 \sum_i x^i \deonde{x^i} f(tx^1, \ldots, tx^n) \, dt
+\end{equation*}
+So, the $f_i$ we are looking for are:
+\begin{equation*}
+f_i = \int\limits_0^1 \defonde{f}{x^i}(tx^1, \ldots, tx^n)\, dt
+\end{equation*}
+\end{proof}
+
+\begin{remarkbox}\begin{remark}
+Now, we can prove that the $\dim \tangentalg{p} M = n$. Let $v$ be a derivation at $p$ and $(U, \varphi)$ a local chart around $p$. $x^1, \ldots, x^n$ are the local coordinates, such that $p$ coincides with the origin ($x^i(p) = 0$). From lemma \ref{usefullemma}:
+$$f(x) = f(0) + \sum\limits_i x^i f_i(x)$$
+and
+$$v(f) = \underbrace{v(f(0))}_{=0} + \sum\limits_i \left( v(x^i) \underbrace{f_i(x^i)}_{=f_i(0)} + \underbrace{x^i}_{=0} v(f_i) \right)$$
+Then, $v$ is defined by the way it reacts to coordinate functions around $p$. Thus, $\dim \tangentalg{p} M \le n$. Since $v_i = \deonde{x^i}$ is a derivation, we have $\dim \tangentalg{p} M = n$.
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Physicists's tangent space]
+Let $M$ be a manifold of dimension $n$, then a tangent vector is a map
+\begin{equation}
+v \colon \{ \text{ charts } (U, \varphi) \text{ around } p \} \rightarrow \rfield^n
+\end{equation}
+where $v$ is defined such that if we change charts we have:
+\begin{equation} \label{phystransf}
+v(V, \psi) = D_p (\psi \circ \varphi^{-1})\, v((U, \varphi))
+\end{equation}
+The space of such maps is called tangent space (according to the physicists's definition) and it is denoted by $\tangentphys{p} M$.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+The three previous definitions of tangent space are all equivalent, indeed we can find isomorphisms between such tangent spaces.
+\begin{enumerate}
+\item
+\begin{align}
+\tangentgeom{p}M &\rightarrow \tangentalg{p}M  \\
+[\gamma] &\mapsto v_{\gamma}\colon C^{\infty}(M) \rightarrow \rfield \\
+& \qquad \qquad \qquad f \mapsto \restrict{\diondi{t}}{t=0} (f\circ \gamma)(t)
+\end{align}
+\item 
+\begin{align}
+\tangentalg{p}M &\rightarrow \tangentphys{p}M  \\
+v &\mapsto \left \{ (U, \varphi) \mapsto\{v(x^i)\}_{i=1, \ldots, n} \right \}
+\end{align}
+where $x^i$ are the coordinates around $p$ from $\varphi$.
+\item 
+\begin{align}
+\tangentphys{p}M &\rightarrow \tangentgeom{p}M  \\
+v &\mapsto \left\{ \gamma_i \colon t \mapsto \varphi(\varphi^{-1}(p) + tv((U, \varphi)))\right\}
+\end{align}
+with $|t| < \varepsilon$, where we picked up a chart $(U, \varphi)$ around $p$ with coordinate $x^i$.
+\end{enumerate}
+Accordingly, we also have three different definitions for differentiating, i.e. three definitions for the map
+\begin{equation}
+D_p f \colon T_pM \rightarrow T_{F(p)} N
+\end{equation}
+where $p \in M, F \colon M \rightarrow N$ smooth:
+\begin{enumerate}
+\item $D_p^{\text{geom}} F ([\gamma]) = [F \circ \gamma]$, where the right-hand side is an equivalence class of equivalence curves on $N$,
+\item $D_p^{\text{alg}} F (v) = \left \{C^{\infty}(N) \ni f \mapsto v(f \circ F) \right \}$,
+\item $D_p^{\text{phys}} F(v) = \{ (V, \psi) \rightarrow D_p^{\text{phys}} (\psi \circ F \circ \varphi^{-1})\, v(U, \varphi)\}$, where $(V, \psi)$ is any chart of $N$ near $F(p)$.
+\end{enumerate}
+These definitions are compatible with the maps above, e.g. the following diagram
+\begin{center}
+\begin{tikzcd}
+T^{\text{geom}} M \arrow[r, "D^{\text{geom}}"] \arrow[d] & T^{\text{geom}} N \arrow[d] \\
+T^{\text{alg}}M \arrow[r, "D^{\text{alg}}"]              & T^{\text{alg}}N            
+\end{tikzcd}
+\end{center}
+commutes.
+\end{remark}\end{remarkbox}
+
+\begin{lemma}[Chain rule]
+Let $M_0, M_1, M_2$ be smooth manifolds, and $f_0 \colon M_0 \rightarrow M_1, f_1 \colon M_1 \rightarrow M_2$ smooth. Then:
+$$D(f_1 \circ f_0) = Df_1 \circ Df_0$$
+\end{lemma}
+\begin{proof}
+Using the geometric definition:
+\begin{equation*}
+[D(f_1 \circ f_0)][\gamma] = [(f_1 \circ f_0) \circ \gamma] = [f_1 \circ (f_0 \circ \gamma)] = (Df_1 \circ Df_0)[\gamma]
+\end{equation*}
+\end{proof}
+
+\begin{definition}
+For a manifold $M$ of dimension $n$, let 
+\begin{align}
+TM = \bigcup_{p \in M} \tangentphys{p} M & \overset{\text{pr}}{\longrightarrow} M \\
+v &\longmapsto p \nonumber
+\end{align}
+This map is the bundle projection of the tangent bundle $TM$.
+\end{definition}
+\begin{remarkbox}\begin{remark}
+$TM$ is a manifold, if equipped with the following structure. Pick an atlas $(U_i, \varphi_i)_{i \in I}$ of $M$ (remember: $\varphi \colon M \supset U_i \rightarrow \rfield^n, U_i$ open). Thanks to the second-countability property, we can take $I$ as a countable set without loss of generality. Then, one defines local coordinates (i.e. a local parametrization) on $\pr^{-1}(U_i)$ via
+\begin{align} \label{TMmap}
+\hat{\varphi_i} \colon TM \supset \pr^{-1}(U_i) &\longrightarrow \varphi_i(U_i) \times \rfield^n \\
+v &\longmapsto \left ( \varphi(\pr(v)),\, v((U_i, \varphi_i)) \right ) \nonumber
+\end{align}
+This is a bijective map, and we define the topology on $TM$ as the topology so that $\hat{\varphi_i}$ is a homeomorphism for all $i$. This topology is Hausdorff, indeed: let $v_1, v_2 \in TM$. If $p_1 = \pr v_1 \not = \pr v_2 = p_2$, then there exist open sets $V_j \ni p_j, j =1, 2$ which are disjoint and open (because $M$ is Hausdorff). Let $U_{i(p_1)}, U_{i(p_2)}$ be charts around $p_1, p_2$. Then:
+$$\pr^{-1} \left( U_{i(p_1)} \cap V_1 \right) \cap \pr^{-1} \left( U_{i(p_2)} \cap V_2 \right) = \emptyset$$
+On the other hand, if $\pr v_1 = \pr v_2$, let $\left( U_{i(v_1)}, \varphi_{i(v_1)} \right)$ be a chart containing $\pr v_1$. Then $\hat \varphi_i(v_1), \hat \varphi_i (v_2)$ differ in the second entry in $\rfield^n$: pick disjoint open sets $W_1, W_2$ of $\rfield^n$ separating those entries and consider the open sets $\hat{\varphi_i}^{-1} \left( \varphi_i(U_i) \times W_j \right), j =1, 2$.
+
+Moreover, the topology is second countable. Finally, we need to check the smoothness of the transition functions $\hat \varphi_j \circ \hat \varphi_i^{-1}$. Note that $\hat \varphi_i \left( \pr^{-1}(U_i) \cap \pr^{-1}(U_j) \right) = \varphi_i (U_i \cap U_j) \times \rfield^n$. By the transformation rule \eqref{phystransf}, and using \eqref{TMmap}:
+$$\hat \varphi_j \circ \hat \varphi_i^{-1} \left (x, w = (w^1, \ldots, w^n) \right) = (\varphi_j \circ \varphi_i^{-1}(x), D_x(\varphi_j \circ \varphi_i^{-1}) (w))$$
+This map is smooth. Note that $D_x(\cdots)$ is a linear transformation for fixed base point $x$. 
+Thus $ T_pM = \pr^{-1}(p)$ is a vector space
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Vector field]
+A vector field $X$ on a manifold $M$ is a smooth map
+\begin{center}
+$X \colon$
+\begin{tikzcd}
+ M\rar{} & TM \arrow[l, black, bend left]{r}[black, swap]{\pr}
+\end{tikzcd}
+\end{center}
+so that $\pr \circ X = \id_M$.
+\end{definition}
+
+\begin{remarkbox}\begin{remark} [Commutator of vector fields]
+Let $X, Y$ be two vector fields on $M$. Then the assignment 
+\begin{equation*}
+C^{\infty}(M) \ni f \longmapsto [X, Y](f) = X \left(Y(f)\right) - Y \left(X(f)\right)
+\end{equation*}
+is independent of the local coordinates  and satisfies the Leibniz rule (it can be easily verified): $[X, Y](fg) = g\, [X, Y](f) + f \, [X, Y](g)$. Moreover, the commutator satisfies the properties already seen in lemma \ref{commlemma}. And in local coordinates: 
+$$X= \sum\limits_i a^i \partial_i, \qquad Y= \sum\limits_j b^j \partial_j$$
+we have:
+$$[X, Y] = \sum\limits_{i, j}\left[ \left (a^i \deonde{x^i} b^j \right) \deonde{x^j} - \left(b^j \deonde{x^j}a^i \right) \deonde{x^i} \right]$$
+\end{remark}\end{remarkbox}
+
+% TODO:MOVE THIS REMARK
+\begin{remarkbox}\begin{remark}[Tangent space to a $\rfield$-vector space]
+Let $V$ be a an $\rfield$-(vector space) (i.e. a vector space on the field $\rfield$). $V$ is a manifold of dimension $\dim V$. Then, the tangent space to $V$ is $V$ itself (or, better, the tangent space to $V$ is isomorphic to $V$). Indeed, given $v \in V$, there exists an isomorphism:
+\begin{align*}
+V &\cong T_v V \\
+w &\mapsto \left[ t \mapsto (v + tw)\right]
+\end{align*}
+where the map $t \mapsto (v + tw)$ goes from $(-\varepsilon, \varepsilon) \subset \rfield$ to $V$.
+\end{remark}\end{remarkbox}
+
+\begin{definition}
+In a manner similar to $TM$ becoming a manifold, one can define the manifold given by the cotangent bundle
+\begin{equation}
+T^*M = \bigcup_{p \in M} T_p^*M \overset{\pr}{\longrightarrow} M
+\end{equation}
+\end{definition}
+
+\begin{definition}[1-form]
+A 1-form is a smooth map 
+\begin{center}
+$\alpha \colon$
+\begin{tikzcd}
+ M\rar{} & T^*M \arrow[l, black, bend left]{r}[black, swap]{\pr}
+\end{tikzcd}
+\end{center}
+so that $\pr \circ \alpha = \id_M$ (it is a section of the bundle). $k$-forms are defined in an analogous fashion, and so are $\Omega^k(M), d \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M), f^*$ and $f_*$.
+\end{definition}
+
+\section[Lie Groups]{\crule[yellow!50!white]{0.3cm}{0.4cm}  Lie Groups}
+\begin{definition}
+A Lie group $G$ is a group and a smooth manifold, such that the operation of the group and the inverse of the group (seen as maps) are smooth. i.e. the maps
+\begin{align}
+\mu \colon G \times G &\rightarrow G \\
+(g, h) & \mapsto g \cdot h \nonumber \\
+\text{inv} \colon G &\rightarrow G \\
+g & \mapsto g^{-1} \nonumber
+\end{align}
+are smooth.
 \end{definition}
 
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
 \clearpage
+\fancyhf{}
 \begin{thebibliography}{AA}
 \addcontentsline{toc}{section}{Bibliography}
 \bibitem{Lee}
