@@ -81,6 +81,7 @@
 \DeclareMathOperator{\supp}{supp}
 % \DeclareMathOperator{i}{i}
 \newcommand{\rfield}{\mathbb{R}}
+\newcommand{\lie}[1]{\mathfrak{#1}}
 
 %\renewenvironment{proof}[1][\proofname]{\textit{#1.}}{\qed}
 
@@ -262,7 +263,7 @@ Homomorphisms can be called in different ways depending whether they are injecti
 A monomorphism is an injective homomorphism. An epimorphism is a surjective homomorphism. An isomorphism is a bijective homomorphism (thus, it is both a monomorphism and an epimorphism).
 \end{remark}\end{remarkbox}
 
-\begin{remarkbox}\begin{remark} [Endomorphism, automorphism]
+\begin{remarkbox}\begin{remark} \label{endoremark} [Endomorphism, automorphism]
 An endomorphism is a homomorphism from one algebraic structure to itself. If such morphism is bijective, it is called automorphism.
 \end{remark}\end{remarkbox}
 
@@ -2276,6 +2277,22 @@ $$\sum\limits_{j \in J}f_j(x) \equiv 1$$
 Every open cover of a manifold admits a subordinate partition of unity which is smooth.
 \end{theorem}
 
+\begin{definition}[Connected space]\label{connspace}
+A topological space $X$ is connected if it cannot be written as union of two non-empty, disjoint open sets.
+\end{definition}
+
+\begin{remarkbox}
+\begin{remark}[Equivalent definitions of connected space]
+Sometimes it is useful to consider equivalent definitions of connection: a topological space $X$ is connected if:
+\begin{itemize}
+\item It cannot be written as union of two non-empty, disjoint closed sets,
+\item $X = A \cup B$ with $A, B$ disjoint and open sets implies that $A= \emptyset$ or $B = \emptyset$,
+\item The only sets in $X$ that can be both open and closed are $X$ and $\emptyset$.
+\end{itemize}
+\end{remark}
+\end{remarkbox}
+
+
 \begin{definition}[Smooth function from a manifold]
 Let $M$ be a smooth manifold, then $f \colon M \rightarrow \rfield $ is smooth at $p$ if for a chart $\varphi \colon U \rightarrow \rfield^n$, with $U \ni p$, we have that
 $$f \circ \varphi^{-1} \colon \varphi(U) \rightarrow \rfield$$
@@ -2378,7 +2395,7 @@ v(V, \psi) = D_p (\psi \circ \varphi^{-1})\, v((U, \varphi))
 The space of such maps is called tangent space (according to the physicists's definition) and it is denoted by $\tangentphys{p} M$.
 \end{definition}
 
-\begin{remarkbox}\begin{remark}
+\begin{remarkbox}\begin{remark} \label{equivremark}
 The three previous definitions of tangent space are all equivalent, indeed we can find isomorphisms between such tangent spaces.
 \begin{enumerate}
 \item
@@ -2516,6 +2533,192 @@ g & \mapsto g^{-1} \nonumber
 \end{align}
 are smooth.
 \end{definition}
+
+\begin{remarkbox}\begin{remark} [$\text{Aut}(T_e G)$ is a Lie group] \label{autremark}
+Let $G$ be a  Lie group and $g \in G$. Let's consider the map 
+\begin{align} \label{cgmap}
+c_g \colon G &\rightarrow G \\
+h &\mapsto g h g^{-1} \nonumber
+\end{align}
+$c_g$ is  a smooth group homomorphism (i.e. $c_g(h)c_g(k)=c_g(hk)$) and has the property 
+\begin{equation} \label{cgprop}
+c_g \circ c_{g'} = c_{g \circ g'}
+\end{equation}
+ It also preserves the identity element: $c_g(e) = e$. If we differentiate at $e$:
+\begin{equation}
+\text{Ad}_g = D_e c_g \colon T_e G \rightarrow T_e G
+\end{equation}
+is an isomorphism with inverse $\text{Ad}_{g^{-1}}$. Using the property \eqref{cgprop} we have:
+\begin{equation}
+\text{Ad}_g \circ \text{Ad}_{g'} = \text{Ad}_{gg'}
+\end{equation}
+Therefore, we obtain a smooth group homomorphism:
+\begin{align} \label{grouphom}
+\text{Ad} \colon G &\rightarrow \text{Aut}(T_e G)  \\
+g &\mapsto \text{Ad}_g \nonumber
+\end{align}
+with $\text{Ad}_e = \id_{T_e G}$. Here, $\text{Aut}(T_e G)$ is the set of automorphisms of $T_e G$ (see also remark \ref{endoremark}).
+Differentiating again, we get:
+\begin{align} \label{grouphom2}
+\text{ad} \colon T_e G &\rightarrow T_{\id} (\text{Aut}(T_e G)) \cong \text{End}(T_e G) \\
+X &\mapsto \{ Y \mapsto \text{ad}(X)(Y)\} \nonumber
+\end{align}
+where $\text{End}(T_e G)$ is the space of endomorphisms of $T_e G$ (see also the remark \eqref{endoremark}).
+So, since the map given by $\ref{grouphom}$ is bijective, we have that $G \cong \text{Aut}(T_e G)$, i.e. $\text{Aut}(T_e G)$ is a Lie group.  For the same reason, since the map given by \eqref{grouphom2} is bijective, we have that $\text{End}(T_e G)$ is a Lie algebra.
+% TODO: T_id and Lie algebra?
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Left-invariant vector field]
+A vector field $X$ on a Lie group is left-invariant if $l_{g*}X = X$, where $l_g$ is the homeomorphism given by
+\begin{align}
+G &\rightarrow G \\
+h &\mapsto gh \nonumber
+\end{align}
+The space of left-invariant vector fields is denoted by $\lie{g}$. 
+\end{definition}
+
+\begin{remarkbox} \begin{remark}[$\lie{g}$ is a Lie algebra]
+Let's consider:
+\begin{align}
+\lie{g} &\rightarrow T_e G \\
+X &\mapsto X(e) = X_e \nonumber
+\end{align}
+It is an isomorphism since it is linear, i.e. $(X + Y)_e = X_e + Y_e$, and we can get the vector field back from the vector field itself evaluated at $e$. Indeed, the inverse is:
+$$X_h = l_{h*} X_e= (Dl_h)(X_e) \quad \oast$$
+by left-invariance. In fact, we can prove $\oast$ in the following way: the left-invariance condition $D l_g X = l_{g*}X = X$ means that: 
+$$D(l_g)_g'\, (X_g') = X_{g g'}, \, \forall\, g, g' \in G$$
+where we wrote explicitly the element $g'$ about which we compute the derivation and the vector field. In the right-hand side the product $gg'$ is well defined by the operation of the group $G$. Then, by left-invariance, we have that:
+$$D_e(l_h)\, (X_e) = X_{e h} = X_h$$
+which is what we wanted to prove.
+So, we have $\lie{g} \cong T_e G$. In order to prove that $\lie{g}$ is a Lie algebra, we need Lie brackets that satisfy Lie algebra properties. In order to solve the problem, we notice that $l_g$ is not only a homomorphism, but also a diffeomorphism. By lemma \ref{commlemma}, point 5, and by recalling that the commutator of vector fields is still a vector field:
+$$Dl_g [V, W] = [Dl_g V, Dl_g W] \quad \text{for vector fields } V, W$$
+which means that the commutator of left-invariant vector fields is still left-invariant.
+All of this makes $\lie{g}$ a Lie algebra, i.e. a $\rfield$-(vector space) with a pairing $[\cdot, \cdot]$ which is antisymmetric and satisfy Jacobi identity.
+\end{remark} \end{remarkbox}
+
+\begin{remarkbox} \begin{remark} \label{alphacurve}
+Left-invariance provides even more properties. Given a left-invariant vector field $X$, let's consider the curve
+\begin{align}
+\alpha^X \colon \rfield &\rightarrow G \\
+t &\mapsto \alpha^X(t) \nonumber
+\end{align}
+such that $\restrict{\diondi{t}}{t=t_0} \alpha^X(t) = X(\alpha^X(t_0))$ and $\alpha^X(0)=e$. Such a curve locally exists by the theorems about ordinary differential equations. The global existence is assured by the left-invariance property (it lets us extend the solution on larger sets).
+
+Then, we can completely describe the flow of $X$ using the curve $\alpha^X$. In fact, we can write the flow $\varphi$ of $X$ as:
+\begin{align} 
+\varphi \colon \rfield \times G & \rightarrow G \\
+(t, h) &\mapsto h \alpha^X(t) = l_h (\alpha^X(t)) \nonumber
+\end{align}
+It satisfies $\diondi{t} \varphi(t, h) = X(h \alpha^X (t))$ by the chain rule and by left-invariance. Moreover, $\alpha^X(s+t) = \alpha^X(s) \alpha^X(t)$ holds.
+\end{remark} \end{remarkbox}
+
+\begin{tcolorbox}
+\begin{example}
+Assume that  $G \subset GL(n, \rfield)$. Then $\lie{g} \cong T_e G \subset \text{End}(n, \rfield)$ and $X \in G$ is given by a matrix $X$. The curve $\alpha^X$ in this case is given by:
+\begin{equation} \label{expmatrix}
+\alpha^X(t) = \sum\limits_{j=0}^{\infty} \frac{t^j X^j}{j!}
+\end{equation}
+What if we want to compute the commutator of two left-invariant vector fields? We have that $[X, Y] = \text{ad}(X)(Y)$, where "$\text{ad}$" is the map defined in \eqref{grouphom2}. This is true in general, not only for $G \subset GL(n, \rfield)$. In fact, let's recall the maps defined in the remark \ref{autremark}:
+\begin{enumerate}
+\item \begin{align}
+c_g \colon G &\rightarrow G \\
+h &\mapsto ghg^{-1} \nonumber
+\end{align}
+\item \begin{align}
+G &\rightarrow \text{Aut}G \\
+g &\mapsto c_g \nonumber
+\end{align}
+\item \begin{align}
+\text{Ad} \colon G &\rightarrow \text{End}(T_e G) \\
+g &\mapsto D_e c_g = D(c_g)(e) \nonumber
+\end{align}
+$D_e c_g \in \text{End}(T_e G)$ because the differential of the map $c_g$ is itself a map from $T_e G$ to $T_e G$
+\item \begin{equation}
+\text{ad} \colon T_e G \rightarrow T_e \text{End}(T_e G) \cong \text{End}(T_e G)
+\end{equation}
+
+
+
+\end{enumerate}
+Then, if we consider:
+%$$\text{Ad}(g)(Y) = (D_e c_g)(Y) \overset{(1)}{=} \left [c_g(\alpha^Y(t)) \right ] = \restrict{\diondi{t}}{t=0} c_g (\alpha^Y(t))$$
+$$\text{Ad}(g)(Y) = (D_e c_g)(Y) \overset{(1)}{=}  \restrict{\diondi{t}}{t=0} c_g (\alpha^Y(t))$$
+where we used: (1) the geometric definition of differential, see remark \ref{equivremark}.
+Thus:
+\begin{align*}
+\text{ad}(X)(Y) &= \restrict{\diondi{s}}{s=0} \left(  \restrict{\diondi{t}}{t=0} c_{\alpha^X(s)} \alpha^Y (t) \right ) \overset{(2)}{=} \restrict{\diondi{s}}{s=0} \left(  \restrict{\diondi{t}}{t=0} \alpha^X(s) \alpha^Y(t) \alpha^X(-s) \right)  \overset{(3)}{=}  \\
+&= \restrict{\diondi{s}}{s=0} \left(  \restrict{\diondi{t}}{t=0} \exp(sX) \exp(tY) \exp(-sX) \right) = \ldots = XY -YX
+\end{align*}
+where we used: (2) definition of $c_g$ and the fact the $\varphi^{-1}(t) = \varphi(-t)$ if $\varphi$ is the flow of a vector field, (3) definition \eqref{expmatrix} for the case $G \subset GL(n, \rfield)$.
+It is common to use the following notation for Lie groups:
+\begin{align}
+\exp \colon \lie{g} &\rightarrow G \\
+X &\mapsto \alpha^X(1) \nonumber
+\end{align}
+where, in general, $\exp(X+Y) \not = \exp(X)\exp(Y)$. The map "$\exp$" is smooth and 
+\begin{equation} \label{deexp}
+D_e \exp \equiv \id_{\lie{g}}
+\end{equation}
+(recall that $T_e \lie{g} \equiv \lie{g}$ because $\lie{g}$ is a vector field and $T_e G \cong \lie{g}$).
+\end{example}
+\end{tcolorbox}
+
+\begin{lemma}
+Let $f \colon G \rightarrow H$ be a smooth group homomorphism. then
+\begin{equation}
+\exp^H \left(Df(X) \right) = f \left( \exp^G(X) \right)
+\end{equation}
+where $Df \colon \lie{g} \rightarrow \lie{h}$ with $\lie{g} \cong T_e G, \lie{h} \cong T_e H$, as usual.
+\end{lemma}
+\begin{proof}
+Given $Df(X)$, $\alpha^{Df(X)} \colon \rfield \rightarrow H$ is a 1-parameter subgroup (i.e. it satisfies the same properties of $\alpha^X$, see also remark \ref{alphacurve}). $\alpha^{Df(x)}$ coincides with $f \circ \alpha^X$. i.e. the following diagram commutes:
+\begin{center}
+\begin{tikzcd}
+\mathfrak{g} \arrow[r, "Df"] \arrow[d, "\exp^G"'] & \mathfrak{h} \arrow[d, "\exp^H"] \\
+G \arrow[r, "f"]                                  & H                               
+\end{tikzcd}
+\end{center}
+\end{proof}
+
+\begin{lemma} \label{connliegroup}
+Let $G$ be a connected Lie group. Then, if $f \colon G \rightarrow H$ is a smooth homomorphism, it is determined by its differential at the identity element $D_e f$.
+\end{lemma}
+\begin{proof}
+Let's take a lok at the diagram of the previous proof. It would be nice if we could go back from $G$ to $\lie{g}$ like this: 
+\begin{center}
+\begin{tikzcd}
+\mathfrak{g} \arrow[d, "\exp^G"'] \\
+G \arrow[u, bend right]          
+\end{tikzcd}
+\end{center}
+If it was true, then the thesis would be satisfied because the diagram of the previous proof commutes. Unfortunately, this is not always true. It is \textit{locally} true because $D_e \exp^G \equiv \id_{\lie{g}}$ (think about the Taylor expansion, see \eqref{deexp}). Since it is locally true, there exists a neighbourhood $\mathfrak{U} \subset \lie{g}$ of 0 and a neighbourhood $\mathcal{U} \subset G$ of $e$ such that 
+$$\restrict{\exp^G}{\mathfrak{U}} \colon \mathfrak{U} \rightarrow \mathcal{U}$$
+is a diffeomorphism. Thus, on $\mathcal{U}$ the $f$ is defined by:
+$$f = \exp^H \circ Df \circ \left(\restrict{\exp^G}{\mathfrak{U}}\right)^{-1}$$
+Since the Lie group is connected, this is enough to prove the thesis. Indeed every neighbourhood $\mathcal{U}$ of $e$ in $G$ generates $G$ itself if it is connected. This fact can be proved in the following way, let's consider:
+$$V \equiv \mathcal{U} \cap \mathcal{U}^{-1}$$
+It is an open neighbourhood, because intersection of open sets, with 
+$\mathcal{U}^{-1} = \left \{u^{-1} \, | \, u \in \mathcal{U} \right \}$. Moreover,
+$$G^V \equiv \bigcup_{j=0}^{\infty} V^j, \qquad V^j \equiv \left \{v_1 \cdot \ldots \cdot v_j \, | \, v_i \in V \right \}$$
+$G^V$ is a subgroup of $G$, and it is open because every element of the union is open: $V$ is open, $V^2 = \bigcup_{v \in V} v V$ is open, etc... We will now show that also the complement is open:
+$$G = \bigcup_{[g] \in \faktor{G}{G^V}} g G^V$$ 
+because: 
+\begin{itemize}
+\item "$\supseteq$" is trivial since we are considering union of elements of the group,
+\item "$\subseteq$" follows from the fact that $[g] \in \faktor{G}{G^V}$ means that if $g \in G^V$, then we get the entire subgroup $G^V$. If $g \not \in G^V$, then we are considering the elements in $G \setminus G^V$. Since $g G^V$ means that we are multiplying $g$ for all possible element of $G^V$, and since $G^V$ contains the identity element (because it is a subgroup), we can get all the possible elements of $G \setminus G^V$. Then $G \subseteq \bigcup_{[g] \in \faktor{G}{G^V}} g G^V$
+\end{itemize}
+Thus, we can obtain $G \setminus G^V$ if $g \not \in G^V$ in the union:
+$$G \setminus G^V = \bigcup_{[g] \not = [e]} g G^V \text{ is open}$$
+Now, given that $G$ is connected (see definition \ref{connspace}), either $G^V$ or $G \setminus G^V$ must be empty. $G^V$ contains at least the identity element if $G$ is non-empty, so $G \setminus G^V$ must be the empty one. So, $G=G^V$.
+\end{proof}
+
+\begin{remarkbox}
+\begin{remark}
+The hypothesis of connection is necessary for theorem \ref{connliegroup}.
+\end{remark}
+\end{remarkbox}
+
+
 
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
