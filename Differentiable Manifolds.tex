@@ -79,6 +79,7 @@
 \DeclareMathOperator{\Diff}{Diff}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\im}{im}
 % \DeclareMathOperator{i}{i}
 \newcommand{\rfield}{\mathbb{R}}
 \newcommand{\lie}[1]{\mathfrak{#1}}
@@ -665,7 +666,7 @@ There are some interesting properties about $k$-forms:
 \begin{definition} [Field of exterior forms, geometric definition] \label{geomkforms}
   (A field of) exterior forms of degree $k$, $k \le n$ is a map $\omega$ that associates to each point $p \in V$ an element $\omega(p) \in \Lambda^{k}V_p^*$.
   Choosing a basis, we have:
-  \begin{equation}
+  \begin{equation} \label{kformdef}
     \omega(p) = \sum\limits_{i_1 < \ldots < i_k} \underbrace{a_{i_1 \cdots i_k}(p)}_{\text{now it is a function!}} e^{*i_1} \wedge \cdots \wedge e^{*i_k}
     \end{equation}
     $\omega$ is a differential form if $a_{i_1 \cdots i_k}$ are differentiable. The set of differential $k$-forms is denoted by $\Omega^k(\rfield^n)$.
@@ -1382,7 +1383,7 @@ Now, we want to extend the above theorem to $k$-forms.
 \end{lemma}
 
 Then we can extend Poincarè lemma to $k$-forms:
-\begin{theorem} [Poincarè Lemma]
+\begin{theorem} [Poincarè Lemma] \label{poinclemma}
   Let $k \ge 1$. Let $U$ be a contractible, open subset of $\rfield^n$ and $\omega \in \Omega^k(U)$ with $d\omega = 0$. Then there exists a $(k-1)$-form $\alpha \in \Omega^{k-1} (U)$ such that $\omega = d\alpha$.
 \end{theorem}
 
@@ -1508,7 +1509,7 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
   with $Im(d_k) \subset Ker(d_{k+1})$ since $d^2 = d \circ d = 0$
 \end{definition}
 
-\begin{remarkbox}\begin{remark}
+\begin{remarkbox}\begin{remark} \label{drremark}
   $H^k(M) = \faktor{Ker(d_{k+1})}{Im(d_k)}$
 \end{remark}\end{remarkbox}
 
@@ -2705,7 +2706,7 @@ $$G = \bigcup_{[g] \in \faktor{G}{G^V}} g G^V$$
 because: 
 \begin{itemize}
 \item "$\supseteq$" is trivial since we are considering union of elements of the group,
-\item "$\subseteq$" follows from the fact that $[g] \in \faktor{G}{G^V}$ means that if $g \in G^V$, then we get the entire subgroup $G^V$. If $g \not \in G^V$, then we are considering the elements in $G \setminus G^V$. Since $g G^V$ means that we are multiplying $g$ for all possible element of $G^V$, and since $G^V$ contains the identity element (because it is a subgroup), we can get all the possible elements of $G \setminus G^V$. Then $G \subseteq \bigcup_{[g] \in \faktor{G}{G^V}} g G^V$
+\item "$\subseteq$" follows from the fact that "$[g] \in \faktor{G}{G^V}$" means that if $g \in G^V$, then "$gG^V$" yields the entire subgroup $G^V$. If $g \not \in G^V$, then we are considering the elements in $G \setminus G^V$. Since "$g G^V$" means that we are multiplying $g$ by all possible element of $G^V$, and since $G^V$ contains the identity element (because it is a subgroup), we can get all the possible elements of $G \setminus G^V$ from the right-hand side. Then $G \subseteq \bigcup_{[g] \in \faktor{G}{G^V}} g G^V$.
 \end{itemize}
 Thus, we can obtain $G \setminus G^V$ if $g \not \in G^V$ in the union:
 $$G \setminus G^V = \bigcup_{[g] \not = [e]} g G^V \text{ is open}$$
@@ -2717,6 +2718,204 @@ Now, given that $G$ is connected (see definition \ref{connspace}), either $G^V$ 
 The hypothesis of connection is necessary for theorem \ref{connliegroup}.
 \end{remark}
 \end{remarkbox}
+
+\section[Compactly Supported Cohomology and Poincarè Lemma]{\crule[orange!50!white]{0.3cm}{0.4cm}  Compactly Supported Cohomology and Poincarè Lemma}
+
+Let $M$ be a manifold with or without boundary. We have already seen (remark \ref{drremark}) that the $k$-th de Rham cohomology of $M$ is
+\begin{equation}
+H^k(M) \equiv H_{dR}^k(M) = \frac{\ker ( d \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M))  )}{\im ( d \colon \Omega^{k-1}(M) \rightarrow \Omega^k(M))  ) }
+\end{equation}
+And we have already considered the Poincarè lemma \ref{poinclemma}:
+\begin{equation} \label{poinclemmashort}
+H^k(\rfield^n) \cong 
+\begin{cases*}
+0, & $k \not = 0$ \\
+\rfield, & $k=0$
+\end{cases*}
+\end{equation}
+Indeed, in \eqref{poinclemmashort} we used that $\rfield^n$ is contractible (case $k \not = 0$) and that the only exact 0-forms (i.e. functions) are the constant ones (case $k=0$).
+Now, we want to discuss about $k$-forms with compact support (i.e. when the function $a$ of the definition \eqref{kformdef} has compact support). First, we notice that the exterior derivative $d$ maps forms with compact support to forms with compact support. Then, it is natural to define the following.
+\begin{definition}[Compactly supported de Rham cohomology]
+We define the compactly supported de Rham cohomology of a manifold $M$ as:
+\begin{equation}
+H^k_c(M)= \frac{\ker \left ( \restrict{d}{\text{compact supp forms}} \right )}{\im \left ( \restrict{d}{\text{compact supp forms}} \right )}
+\end{equation}
+\end{definition}
+
+\begin{remarkbox}
+\begin{remark}
+The compactly supported de Rham cohomology is somehow different from the standard de Rham cohomology. Indeed, for the latter, given a map $f \colon U \rightarrow V$, we could consider the pullback:
+\begin{align*}
+f^* \colon H^k(V) &\rightarrow H^k(U) \\
+[\omega] &\mapsto [f^* \omega]
+\end{align*}
+For the compactly supported case, we can't do that anymore, because if $\omega$ is compactly supported, in general $f^* \omega$ might not be compactly supported (preimages of compact sets are not compact in general).
+\end{remark}
+\end{remarkbox}
+
+Now, we want to prove a compactly supported version of the Poincarè lemma. In order to do that, we need some general result on manifolds.
+
+\begin{remarkbox}
+\begin{remark}[Integration over the fiber] \label{intfiberrem}
+Let $M$ be a smooth manifold, oriented. Let's consider the projection map
+\begin{equation}
+\pi \colon M \times \rfield \rightarrow M
+\end{equation}
+Given $\omega \in \Omega^k(M), \pi^*\omega$ is not compactly supported in general. However, we can define a map 
+\begin{equation}
+\pi_* \colon \Omega_c^k(M \times \rfield) \rightarrow \Omega_c^{k-1}(M)
+\end{equation}
+defined in such a way that $\pi_* \omega$ still has compact support. Such a map is called \textit{integration along the fiber}. We used the notation of the pushforward because it is indeed another way to write the pushforward of a $k$-form. 
+We also notice that every $k$-form on $M \times \rfield$ can be written as sum (more than two summands in general) of two types of $k$-forms:
+\begin{description}
+\item[$\bullet $ Type A)] $\omega = f(x, t) \, \pi^* \eta, \quad \eta \in \Omega^k(M)$,
+\item[$\bullet$ Type B)] $\omega = f(x, t)\, \pi^*\eta \wedge dt, \quad \eta \in \Omega^{k-1}(M)$.
+\end{description}
+where $f(x, t)$ is a compactly supported function, $dt \in \Omega^1(\rfield)$.
+
+Now, we define $\pi_*$ in the way it acts on (type A) and (type B) forms:
+\begin{align}
+&\text{(type A)} \qquad  f(x, t) \, \pi^* \eta \overset{\pi_*}{\longmapsto}  0  \label{typea} \\
+&\text{(type B)}\qquad  f(x,t) \, \pi^*\eta \wedge dt \overset{\pi_*}{\longmapsto} \eta \, \,  \underbrace{\int\limits_{-\infty}^{\infty} f(x, s) ds }_{\equiv F(x)}  \label{typeb} 
+\end{align}
+Formally speaking, $f$ is the pullback of $F$.
+\end{remark}
+\end{remarkbox}
+
+\begin{lemma} \label{pichain}
+$\pi_*$ is a chain map, i.e.
+\begin{equation}
+\pi_* \circ d  = d \circ \pi_*
+\end{equation}
+where the differential in the left-hand side acts on $M \times \rfield$, whereas the one in the right-hand side acts on $M$.
+\end{lemma}
+\begin{proof}
+We prove the lemma for (type A) and (type B) forms, thus it is proved for any form on $M \times \rfield$ (see remark \ref{intfiberrem}).
+\begin{itemize}
+\item(Type A):
+\begin{align*}
+\pi_* \circ d \left ( f(x, t) \,\pi^* \eta \right ) &= \pi_* \left ( \underbrace{\defonde{f}{x}(t, x) dx \wedge \pi^* \eta}_{\text{type A}} + \underbrace{\defonde{f}{t}(x, t)\, dt \wedge \pi^* \eta}_{\text{type B}} + \underbrace{f(x, t) \, d\pi^* \eta}_{\substack{\text{type A because } \\ d\pi^*=\pi^*d}} \right ) = \\
+&=\int_{-\infty}^{\infty} \defonde{f}{s}(x, s) ds \, \pi^* \eta = 0
+\end{align*}
+where we used the definition of $\pi^*$ for (type B) forms \eqref{typeb} and  the fact that $\pi_*(\text{type A}) = 0$. Finally, we used the fundamental theorem of integral calculus with the fact that $f$ has compact support.
+Moreover, $d \circ \pi_*( f(x, t) \, \pi^*\eta) = 0$.
+\item(Type B):
+\begin{align*}
+\pi_* \circ d (f(x, t) \, \pi^* \eta \wedge dt) &= \pi_* \left ( \defonde{f}{x} (x, t) dx \wedge \pi^*\eta \wedge dt + f(x, t) \pi^* d\eta \wedge dt \right)  = \\  
+&=\defonde{F}{x}(x, t)dx \wedge \pi^* \eta + F(x) \, \pi^* d\eta 
+\end{align*}
+where we used the $F$ defined in \eqref{typeb}.
+Moreover,
+\begin{align*}
+d \circ \pi_* (f(x, t) \, \pi^* \eta \wedge dt) = d(F(x)\, \pi^*\eta) = \defonde{F}{x}(x, t)dx \wedge \pi^* \eta + F(x) \, \pi^* d\eta 
+\end{align*}
+\end{itemize}
+\end{proof}
+
+\begin{remarkbox}
+\begin{remark}
+Consequence of lemma \ref{pichain}: $\pi_*$ defines a map
+$$\pi_* \colon H_c^k(M \times \rfield) \rightarrow H^{k-1}_c(M)$$
+We want to prove that such a map is an isomorphism. Let's construct the inverse in the following way: let $e \colon \rfield \rightarrow \rfield$ be a smooth function with compact support  such that $\int_{-\infty}^{\infty} e(s) ds = 1$. Then, we define $e_*$ as:
+\begin{align} \label{einverse}
+e_* \colon \Omega^{k-1}_c (M) &\rightarrow \Omega^k(M \times \rfield) \\
+\eta &\mapsto e(t) \, \pi^*\eta \wedge dt \nonumber
+\end{align}
+We have $\pi_* \circ e_* = \id_{\Omega_c^{k-1}(M)}$ \textbf{but} $e_* \circ \pi_* \not = \id_{\Omega_c^k(M \times \rfield)}$. Nevertheless, we just need $e_*$ to be the inverse of $\pi_*$ on $H_c^k(M \times \rfield)$, not on all $\Omega^k_c(M \times \rfield)$. This is true thanks to the two following results.
+\end{remark}
+\end{remarkbox}
+
+\begin{lemma}
+The map $e_*$ defined in \eqref{einverse} is a chain map, i.e.
+\begin{equation}
+d \circ e_* = e_* \circ d
+\end{equation}
+where, again, the differential in the left-hand side acts on $M \times \rfield$ and the one in the right-hand side acts on $M$.
+\end{lemma}
+\begin{proof} 
+Let $\eta \in \Omega^{k-1}_c(M)$.
+\begin{equation*}
+d \circ e_*(\eta) = d \left ( e(t)  \pi^*\eta \wedge dt \right ) = e(t) d^{M \times \rfield} \pi^*\eta \wedge dt = e(t) \pi^*(d^M \eta) \wedge dt = e_* d \eta
+\end{equation*}
+\end{proof}
+
+\begin{proposition} \label{kprop}
+$e_*, \pi_*$ are mutually inverse isomorphisms on $H_c$, since there is an operator $K \colon \Omega^k_c(M \times \rfield) \rightarrow \Omega_c^{k-1}(M)$ such that:
+\begin{equation}
+\mathbb{1} - e_* \circ \pi_* = (-1)^{k-1} (d \circ K - K \circ d)
+\end{equation}
+where:
+\begin{itemize}
+\item $K$ is defined as:
+\begin{align}
+&K(f(x, t)\, \pi^*\eta) = 0 \quad \text{on (type A) forms} \\
+&K(f(x, t)\, \pi^* \eta \wedge dt) = \int_{-\infty}^t f(x, s) ds\, \pi^* \eta - F(x) \left ( \int_{-\infty}^t e(s)ds \right) \pi^* \eta \, \, \text{on (type B) forms}
+\end{align}
+where $\eta$ is a $k$-form in the first case, and it is a ($k-1$)-form in the second case.
+\item $K$ is not a chain map (otherwise the right-hand side would be 0)
+\end{itemize}
+\end{proposition}
+\begin{proof}
+We will prove it for (type B) forms. Then, for (type A) forms it is analogous. Then, recalling the definition of the integration along the fiber $F$ contained in \eqref{typeb}:
+\begin{enumerate}
+\item
+\begin{align*}
+(\mathbb{1} - e_* \circ \pi_*)(f(x, t) \, \pi^* \eta \wedge dt ) &=f\, \pi^*\eta \wedge dt - e_*(F(x) \eta) = \\
+&= \underbrace{f\, \pi^* \eta \wedge dt}_{(a)} - \underbrace{F(x) e(t) \pi^* \eta \wedge dt}_{(b)}
+\end{align*}
+\item 
+\begin{align*}
+(d \circ K)(f(x, t) \, \pi^* \eta \wedge dt) &= \underbrace{f\, \pi^* \eta \wedge dt}_{(a)}(-1)^{k-1} + \underbrace{\left( \int_{-\infty}^t \defonde{f}{x}(x, s) ds \right) dx \wedge \pi^* \eta}_{(c)} + \\
+&+ \underbrace{\int_{-\infty}^t f(x, s) ds \, \pi^* d\eta}_{(d)} - \underbrace{\left( \defonde{F}{x}\int_{-\infty}^t e(s) ds \right) dx \wedge \pi^* \eta}_{(e)} + \\
+&- \underbrace{e(t)F(x) \, \pi^*\eta \wedge dt}_{(b)} (-1)^{k-1} - \underbrace{F(x)\left(\int_{-\infty}^t e(s) ds \right)\, \pi^* d\eta}_{(f)}
+\end{align*}
+\item 
+\begin{align*}
+(K \circ d) (f(x, t) \, \pi^* \eta \wedge dt) &= K \left( \defonde{f}{x}(x, t) dx \wedge \pi^*\eta \wedge dt + f(x, t) \pi^* d\eta \wedge dt\right) \overset{(1)}{=} \\
+&= \underbrace{\left(\int_{-\infty}^t \defonde{f}{x}(x, s) ds \right) dx \wedge \pi^*\eta}_{(c)} - \underbrace{\defonde{F}{x} \int_{-\infty}^t e(s)ds \,dx \wedge \pi^* \eta}_{(e)} + \\
+&+ \underbrace{\int_{-\infty}^t f(x, s) ds \, \pi^* d\eta}_{(d)} - \underbrace{F(x) \int_{-\infty}^t e(s) ds \, \pi^* d\eta}_{(f)}
+\end{align*}
+Using that: (1) we can exchange integral and derivative, and remember that: $F(x) = \int_{-\infty}^{\infty} f(x, s) ds$.
+\end{enumerate}
+By comparing the three results, we have the thesis.
+\end{proof}
+
+Now, we are finally ready to prove the compactly supported Poincarè lemma.
+
+\begin{lemma}[Compactly supported Poincarè lemma] \label{compsupppoinclemma}
+\begin{equation}
+H_c^k(\rfield^n) \cong 
+\begin{cases*}
+0, & $k \not = n$ \\
+\rfield, & $k = n$
+\end{cases*}
+\end{equation}
+\end{lemma}
+\begin{proof}
+The proof is by induction. The map used to prove the isomorphism for the case $k = n$ is:
+\begin{equation} \label{mapn}
+[\omega] \mapsto \int_{\rfield^n} \omega
+\end{equation}
+We notice that the integral is well defined because $\omega$ is compactly supported, and the integral does not depend on the element of the equivalence class chosen. In fact, if we consider another $n$-form $\omega'$ such that $[\omega'] = [\omega]$, then it means that $\omega'$ and $\omega$ differ by an exact form: $\omega' = \omega + d \alpha, \alpha \in \Omega_c^{n-1}(\rfield^n)$. Let's suppose, without loss of generality, that $\supp \alpha, \supp \omega, \supp \omega' \subset B_{2R}(0)$. Then:
+$$\int_{\rfield^n} \omega' = \int_{B_{2R}(0)} \omega' = \int_{B_{2R}(0)}(\omega + d \alpha) = \int_{B_{2R}(0)}\omega + \int_{B_{2R}(0)} d \alpha \overset{\text{Stokes}} = \int_{\rfield^n} \omega + \underbrace{\int_{\partial B_{2R}(0)} \alpha}_{=0}$$
+For $\fbox{n=1}$, the case $k \not = 1$ coincides with the case $k=0$: we are considering compactly supported closed 0-forms, i.e. functions which are 0 everywhere. Thus, the only compactly supported closed 0-form which is not exact is the trivial one:  $H^0_c(\rfield) = 0$. As regards the case $k=1$, by the standard Poincarè lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield^n$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported! Indeed let's write $\omega$ as $\omega=f(x) dx$, $f$ compactly supported function. If $\int_{\rfield} \omega = \int_{\rfield} f(x)dx = 0$, then the primitive $F(x)=\int_{-\infty}^x f(t)dt$ has compact support (for $x$ small we are outside of the support of $f$, whereas for $x$ big we integrate over all the support, i.e. it's like considering $\int_{\rfield} f(x) dx = 0$). Then $\omega$ is exact: $\omega = dF$ and $F$ has compact support $\Rightarrow [\omega]=0$. Indeed, this explains why we chose the map \eqref{mapn}: if the integral of the $n$-form is 0, the form is exact and it is the differential of a compactly supported $(n-1)$-form. In a similar way, we can choose another closed $n$-form $\eta=g(x)dx,\, g$ with compact support such that $\int_{\rfield}\eta = \int_{\rfield} g(x)dx=c \not=0$. In this case, the primitive is $G(x) = \int_{-\infty}^x g(t)dt$ and $\eta = dG$ (we already knew that such a $G$ existed, thanks to the standard Poincarè lemma), but $G$ is not compactly supported anymore (we have problems for $x$ big). Moreover, for each value of $c$ we get a different primitive. Since we can choose $g(x)$ such that we get any value of $c \in \rfield$, we have that $H_c^1(\rfield) \cong \rfield$. For $\fbox{n > 1}$: from proposition \ref{kprop}, we know that there is an isomorphism 
+\begin{equation} \label{hisomorph}
+H_c^k(M \times \rfield) \,  \substack{\overset{\pi_*}{\longleftarrow} \\ \underset{e_*}{\longrightarrow}} \, H_c^{k-1}(M)
+\end{equation}
+Let's suppose the thesis is true for $n-1$, then we can consider $M=\rfield^{n-1}$ (notice that $\rfield^n$ is an oriented manifold) and thanks to the isomorphism \eqref{hisomorph} the thesis is true also for $n$.
+\end{proof}
+
+\begin{remarkbox}
+\begin{remark}
+The Poincarè lemma \ref{compsupppoinclemma} is valid for $\rfield^n$, but it also holds for open subsets of manifolds which are diffeomorphic to $\rfield^n$. For instance, we can consider the convex subsets $U$ of $\rfield^n$ contained in a manifold. The form $\eta \in \Omega_c^{n-1}(U)$ with $d\eta=\omega$ produced in the proof of the Poincarè lemma for a compactly supported form $\omega$ can be extended by zero to a smooth form on the entire manifold. We will not make any distinction between the extended form and the form on $U$.
+\end{remark}
+\end{remarkbox}
+
+
+
+
+
+
 
 
 
