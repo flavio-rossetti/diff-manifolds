@@ -1694,7 +1694,7 @@ and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
   $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (V \cap V' \cap M) \rightarrow \phi^{-1}(V \cap V' \cap M)$$
   is a diffeomorphism. %write that they are open sets? intersection color...check
 \end{corollary}
-
+\begin{center}
 \begin{tikzpicture}
 
     % Functions i
@@ -1743,7 +1743,7 @@ and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
     \draw (5.69, -3.85) arc (-90:0:0.8);
 
 \end{tikzpicture}
-
+\end{center}
 \begin{tcolorbox}\begin{example}[Submanifolds of $\rfield^n$]
   Let's consider some examples.
   \begin{enumerate}
@@ -2258,11 +2258,11 @@ A manifold admits a compact exhaustion.
 The proof uses the second countability. We will skip it.
 \end{proof}
 
-\begin{definition}[Paracompactness]
+\begin{definition}[Paracompactness] \label{paracompactness}
 A topological space is paracompact if  every open cover admits a locally finite refinement. i.e. if $\{U_i\}_{i \in I}$ is an open cover of $X$, there is another open cover $\{V_j\}_{j \in J}$ of $X$ such that $V_j \subset U_i(j)$ (refinement) and every point $x$ has a neighbourhood $V_x$ such that $V_x$ intersects only a finite number of $V_j$ (locally finite).
 \end{definition}
 
-\begin{theorem}
+\begin{theorem} \label{paracompactnessthm}
 Manifolds are paracompact.
 \end{theorem}
 \begin{proof}
@@ -2911,13 +2911,106 @@ The Poincarè lemma \ref{compsupppoinclemma} is valid for $\rfield^n$, but it al
 \end{remark}
 \end{remarkbox}
 
+We will now analyze some consequences of the compactly supported Poincarè lemma.
 
+\begin{definition}[Bump form] \label{bumpform}
+A bump form on $M^n$ (manifold of dimension $n$) is a compactly supported $n$-form $\omega = \rho \, dx^1 \wedge \ldots \wedge dx^n$ in a coordinate domain $(U, \varphi), \varphi \colon U \rightarrow \rfield^n \supseteq \varphi(U)$ so that $\left | \int_U \omega \right | = 1$.
+\end{definition}
 
+\begin{remarkbox}\begin{remark} \label{bumpremark}
+The Poincarè lemma tells us that: given $\omega, \omega'$ bump forms in $U$, then:
+\begin{equation}
+\omega = \omega' + d \eta,\, \eta \in \Omega_c^{n-1}(U) \Leftrightarrow \int_U \omega = \int_U \omega'
+\end{equation}
+Indeed, the "$\Rightarrow$" is always true thanks to Stokes's theorem, whereas the "$\Leftarrow$" follows from the proof of the Poincarè lemma \ref{compsupppoinclemma}, because bump forms are $n$-forms in a $n$-dimensional manifold and the equality between the integrals implies that $[\omega] = [\omega']$ (because the isomorphism used in the proof is given by the integral map \eqref{mapn}). Thus, the two forms differ by an exact form. If $[\omega] = [\omega']$, the two forms are called \textit{cohomologous}, and we will also write $\omega \sim \omega'$.
+\end{remark}\end{remarkbox}
 
+\begin{proposition} \label{prop2bumpforms}
+$M$ connected manifold, then any two bump forms are cohomologous (on $M$) up to a sign.
+\end{proposition}
+\begin{proof}
+Let's consider two bump forms $\omega, \omega'$, compactly supported on $(U, \varphi), (U', \varphi')$, respectively. If $(U, \varphi) = (U', \varphi')$, then we have that $\int_U \omega = \int_U \omega'$ up to a sign (by definition \ref{bumpform}). Then, by the previous remark \ref{bumpremark} we have that $\omega$ and $\omega'$ are cohomologous up to a sign. On the other hand, if $(U, \varphi) \not = (U', \varphi')$, we do in the following way: since $M$ is a connected manifold, it is also path-connected (see problem set 12, ex. 1.(e)). Thus, we can find a path between $U$ and $U'$, and we can cover it with open sets $U_1, U_2, \ldots$.
+\begin{figure}[h] \label{Fig:bumpforms1}
+     \centering
+     \includegraphics[width=0.8\textwidth]{Images/bumpforms1.pdf} 
+     \caption{We can cover the path between $U$ and $U'$}      
+\end{figure}
+Then, we can consider a bump form $\omega_1$ in $U \cap U_1$, and we can extend it by zero in $U$. For the same reason seen in the case $U=U'$, we have that $\omega$ is cohomologous to $\omega_1$ up to a sign. Again, we can consider a bump form $\omega_2$ in $U_1 \cap U_2$ and extend it by zero in $U_1$. As before, $\omega_2$ is cohomologous to $\omega_1$ up to a sign, and so on. We continue in this way up to $U'$, and using the transitive property of the equivalence relation we find that $\omega$ is cohomologous to $\omega'$ up to a sign.
+\end{proof}
 
+\begin{lemma} \label{lemmalocfinite}
+Every $n$-form on $M$ is cohomologous to a locally finite sum of bump forms.
+\end{lemma}
+\begin{proof}
+Pick a cover $(U_i, \varphi_i), \varphi_i \colon U_i \rightarrow \varphi_i(U_i) \subseteq \rfield^n$, and a locally finite refinement $V_j$ (recall the definition contained in def. \ref{paracompactness}) with a subordinate partition of unity $\lambda_j$ (i.e. $\sum_j \lambda_j = 1$). Then:
+$$\omega = \sum\limits_j (\lambda_j \omega) \sim \sum\limits_{\substack{j \text{ s.t. } \\ \int \lambda_j \omega \not = 0}} \underbrace{\left( \frac{\lambda_j \omega}{\int \lambda_j \omega} \right)}_{\text{bump form}} \cdot \underbrace{\left ( \int \lambda_j \omega \right )}_{\text{coefficients}}$$
+And the sum if locally finite because we chose a locally finite refinement, which is always possible since manifolds are paracompact (thm \ref{paracompactnessthm}).
+\end{proof}
 
+\begin{theorem} \label{surjintegral}
+If $M$ is a connected, smooth manifold of dimension $n$, such that $\partial M = \emptyset$ and $M$ is oriented, then the map:
+\begin{align} \label{surjmap}
+H^n(M) &\rightarrow \rfield \\
+[\omega] &\mapsto \int_M \omega \nonumber
+\end{align}
+is well defined and surjective.
+\end{theorem}
+\begin{proof}
+Since $\partial M = \emptyset$, we have $\int_M (\omega + d \eta) = \int_M \omega$ by Stokes's theorem. So, the definition does not depend on the element of the equivalence class chosen. Moreover, let $(U_i, \varphi_i)$  be a chart from the oriented atlas, and let $\omega=f(x_1, \ldots, x_n) dx^1 \wedge \ldots dx^n$ in $U_i$, with $f$ smooth function, $f > 0$. Then, $\int_M \omega > 0$. Since $\omega$ and $c \, \omega$ are cohomologous $\forall \, c \in \rfield$, we have that for every real number $\lambda$ we can consider a $n$-form $c\,  \omega$ such that $\int_M c\, \omega = \lambda$. So, the map is surjective.
+\end{proof}
 
+\begin{theorem}
+If $M$ is a connected, smooth manifold of dimension $n$, $\dim \left( H^n(M) \right) \le 1$.
+\end{theorem}
+\begin{proof}
+Using the previous theorem \ref{surjintegral}, we just need to verify how many values $\int_U \omega$ can have, where $U$ open subset of $M$ diffeomorphic to $\rfield^n$ (Notice: $\partial U = \emptyset$ because $U$ is open). Now, every element of $H^n(M)$ is cohomologous to a (real) multiple of  a bump form in a fixed chart $(U, \varphi)$. Bump forms have integral $ =\pm 1$. Therefore, the value of the integral of a closed-but-not-exact $n$-form in $H^n(M)$ can be any real number. Since the map \eqref{surjmap} is surjective, we have the thesis.
+\end{proof}
 
+\begin{definition}
+A manifold $M$ is closed if it is compact and $\partial M = \emptyset$.
+\end{definition}
+
+\begin{theorem}
+Let $M$ be a connected, compact, orientable manifold with $\partial M \not = \emptyset$ and of dimension $n$. Then $H^n(M) = 0$.
+\end{theorem}
+\begin{proof}
+It suffices to find a bump form which is cohomologous to zero in $M$. Once we find it, we have the thesis because $M$ is connected, so any other bump form in the manifold is zero by proposition \ref{prop2bumpforms}. Also, by lemma \ref{lemmalocfinite}, every $n$-form is cohomologous to a locally finite sum of zero-forms, i.e. it is a zero form and we would have the thesis.
+\begin{figure}[h] \label{Fig:bumpforms2}
+     \centering
+     \includegraphics[width=0.8\textwidth]{Images/bumpforms2.pdf} 
+     \caption{We can find a bump form cohomologous to a zero form}      
+\end{figure}
+Let's find such a bump form. First, let's consider a boundary chart $(U, \varphi), \varphi \colon U \rightarrow \rfield^n \cap {x_1 < 0}$ (such that $\varphi(U)$ is a half-ball) and a bump form $\omega$ compactly supported in the interior of the half-ball. We will also consider the other half-ball. We will call $B_l$ the lower half-ball ($B_l = \varphi(U)$) and we will call $B_u$ the other half. We consider another bump form $\omega_u$ contained in $B_u$ such that:
+$$\int_{B_u} \omega_u = \int_{B_l} - \omega$$
+It is always possible, because bump forms can only have integral $=\pm 1$.
+Now, we consider the form $\omega_u + \omega$ and we extend it by zero. It is compactly supported in the open ball $B \equiv B_u \cup B_l$. We notice that $\int_{B} (\omega_u + \omega) = \int_B d\eta, \, \eta \in \Omega_c(B)$ by Stokes's theorem and using that $\partial B =\emptyset$. Then, by remark \ref{bumpremark} we have that $d\eta = \omega_u + \omega$. Thus:
+$$\restrict{d\eta}{B_l} = \restrict{\omega_u}{B_l} + \restrict{\omega}{B_l} = \restrict{\omega}{B_l}$$
+Then, if $\varphi^* \eta$ is a primitive of the bump form $\varphi^* \omega$. So, $\varphi^* \omega$ is the zero form we were looking for.
+\end{proof}
+
+What if we remove orientation? Recall that we can't compute integrals without orientation.
+\begin{theorem}
+Let $M$ be a connected but not orientable manifold of dimension $n$. Then: $H^n(M) = 0$.
+\end{theorem}
+\begin{proof}
+Let's cover $M$ by an atlas $(U_i, \varphi_i), \varphi_i \colon U_i \rightarrow \varphi_i(U_i) = \rfield^n$ (we choose the atlas such that $\varphi(U_i) = \rfield^n$). Let's consider an open set $U_0$.
+\begin{figure}[h] \label{Fig:bumpforms3}
+     \centering
+     \includegraphics[width=0.8\textwidth]{Images/bumpforms3.pdf} 
+     \caption{We can consider two paths connecting $U_0$ and $U_i$}      
+\end{figure} Let's consider another set $U_i$ from the cover, $U_0 \not = U_i$. Since $M$ is a connected manifold, it is also path-connected, so there exists a path $\gamma \colon [0, 1] \rightarrow M$ that connects $U_0$ to $U_i$. By the same reasoning of the proof of proposition \ref{prop2bumpforms}, we get that a bump form $\omega_0$ contained  in $U_0$ is cohomologous to a bump form $\omega_i(\gamma)$ contained in $U_i$. But, since $M$ is not orientable, there also exists a second path $\gamma'$ connecting $U_0$ and $U_i$, and a second chain of charts covering $\gamma'$, such that, repeating the same procedure, $\omega_0$ is cohomologous to $\omega_{i'}(\gamma')$ with the opposite sign of before (i.e. the integrals have opposite signs). Notice that even if we cannot integrate on $M$, we can integrate on the charts. It means that:
+$$\omega_i(\gamma) \sim \omega_0 \sim \omega_{i'}(\gamma') \sim -\omega_0$$
+So, $\omega \sim - \omega \Leftrightarrow 2 \omega \sim 0$.
+\end{proof}
+
+\begin{remarkbox}\begin{remark}
+The proofs of the following facts are similar to the previous ones: given a connected manifold $M$:
+\begin{itemize}
+\item $M$ not compact, $\partial M = \emptyset \Rightarrow H^n(M)=0$
+\item $M$ compact $\Rightarrow H_c^*(M) = H^*(M)$
+\item $M$ not compact, oriented, $\partial M= \emptyset \Rightarrow H^n_c(M)=\rfield$ 
+\end{itemize}
+\end{remark}\end{remarkbox}
 
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
