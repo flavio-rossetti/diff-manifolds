@@ -2966,7 +2966,7 @@ If $M$ is a connected, smooth manifold of dimension $n$, $\dim \left( H^n(M) \ri
 Using the previous theorem \ref{surjintegral}, we just need to verify how many values $\int_U \omega$ can have, where $U$ open subset of $M$ diffeomorphic to $\rfield^n$ (Notice: $\partial U = \emptyset$ because $U$ is open). Now, every element of $H^n(M)$ is cohomologous to a (real) multiple of  a bump form in a fixed chart $(U, \varphi)$. Bump forms have integral $ =\pm 1$. Therefore, the value of the integral of a closed-but-not-exact $n$-form in $H^n(M)$ can be any real number. Since the map \eqref{surjmap} is surjective, we have the thesis.
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{closedman}
 A manifold $M$ is closed if it is compact and $\partial M = \emptyset$.
 \end{definition}
 
@@ -2998,7 +2998,8 @@ Let's cover $M$ by an atlas $(U_i, \varphi_i), \varphi_i \colon U_i \rightarrow 
      \centering
      \includegraphics[width=0.8\textwidth]{Images/bumpforms3.pdf} 
      \caption{We can consider two paths connecting $U_0$ and $U_i$}      
-\end{figure} Let's consider another set $U_i$ from the cover, $U_0 \not = U_i$. Since $M$ is a connected manifold, it is also path-connected, so there exists a path $\gamma \colon [0, 1] \rightarrow M$ that connects $U_0$ to $U_i$. By the same reasoning of the proof of proposition \ref{prop2bumpforms}, we get that a bump form $\omega_0$ contained  in $U_0$ is cohomologous to a bump form $\omega_i(\gamma)$ contained in $U_i$. But, since $M$ is not orientable, there also exists a second path $\gamma'$ connecting $U_0$ and $U_i$, and a second chain of charts covering $\gamma'$, such that, repeating the same procedure, $\omega_0$ is cohomologous to $\omega_{i'}(\gamma')$ with the opposite sign of before (i.e. the integrals have opposite signs). Notice that even if we cannot integrate on $M$, we can integrate on the charts. It means that:
+\end{figure}
+Let's consider another set $U_i$ from the cover, $U_0 \not = U_i$. Since $M$ is a connected manifold, it is also path-connected, so there exists a path $\gamma \colon [0, 1] \rightarrow M$ that connects $U_0$ to $U_i$. By the same reasoning of the proof of proposition \ref{prop2bumpforms}, we get that a bump form $\omega_0$ contained  in $U_0$ is cohomologous to a bump form $\omega_i(\gamma)$ contained in $U_i$. But, since $M$ is not orientable, there also exists a second path $\gamma'$ connecting $U_0$ and $U_i$, and a second chain of charts covering $\gamma'$, such that, repeating the same procedure, $\omega_0$ is cohomologous to $\omega_{i'}(\gamma')$ with the opposite sign of before (i.e. the integrals have opposite signs). Notice that even if we cannot integrate on $M$, we can integrate on the charts. It means that:
 $$\omega_i(\gamma) \sim \omega_0 \sim \omega_{i'}(\gamma') \sim -\omega_0$$
 So, $\omega \sim - \omega \Leftrightarrow 2 \omega \sim 0$.
 \end{proof}
@@ -3010,6 +3011,44 @@ The proofs of the following facts are similar to the previous ones: given a conn
 \item $M$ compact $\Rightarrow H_c^*(M) = H^*(M)$
 \item $M$ not compact, oriented, $\partial M= \emptyset \Rightarrow H^n_c(M)=\rfield$ 
 \end{itemize}
+\end{remark}\end{remarkbox}
+
+\begin{theorem}[Brouwer] \label{brouwerthm}
+Let $f \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)} \subset \rfield^n$ be smooth. Then, $f$ has a fixed point, i.e. $\exists \, x \in \overline{B_1(0)}$ such that $f(x)=x$.
+\end{theorem}
+
+\begin{proof}
+Let's prove it for $f$ smooth. If $f$ is continuous but not smooth, we can approximate it using smooth maps (Weierstrass approximation). Moreover, we will prove it for $n \ge 2$ (for $n=0, 1$ it is a consequence of the intermediate value theorem).
+By contradiction: let's assume $f$ has no fixed point. Then we consider the map
+\begin{align*}F \colon \overline{B_1(0)} &\rightarrow \partial \overline{B_1(0)} = S^{n-1} \\
+x &\mapsto \substack{\text{unique intersection with }S^{n-1} \\ \text{ of the ray passing through }x \text{ and } f(x)}
+\end{align*}
+$F$ is a smooth function: we will not verify it because it is not interesting for the proof. Moreover, we notice that if $y \in \partial \overline{B_1(0)} \Rightarrow F(y) = y$.
+\begin{figure}[h] \label{Fig:ball10}
+     \centering
+     \includegraphics[width=0.3\textwidth]{Images/B_10.pdf} 
+     \caption{$F$ sends every point of the ball on its border}      
+\end{figure}
+Let's now consider the map: $\iota \colon S^{n-1} \rightarrow \overline{B_1(0)}$ such that $F \circ \iota = \id_{S^{n-1}}$. What happens here? $\iota$ sends any point $z$ on the surface of the ball to the ball itself. $\iota$ is defined in such a way that the position of $\iota(z)$ must be on the line connecting $z$ and $f(\iota(z))$. This way, when we apply $F$ to $\iota(z)$ we go back to $z \in S^{n-1}$. Now, we can consider the pulback:
+$$\id_{S^{n-1}}^* = \iota^* \circ F^* \quad \oast$$
+where we consider $F^*$ acting on closed-but-not-exact forms: $F^* \colon H^*(S^{n-1}) \rightarrow H^*(\overline{B_1(0)})$. If $* = n-1$, the map:
+$$F^* \colon \underbrace{H^{n-1}(S^{n-1})}_{\cong \rfield} \longrightarrow \underbrace{H^{n-1}(\overline{B_1(0)})}_{\cong \,0}$$
+has to be injective because of $\oast$ (if the composition of maps is injective, the first map acting is injective). But this is impossible because $H^{n-1}(S^{n-1}) \cong \rfield$ (maybe it was proved in the exercise sheets?) and $H^{n-1}(\overline{B_1(0)}) \cong 0$, with $B_1(0)$ $n$-dimensional ball. In order to prove the latter, we can't use the Poincarè lemma because $\overline{B_1(0)}$ is not homeomorphic to $\rfield^n$ (one is compact and the other is not, and compactness is left invariant under homeomorphisms). But we can prove that $\id \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ is homotopic equivalent to the map $\text{zero} \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ that sends every element of $\overline{B_1(0)}$ to $0 \in \overline{B_1(0)}$. Once we do this, we use the fact that the space itself is homotopic equivalent to the trivial set (for $n \ge 2$) and then the de Rham cohomology must be trivial as well.
+\end{proof}
+
+\begin{remarkbox}\begin{remark}
+The important assumption of the Brouwer theorem \ref{brouwerthm} is that the entire space is $\overline{B_1(0)}$. We also notice that the theorem can be seen as a corollary of the \href{https://en.wikipedia.org/wiki/Borsuk-Ulam_theorem}{Borsuk-Ulam theorem}. It says that there exists at least a couple of antipodal points on the Earth surface with same temperature and barometric pressure (if we assume temperature and pressure to be two continuous functions).
+\end{remark}\end{remarkbox}
+
+\begin{definition}[degree of a map] \label{degreemap}
+Let $f \colon M \rightarrow  N$ be smooth, $N, M$ closed manifolds (see def.  \ref{closedman}), orientable and of the same dimension. Then, the degree of $f$ is
+\begin{equation}
+\deg(f) = \frac{\int_M f^* \omega}{\int_N \omega}, \quad \text{for a form } \omega \in \Omega^n(N) \text{ s.t. } \int_N\omega \not = 0
+\end{equation}
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+The definition \ref{degreemap} does not depend on the $\omega$ chosen: if $\omega_1, \omega_2$ are $n$-forms with the same integral, by remark \ref{bumpremark} they are cohomologous, i.e. they differ by an exact form $d\eta$. Then we can write $\omega_1 = \omega_2 + d\eta$ and we get the same degree by using the naturality of the pullback ($f^* d \eta = d f^* \eta$) and Stokes's theorem. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
 \end{remark}\end{remarkbox}
 
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
