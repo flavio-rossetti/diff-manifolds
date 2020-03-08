@@ -21,12 +21,16 @@
 \usepackage{float, subcaption, braket, bbold, amssymb,amsthm,amsmath,mathtools, tikz-cd}
 \usepackage{stackengine}
 \usepackage{fancyhdr}
+\usepackage{musicography}
+
 
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\rightmark}
 \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0pt} 
+
+
 
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable}
@@ -73,6 +77,7 @@
 \linespread{1.2}
 
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Index}{Index}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\Der}{Der}
@@ -108,6 +113,16 @@
 \newcommand{\tangentphys}[1]{T_{#1}^{\text{phys}}}
 
 \newcommand{\tangentalg}[1]{T_{#1}^{\text{alg}}}
+
+\usetikzlibrary{calc}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+\newcommand{\DrawBox}[1][]{%
+    \tikz[overlay,remember picture]{
+    \draw[red,#1]
+      ($(left)+(-0.2em,1.5em)$) rectangle
+      ($(right)+(3em,-1.0em)$);}
+}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -160,10 +175,11 @@ instead of
 $$\sum\limits_i v^i e_i$$
 Given a map $f$ from a set $X$ to a set $Y$, we will denote it by 
 $$f \colon X \rightarrow Y$$
-We will use the arrow "$\mapsto$" to denote how each element of $X$ is mapped into $Y$ through $f$. For instance, given $x_1, x_2 \in X, y \in Y$:
+We will use the arrow "$\mapsto$" to denote how each element of $X$ is mapped into $Y$ through $f$. For instance, given $x_1, x_2 \in X, y \in Y$, we will either use the notation:
 $$x_1 \mapsto f(x)$$ 
 or
 $$x_2 \mapsto y$$
+We will use the symbol $\equiv$ in order to define mathematical objects.
 
 \section[Quick review: Basic Algebraic Structures]{\crule[blue!50!white]{0.3cm}{0.4cm}  Quick review: Basic Algebraic Structures}
 
@@ -328,6 +344,238 @@ Intuitively, we can say that the quotient space $\faktor{E}{\sim}$ is a copy of 
     \item If we consider two groups instead of vector spaces, finding the quotient space requires a bit more effort.
   \end{itemize}
 \end{example}\end{tcolorbox}
+
+\section[Topology]{\crule[purple!80!white]{0.3cm}{0.4cm}  Topology}
+
+\begin{definition}[Topology] \label{top}
+A topology on a set $M$ is a subset $\mathcal{O} \subset \mathcal{P}(M)$, where $\mathcal{P}(M)$ is the power set of $M$, such that:
+\begin{enumerate}
+	\item $\emptyset, M \in \mathcal{O}$
+	\item $\mathcal{O}$ is closed under arbitrary unions: $U_i \in \mathcal{O}, i \in I$, then $\cup_{i \in I} U_i \in \mathcal{O}$
+	\item $\mathcal{O}$ is closed under finite intersections: $U_1, \ldots, U_k \in \mathcal{O}$, then $U_1 \cap \ldots \cap U_k \in \mathcal{O}$.
+\end{enumerate}
+Sets in $\mathcal{O}$ are called open, $A \subset M$ is closed if $M \setminus A$ is open. A subset $V \subset M$ containing $p$ is a neighbourhood of $p$ if there is an open set $U \subset V$ containing $p$.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}[Euclidean topology on $\rfield$]
+The Euclidean topology is the one we implicitly use every time we want to talk about subsets of $\rfield^n$. Indeed, we use it whenever we talk about about "open sets", "limit points" or "open balls" in $\rfield^n$. In $\rfield$, it can be defined by specifying which sets are open, in the following way: \textit{in the Euclidean topology on $\rfield$, a subset $U \subset \rfield$ is open if and only if it is union of open intervals}. It satisfies the definition \ref{top} of topology, indeed:
+\begin{enumerate}
+\item $\emptyset$ is the null union of open intervals, and $\rfield = \bigcup_n \; \left ]-n, n \right [$
+\item if 
+$$A=\bigcup_{i \in I} \;  \mathopen  ] a_i, b_i \mathclose [$$
+$$B=\bigcup_{j \in J} \;  \left ] c_j, d_j \right [$$
+are two open sets, then their union is still union of open intervals. Same result if we consider an arbitrary number of open sets $A, B, C, \ldots$
+\item if $A$ and $B$ as before, then their intersection is
+$$A \cap B = \bigcup_{\substack{i \in I \\ j \in J}} \; ]a_i, b_i[ \; \cap \;  ]c_j, d_j[$$
+which is still union of open intervals.
+\end{enumerate}
+In $\rfield^n$, we can define it using the concept of basis (see the next pages).
+\end{remark}\end{remarkbox}
+
+\begin{remarkbox}\begin{remark}
+From the definition above we can see that $M$ and $\emptyset$ are always both open and closed sets. Notice that a set in a topological space can be: \begin{itemize}
+\item \textit{both open and closed}, e.g. the set $\rfield$ (in the Euclidean topology on $\rfield$) is open by definition of topology, and it is also closed because its complement is open, 
+\item \textit{neither open nor closed}, e.g. the interval $[0, 2[$ in the Euclidean topology on $\rfield$ (it cannot be written as union of open intervals, and neither can its complement),
+\item \textit{open but not closed}, e.g. $]0, 2[$ again in the Euclidean topology on $\rfield$,
+\item \textit{closed but not open}, e.g. $[0, 2]$ in the same topological space.
+\end{itemize}
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Closure, interior]
+Let $V \subset M$, let $\mathcal{O}$ be an arbitrary topology. The closure $\bar V $ of $V$ is the smallest closed subset of $M$ containing $V$. The interior $\mathring V$ of $V$ is the largest open subset contained in $V$.
+\end{definition} %TODO: existence
+
+\begin{definition}[Continuous function, homeomorphism] \label{topcontinuity}
+A map $f \colon X \rightarrow Y$ between topological spaces is continuous if $f^{-1}(U) \in \mathcal{O}_X$ for all $U \in \mathcal{O}_Y$ (i.e. if the pre-image of an open set through $f$ is still an open set). $f$ is a homeomorphism if it is bijective, continuous and $f^{-1}$ is continuous.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}[Continuous maps vs. open maps]
+Requiring that the pre-image of an open set is open is different from requiring that the image of an open set is open! If $f$ brings open sets to open sets, it is called open map (and it might not be continuous).
+\end{remark}\end{remarkbox}
+
+\begin{tcolorbox}\begin{example} \label{topexamples}
+Given a set $M$, we can always consider two simple topologies on it:
+\begin{enumerate}
+	\item $\mathcal{O}_M =  \mathcal{P}(M)$ is a topology, where $\mathcal{P}(M)$ is the power set of $M$ (i.e. the family of all subsets of $M$). Everything is open in $M$, so it is easy to see that any function going from $(M, \mathcal{O}_M)$ to any space $(Y, \mathcal{O}_Y)$ must be continuous.
+	\item $\mathcal{O}_M=\{\emptyset, M\}$ is a topology: the open sets are just the two ones required by the definition \ref{top}. In this case, every function going from any space $(Y, \mathcal{O}_Y)$ to $(M, \mathcal{O}_M)$ must be continuous (the pre-image of the empty set is the empty set, and the pre-image of $M$ is $Y$).
+\end{enumerate}
+What is more, we can consider topologies on metric spaces: if $(M, d)$ is a metric space and $B_{\varepsilon}(x)$ denotes the ball of radius $\varepsilon$ around $x$, then
+$$\mathcal{O}_d = \{U \subset M \, | \, \forall\, x \in U \, \exists\, \varepsilon > 0 \colon B_{\varepsilon}(x) \subset U \}$$
+defines a topology. In particular, we say that the topology is induced by a metric if the open sets are the open balls of the metric space. If $X, Y$ are metric spaces, the definition of continuity seen in the Analysis courses is: $f \colon (X, \mathcal{O}_X) \rightarrow (Y, \mathcal{O}_Y)$ is continuous if and only if $\forall \, x \in X, \forall \, \varepsilon > 0, \exists \, \delta > 0$ such that $f\left(B_{\delta}(x)\right) \subset B_{\varepsilon}\left(f(x)\right)$. One can show that in metric spaces such a definition is equivalent to definition \ref{topcontinuity}.
+\end{example}\end{tcolorbox}
+
+\begin{remarkbox}\begin{remark}
+If $\mathcal{O}_1, \mathcal{O}_2$ are topologies on $M$, then the intersection of the two topologies is again a topology. Therefore, given a family of subsets of $M$ one can ask for the smallest topology on $M$ which contains a subset.
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Hausdorff]
+A topological space $(M, \mathcal{O})$ is Hausdorff if for all $p, q \in M$ there is a pair of open sets $p \in U_p, q \in U_q$ so that $U_p \cap U_q = \emptyset$.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+Points in Hausdorff spaces are closed sets. i.e. if $M$ is Hausdorff and $x \in X$, $\{x\}$ is a closed set. In order to see that, we just need to prove that $M \setminus \{x\}$ is open. Let's suppose $M \setminus \{x\} \not = \emptyset$ (otherwise we are done, since $M = \{x\}$ and $M$ is both closed and open). Then we can find another point $y \in M \setminus \{x\}$. Since $M$ is Hausdorff, we can find two open sets $U_x, U_y$ containing $x$ and $y$ respectively, such that $U_x \cap U_y = \emptyset$. The proof is over if we prove that $M \setminus \{x\} = \cup_{y \in M \setminus \{x\}} U_y$, since it implies that $M \setminus \{x\}$ is open (arbitrary union of open sets is open), and then $\{x\}$ is closed. It is true because:
+\begin{itemize}
+\item "$M \setminus \{x\} \subseteq  \cup_{y \in M \setminus \{x\}} U_y$": for each point $z$ in $M$ different from $x$, there exists an open set $U_z$ entirely contained in $M \setminus \{x\}$ by Hausdorff assumption. The point is contained in a set which is contained in $\cup_{y \in M \setminus \{x\}} U_y$ so, in particular, the point is in $\cup_{y \in M \setminus \{x\}} U_y$.
+\item "$M \setminus \{x\} \supseteq \cup_{y \in M \setminus \{x\}} U_y$": if $z \in \cup_{y \in M \setminus \{x\}} U_y$, then $z \not = x$, otherwise there would be an intersection between an open set $U_{\bar x}$ for a fixed $\bar x$ and every open set containing $x$. This is impossible because by Hausdorff assumption there exists at least one open sets of those which does not intersect $U_{\bar x}$.
+\end{itemize}
+
+Moreover:
+\begin{itemize}
+	\item $(M, \mathcal{P}(M))$ is always Hausdorff (there are "so many" open sets that you can always find two of them containing the right points and so that they do not intersect each other).
+	\item If the topology is induced by a metric, then the topological space is Hausdorff (for instance, $\rfield^n$ with the topology induced by Euclidean metric is a Hausdorff topological space).
+\end{itemize}
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Product topology]
+Let $(M_i, \mathcal{O}_i), i \in I$ be topological spaces. Then the product topology on $\prod_{i \in I} M_i$ is the smallest topology such that all projections
+$$
+\prod_{i \in I} M_i \rightarrow M_j
+$$
+are continuous maps for all $j \in I$.
+\end{definition}
+
+\begin{definition}[Quotient topology]
+Let $(M, \mathcal{O}_M)$ be a topological space and $\sim$ an equivalence relation on $M$. Then the quotient topology on $\faktor{M}{\sim}$ is the largest topology so that the function
+\begin{align*}
+\pi \colon M &\rightarrow \faktor{M}{\sim} \\
+x &\mapsto [x]
+\end{align*}
+is continuous. $\pi$ is also called canonical projection.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}[Quotient topology pt. 2]
+We can also use another useful characterization of the quotient topology: a set $U \subset \faktor{M}{\sim}$ is open if and only if $\pi^{-1}(U) \in \mathcal{O}_M$. It is easy to prove that this definition is equivalent to the one above. Let's call $(1)$ the first definition and $(2)$ the last one.
+\begin{itemize}
+\item "$(1) \Rightarrow (2)$": $U$ open in the quotient topology, then $\pi^{-1}(U)$ is open in $M$ by (1), because $\pi$ is a continuous map. If $\pi^{-1}(U)$ is open in $M$, then $U$ is open in $\faktor{M}{\sim}$ because in $(1)$ we have defined the topology on $\faktor{M}{\sim}$ as the \textit{largest} topology such that $\pi$ is continuous!
+\item "$(2) \Rightarrow (1)$: $\pi$ is obviously continuous. And the topology we get is the \textit{largest} one such that $\pi$ is continuous because if $\pi^{-1}(U)$ is not open in $M$, then $U$ is not open in the quotient space (read also below).
+\end{itemize}
+\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that it exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. In the $"(1) \Rightarrow (2)"$ above it was true because in $Y$ we had the largest topology such that $f\colon X \rightarrow Y$ was continuous. It means that the topology on $Y$ had the same open sets of the "power set topology" (i.e. everything is open, cf. remark \ref{topexamples}) except for some sets. Which sets did we remove? We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
+\end{remark}\end{remarkbox}
+
+\begin{tcolorbox}\begin{example}[Cofinite topology]
+Let $M$ be a set. We define the following topology: the open sets are $\emptyset$ and the sets $U \not = \emptyset, U \subset M$ such that their complement in $M$ is finite. Another way to define the same topology is using closed sets: the only closed sets in this topology are $M$ and the finite sets. This topology is called cofinite topology.
+$M$ with this topology is not Hausdorff if $M$ is an infinite set.
+Why? Because\footnote{the proof is easier to follow if you think of $M$ with cofinite topology as $\rfield$ endowed with cofinite topology}: given $x, y$ in $M, x \not = y$, if $U_a$ and $U_b$ are open sets that contain $a$ and $b$ respectively, the complements of $U_a$ and $U_b$ must be finite (so, $U_a$ and $U_b$ must be infinite, because the bigger space $M$ is infinite).
+But then $U_a \cap U_b \not = \emptyset$. Indeed, the complement of $U_a$ in $M$ is $M \setminus U_a$ and it must be finite because $U_a$ is open.
+If we assume $U_a \cap U_b = \emptyset$, then $U_b$ must be contained in the complement of $U_a$. But then $U_b$ (which is an infinite set, because it is open) would be contained in $M \setminus U_a$ (which is a finite set). Contradiction!
+\end{example}\end{tcolorbox}
+
+\begin{lemma}
+A subspace of a Hausdorff space is Hausdorff.
+\end{lemma}
+
+\begin{tcolorbox}\begin{example}[Subspace topology]
+Let $(M, \mathcal{O}_M)$ be a topological space and $N \subset M$ a subset. Then a natural topology for $N$ is the subspace (or subset) topology, defined in the following way. The subspace topology is the smallest topology so that the inclusion map $N \rightarrow M$ is continuous, i.e. $V \subset N$ is open if and only if there is an open set $U \subset M$ such that $U \cap N = V$.
+
+For instance, you may know that $[0, 1)$ is neither open nor closed in $\rfield$ with Euclidean topology (i.e. the topology induced by the standard metric). Actually, it is an open set in $([0, 2], \mathcal{O})$, where $\mathcal{O}$ is the subset topology (with respect to $(\rfield, \mathcal{O}_d)$, where $\mathcal{O}_d$ is the Euclidean topology). Indeed $$[0, 1) = (-1, 1) \cap [0, 2] $$
+You should always pay attention to the topology and to where it is defined, for instance $[0, 1]$ is closed (but not open) in $(\rfield, \mathcal{O}_d)$, whereas it is both open and closed in $([0, 1], \mathcal{O})$, for any topology $\mathcal{O}$.
+\end{example}\end{tcolorbox}
+
+\begin{definition}[Subbasis]
+Let $M$ be a set and $B \subset \mathcal{P}(M)$ some collection of subsets. Let $\mathcal{O}_B$ be the smallest topology containing $B$, then we say that $B$ is a subbasis of $\mathcal{O}_B$.
+\end{definition}
+
+\begin{definition}[Basis]
+Let $(M, \mathcal{O})$ be a topological space and $\mathcal{B} \subset \mathcal{O}$. Then $\mathcal{B}$ is a basis for $\mathcal{O}$ if every open set is a union of sets in $\mathcal{B}$.
+\end{definition}
+
+\begin{definition}[Second countability]
+Let $(M, \mathcal{O}_M)$ be a topological space. Then $(M, \mathcal{O}_M)$ is second countable if it admits a countable basis.
+\end{definition}
+
+\begin{tcolorbox}\begin{example}[Euclidean topology in $\rfield^n$]
+Now we can properly define the Euclidean topology on $\rfield^n$. In any metric space, the open balls form a topology for that space, and such a topology is also called metric topology. The Euclidean topology on $\rfield^n$ is the one generated by the open balls (using Euclidean metric). In particular, let $\mathcal{B} = \{B_{\varepsilon}(x) \, | \, \varepsilon \in \mathbb{Q}, x \in \mathbb{Q}^n \}$. This is a basis of the metric topology of $\rfield^n$ (and it is a countable set, because we used the density of $\mathbb{Q}$ in $\rfield$).
+\end{example}\end{tcolorbox}
+
+\begin{lemma}
+If $A \subset M$ and $M$ has a countable basis, then the subspace topology on $A$ has a countable basis.
+\end{lemma}
+
+\begin{definition}[Cover]
+Let $J$ be a set of indices, either finite or infinite. A family of sets $\{U_i\}_{i \in J}$ is a cover for a topological space $X$ if $\cup_i U_i = X$ (the sets "cover" the entire space). It is an open cover if the $U_i$ are open sets in the topopolgy of $X$. A subcover is a subfamily of the initial cover which is still a cover.
+\end{definition}
+
+\begin{definition} [Compact space]
+A topological space $X$ is compact if every open cover $\{U_i\}_{i \in J}$ admits a finite subcover $\{U_i\}_{i=1}^k$.
+\end{definition}
+
+\begin{tcolorbox}
+\begin{example}
+If $(X, d)$ is a metric space and is compact, then $X$ is bounded (i.e. contained in a ball). Indeed: $U_i = B_i(x) = \{y \in X\, |\, d(x, y) < i\}$ is an open set. And for a fixed $x \in X$, $\cup_i U_i$ is an open cover: $\cup_{i \in \mathbb{N}} U_i = X$. Since the space is compact $\Rightarrow U_{i_1} \cup \ldots \cup U_{i_k} = X$ for some indices $i_1, \ldots, i_k$. These indices are the radii of the balls. Take $c = 2 \max\{i_1, \ldots, i_k\}$, then we have that $d(x, y) < c \, \forall\, y, \in X$, i.e. $X$ is bounded because it is contained in the ball $B_c(x)$.
+\end{example}
+\end{tcolorbox}
+
+\begin{theorem}[Heine-Borel]
+A subset of $\rfield^n$ is compact if and only if it is closed and bounded.
+\end{theorem}
+
+\begin{corollary} [Weierstrass]
+Let $X$ be a compact space, $f \colon X \rightarrow \rfield$ continuous, then $f$ attains its maximum (and minimum) in $X$.
+\end{corollary}
+
+\begin{lemma}[Closed in a compact] \label{closedincomp}
+$X$ is a compact topological space, $A \subset X$ closed $\Rightarrow A$ is compact (in subspace topology). 
+\end{lemma}
+\begin{proof}
+Let $\{U_i\}_{i \in I}$ be an open cover of $A$. There are open sets $V_i \subset X$ with $V_i \cap A = U_i$ by definition of open sets in the subspace topology. Moreover, $V_A \equiv X \setminus A$ is open because $A$ is closed. Since $\{U_i\}_{i \in I}$ is an open cover of $A$, we have that $\{U_i\}_{i \in I}$ and $V_A$ form an open cover of $X$. Since $X$ is compact, there is a finite number of indices $i_1, \ldots, i_k \in I$ such that $V_{i_1}, \ldots, V_{i_k}, V_A$ cover $X$. Since $V_A = X \setminus A$, it follows that the sets $V_{i_1}, \ldots V_{i_k}$ cover $A$. Since $U_i = V_i \cap A$, also $U_{i_1}, \ldots, U_{i_k}$ cover $A$. Then $A$ is compact because we proved that every open cover admits a finite subcover.
+\end{proof}
+
+\begin{lemma} [Cont. functions map compact sets to compact sets] \label{contcomp}
+If $A$ is compact and $f \colon A \rightarrow Y$ is continuous, then $f(A)$ is compact.
+\end{lemma}
+\begin{proof}
+Let $\{U_i\}_{i \in I}$ be an open cover of $f(A)$. Then $\exists\,  \{V_i\}_{i \in I}, V_i \subset Y$ open, so that $U_i = V_i \cap f(A)$ (by definition of open sets in subspace topology). Since $f$ is continuous, $f^{-1}(V) \subset A$ is open, and $f^{-1}(V)$ covers $A$. Since $A$ is compact, there exist $i_1, \ldots, i_k$ such that $f^{-1}(V_{i_1}), \ldots, f^{-1}(V_{i_k})$ still cover $A$. Thus, $V_{i_1},\ldots, V_{i_k}$ is a collection of open sets in $Y$ covering $f(A)$. In the subspace toplogy, $U_{i_1} = V_{i_1} \cap f(A), \ldots, U_{i_k} = V_{i_k} \cap f(A)$ cover $f(A)$.
+\end{proof}
+
+\begin{lemma}[Compact set in a Hausdorff] \label{compinhauss}
+Let $X$ be Hausdorff. Let $A \subset X$. Assume $A$ is compact. Then $A$ is closed.
+\end{lemma}
+\begin{proof}
+Let $x \in X \setminus A$. For every $a \in A$, there are $U_a \subset X, V_x(a) \subset X$ open sets such that $U_a \cap V_x(a) = \emptyset$ (because of the Hausdorff hypothesis). Here, w used the notation $V_x(a)$ to stress out the dependence of $V$ on $x$ and $a$. The sets $\{U_a \cap A\}_{a \in A}$ are form an open cover of $A$. Since $A$ is compact, there are finitely many $a_1, \ldots a_k$ so that $U_{a_1} \cap A, \ldots, U_{a_k} \cap A$ cover $A$. Now, $V_x = V_x(a_1) \cap \ldots \cap V_x(a_k)$ contains $x$ and it is open. Moreover, $V_x \,\cap A = \emptyset$ because $V_x$ is disjoint from each $U_{a_i} \Rightarrow X \setminus A$ is open, becuase for each point we can find an open set that contains the point and that is contained in $X \setminus A$.
+\end{proof}
+
+\begin{theorem} [How to get a homeomorphism]
+Let $f \colon X \rightarrow Y$ be a continuous function, $X$ compact, $Y$ Hausdorff and $f$ bijective. Then $f$ is a homeomorphism.
+\end{theorem}
+\begin{proof}
+The only thing which is left to prove is that $f^{-1}$ is a continuous function. First, we notice that an equivalent definition of continuous function is: "$f \colon X \rightarrow Y$ is continuous $\Leftrightarrow f^{-1}(C)$ is closed $\forall \, $ closed set $C \subset Y$". In order to prove that $f^{-1}$ is continuous, we need to show that $f(C) \subset Y$ is closed for all $C \subset X$ closed. This is true because: $C$ closed in $X \Rightarrow C$ compact because of lemma \ref{closedincomp} $\Rightarrow f(C)$ is compact in $Y$ because of lemma \ref{contcomp} $\Rightarrow f(C)$ is closed, using the lemma \ref{compinhauss}.
+\end{proof}
+
+\begin{remarkbox}
+\begin{remark}
+We can consider the concept of sequential compactness: $X$ is sequentially compact if every sequence in $X$ contians a convergent subsequence in $X$. In general, $X$ compact $\not \Rightarrow X$ sequentially compact. But, $X$ compact $+$ first countable $\Rightarrow X$ sequentially compact. Here, $X$ is first countable if $\forall\, x \in X\, \exists \,  N_1, N_2, \ldots, N_i$ (where $i \in I, I $) countable collection of neighbourhoods of $x$ such that every neighbourhood contains one of the $N_i$. Notice that manifolds are first countable! (not proved)
+\end{remark}
+\end{remarkbox}
+
+\begin{definition}[Compact exhaustion]
+Let $X$ be a topological space. A compact exhaustion $\{K_i\}_{i \in \mathbb{N}}$ of $X$ is a countable collection of compact sets $K$ so that $\bar K_i \subset \mathring K_{i+1}$
+\end{definition}
+
+\begin{definition}[Paracompactness] \label{paracompactness}
+A topological space is paracompact if  every open cover admits a locally finite refinement. i.e. if $\{U_i\}_{i \in I}$ is an open cover of $X$, there is another open cover $\{V_j\}_{j \in J}$ of $X$ such that $V_j \subset U_i(j)$ (refinement) and every point $x$ has a neighbourhood $V_x$ such that $V_x$ intersects only a finite number of $V_j$ (locally finite).
+\end{definition}
+
+\begin{definition}[Partition of unity]
+A partition of unity subordinate to an open cover $\{U_i\}_{i \in I}$ of $X$ is a collection of continuous functions $f_j \colon X \rightarrow [0, 1]$ such that $\forall \, x \exists \, V_x \ni x, V_x$ neighbourhood of $x$ so that the support $\supp(f_j) = \overline{f_j^{-1}((0, 1])}$ is contained in one of the $U_i$, and $V_x$ intersects only finitely many $\supp(f_j)$, and
+$$\sum\limits_{j \in J}f_j(x) \equiv 1$$
+\end{definition}
+
+\begin{definition}[Connected space]\label{connspace}
+A topological space $X$ is connected if it cannot be written as union of two non-empty, disjoint open sets.
+\end{definition}
+
+\begin{remarkbox}
+\begin{remark}[Equivalent definitions of connected space]
+Sometimes it is useful to consider equivalent definitions of connection: a topological space $X$ is connected if:
+\begin{itemize}
+\item It cannot be written as union of two non-empty, disjoint closed sets,
+\item $X = A \cup B$ with $A, B$ disjoint and open sets implies that $A= \emptyset$ or $B = \emptyset$,
+\item The only sets in $X$ that can be both open and closed are $X$ and $\emptyset$.
+\end{itemize}
+\end{remark}
+\end{remarkbox}
+
+
 
 \section[Derivations]{\crule[yellow!50!white]{0.3cm}{0.4cm}  Derivations}
 \begin{definition}[Derivation] \label{derivation}
@@ -653,12 +901,13 @@ There are some interesting properties about $k$-forms:
   \end{enumerate}
 \end{proposition}
 \begin{proof}[Sketch of the proof]
+$ $
 	\begin{enumerate}
 	\item Writing the forms in terms of the basis, we only need to prove that the property (1) holds for the elements of the dual basis. Moreover, by multilinearity, we just need to prove it for the elements of the dual basis applied to a basis $\{e_i\}$ of $V$. Thus, the proof for (1) is over because this property is true for the determinant: when we compute it, we can start from any row or column.
 	\item By writing the forms in terms of the basis as before.
 	\item  Again, by writing the forms in terms of the basis we have a sequence of wedge products like
 	$$e^{*i_1} \wedge \ldots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \ldots \wedge e^{*j_p}$$
-	If we swap two elements of the product we get a factor "$-1$". In order to have the right hand side we need to "move $e^{*j_1}$ on the left $k$ times", so we get a factor $(-1)^k$. Same for $e^{*j_2}$: we need to move it on the left $k$ times and so we get an extra factor $(-1)^k$. Again, we repeat the procedure for all the elements up to $e^{*j_p}$. At the end, we get a factor $(-1)^{kp}$.
+	If we swap two elements of the product we get a factor "$-1$". In order to have the right hand side we need to "move $e^{*j_1}$ on the left $k$ times", so we get a factor $(-1)^k$. Same for $e^{*j_2}$: we need to move it on the left $k$ times and so we get an extra factor $(-1)^k$. Again, we repeat the procedure for all the elements up to $e^{*j_p}$. At the end, we get a factor $(-1)^{kp}$. \qedhere
 	\end{enumerate}
 \end{proof}
 
@@ -970,7 +1219,7 @@ where $f^i = y^i(f)$. We used properties (2) and (4) of proposition \ref{pullbac
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}
-\begin{example}[Example of a pullback]
+\begin{example}[Example of a pullback] \label{angexample}
 Let's consider 
 $$U = \{ r > 0, \, 0 < \theta \le 2 \pi \}$$ 
 $$V = \rfield^2 \setminus \{(0, 0)\}$$
@@ -1119,7 +1368,7 @@ By fixing either the time or the starting point of the flow, we can consider two
 \begin{remarkbox}\begin{remark}
   We denoted the flow by the symbol $\phi_t$ and not $\phi$. What we are doing here is not caring about $p$: $\phi^*_t \omega (\cdot) = \omega(\phi_t(\cdot))$.
   %In components we have: ...to do
-  Useful formula (Cartan's formula): $L_z \omega = (d i_z + i_z d) \omega$
+  Useful formula (Cartan's formula): $L_z \omega = (d i_z + i_z d) \omega$.
 \end{remark}\end{remarkbox}
 \section[Lie derivative of a vector field]{\crule[blue!50!white]{0.3cm}{0.4cm}  Lie derivative of a vector field}
 \begin{definition}[pullback of a vector field]
@@ -1221,7 +1470,7 @@ So, the most general result that we achieved is the following:
 \end{theorem}
 \begin{proof}[Sketch of the proof]
 First, we notice that $U$ is compact as well because it is homeomorphic to a compact set.
-Then, the proof uses the naturality of the pullback "$f^*d = df^*$" and the results for open subsets of $\rfield^n$. [\textbf{TO DO}]
+Then, the proof uses the naturality of the pullback "$f^*d = df^*$" and the results for open subsets of $\rfield^n$. 
 \end{proof}
 
 \begin{corollary}[Fundamental theorem of line integrals]
@@ -1259,12 +1508,12 @@ Using the Stokes' theorem in (2).
 See problem sheet 5, exercise 3.
 \end{proof}
 
-\section[Poincarè Theorem of 1-forms]{\crule[brown!50!white]{0.3cm}{0.4cm}  Poincarè Theorem of 1-forms}
+\section[Closed and Exact $k$-forms]{\crule[brown!50!white]{0.3cm}{0.4cm}  Closed and Exact $k$-forms}
 \begin{definition} [Closed and exact forms]
   If $\omega \in \Omega^{k}(U)$ such that $d\omega = 0$, then $\omega$ is closed. If there exists $\alpha \in \Omega ^{k-1}(V), V \subset U$ such that $\omega = d\alpha$ in $V$ then $\omega$ is exact.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{propex1forms}
   The following are equivalent (\textbf{note that we are considering just 1-forms!}):
   \begin{enumerate}
     \item $\omega \in \Omega^1(U)$ is exact in a connected open subset $V \subset U$
@@ -1311,6 +1560,7 @@ where we used $\int \omega = \int a_i \frac{dx^i}{dt} dt$ and the fact that ever
 \end{theorem}
 
 \begin{remarkbox}\begin{remark}
+  We will not prove this theorem, because it follows from the more general case for $k$-forms, that we will analyze in the next pages.
   Using the Poincarè theorem for 1-forms, we can extend the definition of the integral of a closed 1-form along a \textbf{continuous} path (until now, we have always assumed the our paths were piecewise differentiable). In fact, assume that $ \omega \in \Omega^1(U), d \omega = 0$, and $\gamma$ such that:
   $$\gamma \colon [0, 1] \rightarrow U$$ is a differentiable map.
   Now, we choose a partition of $[0, 1]$, i.e. a collection of points $0 = t_0 < t_1 < \ldots < t_k < t_{k+1} = 1$ such that the restriction of $\gamma$ to the interval $(t_i, t_{i+1})$ is contained in a ball $B_i$ where $\omega$ is exact. In particular:
@@ -1335,57 +1585,115 @@ Now, we want to extend the above theorem to $k$-forms.
   such that $H(p, 1) = p, H(p, 0) = p_0, \forall\, p \in U$
 \end{definition}
 
+\begin{tcolorbox}\begin{example}
+$\rfield^n$ is contractible to any point $p_0 \in \rfield^n$. The homotopy is given by:
+$$H(p, t) = p_0 + t(p- p_0)$$
+\end{example}\end{tcolorbox}
+
 \begin{remarkbox}\begin{remark}
   If $U$ is contractible, we can associate a $k$-form $\bar\omega \in \Omega^k(U \times \rfield)$ to every $\omega \in \Omega^k(U)$. $\bar \omega$ is defined as
   \begin{equation}
     \bar\omega = H^* \omega
   \end{equation}
-  On the other hand, any $\bar \omega \in \Omega^k(U \times \rfield)$ has a unique decomposition of the form
-  \begin{equation}
-    \bar \omega = \omega_1 + dt \wedge \eta
-  \end{equation}
-  with $i_{\partial_t} \omega_1 = 0$ and $i_{\partial_t} \eta = 0$.
   Conversely, we can associate a $k$-form $\omega \in \Omega^k(U)$ to each $\bar \omega \in \Omega^k(U \times \rfield)$ with the help of the inclusion map
   \begin{align}
     i_t \colon U &\rightarrow U \times \rfield \\
     p &\mapsto i_t(p) = (p,t)\nonumber
   \end{align}
-  Then, $i_t^* \bar \omega \in \Omega^k(U)$ if $\bar \omega \in \Omega^k(U \times \rfield)$
+  Then, $i_t^* \bar \omega \in \Omega^k(U)$ if $\bar \omega \in \Omega^k(U \times \rfield)$.
+ \end{remark}\end{remarkbox}
+ 
+ \begin{lemma}   \label{lemmaform1}
+  Any $k$-form on $U \times \rfield$ has a unique decomposition of the form
+  \begin{equation}
+    \bar \omega = \omega_1 + dt \wedge \eta
+  \end{equation}
+  where $\omega_1 \in \Omega^k(U \times \rfield), \eta \in \Omega^{k-1}(U \times \rfield)$, and with $i_{\partial_t} \omega_1 = 0$ and $i_{\partial_t} \eta = 0$.
+  \end{lemma}
 
-  Furthermore, let's define the map
+
+\begin{proof}
+  Let's choose coordinates $\{x^1, \ldots, x^n, t\}$ for $U \times \rfield$. Then we write $\bar \omega$ on the basis:
+  $$\bar \omega = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k} + \sum_{i_1 < \ldots < i_{k-1}} b_{i_1 \ldots i_{k-1}} dt \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_{k-1}}$$
+  (We can always do this, the coefficients could also be trivial). Obviously, we have $i_{\partial_t} \omega_1 = 0$ and $i_{\partial_t} \eta = 0$ by definition of dual basis: $dx^{j} (\partial_t) = 0, \forall \, j$, $dt(\partial_t) = 1$.
+\end{proof}
+
+\begin{remarkbox} \begin{remark} \label{intremark}
+Now, we want to integrate the form $\bar \omega = \omega_1 + dt \wedge \eta$ of lemma \ref{lemmaform1}. 
+Let's define the map
   \begin{align}
     I \colon \Omega^k(U \times \rfield) &\rightarrow \Omega^{k-1}(U) \\
     \eta &\mapsto I\eta \nonumber
   \end{align}
   such that $$(I\eta)(z_1, \ldots, z_{k-1}) = \int_0^1 \eta(p, t)(\partial_t, i_{t^*}z_1, \ldots, i_{t^*}z_{k-1})dt$$
+where we used the inclusion map:
+  \begin{align} \label{definclusion}
+    i_t \colon U &\rightarrow U \times \rfield \\
+    p &\mapsto (p, t) \nonumber
+  \end{align}
+  $i_t$ "includes" $U$ into $U \times \rfield$ at $t$ (it is \textbf{not} the interior derivative!)
 \end{remark}\end{remarkbox}
 
-\begin{proof}
-  Let's choose coordinates $\{x^1, \ldots, x^n, t\}$ for $U \times \rfield$. Then we write $\bar \omega$ on the basis:
-  $$\bar \omega = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k} + \sum_{i_1 < \ldots < i_{k-1}} b_{i_1 \ldots i_{k-1}} dt \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_{k-1}}$$
-  (We can always do this, the coefficients could also be trivial).
-  Now, we want to integrate this form. Let:
-  \begin{align*}
-    i_t \colon U &\rightarrow U \times \rfield \\
-    p &\mapsto (p, t)
-  \end{align*}
-  $i_t$ is the inclusion map (it "includes" $U$ into $U \times \rfield$ at $t$)...TO DO
-\end{proof}
-
-\begin{lemma}
+\begin{lemma} \label{lemmaform2}
   \begin{equation}
     i_1^* \bar \omega - i_0^* \bar \omega = d(I \bar \omega) + I(d\bar \omega)
   \end{equation}
-  Indeed, since $H \circ i_1 = Id$ and $H \circ i_0 = p_0$, $\forall \, p \in U$ we have
-  $$\omega = (H \circ i_1)^* \omega = i_1^* \bar \omega$$
-  and
-  $$0 = (H \circ i_0)^* \omega = i_0^* \bar \omega$$
+  where $i_1$ is $i_t$ for $t=1$, and $I$ is the integration defined in remark \ref{intremark}. $i^*t\colon \Omega(U \times \rfield \rightarrow \Omega(U)$ is the pullback of $i_t$.
 \end{lemma}
+\begin{proof}
+%Indeed, since $H \circ i_1 = Id$ and $H \circ i_0 = p_0$, $\forall \, p \in U$ we have
+  %$$\omega = (H \circ i_1)^* \omega = i_1^* \bar \omega$$
+  %and
+  %$$0 = (H \circ i_0)^* \omega = i_0^* \bar \omega$$
+  Let's consider $p \in U$ with coordinates $x^1, \ldots, x^n$. Since everything is linear, we just need to check the thesis for the single terms in the sum $\bar \omega = \omega_1 + dt \wedge \eta$.
+  \begin{description}
+  \item[case a)] Assume:
+  \begin{equation} \label{omegacasea}
+  \bar \omega = f \, dx^{i_1} \wedge \ldots \wedge dx^{i_k}
+  \end{equation}
+  Then:
+  \begin{align*}
+  d \bar \omega = df \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_k} = \defonde{f}{t} dt \wedge dx^{i_1} \wedge \ldots dx^{i_k} + \defonde{f}{x^i} dx^i \wedge dx^{i_1} \wedge \ldots dx^{i_k}
+  \end{align*}
+  $$I(d\bar \omega) = \int_0^1 \defonde{f}{t}(p, t) \underbrace{i_t^* dx^{i_1}}_{=dx^{i_1}} \wedge \ldots \wedge i_t^* dx^{i_k} dt = (f(p, 1) - f(p, 0)) dx^{i_1} \wedge \ldots \wedge dx^{i_k} = i_1^* \bar \omega - i_0^* \bar \omega$$
+  Moreover, $I\bar \omega = 0$ because $\bar \omega$ (cf. \eqref{omegacasea}) does not contain any $dt$ in this case.
+  \item[case b)] Assume:
+  \begin{equation} \label{omegacaseb}
+  \bar \omega  = f\, dt \wedge dx^{i_1} \wedge \ldots dx^{i_{k-1}}
+  \end{equation}
+  Then:
+  $$d \bar \omega = \defonde{f}{x^i} dx^i \wedge dt \wedge dx^{i_1} \wedge \ldots  \wedge dx^{i_{k-1}}$$
+  Then, changing the order of the basis and getting a minus sign:
+  $$I(d \bar \omega) = - \int_0^1 \defonde{f}{x^i} dx^i \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_{k-1}} dt$$
+  And also:
+  $$d(I \bar \omega) = d \int_0^1 f(p, t) dx^{i_1} \wedge \ldots \wedge dx^{i_{k-1}} dt = \int_0^1 \defonde{f}{x^i} dx^i \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_{k-1}} dt$$
+  Thus, we have $I(d \bar \omega) + d(I \bar \omega) = 0$. In this case (cf. \eqref{omegacaseb}), we also have $i_t^* dt = 0$ (recall that $i_t \colon p \mapsto (p, t)$). Therefore: $i_t^* \bar \omega = 0, \forall \, t$. \qedhere
+  \end{description}
+
+  
+  
+  
+
+\end{proof}
 
 Then we can extend Poincarè lemma to $k$-forms:
 \begin{theorem} [Poincarè Lemma] \label{poinclemma}
   Let $k \ge 1$. Let $U$ be a contractible, open subset of $\rfield^n$ and $\omega \in \Omega^k(U)$ with $d\omega = 0$. Then there exists a $(k-1)$-form $\alpha \in \Omega^{k-1} (U)$ such that $\omega = d\alpha$.
 \end{theorem}
+\begin{proof}
+The proof follows from the previous lemmas  \ref{lemmaform1} and \ref{lemmaform2}. In fact, in the hypotheses of the theorem, the $\alpha$ that we need is $\alpha = I \bar \omega$. Indeed: given $\omega \in \Omega^k(U)$, we can define $\bar \omega = H^* \omega \in \Omega^k(U \times \rfield)$, where $H$ is the map that can contract $U$ to a point. If we consider the map $i_t$ defined in \eqref{definclusion}, we have:
+$$H \circ i_1 = \id \quad \text{and} \quad H \circ i_0 = \text{const.}$$
+So:
+$$\omega = (H \circ i_1)^* \omega = i_1^* (H^* \omega) = i_1^* \bar \omega$$
+and also:
+$$0 = (H \circ i_0)^* \omega = i_0^* (H^* \omega) = i_0^* \bar \omega$$
+From the lemma \ref{lemmaform2}, we know that $i_1^* \bar \omega - i_0^* \bar \omega = d(I \bar \omega) + I(d \bar \omega) $. From previous computations, it means:
+$$\omega = d(I \bar \omega) + I (d \bar \omega)$$
+Actually, $I (d \bar \omega) = 0$ because $d \bar \omega = 0$. Indeed:
+$$d \bar \omega = d(H^* \omega) \overset{(1)}{=} H^* d \omega \overset{(2)}{=} 0$$
+where we used: (1) naturality of the pullback, cf. proposition \ref{pullbackprop}, point 5, (2) $d \omega = 0$ by assumption.
+Then, $\omega = d(I \bar \omega)$.
+\end{proof}
 
 Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independent of the choice of $\gamma$?
 
@@ -1394,8 +1702,13 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
   \begin{align*}
     H \colon [a, b] &\times [0, 1] \rightarrow U &\text{ such that:}\\
     H(s, 0) &= \gamma_1(s), &\forall\, s \in [a, b] \\
-    H(s, 1) &= \gamma_2(s), &\forall\, s \in [a, b] \\
+    H(s, 1) &= \gamma_2(s), &\forall\, s \in [a, b]
   \end{align*}
+  \begin{figure}[h] \label{Fig:hom1}
+     \centering
+     \includegraphics[width=0.4\textwidth]{Images/homotopy1.pdf} 
+     \caption{Homotopy between curves}      
+\end{figure}
 \end{definition}
 
 \begin{definition}[Homotopy between closed curves with same endpoints]
@@ -1407,16 +1720,33 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
     H(a, t) &= \gamma_1(a) = \gamma_2(a), &\forall\, t \in [0, 1] \\
     H(b, t) &= \gamma_1(b) = \gamma_2(b), &\forall\, t \in [0, 1]
   \end{align*}
+  \begin{figure}[h] \label{Fig:hom2}
+     \centering
+     \includegraphics[width=0.4\textwidth]{Images/homotopy2.pdf} 
+     \caption{Homotopy between curves with same endpoints}      
+\end{figure}
 \end{definition}
 
 \begin{theorem}
-  Let $\omega \in \Omega^1(U)$, with $d \omega = 0$ (closed), and $\gamma_1, \gamma_2$ be two homotopic curves (as in the previous definition). then:
+  Let $\omega \in \Omega^1(U)$, with $d \omega = 0$ (closed), and $\gamma_1, \gamma_2$ be two homotopic curves with same endpoints. then:
   \begin{equation}
     \int_{\gamma_1} \omega = \int_{\gamma_2} \omega
   \end{equation}
 \end{theorem}
+\begin{proof}
+Let's suppose the two curves do not intersect each other.
+We can go through $\gamma_1$ backwards. Let $I$ be the interior of the space bounded by the two curves.
+\begin{figure}[h] \label{Fig:hom4}
+     \centering
+     \includegraphics[width=0.2\textwidth]{Images/homotopy4.pdf}    
+\end{figure}
+$I$ is contractible, then by Poincarè lemma \ref{poinclemma}, $\omega$ is exact in $I$. Using Stokes's theorem and denoting the curve $\gamma_1$ with reversed orientation by $\hat \gamma_1$:
+$$\int_{\hat \gamma_1 + \gamma_2} = \int_I d \omega = 0$$
+where last equality follows from the exactness of $\omega$: $d\omega = d^2 \alpha=0$ for some 0-form $\alpha$.
+On the other hand, if the two curves intersect each other, we split the curves for each intersection and apply the previous proof for each one of them.
+\end{proof}
 
-What if $\gamma_1(a) \not = \gamma_2(a), \gamma_1(b) \not = \gamma_2(b)$
+What if $\gamma_1(a) \not = \gamma_2(a), \gamma_1(b) \not = \gamma_2(b)$?
 \begin{definition}[Homotopy between closed curves]
 $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are freely homotopic if there exists a continuous map
 \begin{align*}
@@ -1425,6 +1755,11 @@ $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are 
   H(s, 1) &= \gamma_2(s) &\forall\, s \in [a, b] \\
   H(a, t) &= H(b, t) &\forall\, t \in [0, 1]
 \end{align*}
+ \begin{figure}[h] \label{Fig:hom3}
+     \centering
+     \includegraphics[width=0.3\textwidth]{Images/homotopy3.pdf} 
+     \caption{Homotopy between closed curves}      
+\end{figure}
 \end{definition}
 
 \begin{proposition}
@@ -1434,6 +1769,9 @@ $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are 
   \end{equation}
   In particular, if $\gamma_1$ is freely homotopic to a point, then $\int_{\gamma_1} \omega = 0$
 \end{proposition}
+\begin{proof}[Idea of the proof]
+We can decompose the space in small squares and use the Stokes's for each of them.
+\end{proof}
 
 \begin{definition}[Simply connected set]
   %\marginpar{If $U$ is arc-wise connected we also say that it is simply connected if its fundamental group is trivial}
@@ -1448,16 +1786,16 @@ $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are 
 "Contractible $\Longrightarrow$ simply connected" (why?), but "Simply connected $\cancel{\Longrightarrow}$ contractible" (cf. $S^2$).
 \end{remark}\end{remarkbox}
 
-\begin{remarkbox}\begin{remark}
-  Every closed form on a simply connected subset $U$ of $\rfield^n$ is exact.
-\end{remark}\end{remarkbox}
-
-\begin{lemma}
+\begin{lemma} \label{closedinsimplyconn}
   A connected open subset $U$ of $\rfield^n$ is simply connected if every closed curve in $U$ is homotopic to a point in $U$.
 \end{lemma}
 
+\begin{remarkbox}\begin{remark}
+  Every closed 1-form on a simply connected subset $U$ of $\rfield^n$ is exact. Indeed, $\int_{\gamma} \omega = 0$ for every closed $\gamma$ in the space, where $\omega$ is a closed 1-form, because every closed curve can be shrinked to a point (by lemma \ref{closedinsymplyconn}). By proposition \ref{propex1forms}, $\omega$ is exact. The result is not true for $k$-forms (in such cases, we need more advanced tools).
+\end{remark}\end{remarkbox}
+
 We can limit ourselves to consider continuous curves, thanks to the two following results:
-\begin{theorem}[Whitney approximation on $\rfield^n$]
+\begin{theorem}[Whitney approximation on $\rfield^n$] \label{whitney}
   If $\gamma$ is a continuous map between $U, V \subsetneq \rfield^n$, then $\gamma$ is homotopic to a smooth map $\tilde \gamma$. If $\gamma$ is smooth on a closed subset $A$ of $U$, then the homotopy can be taken relatively to $A$.
 \end{theorem}
 
@@ -1506,17 +1844,17 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
 \begin{definition}[de Rham Complex]
   The de Rham Complex is defined by $\Omega^*(M, \rfield)$ together with the sequence
   $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0$$
-  with $Im(d_k) \subset Ker(d_{k+1})$ since $d^2 = d \circ d = 0$
+  with $\im(d_k) \subset \ker(d_{k+1})$ since $d^2 = d \circ d = 0$
 \end{definition}
 
 \begin{remarkbox}\begin{remark} \label{drremark}
-  $H^k(M) = \faktor{Ker(d_{k+1})}{Im(d_k)}$
+  $H^k(M) = \faktor{\ker(d_{k+1})}{\im(d_k)}$
 \end{remark}\end{remarkbox}
 
 \begin{definition} [exact sequence] \label{exsequence}
   If $H^k(M, \rfield) = 0, k=1, \ldots, n$, then
     $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
-    is an exact sequence if and only if $Ker(d_{k+1}) = Im(d_k)$
+    is an exact sequence if and only if $\ker(d_{k+1}) = \im(d_k)$
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
@@ -1539,16 +1877,16 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
  \end{remark}\end{remarkbox}
 
 \begin{definition}[Homotopy between maps]
-  Two maps $\phi, \psi \colon U \rightarrow V$ are homotopic if there exists a continuous map $H$
+  Two maps $\phi, \psi \colon U \rightarrow V$ are homotopy equivalent if there exists a continuous map $H$
   \begin{align*}
-    H \colon [0,1] &\times U \rightarrow V &\text{ such that:}\\
-    H(0, \cdot) &\colon U \rightarrow V &\text{ with } H(0, \cdot) = \phi(\cdot) \\
-    H(1, \cdot) &\colon U \rightarrow V &\text{ with } H(1, \cdot) = \psi(\cdot)
+    H \colon [0,1] &\times U \rightarrow V \text{ such that:}\\
+    H(0, \cdot) &\colon U \rightarrow V \quad \text{ with } H(0, \cdot) = \phi(\cdot) \\
+    H(1, \cdot) & \colon U \rightarrow V \quad \text{ with } H(1, \cdot) = \psi(\cdot)
   \end{align*}
 \end{definition}
 
  \begin{definition}[Homotopy equivalence between sets]
-   Two subsets $U$ and $V$ of $\rfield^n$ are homotopic equivalent if there exist continuous maps $f \colon U \rightarrow V$ and $g \colon V \rightarrow U$ such that the compositions $g \circ f$ and $f \circ g$ are homotopic to the identity in $U$ and $V$, respectively. $f$ and $g$ are called homotopy equivalences.
+   Two subsets $U$ and $V$ of $\rfield^n$ are homotopy equivalent if there exist continuous maps $f \colon U \rightarrow V$ and $g \colon V \rightarrow U$ such that the compositions $g \circ f$ and $f \circ g$ are homotopic to the identity in $U$ and $V$, respectively. $f$ and $g$ are called homotopy equivalences.
  \end{definition}
 
  \begin{tcolorbox}\begin{example}
@@ -1561,13 +1899,21 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
    \end{itemize}
  \end{example}\end{tcolorbox}
 
- \begin{lemma}
-   Let $\phi, id \colon V \rightarrow V$ be two smoothly homotopic maps. Then $\restrict{\phi^*}{H^*(V, \rfield)} = \restrict{id^*}{H^*(V, \rfield)}$
+ \begin{lemma} \label{homlemma}
+   Let $\phi, \id \colon V \rightarrow V$ be two smoothly homotopic maps. Then $\restrict{\phi^*}{H^*(V, \rfield)} = \restrict{\id^*}{H^*(V, \rfield)}$.
  \end{lemma}
+ \begin{proof}
+ We want to show that $(\phi^* - \id^*)(\omega) = d \alpha$. If it is true, $\phi^*$ and $\id^*$ map to the same equivalence class in the cohomology group, because two forms are in the same equivalence class if they differ by an exact form. Let $H \colon \rfield \times V \rightarrow V$ be the smooth homotopy between $\phi$ and $\id$ in $V$. We can consider it smooth thanks to Whitney approximation (cf. theorem \ref{whitney}). Let $\omega \in H^*(V)$. From the proof of Poincarè lemma \ref{poinclemma} we have:
+ $$d(I H^* \omega) + I(d H^* \omega) = i_1^* H^* \omega - i_0^* H^* \omega$$
+ with: $i_0(p) = (0, p), i_1(p) = (1, p)$ (recall the definition of the inclusion \eqref{definclusion}).
+ Here, $H \circ i_0 = \restrict{\id}{V}, H \circ i_1= 0$. Thus: 
+ $$(\phi^* - \id^*)(\omega) = dI (H^* \omega) + I(\underbrace{d H^* \omega}_{=H^*d \omega = 0})$$
+ Using the naturality of the pullback and the fact that $\omega \in H^*(V) \Rightarrow \omega$ is closed. 
+ \end{proof}
 
- \begin{theorem}
-   Let $\phi \colon U \rightarrow V$ be a homotopy equivalence between $U$ and $V$ with homotopy inverse $\psi$. Then $\phi^*$ is an isomorphism between $H^k(U)$ and $H^k(V)$
- \end{theorem}
+ %\begin{theorem}
+   %Let $\phi \colon U \rightarrow V$ be a homotopy equivalence between $U$ and $V$ with homotopy inverse $\psi$. Then $\phi^*$ is an isomorphism between $H^k(U)$ and $H^k(V)$
+ %\end{theorem}
 
 \begin{theorem}
   Let $\phi \colon U \rightarrow V$ be a homotopy equivalence between $U$ and $V$ with homotopy inverse $\psi \colon V \rightarrow U$. then $\phi^*$ induces an isomorphism $\hat \phi^*$ such that:
@@ -1575,6 +1921,13 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
     H^n(V, \rfield) \cong H^n(U, \rfield), \forall\, n
   \end{equation}
 \end{theorem}
+\begin{proof}
+Let $\varphi \equiv \tilde{\phi} \circ \tilde{\psi}$, where $\tilde{\phi}$ is smooth and smoothly homotopy equivalent to $\phi$. $\tilde{\psi}$ is smooth and smoothly homotopy equivalent to $\psi$. So, $\varphi$ is homotopy equivalent to the identity, i.e. $\varphi \simeq \id_V$. Thus: 
+$$\hat \id^*_{H^n(V, \rfield)} = \hat \varphi^*_{H^n(V,\rfield)} = \left (\hat{ \tilde \psi}^* \circ \hat {\tilde \phi}^* \right )_{H^n(V, \rfield)}$$
+by lemma \ref{homlemma}. In the same way:
+$$\left (\hat{\tilde \phi}^* \circ \hat{\tilde \psi}^* \right)_{H^n(U, \rfield)} = \hat \id^*_{H^n(U, \rfield)}$$
+Thus, $\hat{\tilde \phi}$ is a bijection.
+\end{proof}
 
 \begin{definition}[(co)chain map] %add def of (co)chain complex
   Let $A^*$ and $B^*$ be two (co)chain complexes (a (co)chain complex is a generalization of a de Rham complex, e.g. think about $A^*=\Omega^*$).
@@ -1631,7 +1984,7 @@ H^0(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, be
 \end{tikzcd}
 \end{example}\end{tcolorbox}
 
-\begin{theorem}[Mayer-Vietoris]
+\begin{theorem}[Mayer-Vietoris] \label{mvthm}
   Let $M \subset \rfield^n$ such that $M=f(U) \cup g(V), U, V$ open subsets in $\rfield^m, m \le n$. $f, g$ homeomorphisms.
   Let:
   $$i \colon U \cap V \rightarrow U \text{ (inclusion)}$$
@@ -1660,31 +2013,98 @@ We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ 
     \item $\phi \colon U \rightarrow M \cap V$ is a homeomorphism,
     \item $\phi_* (x) \colon \rfield^m \rightarrow \rfield^n$ is injective $\forall \, x \in U$
   \end{itemize}
+  \begin{figure}[H] \label{Fig:submanifold1}
+     \centering
+     \includegraphics[width=0.75\textwidth]{Images/submanifold1.pdf} 
+     \caption{a) Submanifold: local parametrization}      
+\end{figure}
 \end{definition}
 
 \begin{definition}[(b) Submanifold - Locally flat]
-  $\forall p \in M, \exists$ a neighbourhood $V \subset \rfield^n, p \in V$ and a neighbourhood $W \subset \rfield^n$, $0 \in W$, and a diffeomorphism $\Phi, \Phi \colon W \rightarrow V$ such that
-  $$\Phi \left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right ) = V \cap M$$
+  $\forall p \in M, \exists$ a neighbourhood $V \subset \rfield^n, p \in V$ and a neighbourhood $W \subset \rfield^n$, $0 \in W$, and a diffeomorphism $\Phi, \Phi \colon W \rightarrow V$ such that:
+  \[\Phi \left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right ) = V \cap M\]
+  \begin{figure}[H]
+  \label{Fig:submanifold2}
+     \centering
+     \includegraphics[width=0.8\textwidth]{Images/submanifold2.pdf} 
+     \caption{b) Submanifold: locally flat}      
+\end{figure}
 \end{definition}
 
 \begin{definition}[(c) Submanifold - Locally  a zero set]
-$\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n, V$ open, and a smooth map $F \colon V \rightarrow \rfield^{n-m}$ such that
+$\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n, V$ open, and a smooth map $F \colon V \rightarrow \rfield^{n-m}$ such that:
 $$V \cap M = \{x \in V \, | \, F(x) = 0\}$$
 and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
+\begin{figure}[H]
+  \label{Fig:submanifold3}
+     \centering
+     \includegraphics[width=0.8\textwidth]{Images/submanifold3.pdf} 
+     \caption{c) Submanifold: locally a zero set}      
+\end{figure}
 \end{definition}
 
 \begin{definition}[(d) Submanifold - Locally a graph]
-  $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n$ and a permutation $\sigma \colon \{1, \ldots, n\} \rightarrow \{1, \ldots, n\}$ and $U \subset \rfield^m, U$ open, together with a smooth map $g \colon U \rightarrow \rfield^{n-m}$ such that
+  $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n$ and a permutation $\sigma \colon \{1, \ldots, n\} \rightarrow \{1, \ldots, n\}$ and $U \subset \rfield^m, U$ open, together with a smooth map $g \colon U \rightarrow \rfield^{n-m}$ such that:
   \begin{align*}
   V \cap M = \{ &(x_{\sigma(1)} \cdots x_{\sigma(n)}) \, |\, (x_1, \ldots, x_m) \in U \\
    &\text{ and } (x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m)\}
 \end{align*}
   (g is called a \textit{graph}).
+  \begin{figure}[H]
+  \label{Fig:submanifold4}
+     \centering
+     \includegraphics[width=0.4\textwidth]{Images/submanifold4.pdf} 
+     \caption{d) Submanifold: locally graph}      
+\end{figure}
 \end{definition}
 
-\begin{theorem}
+\begin{theorem} \label{allequiv}
   The four definitions above are equivalent.
 \end{theorem}
+\begin{proof} $ $
+\begin{description}
+\item[(b) $\Rightarrow$ (c):] $\Phi \colon W \rightarrow V$ is a diffeomorphism. Let $F(x) = \pi \circ \Phi^{-1}$, where $x \in M \cap V, \pi \colon \rfield^n \rightarrow \rfield^{n-m}$ ($\pi$ is the projection on the last $n-m$ coordinates). Then $F$ satisfies (c) by construction.
+\item[(c) $\Rightarrow$ (d):] 
+\begin{align*}
+F \colon V \subset \rfield^m \times \rfield^{n-m} &\rightarrow \rfield^{n-m} \\
+(a, b) & \mapsto F(a, b) 
+\end{align*}
+Let's consider the Jacobian matrix:
+$$(F_*)_p = \left (
+\begin{matrix} 
+\defonde{F^1}{x^1} & \ldots & \tikzmark{left}{\defonde{F^1}{x^{m+1}}} & \ldots & \defonde{F^1}{x^n} \\
+\cdot & & & & \\
+\cdot & & & & \\
+\cdot & & & & \\
+\defonde{F^{n-m}}{x^1} & \ldots & \defonde{F^{n-m}}{x^{m+1}} & \ldots & \tikzmark{right}{\defonde{F^{n-m}}{x^n}}
+\end{matrix} \right)
+\DrawBox[thick]$$
+Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ if and only if $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m), \, (x_1, \ldots, x_m) \in U'$. Then, $g$ is the graph of definition (d).
+\item[(d) $\Rightarrow$ (a):] From (d), we know that $g \colon \rfield^m \supset U \rightarrow \rfield^{n-m}$. Then:
+\begin{align*}
+\phi \colon U &\rightarrow \rfield^n = \rfield^m \times \rfield^{m-n} \\
+x &\mapsto (x, g(x))
+\end{align*}
+is a local parametrization: it is a homeomorphism onto the image, and it is differentiable because $g$ is differentiable.
+\item[(a) $\Rightarrow$ (b):] Let $\phi \colon \rfield^m \supset U \rightarrow \rfield^n$ be a local parametrization with $\phi_*\colon \rfield^m \rightarrow \rfield^n$ injective. Let 
+$$B \equiv \left( \left (\defonde{\phi^i}{x^j} \right)_{x=q} \right)_{i, j = 1, \ldots ,n}, q = \phi^{-1}(p), p \in M \cap V$$
+In general, it is not true that $\phi^1$ corresponds to the first component. But we can always reorder the coordinates so that it is true. $B$ is invertible. Let's define:
+\begin{align*}
+\Phi \colon U \times \rfield^{n-m} &\rightarrow \rfield^n= \rfield^m \times \rfield^{n-m} \\
+(x, y) &\mapsto \phi(x) + (0, y)
+\end{align*}
+Then:
+\[ \Phi_*(q, 0) = \left (
+\begin{array}{c|c}
+B & 0 \\
+\hline
+\text{anything} & \text{Id}
+\end{array} \right) \]
+is invertible. Thus, by the implicit function theorem, there exists a neighbourhood $W \subset (U \times \rfield^{n-m})$ of $(q, 0)$ and $V' \subset \rfield$ of $p$ such that $\Phi \colon W \rightarrow V'$ is a diffeomorphism. Furthermore:
+\[ \Phi\left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right) = \phi\left( W \cap (\rfield^m \times \{0\}^{n-m}) \right) \subset M \cap V \]
+because $\Phi$ acts like $\phi$ for $y=0$.
+\end{description}
+\end{proof}
 
 \begin{corollary} \label{corsubmanifold}
   Let:
@@ -1744,6 +2164,19 @@ and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
 
 \end{tikzpicture}
 \end{center}
+\begin{proof}
+$\phi^{-1} \circ \phi'$ is a homeomorphism because $\phi$ and $\phi'$ are homeomorphisms. We want to show that they are smooth. Let:
+\begin{align*}
+&q' \in (\phi')^{-1}(V \cap V' \cap M) \subset U' \\
+&q \in \phi^{-1} \circ \phi' (q') \in U
+\end{align*}
+By the proof of (a) $\Rightarrow$ (b) of the theorem \ref{allequiv}, we know that there exists a diffeomorphism $\Phi \colon \rfield^n \supset W \rightarrow V'' \subset \rfield^n$, with $(q, 0) \in W$, such that:
+\[ \restrict{\Phi}{W \cap \rfield^m} = \restrict{\phi}{W \cap \rfield^m} \]
+Thus:
+\[\restrict{\phi^{-1} \circ \phi'}{(\phi')^{-1} \circ \phi(W \cap \rfield^m)} = \restrict{\Phi^{-1} \circ \phi'}{(\phi')^{-1} \circ \phi(W \cap \rfield^m)} \]
+where the right-hand side is smooth. We can prove the same result the other way round.
+\end{proof}
+
 \begin{tcolorbox}\begin{example}[Submanifolds of $\rfield^n$]
   Let's consider some examples.
   \begin{enumerate}
@@ -1985,6 +2418,16 @@ Notice that \textbf{the integral is well-defined if $M$ is orientable} (definiti
 \begin{lemma}
   $\int\limits_{M} \omega$ is independent of the choice $(V_{\alpha}, \varphi_i)$
 \end{lemma}
+\begin{proof}
+Let $\{ W_{\alpha} \}$ be another covering of $M$ and $\{\psi_j\}_{j=1, \ldots, m'}$ a partition of unity
+ subordinate to $\{W_{\alpha}\}$, 
+ then $\{W_{\alpha} \cap V_{\beta}\}_{\alpha, \beta}$ is also
+  a covering of $M$ and 
+  \[ \left(\varphi_i \psi_j \right)_{\substack{i=1, \ldots, m \\ j=1, \ldots, m'}}\]
+  is a partition of unity subordinate to $\{W_{\alpha} \cap V_{\beta}\}$. Thus:
+\[ \sum\limits_{i=1}^m \int_M \varphi_i \omega = \sum\limits_{i=1}^m \sum_{j=1}^{m'} \int_M \varphi_i \psi_j \omega = \sum\limits_{j=1}^{m'} \int_M \psi_j \left( \sum\limits_{j=1}^{m'} \varphi_i \omega \right) = \sum\limits_{j=1}^{m'} \int_M \psi_j \omega \]
+where we could swap the sums since they are finite (they are finite because $M$ is compact by assumption).  
+\end{proof}
 
 \begin{remarkbox}\begin{remark}
   What happens with boundaries? If $p \in \partial M$, there is no neighbourhood of $p$ homeomorphic to an open set $U \subset \rfield^n$.
@@ -2017,6 +2460,14 @@ When is a point on the boundary of a manifold?
 \begin{lemma}
   The definition \ref{pointbdr} does not depend on the choice of parametrisation.
 \end{lemma}
+\begin{proof}
+The proof is by contradiction.
+Let $\phi_1 \colon U_1 \rightarrow M, U_1 \subset H^n$ such that $\phi_1(0, x^2, \ldots, x^n)=p$ for some $x^2, \ldots, x^n$. Assume there exists $\phi_2 \colon U_2 \rightarrow M$ parametrization around $p$ such that $\phi_2^{-1}(p) = q = (x^1, \ldots x^n)$ with $x^1 \not = 0$. Let $\omega = \phi_1(U_1) \cap \phi(U_2)$. Then, the map:
+\[\left ( \phi_1^{-1} \circ \phi_2 \right) \colon \phi_2^{-1}(\omega) \rightarrow \phi_1^{-1}(\omega)\]
+is a diffeomorphism (by definition of manifold). Since $x^1 \not = 0$, there exists a neighbourhood $U$ of $q$ such that $U \subset \phi_2^{-1}(\omega)$ and such that $U$ does not intersect with:
+\[\left \{ (x^1, \ldots , x^n ) \in H^n \, | \, x^1= 0 \right \}\]
+The restriction of $\phi_1^{-1} \circ \phi_2$ to $U$ gives a differentiable map $U \rightarrow H^n$ such that $\det(\phi_1^{-1} \circ \phi_2)_* \not = 0$ (invertible map). Thus, $(\phi_1^{-1} \circ \phi_2)(V)$ contains points which are not in $H^n$ for some choice of $V \ni q$. But then it can't be a parametrization (contradiction!).
+\end{proof}
 
 \begin{definition} [Orientable manifold]
   $M$ is orientable if there exists an atlas $\mathcal{A} = \{\phi_{\alpha}, U_{\alpha}\}$ such that for each pair $\alpha, \beta$ with $\phi_{\alpha}(U_{\alpha}) \cap \phi_{\beta}(U_{\beta}) \not = \emptyset$, the differential
@@ -2027,6 +2478,7 @@ When is a point on the boundary of a manifold?
 \end{definition}
 
 \begin{proposition}
+$ $
   \begin{itemize}
     \item The boundary $\partial M$ of a $n$-dimensional differentiable manifold with boundary is a $(n-1)$-dimensional differentiable manifold. %with boundary?check
     \item The orientation on $M$ induces an orientation on $\partial M$
@@ -2039,143 +2491,18 @@ When is a point on the boundary of a manifold?
     \int\limits_M d \omega = \int\limits_{\partial M} i^* \omega
   \end{equation}
 \end{theorem}
+\begin{proof}[Idea of the proof]
+First, we prove the theorem for a rectangle and then, for a generic set, we fill the set with rectangles.
+\end{proof}
 
-\section[Abstract Manifolds and Topology]{\crule[red!50!white]{0.3cm}{0.4cm}  Abstract Manifolds and Topology}
+\section[Abstract Manifolds]{\crule[red!50!white]{0.3cm}{0.4cm}  Abstract Manifolds}
 \begin{remarkbox}\begin{remark}[Non-Example of a manifold]
 The set $$M= (-\infty, 0) \cup (0, \infty) \cup \{a, b\}$$ (endowed with a particular topology that we will see later) is not a manifold. Here, $a, b$ are just two points (not necessary real numbers): just imagine $M$ as a subset of $\rfield^2$, consisting of a real line without the origin plus any two points in $\rfield^2$. Even if we have not defined a topology on $M$, we can feel that it doesn't look right: there are two maps $\varphi_a, \varphi_b$ identifying the subsets $U_a = M \setminus \{b\}$ and $U_b = M \setminus \{a\}$ with $\rfield$ (we are just calling the 0 element in other way). The transition function
 $$\varphi_b \circ \varphi_a^{-1} \colon \varphi(U_a \cap U_b) = \rfield \setminus \{0\} \rightarrow \varphi_b(U_b \cap U_a) = \rfield \setminus \{0\}$$
 is the identity, and is smooth. \textbf{But}  a smooth function on $M$ must have the same value when evaluated at $a$ and $b$, and this does not look right (why?).
 \end{remark}\end{remarkbox}
 
-\begin{definition}[Topology] \label{top}
-A topology on a set $M$ is a subset $\mathcal{O} \subset \mathcal{P}(M)$, where $\mathcal{P}(M)$ is the power set of $M$, such that:
-\begin{enumerate}
-	\item $\emptyset, M \in \mathcal{O}$
-	\item $\mathcal{O}$ is closed under arbitrary unions: $U_i \in \mathcal{O}, i \in I$, then $\cup_{i \in I} U_i \in \mathcal{O}$
-	\item $\mathcal{O}$ is closed under finite intersections: $U_1, \ldots, U_k \in \mathcal{O}$, then $U_1 \cap \ldots \cap U_k \in \mathcal{O}$.
-\end{enumerate}
-Sets in $\mathcal{O}$ are called open, $A \subset M$ is closed if $M \setminus A$ is open. A subset $V \subset M$ containing $p$ is a neighbourhood of $p$ if there is an open set $U \subset V$ containing $p$.
-\end{definition}
 
-\begin{remarkbox}\begin{remark}
-From the definition above we can see that $M$ and $\emptyset$ are always both open and closed sets. Notice that a set in a topological space can be: \begin{itemize}
-\item both open and closed
-\item neither open nor closed
-\item open but not closed
-\item closed but not open
-\end{itemize}
-(more examples later).
-\end{remark}\end{remarkbox}
-
-\begin{definition}[Closure, interior]
-Let $V \subset M$, let $\mathcal{O}$ be an arbitrary topology. The closure $\bar V $ of $V$ is the smallest closed subset of $M$ containing $V$. The interior $\mathring V$ of $V$ is the largest open subset contained in $V$.
-\end{definition} %TODO: existence
-
-\begin{definition}[Continuous function, homeomorphism] \label{topcontinuity}
-A map $f \colon X \rightarrow Y$ between topological spaces is continuous if $f^{-1}(U) \in \mathcal{O}_X$ for all $U \in \mathcal{O}_Y$ (i.e. if the pre-image of an open set through $f$ is still an open set). $f$ is a homeomorphism if it is bijective, continuous and $f^{-1}$ is continuous.
-\end{definition}
-
-\begin{remarkbox}\begin{remark}[Continuous maps vs. open maps]
-Requiring that the pre-image of an open set is open is different from requiring that the image of an open set is open! If $f$ brings open sets to open sets, it is called open map (and it might not be continuous).
-\end{remark}\end{remarkbox}
-
-\begin{tcolorbox}\begin{example} \label{topexamples}
-Given a set $M$, we can always consider two simple topologies on it:
-\begin{enumerate}
-	\item $\mathcal{O}_M =  \mathcal{P}(M)$ is a topology, where $\mathcal{P}(M)$ is the power set of $M$ (i.e. the family of all subsets of $M$). Everything is open in $M$, so it is easy to see that any function going from $(M, \mathcal{O}_M)$ to any space $(Y, \mathcal{O}_Y)$ must be continuous.
-	\item $\mathcal{O}_M=\{\emptyset, M\}$ is a topology: the open sets are just the two ones required by the definition \ref{top}. In this case, every function going from any space $(Y, \mathcal{O}_Y)$ to $(M, \mathcal{O}_M)$ must be continuous (the pre-image of the empty set is the empty set, and the pre-image of $M$ is $Y$).
-\end{enumerate}
-What is more, we can consider topologies on metric spaces: if $(M, d)$ is a metric space and $B_{\varepsilon}(x)$ denotes the ball of radius $\varepsilon$ around $x$, then
-$$\mathcal{O}_d = \{U \subset M \, | \, \forall\, x \in U \, \exists\, \varepsilon > 0 \colon B_{\varepsilon}(x) \subset U \}$$
-defines a topology. In particular, we say that the topology is induced by a metric if the open sets are the open balls of the metric space. If $X, Y$ are metric spaces, the definition of continuity seen in the Analysis courses is: $f \colon (X, \mathcal{O}_X) \rightarrow (Y, \mathcal{O}_Y)$ is continuous if and only if $\forall \, x \in X, \forall \, \varepsilon > 0, \exists \, \delta > 0$ such that $f\left(B_{\delta}(x)\right) \subset B_{\varepsilon}\left(f(x)\right)$. One can show that in metric spaces such a definition is equivalent to definition \ref{topcontinuity}.
-\end{example}\end{tcolorbox}
-
-\begin{remarkbox}\begin{remark}
-If $\mathcal{O}_1, \mathcal{O}_2$ are topologies on $M$, then the intersection of the two topologies is again a topology. Therefore, given a family of subsets of $M$ one can ask for the smallest topology on $M$ which contains a subset.
-\end{remark}\end{remarkbox}
-
-\begin{definition}[Hausdorff]
-A topological space $(M, \mathcal{O})$ is Hausdorff if for all $p, q \in M$ there is a pair of open sets $p \in U_p, q \in U_q$ so that $U_p \cap U_q = \emptyset$.
-\end{definition}
-
-\begin{remarkbox}\begin{remark}
-Points in Hausdorff spaces are closed sets. i.e. if $M$ is Hausdorff and $x \in X$, $\{x\}$ is a closed set. In order to see that, we just need to prove that $M \setminus \{x\}$ is open. Let's suppose $M \setminus \{x\} \not = \emptyset$ (otherwise we are done, since $M = \{x\}$ and $M$ is both closed and open). Then we can find another point $y \in M \setminus \{x\}$. Since $M$ is Hausdorff, we can find two open sets $U_x, U_y$ containing $x$ and $y$ respectively, such that $U_x \cap U_y = \emptyset$. The proof is over if we prove that $M \setminus \{x\} = \cup_{y \in M \setminus \{x\}} U_y$, since it implies that $M \setminus \{x\}$ is open (arbitrary union of open sets is open), and then $\{x\}$ is closed. It is true because:
-\begin{itemize}
-\item "$M \setminus \{x\} \subseteq  \cup_{y \in M \setminus \{x\}} U_y$": for each point $z$ in $M$ different from $x$, there exists an open set $U_z$ entirely contained in $M \setminus \{x\}$ by Hausdorff assumption. The point is contained in a set which is contained in $\cup_{y \in M \setminus \{x\}} U_y$ so, in particular, the point is in $\cup_{y \in M \setminus \{x\}} U_y$.
-\item "$M \setminus \{x\} \supseteq \cup_{y \in M \setminus \{x\}} U_y$": if $z \in \cup_{y \in M \setminus \{x\}} U_y$, then $z \not = x$, otherwise there would be an intersection between an open set $U_{\bar x}$ for a fixed $\bar x$ and every open set containing $x$. This is impossible because by Hausdorff assumption there exists at least one open sets of those which does not intersect $U_{\bar x}$.
-\end{itemize}
-
-Moreover:
-\begin{itemize}
-	\item $(M, \mathcal{P}(M))$ is always Hausdorff (there are "so many" open sets that you can always find two of them containing the right points and so that they do not intersect each other).
-	\item If the topology is induced by a metric, then the topological space is Hausdorff (for instance, $\rfield^n$ with the topology induced by Euclidean metric is a Hausdorff topological space).
-\end{itemize}
-\end{remark}\end{remarkbox}
-
-\begin{definition}[Product topology]
-Let $(M_i, \mathcal{O}_i), i \in I$ be topological spaces. Then the product topology on $\prod_{i \in I} M_i$ is the smallest topology such that all projections
-$$
-\prod_{i \in I} M_i \rightarrow M_j
-$$
-are continuous maps for all $j \in I$.
-\end{definition}
-
-\begin{definition}[Quotient topology]
-Let $(M, \mathcal{O}_M)$ be a topological space and $\sim$ an equivalence relation on $M$. Then the quotient topology on $\faktor{M}{\sim}$ is the largest topology so that the function
-\begin{align*}
-\pi \colon M &\rightarrow \faktor{M}{\sim} \\
-x &\mapsto [x]
-\end{align*}
-is continuous. $\pi$ is also called canonical projection.
-\end{definition}
-
-\begin{remarkbox}\begin{remark}[Quotient topology pt. 2]
-We can also use another useful characterization of the quotient topology: a set $U \subset \faktor{M}{\sim}$ is open if and only if $\pi^{-1}(U) \in \mathcal{O}_M$. It is easy to prove that this definition is equivalent to the one above. Let's call $(1)$ the first definition and $(2)$ the last one.
-\begin{itemize}
-\item "$(1) \Rightarrow (2)$": $U$ open in the quotient topology, then $\pi^{-1}(U)$ is open in $M$ by (1), because $\pi$ is a continuous map. If $\pi^{-1}(U)$ is open in $M$, then $U$ is open in $\faktor{M}{\sim}$ because in $(1)$ we have defined the topology on $\faktor{M}{\sim}$ as the \textit{largest} topology such that $\pi$ is continuous!
-\item "$(2) \Rightarrow (1)$: $\pi$ is obviously continuous. And the topology we get is the \textit{largest} one such that $\pi$ is continuous because if $\pi^{-1}(U)$ is not open in $M$, then $U$ is not open in the quotient space (read also below).
-\end{itemize}
-\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that it exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. In the $"(1) \Rightarrow (2)"$ above it was true because in $Y$ we had the largest topology such that $f\colon X \rightarrow Y$ was continuous. It means that the topology on $Y$ had the same open sets of the "power set topology" (i.e. everything is open, cf. remark \ref{topexamples}) except for some sets. Which sets did we remove? We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
-\end{remark}\end{remarkbox}
-
-\begin{tcolorbox}\begin{example}[Cofinite topology]
-Let $M$ be a set. We define the following topology: the open sets are $\emptyset$ and the sets $U \not = \emptyset, U \subset M$ such that their complement in $M$ is finite. Another way to define the same topology is using closed sets: the only closed sets in this topology are $M$ and the finite sets. This topology is called cofinite topology.
-$M$ with this topology is not Hausdorff if $M$ is an infinite set.
-Why? Because \footnote{the proof is easier to follow if you think of $M$ with cofinite topology as $\rfield$ endowed with cofinite topology}: given $x, y$ in $M, x \not = y$, if $U_a$ and $U_b$ are open sets that contain $a$ and $b$ respectively, the complements of $U_a$ and $U_b$ must be finite (so, $U_a$ and $U_b$ must be infinite, because the bigger space $M$ is infinite).
-But then $U_a \cap U_b \not = \emptyset$. Indeed, the complement of $U_a$ in $M$ is $M \setminus U_a$ and it must be finite because $U_a$ is open.
-If we assume $U_a \cap U_b = \emptyset$, then $U_b$ must be contained in the complement of $U_a$. But then $U_b$ (which is an infinite set, because it is open) would be contained in $M \setminus U_a$ (which is a finite set). Contradiction!
-\end{example}\end{tcolorbox}
-
-\begin{lemma}
-A subspace of a Hausdorff space is Hausdorff.
-\end{lemma}
-
-\begin{tcolorbox}\begin{example}[Subspace topology]
-Let $(M, \mathcal{O}_M)$ be a topological space and $N \subset M$ a subset. Then a natural topology for $N$ is the subspace (or subset) topology, defined in the following way. The subspace topology is the smallest topology so that the inclusion map $N \rightarrow M$ is continuous, i.e. $V \subset N$ is open if and only if there is an open set $U \subset M$ such that $U \cap N = V$.
-
-For instance, you may know that $[0, 1)$ is neither open nor closed in $\rfield$ with Euclidean topology (i.e. the topology induced by the standard metric). Actually, it is an open set in $([0, 2], \mathcal{O})$, where $\mathcal{O}$ is the subset topology (with respect to $(\rfield, \mathcal{O}_d)$, where $\mathcal{O}_d$ is the Euclidean topology). Indeed $$[0, 1) = (-1, 1) \cap [0, 2] $$
-You should always pay attention to the topology and to where it is defined, for instance $[0, 1]$ is closed (but not open) in $(\rfield, \mathcal{O}_d)$, whereas it is both open and closed in $([0, 1], \mathcal{O})$, for any topology $\mathcal{O}$.
-\end{example}\end{tcolorbox}
-
-\begin{definition}[subbasis]
-Let $M$ be a set and $B \subset \mathcal{P}(M)$ some collection of subsets. Let $\mathcal{O}_B$ be the smallest topology containing $B$, then we say that $B$ is a subbasis of $\mathcal{O}_B$.
-\end{definition}
-
-\begin{definition}[Basis]
-Let $(M, \mathcal{O})$ be a topological space and $\mathcal{B} \subset \mathcal{O}$. Then $\mathcal{B}$ is a basis for $\mathcal{O}$ if every open set is a union of sets in $\mathcal{B}$.
-\end{definition}
-
-\begin{definition}[Second countability]
-Let $(M, \mathcal{O}_M)$ be a topological space. Then $(M, \mathcal{O}_M)$ is second countable if it admits a countable basis.
-\end{definition}
-
-\begin{tcolorbox}\begin{example}
-Let $\mathcal{B} = \{B_{\varepsilon}(x) \, | \, \varepsilon \in \mathbb{Q}, x \in \mathbb{Q}^n \}$. This is a basis of the metric topology of $\rfield^n$ (and it is a countable set, because we used the density of $\mathbb{Q}$ in $\rfield$).
-\end{example}\end{tcolorbox}
-
-\begin{lemma}
-If $A \subset M$ and $M$ has a countable basis, then the subspace topology on $A$ has a countable basis.
-\end{lemma}
 
 \begin{definition}[Manifold]
 A manifold $M$ of dimension $n$ is a topological space which is Hausdorff, second countable and admits an (equivalence class of) atlas(es) $\varphi_i \colon U_i \rightarrow V_i$, where the 
@@ -2191,65 +2518,6 @@ We require the hypothesis of second countability for manifolds in order to apply
 Manifolds are metrizable, i.e. there exists a metric $d$ such that the topology on the manifold is the one induced by $d$.
 \end{fact}
 
-\begin{definition}[Cover]
-Let $J$ be a set of indices, either finite or infinite. A family of sets $\{U_i\}_{i \in J}$ is a cover for a topological space $X$ if $\cup_i U_i = X$ (the sets "cover" the entire space). It is an open cover if the $U_i$ are open sets in the topopolgy of $X$. A subcover is a subfamily of the initial cover which is still a cover.
-\end{definition}
-
-\begin{definition} [Compact space]
-A topological space $X$ is compact if every open cover $\{U_i\}_{i \in J}$ admits a finite subcover $\{U_i\}_{i=1}^k$.
-\end{definition}
-
-\begin{tcolorbox}
-\begin{example}
-If $(X, d)$ is a metric space and is compact, then $X$ is bounded (i.e. contained in a ball). Indeed: $U_i = B_i(x) = \{y \in X\, |\, d(x, y) < i\}$ is an open set. And for a fixed $x \in X$, $\cup_i U_i$ is an open cover: $\cup_{i \in \mathbb{N}} U_i = X$. Since the space is compact $\Rightarrow U_{i_1} \cup \ldots \cup U_{i_k} = X$ for some indices $i_1, \ldots, i_k$. These indices are the radii of the balls. Take $c = 2 \max\{i_1, \ldots, i_k\}$, then we have that $d(x, y) < c \, \forall\, y, \in X$, i.e. $X$ is bounded because it is contained in the ball $B_c(x)$.
-\end{example}
-\end{tcolorbox}
-
-\begin{theorem}[Heine-Borel]
-A subset of $\rfield^n$ is compact if and only if it is closed and bounded.
-\end{theorem}
-
-\begin{corollary} [Weierstrass]
-Let $X$ be a compact space, $f \colon X \rightarrow \rfield$ continuous, then $f$ attains its maximum (and minimum) in $X$.
-\end{corollary}
-
-\begin{lemma}[Closed in a compact] \label{closedincomp}
-$X$ is a compact topological space, $A \subset X$ closed $\Rightarrow A$ is compact (in subspace topology). 
-\end{lemma}
-\begin{proof}
-Let $\{U_i\}_{i \in I}$ be an open cover of $A$. There are open sets $V_i \subset X$ with $V_i \cap A = U_i$ by definition of open sets in the subspace topology. Moreover, $V_A \equiv X \setminus A$ is open because $A$ is closed. Since $\{U_i\}_{i \in I}$ is an open cover of $A$, we have that $\{U_i\}_{i \in I}$ and $V_A$ form an open cover of $X$. Since $X$ is compact, there is a finite number of indices $i_1, \ldots, i_k \in I$ such that $V_{i_1}, \ldots, V_{i_k}, V_A$ cover $X$. Since $V_A = X \setminus A$, it follows that the sets $V_{i_1}, \ldots V_{i_k}$ cover $A$. Since $U_i = V_i \cap A$, also $U_{i_1}, \ldots, U_{i_k}$ cover $A$. Then $A$ is compact because we proved that every open cover admits a finite subcover.
-\end{proof}
-
-\begin{lemma} [Cont. functions map compact sets to compact sets] \label{contcomp}
-If $A$ is compact and $f \colon A \rightarrow Y$ is continuous, then $f(A)$ is compact.
-\end{lemma}
-\begin{proof}
-Let $\{U_i\}_{i \in I}$ be an open cover of $f(A)$. Then $\exists\,  \{V_i\}_{i \in I}, V_i \subset Y$ open, so that $U_i = V_i \cap f(A)$ (by definition of open sets in subspace topology). Since $f$ is continuous, $f^{-1}(V) \subset A$ is open, and $f^{-1}(V)$ covers $A$. Since $A$ is compact, there exist $i_1, \ldots, i_k$ such that $f^{-1}(V_{i_1}), \ldots, f^{-1}(V_{i_k})$ still cover $A$. Thus, $V_{i_1},\ldots, V_{i_k}$ is a collection of open sets in $Y$ covering $f(A)$. In the subspace toplogy, $U_{i_1} = V_{i_1} \cap f(A), \ldots, U_{i_k} = V_{i_k} \cap f(A)$ cover $f(A)$.
-\end{proof}
-
-\begin{lemma}[Compact set in a Hausdorff] \label{compinhauss}
-Let $X$ be Hausdorff. Let $A \subset X$. Assume $A$ is compact. Then $A$ is closed.
-\end{lemma}
-\begin{proof}
-Let $x \in X \setminus A$. For every $a \in A$, there are $U_a \subset X, V_x(a) \subset X$ open sets such that $U_a \cap V_x(a) = \emptyset$ (because of the Hausdorff hypothesis). Here, w used the notation $V_x(a)$ to stress out the dependence of $V$ on $x$ and $a$. The sets $\{U_a \cap A\}_{a \in A}$ are form an open cover of $A$. Since $A$ is compact, there are finitely many $a_1, \ldots a_k$ so that $U_{a_1} \cap A, \ldots, U_{a_k} \cap A$ cover $A$. Now, $V_x = V_x(a_1) \cap \ldots \cap V_x(a_k)$ contains $x$ and it is open. Moreover, $V_x \,\cap A = \emptyset$ because $V_x$ is disjoint from each $U_{a_i} \Rightarrow X \setminus A$ is open, becuase for each point we can find an open set that contains the point and that is contained in $X \setminus A$.
-\end{proof}
-
-\begin{theorem} [How to get a homeomorphism]
-Let $f \colon X \rightarrow Y$ be a continuous function, $X$ compact, $Y$ Hausdorff and $f$ bijective. Then $f$ is a homeomorphism.
-\end{theorem}
-\begin{proof}
-The only thing which is left to prove is that $f^{-1}$ is a continuous function. First, we notice that an equivalent definition of continuous function is: "$f \colon X \rightarrow Y$ is continuous $\Leftrightarrow f^{-1}(C)$ is closed $\forall \, $ closed set $C \subset Y$". In order to prove that $f^{-1}$ is continuous, we need to show that $f(C) \subset Y$ is closed for all $C \subset X$ closed. This is true because: $C$ closed in $X \Rightarrow C$ compact because of lemma \ref{closedincomp} $\Rightarrow f(C)$ is compact in $Y$ because of lemma \ref{contcomp} $\Rightarrow f(C)$ is closed, using the lemma \ref{compinhauss}.
-\end{proof}
-
-\begin{remarkbox}
-\begin{remark}
-We can consider the concept of sequential compactness: $X$ is sequentially compact if every sequence in $X$ contians a convergent subsequence in $X$. In general, $X$ compact $\not \Rightarrow X$ sequentially compact. But, $X$ compact $+$ first countable $\Rightarrow X$ sequentially compact. Here, $X$ is first countable if $\forall\, x \in X\, \exists \,  N_1, N_2, \ldots, N_i$ (where $i \in I, I $) countable collection of neighbourhoods of $x$ such that every neighbourhood contains one of the $N_i$. Notice that manifolds are first countable! (CHECK)
-\end{remark}
-\end{remarkbox}
-
-\begin{definition}[Compact exhaustion]
-Let $X$ be a topological space. A compact exhaustion $\{K_i\}_{i \in \mathbb{N}}$ of $X$ is a countable collection of compact sets $K$ so that $\bar K_i \subset \mathring K_{i+1}$
-\end{definition}
 
 \begin{theorem}
 A manifold admits a compact exhaustion.
@@ -2258,9 +2526,6 @@ A manifold admits a compact exhaustion.
 The proof uses the second countability. We will skip it.
 \end{proof}
 
-\begin{definition}[Paracompactness] \label{paracompactness}
-A topological space is paracompact if  every open cover admits a locally finite refinement. i.e. if $\{U_i\}_{i \in I}$ is an open cover of $X$, there is another open cover $\{V_j\}_{j \in J}$ of $X$ such that $V_j \subset U_i(j)$ (refinement) and every point $x$ has a neighbourhood $V_x$ such that $V_x$ intersects only a finite number of $V_j$ (locally finite).
-\end{definition}
 
 \begin{theorem} \label{paracompactnessthm}
 Manifolds are paracompact.
@@ -2269,29 +2534,12 @@ Manifolds are paracompact.
 The proof uses the second countability property. We will skip it here.
 \end{proof}
 
-\begin{definition}[Partition of unity]
-A partition of unity subordinate to an open cover $\{U_i\}_{i \in I}$ of $X$ is a collection of continuous functions $f_j \colon X \rightarrow [0, 1]$ such that $\forall \, x \exists \, V_x \ni x, V_x$ neighbourhood of $x$ so that the support $\supp(f_j) = \overline{f_j^{-1}((0, 1])}$ is contained in one of the $U_i$, and $V_x$ intersects only finitely many $\supp(f_j)$, and
-$$\sum\limits_{j \in J}f_j(x) \equiv 1$$
-\end{definition}
+
 
 \begin{theorem}
 Every open cover of a manifold admits a subordinate partition of unity which is smooth.
 \end{theorem}
 
-\begin{definition}[Connected space]\label{connspace}
-A topological space $X$ is connected if it cannot be written as union of two non-empty, disjoint open sets.
-\end{definition}
-
-\begin{remarkbox}
-\begin{remark}[Equivalent definitions of connected space]
-Sometimes it is useful to consider equivalent definitions of connection: a topological space $X$ is connected if:
-\begin{itemize}
-\item It cannot be written as union of two non-empty, disjoint closed sets,
-\item $X = A \cup B$ with $A, B$ disjoint and open sets implies that $A= \emptyset$ or $B = \emptyset$,
-\item The only sets in $X$ that can be both open and closed are $X$ and $\emptyset$.
-\end{itemize}
-\end{remark}
-\end{remarkbox}
 
 
 \begin{definition}[Smooth function from a manifold]
@@ -2930,7 +3178,7 @@ $M$ connected manifold, then any two bump forms are cohomologous (on $M$) up to 
 \end{proposition}
 \begin{proof}
 Let's consider two bump forms $\omega, \omega'$, compactly supported on $(U, \varphi), (U', \varphi')$, respectively. If $(U, \varphi) = (U', \varphi')$, then we have that $\int_U \omega = \int_U \omega'$ up to a sign (by definition \ref{bumpform}). Then, by the previous remark \ref{bumpremark} we have that $\omega$ and $\omega'$ are cohomologous up to a sign. On the other hand, if $(U, \varphi) \not = (U', \varphi')$, we do in the following way: since $M$ is a connected manifold, it is also path-connected (see problem set 12, ex. 1.(e)). Thus, we can find a path between $U$ and $U'$, and we can cover it with open sets $U_1, U_2, \ldots$.
-\begin{figure}[h] \label{Fig:bumpforms1}
+\begin{figure}[H] \label{Fig:bumpforms1}
      \centering
      \includegraphics[width=0.8\textwidth]{Images/bumpforms1.pdf} 
      \caption{We can cover the path between $U$ and $U'$}      
@@ -2975,7 +3223,7 @@ Let $M$ be a connected, compact, orientable manifold with $\partial M \not = \em
 \end{theorem}
 \begin{proof}
 It suffices to find a bump form which is cohomologous to zero in $M$. Once we find it, we have the thesis because $M$ is connected, so any other bump form in the manifold is zero by proposition \ref{prop2bumpforms}. Also, by lemma \ref{lemmalocfinite}, every $n$-form is cohomologous to a locally finite sum of zero-forms, i.e. it is a zero form and we would have the thesis.
-\begin{figure}[h] \label{Fig:bumpforms2}
+\begin{figure}[H] \label{Fig:bumpforms2}
      \centering
      \includegraphics[width=0.8\textwidth]{Images/bumpforms2.pdf} 
      \caption{We can find a bump form cohomologous to a zero form}      
@@ -2994,7 +3242,7 @@ Let $M$ be a connected but not orientable manifold of dimension $n$. Then: $H^n(
 \end{theorem}
 \begin{proof}
 Let's cover $M$ by an atlas $(U_i, \varphi_i), \varphi_i \colon U_i \rightarrow \varphi_i(U_i) = \rfield^n$ (we choose the atlas such that $\varphi(U_i) = \rfield^n$). Let's consider an open set $U_0$.
-\begin{figure}[h] \label{Fig:bumpforms3}
+\begin{figure}[H] \label{Fig:bumpforms3}
      \centering
      \includegraphics[width=0.8\textwidth]{Images/bumpforms3.pdf} 
      \caption{We can consider two paths connecting $U_0$ and $U_i$}      
@@ -3024,7 +3272,7 @@ By contradiction: let's assume $f$ has no fixed point. Then we consider the map
 x &\mapsto \substack{\text{unique intersection with }S^{n-1} \\ \text{ of the ray passing through }x \text{ and } f(x)}
 \end{align*}
 $F$ is a smooth function: we will not verify it because it is not interesting for the proof. Moreover, we notice that if $y \in \partial \overline{B_1(0)} \Rightarrow F(y) = y$.
-\begin{figure}[h] \label{Fig:ball10}
+\begin{figure}[H] \label{Fig:ball10}
      \centering
      \includegraphics[width=0.3\textwidth]{Images/B_10.pdf} 
      \caption{$F$ sends every point of the ball on its border}      
@@ -3051,6 +3299,356 @@ Let $f \colon M \rightarrow  N$ be smooth, $N, M$ closed manifolds (see def.  \r
 The definition \ref{degreemap} does not depend on the $\omega$ chosen: if $\omega_1, \omega_2$ are $n$-forms with the same integral, by remark \ref{bumpremark} they are cohomologous, i.e. they differ by an exact form $d\eta$. Then we can write $\omega_1 = \omega_2 + d\eta$ and we get the same degree by using the naturality of the pullback ($f^* d \eta = d f^* \eta$) and Stokes's theorem. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
 \end{remark}\end{remarkbox}
 
+\begin{tcolorbox}
+\begin{example} \label{degreeexample}
+$ $
+\begin{itemize}
+\item $\deg(\id_M) = 1$,
+\item $\deg($constant map$)=0$, because the definition of pullback uses the pushforward: $f^* \omega = \omega (f_*, \ldots)$
+\item If $M, N$ are closed, orientable and of the same dimensions, from the previous two points we know that the identity map cannot be homotopy equivalent to a constant map.
+\item If $M=N=S^1$, let's consider
+\begin{align*}
+f_k \colon S^1 &\rightarrow S^1 \subset \mathbb{C} \\
+e^{i \varphi} = z &\mapsto z^k
+\end{align*}
+Then we have $\deg(f_k) = k$, indeed we can consider $\omega = d\varphi, \varphi$ angular coordinate on $S^1$ (cf. example \ref{angexample}). We stress out that $d\varphi$ is not exact (it is just a bad notation) because $\varphi$ is not a well defined function (it is well defined up to a $2\pi$ angle). Then, we have:
+$$\int_{S^1} \omega = 2\pi, \quad \int_{S^1} f_k^* d\varphi = \int_{S^1} k \,d\varphi = 2\pi k \, \Rightarrow \,  \deg(f_k)=k$$
+where we used: $(f^* \omega)(\alpha) = \omega(f_* \alpha) = k \,\omega(\alpha) = k \,d\varphi$.
+\item For the next theorem, we introduce the concept of critical value and regular value of a function $f$. A critical value is the image of a critical point. A point $p$ is a regular value for $f$ if $D_q f$ is a surjective map for every $q \in f^{-1}(p)$: in a simpler way, $p$ is a regular value if it is not a critical value.
+\end{itemize}
+\end{example}
+\end{tcolorbox}
+
+\begin{theorem}
+For all $f \colon M \rightarrow N$, in the hypothesis of def. \ref{degreemap}, the degree of $f$ is an integer. In particular, it is the signed count of preimages of a regular value.
+\end{theorem}
+\begin{proof}
+Let consider a regular value $p\in N$ of $f$. $p$ exists thanks to \href{https://en.wikipedia.org/wiki/Sard's_theorem}{Sard's theorem}. Sard's theorem states that the set of the critical values of a smooth function $f$ from a manifold to another is a null-measure set. We can apply this theorem to our case (and whenever $f$ is not smooth we can approximate it by smooth functions if it is at least continuous). Indeed, if the set of critical values has zero measure, its complementary set (the regular values) has dimension $n$.
+In particular, $f^{-1}(q)$ is a submanifold of dimension 0 or, analogously, a submanifold of codimension $n$ (not proved). So, $f^{-1}(p)$ consists of a finite collection of points $q_1, \ldots, q_m$. By the inverse function theorem, there exists a neighbourhood $U_i$ of $q_i \in f^{-1}(p)$ such that $\restrict{f}{U_i}$ is a diffeomorphism onto its image. Let $\omega$ be a bump form supported in $\bigcap_i f(U_i) = V$. Then:
+$$\int_M f^* \omega = \sum\limits_i \underbrace{\int_{U_i} f^* \omega}_{\substack{=\pm \int_{f(U_i)} \omega \\ \text{depending} \\ \text{on orientation}}} = \sum\limits_i \left ( \pm \int_V \omega \right )$$ 
+So, the degree is an integer: the signed count of preimages of a regular value. The sign depends on the orientation (i.e. the sign of the determinant of the Jacobian at $p_i, \forall\, i$).
+\end{proof}
+
+\section[Poincarè Duality]{\crule[blue!70!white]{0.3cm}{0.4cm}  Poincarè Duality}
+
+In the last section, we studied the degree of a map. It is not always possible to find a map of non-vanishing degree between manifolds of the same dimension. For instance, every smooth map $S^2 \rightarrow T^2 = S^1 \times S^1$ has degree 0.
+
+\begin{tcolorbox}
+\begin{example}
+Let's consider a smooth map $f \colon S^2 \rightarrow T^2=S^1 \times S^1$.
+\begin{minipage}{\textwidth} \label{Fig:torus}
+\vspace{1em}
+     \centering
+     \includegraphics[width=0.6\textwidth]{Images/torus.pdf} 
+     \captionof{figure}{$f \colon S^2 \rightarrow T^2$}      
+\end{minipage}
+$f$ has degree 0, indeed the pullback $f^*\colon H^2(T^2) \rightarrow H^2(S^2)$ is the zero map. In order to show this, we consider two projection maps, $\pr_1$ and $\pr_2$, defined as follows:
+\begin{center}
+\begin{tikzcd}
+                    & T^2=S^1 \times S^1 \arrow[ld, "\text{pr}_1"'] \arrow[rd, "\text{pr}_2"] &                     \\
+{(S^1, d\varphi_1)} &                                                                         & {(S^1, d\varphi_2)}
+\end{tikzcd}
+\end{center}
+where  $\varphi_i$ are angular functions and $d\varphi_1$ and $d\varphi_2$ are not exact, as already seen in the example \ref{degreeexample}.
+We choose $\omega \equiv (\pr_1^* d \varphi_1) \wedge (\pr_2^* d\varphi_2)$. We have:
+$$\int_{S^1 \times S^1} \omega = \int_{S^1} d\varphi_1 \int_{S^1} d\varphi_2 = 4 \pi^2$$
+Now, 
+$$f^* \omega = \underbrace{\left ( (\pr_1 \circ f)^* d \varphi_1 \right )}_{\text{closed 1-form on }S^2} \wedge \underbrace{\left( \pr_2 \circ f)^* d \varphi_2 \right)}_{\text{also closed}}$$
+ because we used the proposition \ref{pullbackprop}, point 3 and because of the naturality of the pullback. Now, $H^1(S^2)=0$ (not proved, but it can be computed using the Mayer-Vietoris theorem \ref{mvthm}). So, every closed form on $S^2$ is exact. Thus, the two closed 1-forms above are actually exact forms.
+So, $(\pr_1\circ f)^*d\varphi_1 = d g$ and we have that
+$$f^*\omega = dg \wedge \left( (\pr_2 \circ f)^* d \varphi_2 \right)$$ is exact because the product between an exact form  and a closed one is an exact form. Finally:
+$$\int_{S^2} f^* \omega = 0$$
+using Stokes's theorem (we get $\int_{B^3} 0=0$).
+\end{example}
+\end{tcolorbox}
+
+\begin{theorem}
+Let $M$ be a closed, oriented, connected $n$-dimensional manifold. Then, if we consider maps to $S^n$, not only the degree is homotopy invariant but the converse is also true:
+\begin{equation}
+f_0 \sim f_1 \colon M \rightarrow S^n \Leftrightarrow \deg(f_0) = \deg(f_1)
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[Poincarè Duality]
+Let $M$ be an oriented, connected, $n$-dimensional manifold with $\partial M = \emptyset$. We define the map:
+\begin{align}
+\text{PD} \colon H^k(M) \times H^{n-k}_c (M) &\rightarrow \rfield \\
+([\omega], [\eta]) &\mapsto \int_M (\omega \wedge \eta) \nonumber
+\end{align}
+where $[\omega]$ and $[\eta]$ are equivalence classes for different equivalence relations. This map is non-degenerate\footnote{PD is non-degenerate: if $[\omega]$ is non-zero, we can find a $[\eta]$ such that PD$([\omega], [\eta]) \not = 0$.} and establishes a natural isomorphism:
+\begin{align}
+H^k(M) &\cong (H^{n-k}_c(M))^* \\
+(H^k(M))^* &\cong H_c^{n-k}(M)
+\end{align}
+Moreover, if $M$ is closed, then $H^k(M) \cong (H^{n-k}(M))^*$ and these vector spaces have finite dimension.
+\end{theorem}
+\begin{proof}[Idea of the proof]
+The proof is not hard, but it is quite long, under the assumption that exists a finite "good" cover by charts. Here, "good" means that any non-empty intersection of charts is diffeomorphic to a ball. Then, the proof is by induction on the cardinality of a finite good cover. Then, we also need to use the zig-zag lemma for $H^*$ and $H^*_c$ and the so-called 5-lemma.
+\end{proof}
+
+\section[Riemannian Metric and the Hodge-$\star$ Operator]{\crule[red!60!white]{0.3cm}{0.4cm}  Riemannian Metric and the Hodge-$\star$ Operator}
+\begin{definition}[Riemannian metric] \label{riemmetric}
+Let $M$ be a smooth manifold. A Riemannian metric is a map
+\begin{equation}
+g \colon \restrict{(TM \times TM)}{\Delta} \rightarrow \rfield
+\end{equation}
+fiberwise bilinear, symmetric and positive definite. Here, $\Delta=\{(x, x) \, | \, x \in M\} \subset M \times M$ is the diagonal set\footnote{$\Delta$ is a submanifold of $M \times M$ and it is diffeomorphic to $M$.} of $M$.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+Let's analyze the definition \ref{riemmetric}. The term "fiber" denotes the preimage of a point. The restriction of the metric $g$ to $\Delta$ means that the first and the second arguments of the map $g$ are in the same space $T_x M$, for some $x \in M$. Moreover, we can generalize the definition to consider metrics with the same hypotheses, but which are not positive definite and non-degenerate: this how a Lorentzian metric is defined.
+\end{remark}\end{remarkbox}
+
+\begin{theorem}
+Every smooth manifold admits a Riemannian metric,
+\end{theorem}
+\begin{proof}
+Let's cover $M$ with charts $(U_i, \varphi_i)$ and pick a subordinate partition of unity $\phi_j \colon V_j \subset U_{i(\ldots)}\rightarrow \rfield$. We can do that because our manifold is second-countable and paracompact (the latter one is actually a necessary hypothesis). On each set $V_j$ there is a metric $g_j$ coming from the coordinates. Then, $g = \sum\limits_j \lambda_j g_j$ is a Riemannian metric (easy to verify). The key point is that a convex combination of positive definite is still positive definite).
+\end{proof}
+
+\begin{remarkbox}\begin{remark}[Counter-example for Lorentzian metric]
+It is not true that every manifold admits a Lorentzian metric. For instance, $S^{2n}$ does not.
+\end{remark}\end{remarkbox}
+
+A Riemannian metric assigns lengths to vectors, angles between vectors...we want to extend this (or, analogously, a Lorentzian metric) to alternating forms.
+\begin{remarkbox}\begin{remark} \label{genmetricrem}
+A Riemannian metric provides an isomorphism:
+\begin{align*}
+\musFlat \colon T_p M &\rightarrow (T_p M)^* \\
+v &\mapsto (\omega \mapsto g(v, w))
+\end{align*}
+And the inverse is the map $\musSharp \equiv \musFlat^{-1}$. To extend the metric from $T_p^* M$ to $\Lambda^kT_p^* M \equiv \text{Alt}^k T_p^* M$ we observe that there exists an isomorphism:
+\begin{align*}
+\text{Alt}^k(T_p^*M) & \overset{\sim}{\longrightarrow} (\text{Alt}^k(T_p M))^* \\
+\varphi &\longmapsto \tilde{\varphi} (x^1 \wedge \ldots \wedge x^k) = \varphi(x_1, \ldots x_k)
+\end{align*}
+It is an isomorphism and it is also canonical. It means that it lets us define a Lorentzian metric on forms. In particular, if $e_1, \ldots, e_n$ is an orthonormal basis of $T_pM$ and $\delta^1, \ldots, \delta^n$ is the dual basis, then:
+\begin{equation*}
+\langle \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}, \delta^{\lambda_1}\wedge \ldots \wedge \delta^{\lambda_k} \rangle = \begin{cases*}
+0, & if $(\lambda_1, \ldots, \lambda_k) \not = (\mu_1, \ldots, \mu_k)$\\
+\varepsilon_{\lambda_1}\cdots \varepsilon_{\lambda_k}, &if $(\lambda_1, \ldots, \lambda_k) = (\mu_1, \ldots, \mu_k)$ 
+\end{cases*}
+\end{equation*}
+where: $g(\cdot, \cdot) = \langle\cdot, \cdot\rangle$ is the Lorentzian/Riemannian metric defined on forms, $\mu_1 < \ldots < \mu_k$, $\lambda_1 < \ldots < \lambda_k$, and $\varepsilon_{\lambda_i}= \langle e_i, e_i \rangle = \pm1$ (we always have the "$+$" sign for the Riemannian metric, whereas we have some "$-$" sign for a Lorentzian metric). Thus, $\langle \cdot, \cdot \rangle$ for alternating forms is symmetric.
+\end{remark}\end{remarkbox}
+
+\begin{definition}[Volume form]
+If $M$ is an oriented manifold, then a volume form $\omega$ on $T_pM$ is a  differential $n$-form such that:
+\begin{equation}
+\omega(e_1, \ldots, e_n) = 1, \quad \forall\, \{e_1, \ldots, e_n\} \text{ orthonormal basis of }T_pM
+\end{equation}
+\end{definition}
+
+\begin{remarkbox}\begin{remark} \label{diffbasisrem}
+If $e_1', \ldots, e_n'$ is another oriented orthonormal basis, then $\exists$ a $f$ such that:
+\begin{align*}
+f \colon T_pM &\rightarrow T_p M \\
+e_i &\mapsto e_i'
+\end{align*}
+$f$ linear map, orthogonal and positive definite (i.e. $\det f = 1$). Moreover:
+$$\omega(e_1', \ldots e_n') = \omega(f(e_1), \ldots, f(e_n)) = (f^* \omega) (e_1, \ldots, e_n) = ((\det f) \omega)(e_1, \ldots, e_n) =1$$
+where we used the definition of pullback of a linear map: $f^* \omega = \det f \omega$.
+\end{remark}\end{remarkbox}
+We saw how a volume form reacts to an orthonormal basis. How about a general basis?
+
+\begin{lemma}
+Let $f_1, \ldots f_n$ be an oriented basis (not orthonormal) of $T_p M$. Let $\omega$ be a volume form. Then:
+\begin{equation}
+\omega(f_1, \ldots, f_n)=\sqrt{\det g_{ij}}, \qquad g_{ij} \equiv \langle f_i, f_j \rangle 
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $e_1, \ldots, e_n$ be an oriented orthonormal basis and let's consider the map:
+\begin{align*}
+F \colon T_pM &\rightarrow T_p M \\
+e_i &\mapsto f_i
+\end{align*}
+which has positive determinant. With respect to the basis $e_1, \ldots, e_n$, $F$ is represented by the matrix $A=(\alpha_{ij})$, where $\alpha_{ij}$ such that $f_i = \sum \alpha_{ij} e_j$. Now,
+$$\langle f_i, f_j \rangle = \left \langle \sum\limits_l \alpha_{il} e_l, \sum\limits_m \alpha_{jm}e_m \right \rangle = \ldots= \sum\limits_l \alpha_{il}\alpha_{jl} = \left( A^t A \right )_{ij}$$
+Thus,
+\begin{align*}
+\omega(f_1, \ldots, f_n) &= \omega(F(e_1), \ldots, F(e_n)) = (F^* \omega)(e_1, \ldots, e_n)= \det A \, \omega(e_1, \ldots, e_n) =\\
+&= \det A = \sqrt{\det g_{ij}}
+\end{align*}
+where we used again the definition of pullback for linear maps (see remark \ref{diffbasisrem}), the formula $\det(A A^t) = \det(A)^2$, and the fact that $\omega$ is a volume form.
+\end{proof}
+
+\begin{lemma}[Hodge-$\star$ operator]
+Let $V$ be an oriented\footnote{In 3 dimensions, a vector space is "right-oriented" if its basis is oriented according to the right hand. In general dimension there is not such a thing as a preferred orientation. In this case we just want to say that we arbitrarily chose an orientation for our basis.} $\rfield$-(vector space), $\dim V =n$. Let $\langle \cdot, \cdot \rangle$ be a non-degenerate, symmetric bilinear form. Let $\omega$ be the canonical volume form. Then there is a unique linear map
+\begin{equation}
+\star \colon \Lambda^k V^* \rightarrow \Lambda^{n-k}V^* , \qquad \forall\, k=0, 1, \ldots, n
+\end{equation}
+such that:
+$$\langle \eta, \zeta \rangle \omega = \eta \wedge \star \zeta, \qquad \forall \, \eta, \zeta \in \Lambda^k V^*$$
+$\star$ is the Hodge-$\star$ (Hodge star) operator.
+\end{lemma}	
+\begin{proof}
+\begin{description}
+\item[Uniqueness:] Assume $\star, \tilde{\star}$ satisfy the assumption. Then:
+$$\underbrace{\eta}_{\in \Lambda^k V^*} \wedge \underbrace{(\star \zeta - \tilde{\star} \zeta)}_{\Lambda^{n-k} V^*} = 0, \qquad \forall\, \eta, \zeta \in \Lambda^k V^*$$
+If $\star \not = \tilde{\star} \Rightarrow \exists \, \zeta : \, \forall\, \eta, \, \eta \wedge \underbrace{(\star \zeta- \tilde{\star} \zeta)}_{\not = 0} = 0$, but it is easy to find an $\eta$ violating this equality, writing $\star \zeta - \tilde{\star} \zeta \in \Lambda^{n-k} V^*$ in terms of a basis.
+\item[Existence:]   To prove existence, we use an orthonormal basis  $e_1, \ldots, e_n$ of $V$ and the dual basis $\delta^1, \ldots, \delta^n$ of $V^*$. Recall that for $1 \le \mu_1 < \ldots < \mu_k \le n, 1 \le \lambda_1 < \ldots < \lambda_k \le n$, we have (see also remark \ref{genmetricrem}):
+$$\oast = \langle \delta^{\lambda_1} \wedge \ldots \wedge \delta^{\lambda_k}, \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k} \rangle \omega = \begin{cases*}
+\varepsilon_{\mu_1}\cdots \varepsilon_{\mu_k} \omega, &if $(\lambda_1, \ldots, \lambda_k) = (\mu_1, \ldots, \mu_k)$ \\
+0, &otherwise
+\end{cases*}$$
+And in order to have the thesis, we need:
+$$\oast \overset{!}{=} \delta^{\lambda_1} \wedge \ldots \wedge \delta^{\lambda_k} \wedge \star (\delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k})$$
+where the symbol $\overset{!}{=}$ means "must be equal", as usual. It follows that $\star (\delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k})$ is a multiple of $\delta^{\nu_1} \wedge \ldots \wedge \delta^{\nu_{n-k}}$, where $\nu_1, \ldots, \nu_{n-k}$ such that $\{\mu_1, \ldots, \mu_k, \nu_1, \ldots, \nu_{n-k}\} = \{1, \ldots, n\}$ (because we want to get a multiple of $\omega$). More precisely, using the permutations, only one coefficient of $\star (\delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k})$ is non-zero, and it is the one for $(\lambda_1, \ldots, \lambda_k) = (\mu_1, \ldots, \mu_k)$:
+$$\star(\delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}) = \varepsilon_{\mu_1} \cdots \varepsilon_{\mu_k} \sgn  \left (
+\begin{matrix}
+1 \ldots k &k+1 \ldots n \\
+\mu_1 \ldots \mu_k &\nu_1 \ldots \nu_{n-k}
+\end{matrix} \right )
+\delta^{\nu_1} \wedge \ldots \wedge \delta^{\nu_{n-k}}
+$$
+This holds without any assumption on the order of the $\lambda_i$, and it defines $\star$ on a basis. The resulting operator has the desired property: 
+$$\langle \eta, \zeta \rangle \omega = \eta \wedge \star \zeta, \qquad \forall\, \eta, \zeta \in \Lambda^kV^*$$
+\end{description}
+\end{proof}
+
+\begin{remarkbox}\begin{remark}[Properties of $\star$]
+The Hodge-$\star$ operator has the property:
+\begin{equation} \label{starprop}
+\star \star = \varepsilon_1 \cdots \varepsilon_n (-1)^{k(n-k)}, \quad \text{on } \Lambda^k V^*
+\end{equation}
+where $\varepsilon_i = \langle e_i, e_i \rangle = \pm 1$, so $\Index(V) \equiv \varepsilon_1 \cdots \varepsilon_n$ is the number of "$-$" signs that we get. Let's prove the property \eqref{starprop} on a basis:
+\begin{align*}
+& \star \star (\delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}) = \star \left ( \varepsilon_{\mu_1} \cdots \varepsilon_{\mu_k} \sgn \left(
+\begin{matrix}
+1\ldots k &k+1\ldots n \\
+\mu_1\ldots \mu_k & \nu_1 \ldots \nu_{n-k}
+\end{matrix}
+\right)  \delta^{\nu_1} \wedge \ldots \wedge \delta^{\nu_{n-k}}\right) = \\
+&= \underbrace{\varepsilon_{\mu_1} \cdots \varepsilon_{\mu_k} \varepsilon_{\nu_1} \cdots \varepsilon_{\nu_k}}_{=(-1)^{\Index}} \sgn \underbrace{ \left( 
+\begin{matrix}
+1\ldots k &k+1\ldots n \\
+\mu_1\ldots \mu_k & \nu_1 \ldots \nu_{n-k}
+\end{matrix}
+\right)}_{\tau} \sgn \underbrace{ \left( 
+\begin{matrix}
+1\ldots n-k &n-k+1\ldots n \\
+\nu_1 \ldots \nu_{n-k}& \mu_1 \ldots \mu_{k}
+\end{matrix} 
+\right)}_{\sigma} \\
+& \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k} \overset{(1)}{=}  \varepsilon_1 \ldots \varepsilon_n \sgn (\tau) \sgn(\sigma^{-1}) \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k} = \\
+&=  \varepsilon_1 \ldots \varepsilon_n \sgn \underbrace{ \left (
+\begin{matrix}
+1 \ldots k & k+1 \ldots k+n-k \\
+k -n+1 \ldots n & \ \ldots n-k
+\end{matrix} \right)
+}_{\sigma^{-1} \circ \tau} \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}  = \\
+&= \varepsilon_1 \ldots \varepsilon_n (-1)^{k(n-k)} \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}
+\end{align*}
+where we used: (1) $\sgn(\sigma^{-1}) = \sgn(\sigma)$. So, up to a sign, $\star \star$ is an involution. Moreover, up to a sign, $\star$ is an isometry. Indeed:
+$$\star \eta \wedge \star \star \zeta = \langle \star \eta , \star \zeta \rangle \omega = (-1)^{\Index V} \langle \eta, \zeta \rangle \omega$$
+\end{remark}\end{remarkbox}
+
+\begin{lemma}
+Given a symmetric, bilinear, non-degenerate pairing $\langle\cdot, \cdot \rangle$ on a manifold $M$ (oriented, smooth, compact), there is a induced non-degenerate, symmetric, bilinear pairing
+\begin{align}
+\Omega^k(M) \times \Omega^k(M) &\rightarrow \rfield \\
+(\eta, \zeta) &\mapsto \int_M\langle \eta, \zeta \rangle \omega = \int_M (\eta \wedge \star \zeta) \equiv \langle \eta, \zeta \rangle_M \nonumber
+\end{align}
+ \end{lemma}
+ 
+\begin{definition} [Codifferential]
+The map $\delta = (-1)^k \star d \star^{-1} \colon \Omega^{n-k}(M) \rightarrow \Omega^{n-k-1}(M)$ is called codifferential (it decreases the degree of a form).
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+We notice that $\\delta^2 = 0$. Moreover, we want to compare $\star \delta $ and $d \star$. So, let $\zeta \in \Omega^{k+1}(M)$, we compute the following:
+\begin{align*}
+\overbrace{d \underbrace{\star\, \zeta}_{n-k-1}}^{n-k} &\overset{\eqref{starprop}}{=} (-1)^{k(n-k) + \Index(M)} \star \star d \star \zeta \overset{(1)}{=} (-1)^{k(n-k) + \Index(M)} \star \star d \star \star \underbrace{\star^{-1} \zeta}_{n-(k+1)} \overset{\eqref{starprop}}{=} \\
+&=(-1)^{k(n-k) + 2\Index(M) + (n-k-1)(k+1)} \star \star d \star^{-1} \zeta = \ldots = (-1)^k \star \delta \zeta
+\end{align*}
+where we used: (1) $1=\star \star^{-1}$.
+\end{remark}\end{remarkbox}
+
+\begin{lemma}
+\begin{equation}
+d(\eta \wedge \star \zeta) = (d\eta) \wedge \star \zeta + (-1)^{\deg \eta} \eta \wedge d \star \zeta = \ldots = d \eta \wedge \star \zeta + \eta \wedge \star \delta \zeta
+\end{equation}
+where $\eta \in \Omega^k(M), \zeta \in \Omega^{k+1}(M)$. If $M$ is closed, then:
+\begin{equation}
+0 = \int_M d(\eta \wedge \star \zeta) = \langle d \eta, \zeta \rangle_M + \langle \eta, \delta \zeta \rangle_M
+\end{equation}
+Using the notations of mathematical analysis (where an operator $A^*$ is the adjoint of $A$ if $\langle A^*x,  y \rangle = \langle x, Ay \rangle, \forall\, x, y  $ in the domain of $A$ and $A^*$), we say that $-\delta$ is formally the adjoint of $d$.
+\end{lemma}
+
+\begin{remarkbox}\begin{remark}[Notation]
+We will write:
+$$d_k \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M)$$
+$$\delta_k \colon \Omega^{n-k}(M) \rightarrow \Omega^{n-k-1} (M)$$
+Then: 
+$$(-1)^k \delta_k \star = \star \delta_k$$
+and $-\delta_k$ is the formal adjoint of $d_{n-k-1}$ (via $\langle \cdot, \cdot \rangle_M$).  In addition, $(-1)^k \delta_k$ is conjugate to $d_k$ (via $\star$).
+Let's look again at the adjointness condition:
+\begin{equation} \label{adjcondition}
+\oast \quad \langle d_k \eta, \zeta \rangle _m + \langle \eta, \delta_{n-k-1} \zeta \rangle _M = 0
+\end{equation}
+\textbf{Fact}: From $\oast$, it follows that $\ker d_k \subset (\im \delta_{n-k-1})^{\bot}$. Actually, also $\supset$ holds. Furthermore: $\ker \delta_{n-k} = (\im d_{k-1})^{\bot}$.
+For finite-dimensional vector spaces, this would imply:
+\begin{equation}
+\ocdot \quad \Omega^k(M) = (\ker d_k) \oplus (\im \delta_{n-k-1}) = (\ker \delta_{n-k}) \oplus (\im d_{k-1})
+\end{equation}
+Actually, $\ocdot$ holds also for infinite-dimensional spaces, thanks to the following theorem.
+\end{remark}\end{remarkbox}
+
+\begin{theorem}[Fundamental theorem of Hodhe-de Rham theory]
+$\ocdot$ above is an orthogonal direct sum decomposition.
+\end{theorem}
+
+\begin{corollary}
+\begin{align}
+\ker d_k &= \Omega^k(M) \cap \ker d_k = \left ( \ker (\delta_{n-k} \oplus \im(d_{k-1}) \right ) \cap \ker d_k = \\
+&= \left ( (\ker \delta_{n-k}) \cap \ker d_k \right) \oplus \im d_{k-1} \nonumber
+\end{align}
+Comparing first and last term, and remembering that the de Rham cohomology of $M$ is $H^{k-1}(M) = \faktor{\ker d_k}{\im d_{k-1}}$, we have that $H^{k-1}(M) \cong \left ( (\ker \delta_{n-k}) \cap \ker d_k \right)$. In a similar way:
+\begin{equation}
+\ker \delta_{n-k} = \im \delta_{n-k-1} \oplus \left ( \ker d_k \cap \ker \delta _{n-k} \right )
+\end{equation}
+\end{corollary}
+
+\begin{lemma}[Harmonic forms]
+Elements of $\mathcal{H}^k(M) \equiv \ker d_k \cap \ker \delta_{n-k}$ are closed and coclosed (i.e. closed with respect to $\delta$), and they are said to be harmonic. The Laplace operator is $\Delta = d \circ \delta + \delta \circ d$, and 
+\begin{equation} \label{deltaeqn}
+\mathcal{H}^k(M) = \ker \left ( \restrict{\Delta}{\Omega^k(M)} \right )
+\end{equation}
+\end{lemma}
+\begin{proof}[Proof of \ref{deltaeqn}]
+$\eta, \zeta \in \Omega^k(M)$.
+\begin{description}
+\item["$\subseteq$":] trivial by definition of $\Delta$,
+\item["$\supseteq$":] 
+$$0 = \langle \Delta \eta, \zeta \rangle_M = \langle d \circ \delta \eta + \delta \circ d \eta, \zeta \rangle_M =- \langle d \eta, d \zeta \rangle_M - \langle \delta \eta, \delta \zeta \rangle_M, \, \forall\, \zeta$$
+where we used the adjointness \eqref{adjcondition}. Since it holds for every $\zeta$, it is also true for $\zeta = \eta$:
+$$0 = - \underbrace{|| d \eta ||^2}_{\ge 0} - \underbrace{||\delta \eta||^2}_{\ge 0}$$
+and the equality holds $\Leftrightarrow \eta \in \ker d_k, \eta \in \ker \delta_{n-k}$.\qedhere
+\end{description}
+\end{proof}
+
+\begin{corollary}[Hodge theorem]
+\begin{equation}
+\mathcal{H}^k(M) \rightarrow H^k(M)
+\end{equation}
+is an isomorphism. Moreover, we have:
+\begin{center}
+\begin{tikzcd}
+\mathcal{H}^k(M) \arrow[r] \arrow[d, "\star^{-1}"', shift right] & H^k(M) \arrow[d, shift right]                        \\
+\mathcal{H}^{n-k}(M) \arrow[u, "\star"', shift right] \arrow[r]  & H^{n-k}(M) \arrow[u, "\sim \text{PD}"', shift right]
+\end{tikzcd}
+\end{center}
+\end{corollary}
+
+\begin{remarkbox}\begin{remark}
+$ $
+\textbf{Fact}: $\mathcal{H}^k(M)$ has finite dimension ($\Delta$ is an elliptic operator).
+\textbf{Fact}(Hodge decomposition):
+$$\Omega^k(M) = \mathcal{H}^k(M) \oplus d_{k-1} \Omega^{k-1}(M) \oplus \delta_{n-k-1} \Omega^{k+1}$$
+is an orthogonal sum decomposition.
+\end{remark} \end{remarkbox}
+
 %Add picture vector field pag. 207 Lee, and pag. 221. CHECK from page 14
 
 \clearpage
@@ -3060,7 +3658,7 @@ The definition \ref{degreemap} does not depend on the $\omega$ chosen: if $\omeg
 \bibitem{Lee}
 {J.} M. Lee, Introduction to Smooth Manifolds, Springer
 \bibitem{Notes}
-Lecture notes (Differentiable Manifolds Sachs, Vogel WS 19)
+\href{https://www.physik.uni-muenchen.de/lehre/vorlesungen/wise_19_20/Differentiable-Manifolds/material/skript-TMP.pdf}{Lecture notes} (Differentiable Manifolds Sachs, Vogel WS 19)
 \end{thebibliography}
 
 
