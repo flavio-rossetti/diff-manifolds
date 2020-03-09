@@ -78,6 +78,7 @@
 
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Index}{Index}
+\DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\Der}{Der}
@@ -284,7 +285,7 @@ A monomorphism is an injective homomorphism. An epimorphism is a surjective homo
 An endomorphism is a homomorphism from one algebraic structure to itself. If such morphism is bijective, it is called automorphism.
 \end{remark}\end{remarkbox}
 
-\begin{remarkbox}\begin{remark}
+\begin{remarkbox}\begin{remark} \label{homeoremark}
 Don't get confused with hom\textbf{e}omorphisms! A homeomorphism is a continuous and bijective map between two topological space, such that its inverse is also continuous. In general it is not a homomorphism (without the \textbf{e}), because a topological space is not necessarily associated with an operation on it. (However if it has an operation, the continuity of the map implies that it is also a homomorphism).
 \end{remark}\end{remarkbox}
 
@@ -575,7 +576,30 @@ Sometimes it is useful to consider equivalent definitions of connection: a topol
 \end{remark}
 \end{remarkbox}
 
+\begin{definition}[Path-connected space]
+A topological space $X$ is path-connected if given any two points in the space, they can be connected by a continuous path, i.e. if $\forall\, x, y \in X$ there exists a continuous map $\alpha \colon [0,1] \rightarrow X$ such that $\alpha(0)=x, \alpha(1)=y$. 
+\end{definition}
 
+\begin{remarkbox}\begin{remark}[Path-connected implies connected]
+A path-connected space is always connected (the proof is by contradiction). The converse is not true in general.
+\end{remark}\end{remarkbox}
+
+\begin{remarkbox}\begin{remark}[Topological invariants]
+In the first sections we analyzed the concept of homeomorphism  (see remark \ref{homeoremark}). We will review its importance here. First of all, let's point out that the entire abstraction of topology was built by mathematicians in order to categorize objects in a more abstract way. Spaces which are homeomorphic one to another are considered to be the same in topology. It can be proved that several properties are left invariant by homeomorphisms. For instance if one compact space $X$ is homeomorphic to $Y$, $Y$ must be compact as well. Some of these properties (called topological invariants) are:
+\begin{enumerate}
+\item Compactness,
+\item Paracompactness,
+\item Connectedness (and path-connectedness),
+\item Cardinality,
+\item Hausdorff property,
+\item First countability property,
+\item Second countability property,
+\item Contractibility,
+\item Simple connectedness,
+\item etc...
+\end{enumerate}
+Such topological invariants are also useful in order to verify if two topological spaces are \textbf{not} homeomorphic one to the other. For instance, a closed interval $[a, b]$ in $\rfield$ with Euclidean topology cannot be homeomorphic to $\rfield$ because the former is a compact set, and the latter is not.
+\end{remark}\end{remarkbox}
 
 \section[Derivations]{\crule[yellow!50!white]{0.3cm}{0.4cm}  Derivations}
 \begin{definition}[Derivation] \label{derivation}
@@ -720,6 +744,12 @@ We denote by $\mathfrak{X}(\rfield^n)$ the set of all possible vector fields in 
 where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}$.
 \end{definition}
 
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=.6\linewidth]{images/vfield_e1.pdf}
+     \caption{Vector field v=$e_1=\partial_x$} \label{Fig:vfield_e1}
+\end{figure}
+
 \begin{remarkbox}\begin{remark} [Fields vs. Derivations] \label{fieldsvsder}
   If $v$ is a vector field in $\rfield^n$, then $v$ assigns a vector to another vector of $\rfield^n$. So $v \colon \rfield^n \rightarrow \rfield^n$. So, the set of all vector fields should be (we will use a different symbol to denote it):
   $$X(\rfield^n) = \left \{ v \colon \rfield^n \rightarrow \rfield^n \right \}$$
@@ -745,10 +775,18 @@ where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}
 We also notice that the mathematical object $e_i$ is not much different from $\restrict{(e_i)}{p}$ in this case: there is no difference if we think about them as directions, but it makes a difference if we think about them as directional derivatives, because the latter notation gives info about the point in which the derivative is evaluated. So, we add the pedix "$p$" in order to make the isomorphism between vectors and directional derivatives more explicit. Check also the remark \ref{pointorvec}.
 \end{remark}\end{remarkbox}
 
-\begin{figure}[h]
+\begin{figure}
+\centering
+\begin{subfigure}{.48\textwidth}
      \centering
-     \includegraphics[width=.6\linewidth]{images/vfield_e1.pdf}
-     \caption{Vector field v=$e_1=\partial_x$} \label{Fig:vfield_e1}
+     \includegraphics[width=\linewidth]{images/vfield_2.pdf}
+     \caption{Vector field v=$(y-x)\partial_x-(y+x)\partial_y$} \label{Fig:vfield_2}
+\end{subfigure}
+\begin{subfigure}{.48\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{images/vfield_3.pdf}
+     \caption{Vector field v=$-y\partial_x+x\partial_y$} \label{Fig:vfield_2}
+\end{subfigure}
 \end{figure}
 
 %\begin{remarkbox}\begin{remark}
@@ -1351,10 +1389,19 @@ By fixing either the time or the starting point of the flow, we can consider two
 \item $p \mapsto \theta_t(p)$, for each fixed $t$ (we are observing several integral curves at the same time $t$)
 \item $t \mapsto \theta_t(p)$, for each fixed $p$ (we are observing the integral curve starting from $p$, for all times)
 \end{itemize}
-\begin{figure}[h]
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.48\textwidth}
      \centering
-     \includegraphics[width=.6\linewidth]{images/integralcurve_1.pdf}
+     \includegraphics[width=\linewidth]{Images/integralcurve_1.pdf}
      \caption{the map $t \mapsto \theta_t(p)$ selects just one integral curve} \label{Fig:integralcurve_1}
+\end{subfigure}
+\begin{subfigure}{.48\textwidth}
+     \centering
+     \vspace{0.4em}
+     \includegraphics[width=0.95\linewidth]{Images/integralcurve_2.pdf}
+     \caption{the map $p \mapsto \theta_t(p)$ selects all the curves evaluated at the same time $t$} \label{Fig:integralcurve_2}
+\end{subfigure}
 \end{figure}
 \end{definition}
 
@@ -1931,7 +1978,7 @@ Thus, $\hat{\tilde \phi}$ is a bijection.
 
 \begin{definition}[(co)chain map] %add def of (co)chain complex
   Let $A^*$ and $B^*$ be two (co)chain complexes (a (co)chain complex is a generalization of a de Rham complex, e.g. think about $A^*=\Omega^*$).
-  A (co)chain map $\hat \phi^* \colon A^* \rightarrow B^*$ is a collection of maps $\phi^* \colon A^n \rightarrow B^n$ s.t. $d \circ \phi^* = \phi^* \circ d \colon A^n \rightarrow B^{n+1}$. We often denote $\hat \phi^*$ by $\phi^*$.
+  A (co)chain map $\hat \phi^* \colon A^* \rightarrow B^*$ is a collection of linear maps $\phi^* \colon A^n \rightarrow B^n$ s.t. $d \circ \phi^* = \phi^* \circ d \colon A^n \rightarrow B^{n+1}$. We often denote $\hat \phi^*$ by $\phi^*$.
 \end{definition}
 
 \begin{tcolorbox}\begin{example}
@@ -2407,13 +2454,24 @@ Now, if $f \colon M \rightarrow \rfield$, we can consider $f_i = \varphi_i f \co
   A curve $\gamma \colon (a, b) \rightarrow M$ is continuous [differentiable] if $\phi_{\alpha}^{-1} \circ \gamma \colon (a, b) \rightarrow U_{\alpha}$ is continuous [differentiable]
 \end{definition}
 \section[Integration of differential forms on a compact manifold]{\crule[orange!50!white]{0.3cm}{0.4cm}  Integration of differential forms on a compact manifold}
-$\omega \in \Omega^n(M), M \text{ compact manifold }, \dim M=n$. Pick a partition of unity subordinate to a covering $\{V_{\alpha} \}$ (i.e. pick some maps $\varphi_i, i=1, \ldots, n, 0 \le \varphi_i \le 1, \sum_{i=1}^m \varphi_i \equiv 1, \text{ supp}(\varphi_i) \subset V_{\alpha(i)}$ for some $\alpha = \alpha(i)$). Then:
+
+\begin{definition} [Orientable manifold]
+  $M$ is orientable if there exists an atlas $\mathcal{A} = \{\phi_{\alpha}, U_{\alpha}\}$ such that for each pair $\alpha, \beta$ with $\phi_{\alpha}(U_{\alpha}) \cap \phi_{\beta}(U_{\beta}) \not = \emptyset$, the differential
+  $$
+    (\phi_{\beta}^{-1} \circ \phi_{\alpha})_* \colon  U_{\beta} \rightarrow U_{\alpha}
+  $$
+  has positive determinant. Example of a non-orientable manifold: Möbius strip.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}[How to integrate]
+Let $\omega \in \Omega^n(M), M \text{ compact manifold }, \dim M=n$. Pick a partition of unity subordinate to a covering $\{V_{\alpha} \}$ (i.e. pick some maps $\varphi_i, i=1, \ldots, n, 0 \le \varphi_i \le 1, \sum_{i=1}^m \varphi_i \equiv 1, \text{ supp}(\varphi_i) \subset V_{\alpha(i)}$ for some $\alpha = \alpha(i)$). Then:
 \begin{align}
   \int\limits_M \omega &= \int\limits_M \sum_{i=1}^m \varphi_i \omega = \sum_i \int\limits_M (\varphi_i \omega) = \sum_i \int\limits_{V_{\alpha(i)}} (\varphi_i \omega) = \nonumber \\
   & = \sum_i \int\limits_{U_{\alpha(i)}} \phi^*_{\alpha(i)} (\varphi_i \omega)
 \end{align}
 where $V_{\alpha} = \phi_{\alpha}(U_{\alpha})$.
-Notice that \textbf{the integral is well-defined if $M$ is orientable} (definition of orientable manifolds in the next pages).
+Notice that \textbf{the integral is well-defined if $M$ is orientable}.
+\end{remark}\end{remarkbox}
 
 \begin{lemma}
   $\int\limits_{M} \omega$ is independent of the choice $(V_{\alpha}, \varphi_i)$
@@ -2433,7 +2491,7 @@ where we could swap the sums since they are finite (they are finite because $M$ 
   What happens with boundaries? If $p \in \partial M$, there is no neighbourhood of $p$ homeomorphic to an open set $U \subset \rfield^n$.
   Let's define the following set:
   $$H^n = \{ (x^1, \ldots, x^n) \in \rfield^n \, | \, x^1 \ge 0 \}$$
-  \textbf{Note} that on \cite{Lee} $H^n$ is defined as
+  \textbf{Note} that on Lee \cite{Lee}, $H^n$ is defined as
   $$H^n = \{ (x^1, \ldots, x^n) \in \rfield^n \, | \, x^n \ge 0 \}$$
   (everything is the same, but with $x^1$ replaced by $x^n$).
 \end{remark}\end{remarkbox}
@@ -2455,7 +2513,12 @@ where we could swap the sums since they are finite (they are finite because $M$ 
 When is a point on the boundary of a manifold?
 \begin{definition} [Point on the boundary] \label{pointbdr}
   A point $p \in M$ is on the boundary of $M$ if for some parametrisation $\phi \colon U \subset H^n \rightarrow M$ around $p$, we have $\phi(0, x^2, \ldots, x^n) = p$ for some $x^2, \ldots, x^n$.
-\end{definition}%insert picture here
+  \begin{figure}[H]
+     \centering
+     \includegraphics[width=.6\linewidth]{images/boundary.pdf}
+     \caption{Point on the boundary of a manifold} \label{Fig:boundarypic}
+\end{figure}
+\end{definition}
 
 \begin{lemma}
   The definition \ref{pointbdr} does not depend on the choice of parametrisation.
@@ -2468,14 +2531,6 @@ is a diffeomorphism (by definition of manifold). Since $x^1 \not = 0$, there exi
 \[\left \{ (x^1, \ldots , x^n ) \in H^n \, | \, x^1= 0 \right \}\]
 The restriction of $\phi_1^{-1} \circ \phi_2$ to $U$ gives a differentiable map $U \rightarrow H^n$ such that $\det(\phi_1^{-1} \circ \phi_2)_* \not = 0$ (invertible map). Thus, $(\phi_1^{-1} \circ \phi_2)(V)$ contains points which are not in $H^n$ for some choice of $V \ni q$. But then it can't be a parametrization (contradiction!).
 \end{proof}
-
-\begin{definition} [Orientable manifold]
-  $M$ is orientable if there exists an atlas $\mathcal{A} = \{\phi_{\alpha}, U_{\alpha}\}$ such that for each pair $\alpha, \beta$ with $\phi_{\alpha}(U_{\alpha}) \cap \phi_{\beta}(U_{\beta}) \not = \emptyset$, the differential
-  $$
-    (\phi_{\beta}^{-1} \circ \phi_{\alpha})_* \colon  U_{\beta} \rightarrow U_{\alpha}
-  $$
-  has positive determinant. Example of a non-orientable manifold: Möbius strip.
-\end{definition}
 
 \begin{proposition}
 $ $
@@ -2770,6 +2825,36 @@ $\alpha \colon$
 \end{center}
 so that $\pr \circ \alpha = \id_M$ (it is a section of the bundle). $k$-forms are defined in an analogous fashion, and so are $\Omega^k(M), d \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M), f^*$ and $f_*$.
 \end{definition}
+
+In the following definitions $M$ and $N$ are two topological spaces, and $\rank F$ is the rank of the Jacobian matrix of $F$ at a fixed point. If we don't specify any point, we refer to the Jacobian at any point.
+
+\begin{definition}[Topological embedding]
+A map $F\colon M \rightarrow N$ is a topological embedding if it is a homeomorphism onto its image, i.e. if $F\colon M \rightarrow F(M)$ is a homeomorphism.
+\end{definition}
+
+\begin{definition}[Smooth submersion]
+A smooth map $F\colon M \rightarrow N$ is a smooth submersion if its differential is surjective at each point. If $M, N$ are smooth manifolds, it means $\rank F = \dim N$.
+\end{definition}
+
+\begin{definition}[Smooth immersion]
+A smooth map $F \colon M \rightarrow N$ is a smooth immersion if its differential is injective at each point. If $M, N$ are smooth manifolds, it means $\rank F = \dim M$.
+\end{definition}
+
+\begin{definition}[Smooth embedding]
+A smooth map $F \colon M \rightarrow N$ is a smooth embedding if it is both a smooth immersion and a topological embedding.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}
+A topological embedding which is smooth is not necessarily a smooth embedding!
+\end{remark}\end{remarkbox}
+
+\begin{tcolorbox}\begin{example}
+$ $
+\begin{itemize}
+\item Let $M$ be a smooth manifold (with or without boundary). Let $U \subset M$ be an open submanifold, then the inclusion map $i \colon U \xhookrightarrow{} M$ is a smooth embedding,
+\item $\gamma \colon \rfield \rightarrow \rfield^2$ given by $\gamma(t) = (t^3, 0)$ is a smooth map and a topological embedding, but it's not a smooth embedding because $\gamma ' (0) = (0, 0)$, so $\rank \gamma'(0) = 0$ (there exists at least one point such that the rank is different from $1 = \dim M = \dim \rfield$).
+\end{itemize}
+\end{example}\end{tcolorbox}
 
 \section[Lie Groups]{\crule[yellow!50!white]{0.3cm}{0.4cm}  Lie Groups}
 \begin{definition}
