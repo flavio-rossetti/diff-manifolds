@@ -734,6 +734,8 @@ The vectors of the dual basis will also be called
 \end{equation}
 This will be important later: we will define exterior forms of degree $k$ and we'll use both notations. The set of all these forms is $\Lambda^k V^*$, and its basis is given by products (in particular, exterior products) of $e^{*i_1}, \ldots, e^{*i_k}$ (i.e. $dx^{i_1}, \ldots, dx^{i_k}$).
 \end{remark}\end{remarkbox}
+$ $ \newline
+$ $
 
 \begin{definition} [Set of vector fields] \label{setsfields}
 We denote by $\mathfrak{X}(\rfield^n)$ the set of all possible vector fields in $\rfield^n$, i.e.
@@ -742,13 +744,15 @@ We denote by $\mathfrak{X}(\rfield^n)$ the set of all possible vector fields in 
  v \text{ is } \rfield\text{-linear and } v(fg) = v(f)g + fv(g)  \}
 \end{align}
 where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}$.
-\end{definition}
 
-\begin{figure}[H]
+\begin{figure}[h]
      \centering
-     \includegraphics[width=.6\linewidth]{images/vfield_e1.pdf}
+     \includegraphics[width=.5\linewidth]{images/vfield_e1.pdf}
      \caption{Vector field v=$e_1=\partial_x$} \label{Fig:vfield_e1}
 \end{figure}
+\end{definition}
+
+
 
 \begin{remarkbox}\begin{remark} [Fields vs. Derivations] \label{fieldsvsder}
   If $v$ is a vector field in $\rfield^n$, then $v$ assigns a vector to another vector of $\rfield^n$. So $v \colon \rfield^n \rightarrow \rfield^n$. So, the set of all vector fields should be (we will use a different symbol to denote it):
@@ -785,7 +789,7 @@ We also notice that the mathematical object $e_i$ is not much different from $\r
 \begin{subfigure}{.48\textwidth}
      \centering
      \includegraphics[width=\linewidth]{images/vfield_3.pdf}
-     \caption{Vector field v=$-y\partial_x+x\partial_y$} \label{Fig:vfield_2}
+     \caption{Vector field v=$-y\partial_x+x\partial_y$} \label{Fig:vfield_3}
 \end{subfigure}
 \end{figure}
 
@@ -985,7 +989,7 @@ We want to generalize the concept of differential of a function.
   \end{equation}
 \end{definition}
 
-\begin{remarkbox}\begin{remark}[differential expression in coordinates]
+\begin{remarkbox}\begin{remark}[differential expression in coordinates] \label{diffcoordremark}
   We want to verify that the above definition of differential is equivalent to our usual definition for $C^1(\rfield^n)$ function, which is:
   \begin{equation}
     df = \sum\limits_{i=1}^n \frac{\partial f}{\partial x_i} dx^i = \frac{\partial f}{\partial x_i} dx^i
@@ -1181,16 +1185,19 @@ Now, let's talk about \textit{pullbacks} and \textit{pushforwards} for functions
 Now, we want to give another name to the differential of a function.
 \begin{definition}[Pushforward]
   Given $f \colon U \rightarrow V$ as before, we will also call the differential of $f$ at $p \in \rfield^n$, i.e. $df_p = df(p)$, as the \textit{pushforward} of $f$ at $p$, and it will be denoted by the symbol $(f_*)_p$.
-\end{definition}
-
-In our mind, we'll think of $df_p = (f_*)_p$, at least until this concept is generalized. Using the pullback definition above, we can write the pushforward map as:
+  So, the pushforward map is:
 \begin{align*}
   df_p \equiv (f_*)_p \colon U \subset \rfield^n &\rightarrow V \subset \rfield^m \\
     v & \mapsto (f_*)_p (v)
 \end{align*}
-By definition of differential, $df_p(v) = v(f)$, where $v$ is a vector tangent to $\rfield^n$ at $p$. Since vector are like directional derivatives, $v(f)$ is the directional derivative of $f$ with respect to $v$ (not evaluated at any point, for now!). In particular, if we apply the definition to a point $h(q)$, where $h \in C^{\infty}(\rfield^n, \rfield^m)$ (\textbf{CHECK}) and $q \in \rfield^n$, we have:
-$$(f_*)_p (v)(h)(q) = (f_*)_p (v)(h(q)) = v(h(f(q))) = v(h \circ f) (q) = v (f^* h) (q)$$
-In the last passage, we used the pullback for a differentiable function, which is completely legal since we defined it for differentiable $k$-forms, and a differentiable function is just a 0-form.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}[Pushforward of composition of functions]
+In our mind, we'll think of the pushforward as the differential of a map: $df_p = (f_*)_p$, at least until this concept is generalized. 
+By definition of differential: $df_p(v) = v(f)$, where $v$ is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v(f)$ is the directional derivative of $f$ with respect to $v$ (not evaluated at any point, for now!). In particular, if we apply the definition to a point $h(q)$, where $h \in C^{\infty}(\rfield^n, \rfield^m)$ and $q \in \rfield^n$, we have (cf. also pag. 55 Lee \cite{Lee}):
+$$\restrict{(f_*)_p (v)(h)}{q} \overset{(1)}{=} \restrict{v(h \circ f)}{q}  = \restrict{v(h(f))}{q} \overset{(2)}{=} \restrict{v (f^* h) }{q}$$
+where we used: (1) $(f_*)_p (v)(h)  = v(h \circ f)$, it can be proved that it is the right expression in a similar way to what we did to prove that $(f_*)_p (v)= v(f)$ is the right expression (cf. remark \ref{diffcoordremark}), (2) the expression of the pullback for a differentiable function, which is completely legal since we defined it for differentiable $k$-forms, and a differentiable function is just a 0-form.
+\end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark}
 Using the pushforward, we can define the pullback of a differential form using a different notation (i.e. using $f_*$ instead of $df$):

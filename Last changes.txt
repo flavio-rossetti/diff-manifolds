@@ -1,5 +1,8 @@
 Changes:
 
+10-03-2020:
+- def. 10.17 of pushforward updated 
+
 09-03-2020:
 - Figures of vector fields added, 
 - figure of boundary added in the definition of point on the boundary of a manifold
