@@ -3,7 +3,6 @@ Differentiable Manifolds lecture notes, LMU WS 19.
 
 These notes are neither complete nor accurate.
 
-<<<<<<< HEAD
 Missing parts:
 1) Proof of Zig-zag lemma,
 2) Last lecture (applications of Hodge operator),
@@ -24,6 +23,5 @@ Last changes:
 - def. of cochain map updated
 - remark about topological invariants added
 - def. of path-connected space added.
-=======
+
 For last changes: see file "Last changes.txt"
->>>>>>> 7e7766b9d0a8f53abd1f25c27e8ccf71c4da9e44
