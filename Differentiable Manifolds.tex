@@ -2112,6 +2112,22 @@ and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
 \end{figure}
 \end{definition}
 
+\begin{remarkbox}\begin{remark}[4 definitions]
+Let's analyze two of the four definitions of a submanifold of $\rfield^n$. \begin{description}
+\item[a)] The hypothesis of homeomorphism is quite intuitive: we want our space to be locally similar to $\rfield^n$. As regards the hypothesis of injectivity, we want that the vector field given by the differential of $\phi$ is well-defined. Indeed, the map $\phi$ can define a vector field on $M$ through its differential $d\phi=\phi_*$, if $\phi_*$ is a bijective map. If $\phi$ is not injective, we would have some points on $M$ such that the tangent vector about these points is not unique (and the physical meaning would be lost). If $\phi$ is not surjective, we would have some points on $M$ that have no tangent vector at all. 
+\begin{minipage}{0.9\textwidth}
+\vspace{1em}
+     \centering
+     \includegraphics[width=0.9\textwidth]{Images/notinjnotsurj.pdf} \label{Fig:notinjnotsurj}
+     \captionof{figure}{If $\phi$ is not injective, we have problems in $A$. If not surjective, we have problems in $B$ (taken from page 182, Lee \cite{Lee}).} 
+     \vspace{1em}     
+\end{minipage}
+
+In particular, we want $\phi$ to be a smooth embedding (see also the def. \ref{smoothembedd} that will be given in the next sections).
+\item[c)] The hypothesis of surjectivity is required because of what we said about def. (a). In particular, we require $F$ to be a smooth submersion (see also the def. \ref{smoothsubm} that will be given in the next sections).
+\end{description}
+\end{remark}\end{remarkbox}
+
 \begin{theorem} \label{allequiv}
   The four definitions above are equivalent.
 \end{theorem}
@@ -2839,7 +2855,7 @@ In the following definitions $M$ and $N$ are two topological spaces, and $\rank 
 A map $F\colon M \rightarrow N$ is a topological embedding if it is a homeomorphism onto its image, i.e. if $F\colon M \rightarrow F(M)$ is a homeomorphism.
 \end{definition}
 
-\begin{definition}[Smooth submersion]
+\begin{definition}[Smooth submersion] \label{smoothsubm}
 A smooth map $F\colon M \rightarrow N$ is a smooth submersion if its differential is surjective at each point. If $M, N$ are smooth manifolds, it means $\rank F = \dim N$.
 \end{definition}
 
@@ -2847,7 +2863,7 @@ A smooth map $F\colon M \rightarrow N$ is a smooth submersion if its differentia
 A smooth map $F \colon M \rightarrow N$ is a smooth immersion if its differential is injective at each point. If $M, N$ are smooth manifolds, it means $\rank F = \dim M$.
 \end{definition}
 
-\begin{definition}[Smooth embedding]
+\begin{definition}[Smooth embedding] \label{smoothembedd}
 A smooth map $F \colon M \rightarrow N$ is a smooth embedding if it is both a smooth immersion and a topological embedding.
 \end{definition}
 
