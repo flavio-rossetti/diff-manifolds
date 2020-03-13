@@ -24,4 +24,3 @@ Last changes:
 - remark about topological invariants added
 - def. of path-connected space added.
 
-For last changes: see file "Last changes.txt"
