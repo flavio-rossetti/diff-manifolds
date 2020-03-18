@@ -10,6 +10,10 @@ Missing parts:
 
 Last changes:
 
+18-03-20:
+- typo corrected from "Notations and conventions" to "Topology" sections. Some typos corrected in the rest of the document.
+- definition of algebraic field 3.12 corrected (def. of unitary ring changed).
+
 13-03-20:
 - remark 17.5 about the definitions of a submanifold of R^n was added
 
@@ -23,4 +27,3 @@ Last changes:
 - def. of cochain map updated
 - remark about topological invariants added
 - def. of path-connected space added.
-

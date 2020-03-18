@@ -173,32 +173,38 @@ Main idea: in order to study tangent vectors, we identify them with "directional
 In these notes the Einstein summation convention will be used. It means that the sum symbol will be omitted when it is clear with respect to which index we are summing. For instance we will write
 $$v^i e_i$$
 instead of 
-$$\sum\limits_i v^i e_i$$
+$$\sum\limits_i v^i e_i \, .$$
 Given a map $f$ from a set $X$ to a set $Y$, we will denote it by 
 $$f \colon X \rightarrow Y$$
 We will use the arrow "$\mapsto$" to denote how each element of $X$ is mapped into $Y$ through $f$. For instance, given $x_1, x_2 \in X, y \in Y$, we will either use the notation:
-$$x_1 \mapsto f(x)$$ 
+$$x_1 \mapsto f(x_1)$$ 
 or
-$$x_2 \mapsto y$$
+$$x_2 \mapsto y \,.$$
 We will use the symbol $\equiv$ in order to define mathematical objects.
+We will use the latin abbreviation "i.e." (\textit{id est}) to explain concepts in a more detailed way, and the abbreviation "e.g." (\textit{exempli gratia}) to give examples.
 
 \section[Quick review: Basic Algebraic Structures]{\crule[blue!50!white]{0.3cm}{0.4cm}  Quick review: Basic Algebraic Structures}
 
 \begin{definition} [Operation]
-Let $G$ be a set. $\cdot$ is called a (binary) operation on $G$ if it is a map
+Let $G$ be a set. The map:  
 \begin{align*}
 \cdot \, \colon G &\times G \longrightarrow G \\
 (&a, b) \longmapsto a \cdot b
 \end{align*}
-Such a map is usually denoted by the symbol $\cdot$ or, analogously, with the symbol $+$.
+is called a (binary) operation on $G$.
+Sometimes such a map is also denoted by the symbol $+$.
 \end{definition}
 
-\begin{definition} [Group] Given a set $G$ and an operation $\cdot$ on such set, we will call such set with the operation  (i.e. the couple $(G, \cdot)$) a group if the following properties are satisfied (for $a, b, c \in G$):
+\begin{definition} [Group] Given a set $G$ and an operation $\cdot$ on such set, we will call such set with the operation  (i.e. the couple $(G, \cdot)$) a group if the following properties are satisfied for all $a, b, c \in G$:
 \begin{itemize}
-\item $ a \cdot b \in G$ (closure property, which often follows from the definition of our operation)
-\item $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ (associativity)
-\item $\exists\, \mathbf{1} \in G$ such that $\mathbf{1} \cdot g = g, \, \forall\, g \in G$ (existence of the identity element)
-\item $\forall\, g \in G, \exists\, g^{-1} \in G$ such that $g \cdot g^{-1} = g^{-1} \cdot g = \mathbf{1}$ (existence of the inverse element)
+\item $ a \cdot b \in G$ 
+\hspace*{\fill}\textit{(closure property)}
+\item $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ 
+\hspace*{\fill}\textit{(associativity)}
+\item $\exists\, \mathbf{1} \in G$ such that $\mathbf{1} \cdot g = g, \, \forall\, g \in G$ 
+\hspace*{\fill}\textit{(existence of the identity element)}
+\item $\forall\, g \in G, \exists\, g^{-1} \in G$ so that $g \cdot g^{-1} = g^{-1} \cdot g = \mathbf{1}$ 
+\hspace*{\fill} \textit{(existence of the inverse element)}
 \end{itemize}
 For the sake of simplicity, we will often call $G$ a group, without referring to the operation on it.
 \end{definition}
@@ -216,7 +222,7 @@ $(\mathbb{R}, +)$ is a group. Also: $(\mathbb{R}, \cdot)$ is a group.
 $(\mathbb{N}, +)$ is not a group!
 \end{example}\end{tcolorbox}
 
-\begin{remarkbox}\begin{remark}
+\begin{remarkbox}\begin{remark} \label{zeroone}
 The identity element of a group is often denoted as $\mathbf{1}$ if the operation is denoted by the symbol $\cdot$, whereas it is denoted as $\mathbf{0}$ if the operation is denoted by the symbol $+$.
 In a similar way, the inverse element is often denoted as $g^{-1}$ if the operation is denoted by the symbol $\cdot$, whereas it is denoted as $-g$ if the operation is denoted by the symbol $+$.
 
@@ -233,32 +239,35 @@ Given a set $R$ and two operations: $+$ (usually called "additive operation") an
 \begin{itemize}
 \item $(R, +)$ is an abelian group
 \item $\cdot$ is associative, i.e. $a \cdot (b \cdot c) = (a \cdot b) \cdot c, \, \forall\, a, b, c, \in R$
-\item the multiplicative identity $\mathbf{1}$ exists, i.e. $\exists\, \mathbf{1} \in R$ such that $\mathbf{1} \cdot r = r, \, \forall\, r \in R$
-\item $\cdot$ is distributive with respect to $+$, i.e. $a \cdot (b + c) = a \cdot b + a \cdot c$
+\item $\cdot$ is distributive with respect to $+$, i.e. $a \cdot (b + c) = a \cdot b + a \cdot c$ and $ (b + c) \cdot a = b \cdot a + c \cdot a$
 \end{itemize}
 \end{definition}
 
-\begin{definition} [Commutative ring] $(R, +, \cdot)$ is a commutative ring if the multiplication operation $\cdot$ is commutative
+\begin{definition} [Commutative ring] $(R, +, \cdot)$ is a commutative ring if the multiplication operation $\cdot$ is commutative.
 \end{definition}
 
 \begin{definition} [Unitary ring]
-$(R, +, \cdot)$ is a unitary ring if it contains the multiplication inverse, i.e. the inverse element according to the operation $\cdot$.
+$(R, +, \cdot)$ is a unitary ring if it contains the multiplicative identity, i.e. $\exists\, \mathbf{1} \in R$ such that $\mathbf{1} \cdot r = r \cdot \mathbf{1} =  r, \, \forall\, r \in R$ .
+\end{definition}
+
+\begin{definition}[Invertible element]
+An element $a$ in a ring $(R, +, \cdot)$ is called invertible if there exists its inverse according to the multiplicative operation, i.e. $\exists\, b \in R$ such that $a \cdot b = b \cdot a = \mathbf{1}$. We will also write $a^{-1} \equiv b$.
 \end{definition}
 
 \begin{definition} [Field]
-A unitary, commutative ring is called a field.
+A unitary, commutative ring such that every non-zero element is invertible is called a field.
 \end{definition}
 
+\begin{remarkbox}\begin{remark}
+When we talk about the zero element in a field or in a ring we always refer to the identity element according to the additive operation. See also remark \ref{zeroone}.
+\end{remark}\end{remarkbox}
+
 \begin{tcolorbox}\begin{example}
-The set of $2 \times 2$ matrices made by real coefficients is a ring with the operation of sum between matrices and with the matrix multiplication. The ring is not commutative because the matrix multiplication is not a commutative operation. Nor it is unitary, since not all the matrices are invertible.
+The set of $2 \times 2$ matrices with real coefficients is a ring with the operations of sum between matrices and with the matrix multiplication. The ring is not commutative because the matrix multiplication is not a commutative operation. It is unitary, since the identity matrix is the multiplicative identity. But it's not a field because not every matrix is invertible (just take a matrix with zero determinant).
 \end{example}\end{tcolorbox}
 
 \begin{tcolorbox}\begin{example}
-The set of $2 \times 2$ matrices made by real coefficients is a ring with the operation of sum between matrices and with the matrix multiplication. The ring is not commutative because the matrix multiplication is not a commutative operation. Nor it is unitary, since not all the matrices are invertible.
-\end{example}\end{tcolorbox}
-
-\begin{tcolorbox}\begin{example}
-$(\mathbb{Z}, +, \cdot)$ is a commutative ring. It is not unitary since the inverse element for $\cdot$ is often in the rational numbers, i.e. $3^{-1}$ is the multiplicative inverse of $3$.
+$(\mathbb{Z}, +, \cdot)$ is a unitary, commutative ring. It is not a field since the inverse element for $\cdot$ is often in the rational numbers, i.e. $3^{-1}$ is the multiplicative inverse of $3$.
 \end{example}\end{tcolorbox}
 
 \begin{tcolorbox}\begin{example}
@@ -281,12 +290,12 @@ Homomorphisms can be called in different ways depending whether they are injecti
 A monomorphism is an injective homomorphism. An epimorphism is a surjective homomorphism. An isomorphism is a bijective homomorphism (thus, it is both a monomorphism and an epimorphism).
 \end{remark}\end{remarkbox}
 
-\begin{remarkbox}\begin{remark} \label{endoremark} [Endomorphism, automorphism]
-An endomorphism is a homomorphism from one algebraic structure to itself. If such morphism is bijective, it is called automorphism.
+\begin{remarkbox}\begin{remark} [Endomorphism, automorphism] \label{endoremark} 
+An endomorphism is a homomorphism from one algebraic structure to itself. If such a morphism is bijective, it is called automorphism.
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark} \label{homeoremark}
-Don't get confused with hom\textbf{e}omorphisms! A homeomorphism is a continuous and bijective map between two topological space, such that its inverse is also continuous. In general it is not a homomorphism (without the \textbf{e}), because a topological space is not necessarily associated with an operation on it. (However if it has an operation, the continuity of the map implies that it is also a homomorphism).
+Don't get confused with hom\underline{e}omorphisms! A homeomorphism is a continuous and bijective map between two topological spaces, such that its inverse is also continuous. In general it is not a homomorphism (without the \textbf{e}), because a topological space is not necessarily associated with an operation on it. (However if it has an operation, the continuity of the map implies that it is also a homomorphism).
 \end{remark}\end{remarkbox}
 
 \section[Quick review: Equivalence Classes, Quotient Spaces]{\crule[blue!90!white]{0.3cm}{0.4cm}  Quick review: Equivalence Classes, Quotient Spaces}
@@ -294,68 +303,67 @@ Don't get confused with hom\textbf{e}omorphisms! A homeomorphism is a continuous
   Given a set $E$, a (binary) relation $\sim$ on $E$ is a set of couples $(a, b) \in E \times E$. In other words, a binary relation is a subset of $E \times E$. Moreover, if $(a, b) \in \, \sim\,  \subset E \times E$, we use the following notation: $a \sim b$.
 \end{definition}
 
-The mathematical definition of binary relation is usually not very helpful in the applications. Often it is more convenient not to think about $\sim$, but instead thinking about what is in relation with what. In particular, we want to consider the following:
+The mathematical definition of binary relation is usually not very helpful in the applications. Often it is more convenient not to think about $\sim$, but instead thinking about what is in relation with what. In particular, we want to consider the following definition.
 
 \begin{definition}[Equivalence relation]
   Given a set $E$, an equivalence relation $\sim$ is a binary relation which satisfies the following properties:
   \begin{itemize}
-    \item $a \sim a, \forall\, a \in E$ (reflexive property)
-    \item $a \sim b \Rightarrow b \sim a, \forall\, a, b \in E$ (symmetric property)
-    \item $a \sim b, b \sim c \Rightarrow a \sim c, \forall \, a, b, c \in E$ (transitive property)
+    \item $a \sim a, \forall\, a \in E$ \hspace*{\fill}\textit{(reflexive property)}
+    \item $a \sim b \Rightarrow b \sim a, \forall\, a, b \in E$ \hspace*{\fill}\textit{(symmetric property)}
+    \item $a \sim b, b \sim c \Rightarrow a \sim c, \forall \, a, b, c \in E$ \hspace*{\fill}\textit{(transitive property)}
   \end{itemize}
 \end{definition}
 
 \begin{tcolorbox}\begin{example}
-  The following are examples (or counter-examples) of equivalence relations:
+  The following ones are examples (or counter-examples) of equivalence relations:
   \begin{itemize}
   \item "\textit{Being equal to}" (i.e. "$\sim$" is "$=$") is an equivalence relation on $\rfield$: $x=x \, \forall\, x \in \rfield; x=y \Rightarrow y=x \, \forall\, x, y \in \rfield$, etc.
   \item "\textit{Has the same birthday as}" on the set of all people in the world is an equivalence relation.
-  \item "\textit{Having mutual friends on Facebook}" on the set of Facebook users is not an equivalence relation (there is some problem with transitive property)
-  \item "\textit{Being greater or equal to}" on $\rfield$ is not an equivalence relation (it is not symmetric, however it is antisymmetric and so it is called "partial order relation")
+  \item "\textit{Having mutual friends on Facebook}" on the set of Facebook users is not an equivalence relation (there is some problem with transitive property).
+  \item "\textit{Being greater or equal to}" on $\rfield$ is not an equivalence relation (it is not symmetric, however it is antisymmetric and so it is called "partial order relation").
 \end{itemize}
 \end{example}\end{tcolorbox}
 
 \begin{definition}[Equivalence class]
   Given a set $E$ and an equivalence relation $\sim$ on $E$, the equivalence class of $x \in E$ is the set $[x]$, where
   \begin{equation}
-    [x] \equiv \left \{ y \in E \,|\, y \sim x \right \}
+    [x] \equiv \left \{ y \in E \,|\, y \sim x \right \} \, .
   \end{equation}
   The equivalence class $[x]$ always contains $x$ itself, by definition of equivalence relation.
 \end{definition}
 
 \begin{tcolorbox}\begin{example} \label{modulo4ex}
-We can examine the integers which differ in absolute value by a multiple of 4.
-  If we consider the equivalence relation "$x \sim y$ if $x-y = 4n$ for some $n \in \mathbb{N} \cup \{0\}$" on the set of $\mathbb{Z}$, the equivalence class of 1 is $[1] = \{\ldots, -7, -3, 1, 5, 9, \ldots\}$. We can also write "$x-y = 4n$ for some $n$" as $x \equiv_4 y$ (congruence modulo $4$)
+We can examine the set of integers which differ between them (in absolute value) by a multiple of 4.
+  If we consider the equivalence relation "$x \sim y$ if $x-y = 4n$ for some $n \in \mathbb{N} \cup \{0\}$" on the set of $\mathbb{Z}$, the equivalence class of 1 is $[1] = \{\ldots, -7, -3, 1, 5, 9, \ldots\}$. We can also write "$x-y = 4n$ for some $n$" as $x \equiv_4 y$ (congruence modulo $4$).
 \end{example}\end{tcolorbox}
 
 \begin{definition}[Quotient space]
-  Given a set $E$, an equivalence relation $\sim$ on $E$, the quotient space with respect to $\sim$ is denoted by $\faktor{E}{\sim}$ and it is the set of all equivalence classes:
+  Given a set $E$ and an equivalence relation $\sim$ on $E$, the quotient space with respect to $\sim$ is denoted by $\faktor{E}{\sim}$ and it is the set of all equivalence classes:
   \begin{equation}
-     \faktor{E}{\sim} \equiv \left \{ \, [x] \,|\, x \in E \right \}
+     \faktor{E}{\sim} \equiv \left \{ \, [x] \,|\, x \in E \right \} \, .
   \end{equation}
 \end{definition}
-
 Intuitively, we can say that the quotient space $\faktor{E}{\sim}$ is a copy of $E$ where all the elements equivalent to each other are reduced to one point.
 
 \begin{tcolorbox}\begin{example} \label{quotientexample}
   Let's consider two examples:
   \begin{itemize}
-    \item If we consider the example \ref{modulo4ex}, $\faktor{\mathbb{Z}}{\sim} = \{[0], [1], [2], [3]\}$. We notice that all the integers that differ from 0 by a multiple of 4 (in absolute value) are identified with one point (the equivalence class $[0]$). All the integers that differ from 1 by a multiple of 4 (in absolute value) are identified with one point (the equivalence class $[1]$), and so on. In this case, we also write $\faktor{\mathbb{Z}}{\sim} = \faktor{\mathbb{Z}}{4\mathbb{Z}}$
+    \item If we consider the example \ref{modulo4ex}, $\faktor{\mathbb{Z}}{\sim} = \{[0], [1], [2], [3]\}$. We notice that all the integers that differ from 0 by a multiple of 4 (in absolute value) are identified with one point (which is the equivalence class $[0]$). All the integers that differ from 1 by a multiple of 4 (in absolute value) are identified with one point (the equivalence class $[1]$), and so on. In this case, we also write $\faktor{\mathbb{Z}}{\sim} = \faktor{\mathbb{Z}}{4\mathbb{Z}}$.
     \item If $V$ is a vector space and $U$ is a vector subspace of $V$, then we can consider the equivalence relation "$x \sim y$ if $x-y \in U$". We notice that $x \sim x$ for each $x \in V$ since $x-x = 0 \in U$, because $U$ is a vector space as well. Then, $\faktor{V}{\sim}$ is isomorphic to $V'$, where $V'$ is $V$ without its subspace $U$ (every element of $U$ is identified with 0 in the quotient space, because every element of $U$ is in the same equivalence class of 0).
-    \item If we consider two groups instead of vector spaces, finding the quotient space requires a bit more effort.
+    \item If $V$ and $U$ are just two groups instead of being vector spaces, finding the quotient space requires a bit more effort.
   \end{itemize}
 \end{example}\end{tcolorbox}
 
 \section[Topology]{\crule[purple!80!white]{0.3cm}{0.4cm}  Topology}
 
-\begin{definition}[Topology] \label{top}
+\begin{definition}[Topology, open and closed sets, neighbourhood] \label{top}
 A topology on a set $M$ is a subset $\mathcal{O} \subset \mathcal{P}(M)$, where $\mathcal{P}(M)$ is the power set of $M$, such that:
 \begin{enumerate}
-	\item $\emptyset, M \in \mathcal{O}$
-	\item $\mathcal{O}$ is closed under arbitrary unions: $U_i \in \mathcal{O}, i \in I$, then $\cup_{i \in I} U_i \in \mathcal{O}$
+	\item $\emptyset, M \in \mathcal{O}$,
+	\item $\mathcal{O}$ is closed under arbitrary unions: $U_i \in \mathcal{O}, i \in I$, then $\bigcup\limits_{i \in I} U_i \in \mathcal{O}$,
 	\item $\mathcal{O}$ is closed under finite intersections: $U_1, \ldots, U_k \in \mathcal{O}$, then $U_1 \cap \ldots \cap U_k \in \mathcal{O}$.
 \end{enumerate}
-Sets in $\mathcal{O}$ are called open, $A \subset M$ is closed if $M \setminus A$ is open. A subset $V \subset M$ containing $p$ is a neighbourhood of $p$ if there is an open set $U \subset V$ containing $p$.
+Sets in $\mathcal{O}$ are called open sets. A set $A \subset M$ is closed if $M \setminus A$ is open. A subset $V \subset M$ containing $p$ is a neighbourhood of $p$ if there is an open set $U \subset V$ containing $p$. Sometimes we will denote the topology on a set $X$ by the symbol $\mathcal{O}_X$.
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Euclidean topology on $\rfield$]
@@ -391,26 +399,26 @@ A map $f \colon X \rightarrow Y$ between topological spaces is continuous if $f^
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Continuous maps vs. open maps]
-Requiring that the pre-image of an open set is open is different from requiring that the image of an open set is open! If $f$ brings open sets to open sets, it is called open map (and it might not be continuous).
+Requiring that the pre-image of an open set is open is different from requiring that the image of an open set is open! If $f$ brings open sets to open sets, it is called an open map (and it might not be continuous).
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}\begin{example} \label{topexamples}
 Given a set $M$, we can always consider two simple topologies on it:
 \begin{enumerate}
-	\item $\mathcal{O}_M =  \mathcal{P}(M)$ is a topology, where $\mathcal{P}(M)$ is the power set of $M$ (i.e. the family of all subsets of $M$). Everything is open in $M$, so it is easy to see that any function going from $(M, \mathcal{O}_M)$ to any space $(Y, \mathcal{O}_Y)$ must be continuous.
+	\item $\mathcal{O}_M =  \mathcal{P}(M)$ is a topology, where $\mathcal{P}(M)$ is the power set of $M$ (i.e. the family of all subsets of $M$). Everything is open in $M$, so it is easy to see that any function going from $(M, \mathcal{O}_M)$ to any space $(Y, \mathcal{O}_Y)$ must be continuous, where $\mathcal{O}_Y$ can be any topology on $Y$.
 	\item $\mathcal{O}_M=\{\emptyset, M\}$ is a topology: the open sets are just the two ones required by the definition \ref{top}. In this case, every function going from any space $(Y, \mathcal{O}_Y)$ to $(M, \mathcal{O}_M)$ must be continuous (the pre-image of the empty set is the empty set, and the pre-image of $M$ is $Y$).
 \end{enumerate}
-What is more, we can consider topologies on metric spaces: if $(M, d)$ is a metric space and $B_{\varepsilon}(x)$ denotes the ball of radius $\varepsilon$ around $x$, then
+What is more, we can consider topologies on metric spaces: if $(M, d)$ is a metric space and $B_{\varepsilon}(x)$ denotes the ball of radius $\varepsilon$ around $x$, then:
 $$\mathcal{O}_d = \{U \subset M \, | \, \forall\, x \in U \, \exists\, \varepsilon > 0 \colon B_{\varepsilon}(x) \subset U \}$$
 defines a topology. In particular, we say that the topology is induced by a metric if the open sets are the open balls of the metric space. If $X, Y$ are metric spaces, the definition of continuity seen in the Analysis courses is: $f \colon (X, \mathcal{O}_X) \rightarrow (Y, \mathcal{O}_Y)$ is continuous if and only if $\forall \, x \in X, \forall \, \varepsilon > 0, \exists \, \delta > 0$ such that $f\left(B_{\delta}(x)\right) \subset B_{\varepsilon}\left(f(x)\right)$. One can show that in metric spaces such a definition is equivalent to definition \ref{topcontinuity}.
 \end{example}\end{tcolorbox}
 
 \begin{remarkbox}\begin{remark}
-If $\mathcal{O}_1, \mathcal{O}_2$ are topologies on $M$, then the intersection of the two topologies is again a topology. Therefore, given a family of subsets of $M$ one can ask for the smallest topology on $M$ which contains a subset.
+If $\mathcal{O}_1, \mathcal{O}_2$ are topologies on $M$, then the intersection of the two topologies is again a topology. Therefore, given a family of subsets of $M$ one can ask for the smallest topology on $M$ which still contains a subset.
 \end{remark}\end{remarkbox}
 
-\begin{definition}[Hausdorff]
-A topological space $(M, \mathcal{O})$ is Hausdorff if for all $p, q \in M$ there is a pair of open sets $p \in U_p, q \in U_q$ so that $U_p \cap U_q = \emptyset$.
+\begin{definition}[Hausdorff space]
+A topological space $(M, \mathcal{O}_M)$ is Hausdorff if for all $p, q \in M$ there is a pair of open sets $p \in U_p, \,q \in U_q$ so that $U_p \cap U_q = \emptyset$.
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
@@ -430,7 +438,7 @@ Moreover:
 \begin{definition}[Product topology]
 Let $(M_i, \mathcal{O}_i), i \in I$ be topological spaces. Then the product topology on $\prod_{i \in I} M_i$ is the smallest topology such that all projections
 $$
-\prod_{i \in I} M_i \rightarrow M_j
+\pi_j \colon \prod_{i \in I} M_i \rightarrow M_j
 $$
 are continuous maps for all $j \in I$.
 \end{definition}
@@ -450,13 +458,13 @@ We can also use another useful characterization of the quotient topology: a set 
 \item "$(1) \Rightarrow (2)$": $U$ open in the quotient topology, then $\pi^{-1}(U)$ is open in $M$ by (1), because $\pi$ is a continuous map. If $\pi^{-1}(U)$ is open in $M$, then $U$ is open in $\faktor{M}{\sim}$ because in $(1)$ we have defined the topology on $\faktor{M}{\sim}$ as the \textit{largest} topology such that $\pi$ is continuous!
 \item "$(2) \Rightarrow (1)$: $\pi$ is obviously continuous. And the topology we get is the \textit{largest} one such that $\pi$ is continuous because if $\pi^{-1}(U)$ is not open in $M$, then $U$ is not open in the quotient space (read also below).
 \end{itemize}
-\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that it exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. In the $"(1) \Rightarrow (2)"$ above it was true because in $Y$ we had the largest topology such that $f\colon X \rightarrow Y$ was continuous. It means that the topology on $Y$ had the same open sets of the "power set topology" (i.e. everything is open, cf. remark \ref{topexamples}) except for some sets. Which sets did we remove? We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
+\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that it exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. It is true when we consider the largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous, like in case $"(1) \Rightarrow (2)"$ above. The "largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous" means that the topology on $Y$ has the same open sets of the "power set topology" (i.e. every set is open, cf. remark \ref{topexamples}) except for some sets. Which sets are excluded? Let's consider the following reasoning. We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}\begin{example}[Cofinite topology]
-Let $M$ be a set. We define the following topology: the open sets are $\emptyset$ and the sets $U \not = \emptyset, U \subset M$ such that their complement in $M$ is finite. Another way to define the same topology is using closed sets: the only closed sets in this topology are $M$ and the finite sets. This topology is called cofinite topology.
+Let $M$ be a set. We define the following topology: the open sets are $\emptyset$ and the sets $U \subset M$ such that $U \not = \emptyset$ and that their complement in $M$ is finite. Another way to define the same topology is using closed sets: the only closed sets in this topology are $M$ and the finite sets. This topology is called cofinite topology.
 $M$ with this topology is not Hausdorff if $M$ is an infinite set.
-Why? Because\footnote{the proof is easier to follow if you think of $M$ with cofinite topology as $\rfield$ endowed with cofinite topology}: given $x, y$ in $M, x \not = y$, if $U_a$ and $U_b$ are open sets that contain $a$ and $b$ respectively, the complements of $U_a$ and $U_b$ must be finite (so, $U_a$ and $U_b$ must be infinite, because the bigger space $M$ is infinite).
+Why? Because\footnote{the proof is easier to follow if you think of the space $M$ as $\rfield$.}: given $x, y$ in $M$, with $ x \not = y$, if $U_a$ and $U_b$ are open sets that contain $a$ and $b$ respectively, the complements of $U_a$ and $U_b$ must be finite (so, $U_a$ and $U_b$ must be infinite, because the bigger space $M$ is infinite).
 But then $U_a \cap U_b \not = \emptyset$. Indeed, the complement of $U_a$ in $M$ is $M \setminus U_a$ and it must be finite because $U_a$ is open.
 If we assume $U_a \cap U_b = \emptyset$, then $U_b$ must be contained in the complement of $U_a$. But then $U_b$ (which is an infinite set, because it is open) would be contained in $M \setminus U_a$ (which is a finite set). Contradiction!
 \end{example}\end{tcolorbox}
@@ -468,7 +476,8 @@ A subspace of a Hausdorff space is Hausdorff.
 \begin{tcolorbox}\begin{example}[Subspace topology]
 Let $(M, \mathcal{O}_M)$ be a topological space and $N \subset M$ a subset. Then a natural topology for $N$ is the subspace (or subset) topology, defined in the following way. The subspace topology is the smallest topology so that the inclusion map $N \rightarrow M$ is continuous, i.e. $V \subset N$ is open if and only if there is an open set $U \subset M$ such that $U \cap N = V$.
 
-For instance, you may know that $[0, 1)$ is neither open nor closed in $\rfield$ with Euclidean topology (i.e. the topology induced by the standard metric). Actually, it is an open set in $([0, 2], \mathcal{O})$, where $\mathcal{O}$ is the subset topology (with respect to $(\rfield, \mathcal{O}_d)$, where $\mathcal{O}_d$ is the Euclidean topology). Indeed $$[0, 1) = (-1, 1) \cap [0, 2] $$
+For instance, you may know that $[0, 1)$ is neither open nor closed in $\rfield$ with Euclidean topology $\mathcal{O}_d$. Actually, it is an open set in $([0, 2], \mathcal{O})$, where $\mathcal{O}$ is the subset topology (with respect to $(\rfield, \mathcal{O}_d)$). Indeed:
+\[ [0, 1) = (-1, 1) \cap [0, 2]\, . \]
 You should always pay attention to the topology and to where it is defined, for instance $[0, 1]$ is closed (but not open) in $(\rfield, \mathcal{O}_d)$, whereas it is both open and closed in $([0, 1], \mathcal{O})$, for any topology $\mathcal{O}$.
 \end{example}\end{tcolorbox}
 
@@ -493,7 +502,7 @@ If $A \subset M$ and $M$ has a countable basis, then the subspace topology on $A
 \end{lemma}
 
 \begin{definition}[Cover]
-Let $J$ be a set of indices, either finite or infinite. A family of sets $\{U_i\}_{i \in J}$ is a cover for a topological space $X$ if $\cup_i U_i = X$ (the sets "cover" the entire space). It is an open cover if the $U_i$ are open sets in the topopolgy of $X$. A subcover is a subfamily of the initial cover which is still a cover.
+Let $J$ be a set of indices, either finite or infinite. A family of sets $\{U_i\}_{i \in J}$ is a cover for a topological space $X$ if $\bigcup\limits_i U_i = X$ (the sets "cover" the entire space). It is an open cover if the $U_i$ are open sets in the topology of $X$. A subcover is a subfamily of the initial cover which is still a cover.
 \end{definition}
 
 \begin{definition} [Compact space]
@@ -532,7 +541,7 @@ Let $\{U_i\}_{i \in I}$ be an open cover of $f(A)$. Then $\exists\,  \{V_i\}_{i 
 Let $X$ be Hausdorff. Let $A \subset X$. Assume $A$ is compact. Then $A$ is closed.
 \end{lemma}
 \begin{proof}
-Let $x \in X \setminus A$. For every $a \in A$, there are $U_a \subset X, V_x(a) \subset X$ open sets such that $U_a \cap V_x(a) = \emptyset$ (because of the Hausdorff hypothesis). Here, w used the notation $V_x(a)$ to stress out the dependence of $V$ on $x$ and $a$. The sets $\{U_a \cap A\}_{a \in A}$ are form an open cover of $A$. Since $A$ is compact, there are finitely many $a_1, \ldots a_k$ so that $U_{a_1} \cap A, \ldots, U_{a_k} \cap A$ cover $A$. Now, $V_x = V_x(a_1) \cap \ldots \cap V_x(a_k)$ contains $x$ and it is open. Moreover, $V_x \,\cap A = \emptyset$ because $V_x$ is disjoint from each $U_{a_i} \Rightarrow X \setminus A$ is open, becuase for each point we can find an open set that contains the point and that is contained in $X \setminus A$.
+Let $x \in X \setminus A$. For every $a \in A$, there are $U_a \subset X, V_x(a) \subset X$ open sets such that $U_a \cap V_x(a) = \emptyset$ (because of the Hausdorff hypothesis). Here, we used the notation $V_x(a)$ to stress out the dependence of $V$ on $x$ and $a$. The sets $\{U_a \cap A\}_{a \in A}$ form an open covers of $A$. Since $A$ is compact, there are finitely many $a_1, \ldots a_k$ so that $U_{a_1} \cap A, \ldots, U_{a_k} \cap A$ cover $A$. Now, $V_x = V_x(a_1) \cap \ldots \cap V_x(a_k)$ contains $x$ and it is open. Moreover, $V_x \,\cap A = \emptyset$ because $V_x$ is disjoint from each $U_{a_i} \Rightarrow X \setminus A$ is open, because for each point we can find an open set that contains the point and that is contained in $X \setminus A$.
 \end{proof}
 
 \begin{theorem} [How to get a homeomorphism]
@@ -544,7 +553,7 @@ The only thing which is left to prove is that $f^{-1}$ is a continuous function.
 
 \begin{remarkbox}
 \begin{remark}
-We can consider the concept of sequential compactness: $X$ is sequentially compact if every sequence in $X$ contians a convergent subsequence in $X$. In general, $X$ compact $\not \Rightarrow X$ sequentially compact. But, $X$ compact $+$ first countable $\Rightarrow X$ sequentially compact. Here, $X$ is first countable if $\forall\, x \in X\, \exists \,  N_1, N_2, \ldots, N_i$ (where $i \in I, I $) countable collection of neighbourhoods of $x$ such that every neighbourhood contains one of the $N_i$. Notice that manifolds are first countable! (not proved)
+We can consider the concept of sequential compactness: $X$ is sequentially compact if every sequence in $X$ contains a convergent subsequence in $X$. In general, $X$ compact $\not \Rightarrow X$ sequentially compact. But, $X$ compact $+$ first countable $\Rightarrow X$ sequentially compact. Here, $X$ is first countable if $\forall\, x \in X\, \exists \,  N_1, N_2, \ldots, N_i$ (where $i \in I, I $) countable collection of neighbourhoods of $x$ such that every neighbourhood contains one of the $N_i$. Notice that manifolds are first countable! (not proved.)
 \end{remark}
 \end{remarkbox}
 
@@ -558,7 +567,7 @@ A topological space is paracompact if  every open cover admits a locally finite 
 
 \begin{definition}[Partition of unity]
 A partition of unity subordinate to an open cover $\{U_i\}_{i \in I}$ of $X$ is a collection of continuous functions $f_j \colon X \rightarrow [0, 1]$ such that $\forall \, x \exists \, V_x \ni x, V_x$ neighbourhood of $x$ so that the support $\supp(f_j) = \overline{f_j^{-1}((0, 1])}$ is contained in one of the $U_i$, and $V_x$ intersects only finitely many $\supp(f_j)$, and
-$$\sum\limits_{j \in J}f_j(x) \equiv 1$$
+$$\sum\limits_{j \in J}f_j(x) \equiv 1 \, .$$
 \end{definition}
 
 \begin{definition}[Connected space]\label{connspace}
@@ -581,7 +590,7 @@ A topological space $X$ is path-connected if given any two points in the space, 
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Path-connected implies connected]
-A path-connected space is always connected (the proof is by contradiction). The converse is not true in general.
+A path-connected space is always connected (the proof is by contradiction). The converse is not true in general, but we will see that it is true for smooth manifolds!
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark}[Topological invariants]
@@ -779,14 +788,14 @@ where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}
 We also notice that the mathematical object $e_i$ is not much different from $\restrict{(e_i)}{p}$ in this case: there is no difference if we think about them as directions, but it makes a difference if we think about them as directional derivatives, because the latter notation gives info about the point in which the derivative is evaluated. So, we add the pedix "$p$" in order to make the isomorphism between vectors and directional derivatives more explicit. Check also the remark \ref{pointorvec}.
 \end{remark}\end{remarkbox}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\begin{subfigure}{.48\textwidth}
+\begin{subfigure}{.45\textwidth}
      \centering
      \includegraphics[width=\linewidth]{images/vfield_2.pdf}
      \caption{Vector field v=$(y-x)\partial_x-(y+x)\partial_y$} \label{Fig:vfield_2}
 \end{subfigure}
-\begin{subfigure}{.48\textwidth}
+\begin{subfigure}{.45\textwidth}
      \centering
      \includegraphics[width=\linewidth]{images/vfield_3.pdf}
      \caption{Vector field v=$-y\partial_x+x\partial_y$} \label{Fig:vfield_3}
@@ -2140,7 +2149,8 @@ F \colon V \subset \rfield^m \times \rfield^{n-m} &\rightarrow \rfield^{n-m} \\
 (a, b) & \mapsto F(a, b) 
 \end{align*}
 Let's consider the Jacobian matrix:
-$$(F_*)_p = \left (
+\[
+(F_*)_p = \left (
 \begin{matrix} 
 \defonde{F^1}{x^1} & \ldots & \tikzmark{left}{\defonde{F^1}{x^{m+1}}} & \ldots & \defonde{F^1}{x^n} \\
 \cdot & & & & \\
@@ -2148,7 +2158,7 @@ $$(F_*)_p = \left (
 \cdot & & & & \\
 \defonde{F^{n-m}}{x^1} & \ldots & \defonde{F^{n-m}}{x^{m+1}} & \ldots & \tikzmark{right}{\defonde{F^{n-m}}{x^n}}
 \end{matrix} \right)
-\DrawBox[thick]$$
+\DrawBox[thick] \]
 Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ if and only if $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m), \, (x_1, \ldots, x_m) \in U'$. Then, $g$ is the graph of definition (d).
 \item[(d) $\Rightarrow$ (a):] From (d), we know that $g \colon \rfield^m \supset U \rightarrow \rfield^{n-m}$. Then:
 \begin{align*}
