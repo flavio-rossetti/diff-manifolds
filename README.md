@@ -11,7 +11,7 @@ Missing parts:
 Last changes:
 
 18-03-20:
-- typo corrected from "Notations and conventions" to "Topology" sections. Some typos corrected in the rest of the document.
+- typos corrected from "Notations and conventions" to "Topology" sections. Some typos corrected also in the rest of the document.
 - definition of algebraic field 3.12 corrected (def. of unitary ring changed).
 
 13-03-20:
