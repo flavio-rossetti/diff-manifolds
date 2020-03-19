@@ -10,6 +10,11 @@ Missing parts:
 
 Last changes:
 
+19-03-20:
+- Example 10.7 corrected,
+- page 19 after 8.12: "vector basis"->"basis vector",
+- some typos corrected in the rest of the document.
+
 18-03-20:
 - typos corrected from "Notations and conventions" to "Topology" sections. Some typos corrected also in the rest of the document.
 - definition of algebraic field 3.12 corrected (def. of unitary ring changed).

@@ -613,7 +613,7 @@ Such topological invariants are also useful in order to verify if two topologica
 \section[Derivations]{\crule[yellow!50!white]{0.3cm}{0.4cm}  Derivations}
 \begin{definition}[Derivation] \label{derivation}
 If $a$ is a point of $\rfield^n$, a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$ is called a \textit{derivation at a} if it is linear over $\rfield$ and satisfies the following product rule:
-$$\restrict{v(fg)}{a} = \restrict{f}{a} \restrict{v(g)}{a} + \restrict{g}{a} \restrict{v(f)}{a}$$
+$$\restrict{v(fg)}{a} = \restrict{f}{a} \restrict{v(g)}{a} + \restrict{g}{a} \restrict{v(f)}{a} \, .$$
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
@@ -658,7 +658,7 @@ We could prove that the dual basis is indeed a basis of the dual space, so $\dim
       g \colon V_p &\rightarrow V_p^* \\
       x &\mapsto g(x, \cdot) \nonumber
     \end{align}
-    where $g$ is the Euclidean metric in $\rfield^3$ (in the sense of General Relativity), i.e. the standard dot product: $g(x, y) = x^i y^i$
+    where $g$ is the Euclidean metric in $\rfield^3$ (in the sense of General Relativity), which in $\rfield^n$ coincides with the standard dot product: $g(x, y) = \sum_i x^i y^i$.
     \item $V = \left \{ M \in M_2(\mathbb{C}) \, | \, M^{\dagger} = M, \tr(M) = 0 \right \}$ is a vector field on $\rfield$, where
     $$M= \left ( \begin{matrix}
     a &b \\
@@ -666,7 +666,7 @@ We could prove that the dual basis is indeed a basis of the dual space, so $\dim
   \end{matrix}\right ), M^{\dagger}= \left (\begin{matrix}
     \bar a &\bar b \\
     \bar c &\bar d
-    \end{matrix} \right ), a, \ldots, d \in \mathbb{C}$$
+    \end{matrix} \right ), a, \ldots, d \in \mathbb{C} \, .$$
 
   A basis for $V$ is $\{\sigma_i\}_{i=1,2,3}$, where
   $$\sigma_1 = \left ( \begin{matrix}
@@ -701,7 +701,7 @@ The sentence "can be seen" means that there is an isomorphism $\psi$ associating
 \item Given the vector $e_j$ of the canonical basis, we associate it with the derivation $\partial_{x_j}$ in 0:
 \begin{align}
 \restrict{\partial_{x_j}}{p=0} \equiv \restrict{\frac{\partial}{\partial x_j}}{p=0} \colon C^{\infty}(\rfield^n) &\rightarrow \rfield \\
-f &\mapsto \restrict{\frac{\partial}{\partial x_j}}{0} (f) \equiv \frac{\partial f}{\partial x_j} (0) \nonumber
+f &\mapsto \restrict{\frac{\partial}{\partial x_j}}{0} (f) \equiv \frac{\partial f}{\partial x_j} (0) \nonumber \, .
 \end{align}
 
 In particular, if $\Der(\rfield^n) = \{ \text{derivations on }\rfield^n\}$ $ = \{ v\colon C^{\infty}\rightarrow \rfield, \\ \text{satisfying Leibnitz rule}\}$, then the map:
@@ -717,7 +717,7 @@ What is a possible dual basis?  We want to find linear forms $$e^{*i} \colon V_0
 We have just seen that we can consider vectors as directional derivatives. So, given $e_j$ vector of the canonical basis, we will call it $\restrict{\frac{\partial}{\partial x^j}}{0}$ (because of the isomorphism, they are quite the same mathematical object).
 Now, we want that
 \begin{equation} \label{dualbasisdelta}
-e^{*i}\left( \restrict{\frac{\partial}{\partial x^j}}{0} \right) = \delta_j^i
+e^{*i}\left( \restrict{\frac{\partial}{\partial x^j}}{0} \right) = \delta_j^i \, .
 \end{equation}
 First, let's consider the \textit{coordinate function}:
 \begin{align} \label{coofunc}
@@ -729,17 +729,17 @@ Now, let's just define
 \begin{equation} \label{dualdef}
 e^{*i}\left( \restrict{\frac{\partial}{\partial x^j}}{0} \right) \equiv \restrict{\frac{\partial}{\partial x^j}}{0} x_i =\restrict{\frac{\partial}{\partial x^j} x_i}{0} = \delta_j^i
 \end{equation}
-Where $x_i$ is the coordinate function defined above (remember: $\partial_{x_j}$ is a derivation, so it must be applied to functions!). Now, it might seem that $e^{*i}$ does not take a vector as argument, but rather a function. Actually, this problem is solved by the isomorphism between vectors and directional derivatives proved above. If $\psi$ is the name of such isomorphism, we could slightly change the definition \eqref{dualdef} in order to solve this ambiguity:
+where $x_i$ is the coordinate function defined above (remember: $\partial_{x_j}$ is a derivation, so it must be applied to functions!). Now, it might seem that $e^{*i}$ does not take a vector as argument, but rather a function. Actually, this problem is solved by the isomorphism between vectors and directional derivatives proved above. If $\psi$ is the name of such isomorphism, we could slightly change the definition \eqref{dualdef} in order to solve this ambiguity:
 \begin{equation}
 e^{*i}(e_j) \equiv \psi(e_j) (x_i)
 \end{equation}
 where $x_i$ is the $i$-th coordinate function and
 \begin{equation}
-\psi(e_j) = \restrict{\frac{\partial}{\partial x^j}}{0} = \restrict{\partial_{x_j}}{0}
+\psi(e_j) = \restrict{\frac{\partial}{\partial x^j}}{0} = \restrict{\partial_{x_j}}{0} \, .
 \end{equation}
 The vectors of the dual basis will also be called
 \begin{equation}
-  dx^i \equiv e^{*i}
+  dx^i \equiv e^{*i} \, .
 \end{equation}
 This will be important later: we will define exterior forms of degree $k$ and we'll use both notations. The set of all these forms is $\Lambda^k V^*$, and its basis is given by products (in particular, exterior products) of $e^{*i_1}, \ldots, e^{*i_k}$ (i.e. $dx^{i_1}, \ldots, dx^{i_k}$).
 \end{remark}\end{remarkbox}
@@ -773,13 +773,13 @@ where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}
   Given $v \in \mathfrak{X}(\rfield^n), f: \rfield^n \rightarrow \rfield$, we define the function $v(f)$ as
   \begin{align} \label{vfpdef}
     v(f) \colon \rfield^n &\rightarrow \rfield \nonumber \\
-    p & \mapsto v(f)(p) \equiv v_p f
+    p & \mapsto v(f)(p) \equiv v_p f \, .
   \end{align}
   Now, in coordinates:
   \begin{equation} \label{vfieldincoord}
     v(f)(p) = v_p f = v^i(p)(e_i)_p f = v^i(p) \restrict{\frac{\partial}{\partial x^i}}{p} f = v^i(p) \frac{\partial f}{\partial x^i} (p)
   \end{equation}
-  where we used summation convention, and the fact that every vector basis $e_i$ can be seen as $\restrict{\partial_{x_i}}{p}$. We defined it in the right way because, as expected, we found that $v_p(f)$ is the directional derivative of $f$ in the direction of $v$, evaluated at $p$. So, in brief:
+  where we used summation convention, and the fact that every basis vector $e_i$ can be seen as $\restrict{\partial_{x_i}}{p}$. We defined it in the right way because, as expected, we found that $v_p(f)$ is the directional derivative of $f$ in the direction of $v$, evaluated at $p$. So, in brief:
   \begin{itemize}
     \item $v(f)(p)$ is a number
     \item $v(f)(\cdot)$ is a function from $\rfield^n$ to $\rfield$
@@ -841,7 +841,7 @@ The exterior product $\wedge$ that we defined for $k=2$ in def. \ref{extprod} gi
 \end{align*}
 where, given $(x_1, \ldots, x_k) \in \underbrace{V \times \ldots \times V}_{k \text{ times}}$:
 \begin{equation} \label{detformula}
-  \varphi^1 \wedge \ldots \wedge \varphi^k (x_1, \ldots, x_k) =  \det\left (\varphi^i(x_j) \right)
+  \varphi^1 \wedge \ldots \wedge \varphi^k (x_1, \ldots, x_k) =  \det\left (\varphi^i(x_j) \right) \, .
 \end{equation}
 This is a particular case of an exterior $k$-form (because the sign of determinant changes if we swap two rows or two columns).
 Now let's consider and explicit computation using the determinant, in $\rfield^3$, with coordinates $x, y, z$, and with $\varphi^1, \varphi^2, \varphi^3$ corresponding to the three elements of the dual basis $dx \equiv e^{*1} = dx^1, dy \equiv e^{*2} = dx^2$ and $ dz \equiv e^{*3} = dx^3$:
@@ -862,7 +862,7 @@ and we can use that $dx^i(e_j) = \delta^i_j$. For instance, we can verify that t
 0 & 0 & 0 \\
 0 & 0 & 1
 \end{matrix}
-\right ) = 0
+\right ) = 0 \, .
 \end{equation*}
 \end{remark}\end{remarkbox}
 
@@ -880,7 +880,7 @@ then $a_{i_1 \cdots i_k} = 0, \forall\, i_1, \ldots, i_k$. Indeed, if it is true
 \begin{align*}
 0 &= a_{i_1 \cdots i_k} \underbrace{(e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (e_{i_1}, \ldots, e_{i_k})}_{= 1} + \\
 & + \sum\limits_{\substack{j_1 < \ldots < j_k \\
-j_1 \not = i_1, j_2 \not = i_2, \ldots}} a_{j_1 \cdots j_k} \underbrace{(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k})}_{= 0} = a_{i_1 \cdots i_k}
+j_1 \not = i_1, j_2 \not = i_2, \ldots}} a_{j_1 \cdots j_k} \underbrace{(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k})}_{= 0} = a_{i_1 \cdots i_k} \, .
 \end{align*}
 The second term is zero because $(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k}) = \det \left (e^{*j_l} (e_{i_l}) \right)$ and the matrix $e^{*j_l} (e_{i_l})$ has null coefficients on the main diagonal (because $j_1 \not = i_1, j_2 \not = i_2, \ldots$) and null coefficients on the lower triangle (because we have the ordering $j_1 < \ldots < j_k$). Thus, we are computing the determinant of an upper triangular matrix with null elements on the diagonal, i.e. the determinant is 0.
 Therefore, $a_{i_1 \cdots i_k} = 0$.
@@ -892,7 +892,7 @@ So, we proved the linear independence for the case in which we consider the basi
 &= \sum\limits_{i_1 < \ldots < i_k} x_{i_1} \cdot \ldots \cdot x_{i_k} \psi(e_{i_1}, \ldots, e_{i_k}) \overset{(3)}{=} \\
 &= \sum\limits_{i_1 < \ldots < i_k} x_{i_1} \cdot \ldots \cdot x_{i_k} \psi(e_{i_1}, \ldots, e_{i_k}) (e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (e_{i_1}, \ldots, e_{i_k}) \overset{(4)}{=} \\
 &= \sum\limits_{i_1 < \ldots < i_k} \psi(e_{i_1}, \ldots, e_{i_k}) (e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (x_{i_1}e_{i_1}, \ldots, x_{i_k}e_{i_k}) \overset{(5)}{=} \\
-&= \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k}(e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (v_1, \ldots, v_k) 
+&= \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k}(e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (v_1, \ldots, v_k) \, .
 \end{align*}
 Where we used: (1) $v_1 = \sum\limits_{i_1 = 1}^k x_{i_1}e_{i_1}$ in the $\{e_i\}_{i=1}^n$ basis, (2) we can simplify the sum since $\psi=0$ if two entries are repeated, (3) $1 = (e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (e_{i_1}, \ldots, e_{i_k})$, (4) multilinearity, (5) $0 = e^{*i}(e_j)$ if $i \not = j$ and $a_{i_1 \cdots i_k} \equiv \psi(e_{i_1}, \ldots e_{i_k})$. \qedhere
 \end{itemize}
@@ -923,20 +923,20 @@ Now, we want to define the exterior product between a $k$-form and a $p$-form (a
 \begin{tcolorbox}\begin{example}[Oriented area] \label{orarea}
   Let's consider the following examples:
   \begin{enumerate}
-    \item $V = \rfield^3 \times \rfield^3$ with cartesian coordinates.
+    \item Let's suppose our space is $V = \rfield^3 \times \rfield^3$ with cartesian coordinates.
     $$\varphi \equiv dx^1 \wedge dx^2 + dx^2 \wedge dx^4$$
-    $\varphi$ is a sum of two 2-forms. They are 2-forms (and not 1-forms, nor 3-forms, nor 4-forms, ...) because they are written as wedge product ("$\wedge$") of \textbf{two} elements of the dual basis. Remember that we denote the elements of the dual basis either by $e^{*i}$ or $dx^i$ for some $i$.
+    where $\varphi$ is a sum of two 2-forms. They are 2-forms (and not 1-forms, nor 3-forms, nor 4-forms, ...) because they are written as wedge product ("$\wedge$") of \textbf{two} elements of the dual basis. Remember that we denote the elements of the dual basis either by $e^{*i}$ or $dx^i$ for some $i$.
     Let's compute $\varphi(e_i, e_j)$. We can use the determinant formula \eqref{detformula}: 
 \begin{align*}
-    \varphi(e_i, e_j) = &dx^1(e_i) dx^2(e_j) + dx^2(e_i)dx^4(e_j) - dx^2(e_i)dx^1(e_j) + \\ - &dx^4(e_i)dx^2(e_j)
+    \varphi(e_i, e_j) = &dx^1(e_i) dx^2(e_j) + dx^2(e_i)dx^4(e_j) - dx^2(e_i)dx^1(e_j) + \\ - &dx^4(e_i)dx^2(e_j)\, .
     \end{align*}
-    \item $V = \rfield^2$ with cartesian coordinates $x^1, x^2$.
-    $$\varphi \equiv dx^1 \wedge dx^2$$
+    \item Let's consider $V = \rfield^2$ with cartesian coordinates $x^1, x^2$. Let:
+    $$\varphi \equiv dx^1 \wedge dx^2\, .$$
     Let's compute $\varphi(ae_1, be_2)$, where $ a,b \in \rfield$:
     \begin{align*}
     \varphi(ae_1, be_2) &= dx^1 \wedge dx^2(ae_1, be_2) = ab\,  dx^1 \wedge dx^2(e_1, e_2) = \\
     &= ab \, (dx^1(e_1)dx^2(e_2) - \cancel{dx^2(e_1)} \cancel{dx^1(e^2)}) = ab = \\
-    &= \text{oriented area of the rectangle of sides } a \text{ and } b
+    &= \text{oriented area of the rectangle of sides } a \text{ and } b\, .
   \end{align*}
   \end{enumerate}
 
@@ -957,7 +957,7 @@ $ $
 	\item Writing the forms in terms of the basis, we only need to prove that the property (1) holds for the elements of the dual basis. Moreover, by multilinearity, we just need to prove it for the elements of the dual basis applied to a basis $\{e_i\}$ of $V$. Thus, the proof for (1) is over because this property is true for the determinant: when we compute it, we can start from any row or column.
 	\item By writing the forms in terms of the basis as before.
 	\item  Again, by writing the forms in terms of the basis we have a sequence of wedge products like
-	$$e^{*i_1} \wedge \ldots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \ldots \wedge e^{*j_p}$$
+	$$e^{*i_1} \wedge \ldots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \ldots \wedge e^{*j_p}\, .$$
 	If we swap two elements of the product we get a factor "$-1$". In order to have the right hand side we need to "move $e^{*j_1}$ on the left $k$ times", so we get a factor $(-1)^k$. Same for $e^{*j_2}$: we need to move it on the left $k$ times and so we get an extra factor $(-1)^k$. Again, we repeat the procedure for all the elements up to $e^{*j_p}$. At the end, we get a factor $(-1)^{kp}$. \qedhere
 	\end{enumerate}
 \end{proof}
@@ -967,9 +967,9 @@ $ $
   (A field of) exterior forms of degree $k$, $k \le n$ is a map $\omega$ that associates to each point $p \in V$ an element $\omega(p) \in \Lambda^{k}V_p^*$.
   Choosing a basis, we have:
   \begin{equation} \label{kformdef}
-    \omega(p) = \sum\limits_{i_1 < \ldots < i_k} \underbrace{a_{i_1 \cdots i_k}(p)}_{\text{now it is a function!}} e^{*i_1} \wedge \cdots \wedge e^{*i_k}
+    \omega(p) = \sum\limits_{i_1 < \ldots < i_k} \underbrace{a_{i_1 \cdots i_k}(p)}_{\text{now it is a function!}} e^{*i_1} \wedge \cdots \wedge e^{*i_k} \, .
     \end{equation}
-    $\omega$ is a differential form if $a_{i_1 \cdots i_k}$ are differentiable. The set of differential $k$-forms is denoted by $\Omega^k(\rfield^n)$.
+    The form $\omega$ is a differential form if $a_{i_1 \cdots i_k}$ are differentiable functions. The set of differential $k$-forms is denoted by $\Omega^k(\rfield^n)$.
 \end{definition}
 
 Another (equivalent) definition:
@@ -985,7 +985,7 @@ Another (equivalent) definition:
 \begin{remarkbox}\begin{remark}
   To show the equivalence of the two definition of differential $k$-forms we just need to show that:
   \begin{equation}
-    \omega(p)(v_1, \ldots, v_k) = \omega(v_1, \ldots, v_k)(p)
+    \omega(p)(v_1, \ldots, v_k) = \omega(v_1, \ldots, v_k)(p) \, .
   \end{equation}
   See also the exercise 1, problem sheet 3.
 \end{remark}\end{remarkbox}
@@ -994,18 +994,18 @@ We want to generalize the concept of differential of a function.
 \begin{definition}[Differential] \label{differential}
   Let $f$ be a function $f \colon U \subseteq \rfield^n \rightarrow \rfield$, $f$ differentiable. Let $v \in \mathfrak{X}(\rfield^n) = \Der \mathbb{F}(\rfield^n)$. The exterior derivative of $f$ is its differential $d$, defined as a 1-form such that:
   \begin{equation}
-    df(v) = v(f)
+    df(v) = v(f) \, .
   \end{equation}
 \end{definition}
 
-\begin{remarkbox}\begin{remark}[differential expression in coordinates] \label{diffcoordremark}
+\begin{remarkbox}\begin{remark}[Differential expression in coordinates] \label{diffcoordremark}
   We want to verify that the above definition of differential is equivalent to our usual definition for $C^1(\rfield^n)$ function, which is:
   \begin{equation}
-    df = \sum\limits_{i=1}^n \frac{\partial f}{\partial x_i} dx^i = \frac{\partial f}{\partial x_i} dx^i
+    df = \sum\limits_{i=1}^n \frac{\partial f}{\partial x_i} dx^i = \frac{\partial f}{\partial x_i} dx^i \, .
   \end{equation}
   In order to prove that, we first consider a pointwise definition. Given $p \in \rfield^n$:
   \begin{equation} \label{diffdefp}
-    df_p(v) = v(f), \forall\,\, v \in T_p \rfield^n \cong \rfield^n
+    df_p(v) = v(f), \forall\,\, v \in T_p \rfield^n \cong \rfield^n \, .
   \end{equation}
   ($T_p \rfield^n$ is the tangent space to $\rfield^n$ at $p$). Now, we can write $v(f)$ in coordinates (the gray part is the one we don't care about):
   \begin{equation} \label{diffcoordinates}
@@ -1021,31 +1021,31 @@ We want to generalize the concept of differential of a function.
   \end{equation}
    and then:
    \begin{equation}
-   \textcolor{lightgray}{df_p \left (\restrict{\frac{\partial}{\partial x^i}} {p} \right) = \text{ }} v_i(p) (\lambda^i)_p \restrict{\frac{\partial}{\partial x^i}} {p} = v_i(p)
+   \textcolor{lightgray}{df_p \left (\restrict{\frac{\partial}{\partial x^i}} {p} \right) = \text{ }} v_i(p) (\lambda^i)_p \restrict{\frac{\partial}{\partial x^i}} {p} = v_i(p) \, .
  \end{equation}
    On the other hand, by definition \eqref{diffdefp} we know that:
    \begin{equation} \label{diffpart2}
-     df_p \left (\restrict{\frac{\partial}{\partial x^i}} {p} \right)  = \restrict{\frac{\partial}{\partial x^i}} {p} f = \frac{\partial f}{\partial x^i} (p)
+     df_p \left (\restrict{\frac{\partial}{\partial x^i}} {p} \right)  = \restrict{\frac{\partial}{\partial x^i}} {p} f = \frac{\partial f}{\partial x^i} (p) \, .
    \end{equation}
    Hence, using \eqref{diffpart1} and \eqref{diffpart2} we get:
    \begin{equation}
-     v_i (p) = \frac{\partial f}{\partial x^i} (p)
+     v_i (p) = \frac{\partial f}{\partial x^i} (p) \, .
    \end{equation}
    Then, by the expression of differential in coordinates \eqref{diffcoordinates}:
    \begin{equation}
-     df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p
+     df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p\, .
    \end{equation}
    Applying the definition to $f = x^j$ (coordinate function, as defined in \eqref{coofunc}), we get:
    \begin{equation}
-     df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p = \frac{\partial f}{\partial x^i} (p) (dx^i)_p
+     df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p = \frac{\partial f}{\partial x^i} (p) (dx^i)_p \, .
    \end{equation}
    And then:
    \begin{equation}
-     df = \frac{\partial f}{\partial x^i} dx^i
+     df = \frac{\partial f}{\partial x^i} dx^i\, .
    \end{equation}
    Indeed, if $f = x^j$ then, as before:
    \begin{equation}
-     (dx^j)_p = \frac{\partial x^j}{\partial x^i} (p) \restrict{(\lambda^i)}{p} = \delta^i_j \restrict{(\lambda^i)}{p} = \restrict{(\lambda^j)}{p}
+     (dx^j)_p = \frac{\partial x^j}{\partial x^i} (p) \restrict{(\lambda^i)}{p} = \delta^i_j \restrict{(\lambda^i)}{p} = \restrict{(\lambda^j)}{p} \, .
    \end{equation}
 Pay attention: what we did here is a bit different from what we did for the definition $\ref{vfpdef}$ of a vector field applied to a function. In this case, $p$ is the point where we fixed our vector, whereas in the other case $p$ was the point where we wanted to evaluate the directional derivative of $f$.
 \end{remark}\end{remarkbox}
@@ -1062,23 +1062,30 @@ In the above definition, $f$ was a 0-form (i.e. a function). What is the general
   \begin{equation*}
     d \omega = \sum\limits_{j_1 < \ldots < j_k} \left (d a_{j_1, \ldots, j_k} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k}
   \end{equation*}
-With $d a_{j_1, \ldots, j_k}$ differential of the function $a_{j_1, \ldots, j_k}$.
+with $d a_{j_1, \ldots, j_k}$ differential of the function $a_{j_1, \ldots, j_k}$.
 \end{definition}
 
 \begin{tcolorbox}\begin{example}[Computation of $d\omega$]
   Let's consider the following examples:
   \begin{enumerate}
     \item Let $\omega$ be a 2-form on $\rfield^3$ (coordinates $x^1, x^2, x^3$):
-    $$\omega = dx^1 \wedge dx^2 + x^2 dx^1 \wedge dx^3$$
-    Then
+    $$\omega = dx^1 \wedge dx^2 + x^2 dx^1 \wedge dx^3\, .$$
+    Then:
     $$d \omega = dx^2 \wedge dx^1 \wedge dx^3$$
-    where we used that $d (dx^1 \wedge dx^2) = 0$ because there is no 3-form on a 2-dimensional space (otherwise, we can use that $d^2=0$, but we still have to prove it!)
+    where we used that "$d (dx^1 \wedge dx^2) = 0$" because there is no 3-form on a 2-dimensional space. (otherwise, we can use that $d^2=0$, but we still have to prove it!)
     \item In $\rfield^n$, let's consider:
-    $$\omega = x^2 dx^1, \quad d \omega = dx^2 \wedge dx^1$$
-    where we computed  $d \omega$ by using $d g(v) = v(g)$ for a function $g$ and a vector field $v$. In fact, if $u,v \in \mathfrak{\rfield^n}$, then by definition of exterior product we have:
-    $$d \omega (u, v) = dx^2(u)dx^1(v) - dx^2(v)dx^1(u)$$
-    On the other hand, using $dx^2(u)=u(x^2), v(x^2) = dx^2(v)$ (where $x^2$ is a function, the coordinate function defined in \eqref{coofunc}) we also have:
-    $$d \omega (u, v) = u(x^2)dx^1(v) - v(x^2)dx^2(u)$$
+    $$\omega = x^2 dx^1 \, .$$
+    We have:
+    $$ d \omega = dx^2 \wedge dx^1$$
+    where we used the definition \ref{extder}. Moreover, if $u,v \in \mathfrak{\rfield^n}$, then by definition of exterior product we have:
+    $$d \omega (u, v) = dx^2(u)dx^1(v) - dx^2(v)dx^1(u)\, .$$
+    On the other hand, using that $d g(v) = v(g)$ for a function $g$ and a vector field $v$, we have:
+    \begin{align*}
+    dx^2(u)&=u(x^2)\, , \\ 
+    v(x^2) &= dx^2(v)
+    \end{align*}
+where $x^2$ is a function, the coordinate function defined in \eqref{coofunc}. We also have:
+    $$d \omega (u, v) = u(x^2)dx^1(v) - v(x^2)dx^2(u) \, .$$
   \end{enumerate}
 \end{example}\end{tcolorbox}
 
