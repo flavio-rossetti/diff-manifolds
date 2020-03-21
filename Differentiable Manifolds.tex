@@ -915,8 +915,8 @@ Now, we want to define the exterior product between a $k$-form and a $p$-form (a
     (\alpha, \beta) &\mapsto \alpha \wedge \beta \nonumber
   \end{align}
   with:
-  $$\alpha \wedge \beta = \sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p}} \alpha_{i_1 \cdots i_k}\beta_{j_1 \cdots j_k} e^{*i_1} \wedge \cdots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \cdots \wedge e^{*j_k} $$
-  where $\alpha_{i_1 \cdots i_k},\beta_{j_1 \cdots j_k} \in \mathbb{K}$
+  $$\alpha \wedge \beta = \sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p}} \alpha_{i_1 \cdots i_k}\beta_{j_1 \cdots j_p} e^{*i_1} \wedge \cdots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \cdots \wedge e^{*j_p} $$
+  where $\alpha_{i_1 \cdots i_k},\beta_{j_1 \cdots j_p} \in \mathbb{K}$.
 \end{definition}
 
 
@@ -1323,14 +1323,16 @@ i.e. $f(D)$ is the lower-right triangle of the square $D$. In particular, we can
 
 \section[More on Vector Fields]{\crule[gray!50!white]{0.3cm}{0.4cm}  More on Vector Fields}
 \begin{definition}[Tangent space]
-  $U \subset \rfield^n, U$ is an open set. $p \in U$, then the set of all derivations of $C^\infty(U)$ (cf. def \ref{derivation}) is called tangent space to $U$ at $p$ and is denoted by $T_p U$. An element of $T_p U$ is called a tangent vector at $p$, and it is often denoted by $v_p$.
+  Let $U \subset \rfield^n, U$ open set. Given $p \in U$, then the set of all derivations of $C^\infty(U)$ (cf. def \ref{derivation}) is called tangent space to $U$ at $p$ and is denoted by $T_p U$. An element of $T_p U$ is called a tangent vector at $p$, and it is often denoted by $v_p$. 
 \end{definition}
+
+There are alternative equivalent definitions of the tangent space. All of them will be analyzed in the next sections.
 
 
 \begin{definition}[Tangent bundle]
 The tangent bundle over an open subset $U \subset \mathbb{R}^n$ is defined as
 \begin{equation}
-	TU \equiv \underset{p \in U}{\sqcup} T_p U
+	TU \equiv \underset{p \in U}{\bigsqcup} T_p U
 \end{equation}
 where $T_p U$ is the tangent space of $U$ at $p$. Every element of the disjoint union is represented by an ordered pair $(p, v)$ where $p \in U, v \in T_p U$.
 So, elements of the tangent bundle are couples that consist of a tangent vector at a point of $U$, and the point itself.
@@ -1342,7 +1344,7 @@ The tangent bundle comes equipped with the projection map
 which sends each vector in $T_pU$ to the point $p$ at which it is tangent. 
 \end{definition}
 
-\begin{remarkbox}\begin{remark}
+\begin{remarkbox}\begin{remark} \label{disjointrem}
   In the previous definition, the "$\sqcup$" symbol denotes a disjoint union. "Disjoint" here means that, if we consider the disjoint union of two elements $x$ and $y$ such that $x=y$, the union is the set $\{x, y\}$ and not $\{x\} = \{y\}$ as in normal unions. The mathematical operator doesn't know if two elements are equal. Since we are not mathematical operators, we can enumerate the elements like: $\{(1, x), (2, y)\} = \{(1, x), (2, x)\} = \{(1, y), (2, y)\}$ in order to distinguish them.
 \end{remark}\end{remarkbox}
 
@@ -1355,15 +1357,20 @@ which sends each vector in $T_pU$ to the point $p$ at which it is tangent.
 \end{definition}
 
 \begin{remarkbox}\begin{remark} [Space of sections]
-  The set of all vector fields $\mathfrak{X}(U) \equiv \{ C^\infty(U, TU) \, | \\ \, \pr(v_p) = p \}$ is also called the space of sections in $TU$.
+  The set of all vector fields $\mathfrak{X}(U) \equiv \{ C^\infty(U, TU) \, | \\ \, \pr(v_p) = p \}$ is also called the space of sections in $TU$. Thus, a section of $TU$ is a vector field.
 \end{remark}\end{remarkbox}
+
+\begin{definition}[Cotangent space] \label{cotangentspace}
+Let $U \subset \rfield^n, U$ open set. Given $p \in U$, then the cotangent space at $p$ is denoted by $T_p^* U$ and it is the dual space of $T_pU$:
+\[ T_p^* U = (T_p U)^* \, . \] 
+\end{definition}
 
 \begin{definition} [Cotangent bundle]
   We define
   \begin{equation}
-    T^*U \equiv \underset{p \in U}{\sqcup} T_p^* U
+    T^*U \equiv \bigsqcup\limits_{p \in U} T_p^* U
   \end{equation}
-  as the cotangent bundle. Where $T^*_p$, the dual space of the tangent space, is called cotangent space. We also associate a projection $\pr \colon T^*U \rightarrow U$ with it.
+  as the cotangent bundle. We also associate a projection $\pr \colon T^*U \rightarrow U$ with it.
 \end{definition}
 
 Now, let's talk about about Lie algebras.
@@ -2028,12 +2035,14 @@ Thus, $\hat{\tilde \phi}$ is a bijection.
 
 \begin{tcolorbox}\begin{example}\label{seqexample}
   Let's consider the following example:\\
+  \begin{center}
   \begin{tikzcd}
 \Omega^0(U) \arrow[r, "d"] \arrow[d, "\phi^*"'] & \Omega^1(U) \arrow[r, "d"] \arrow[d, "\phi^*"'] & \Omega^2(U) \arrow[r] \arrow[d, "\phi^*"'] & \ldots & \} \textit{ sequence} \\
 \Omega^0(V) \arrow[r, "d"] \arrow[d, "\psi^*"'] & \Omega^1(V) \arrow[r, "d"] \arrow[d, "\psi^*"'] & \Omega^2(V) \arrow[r] \arrow[d, "\psi^*"'] & \ldots & \} \textit{ sequence} \\
 \Omega^0(W) \arrow[r, "d"]                      & \Omega^1(W) \arrow[r, "d"]                      & \Omega^2(W) \arrow[r]                      & \ldots & \} \textit{ sequence} \\
 \underbrace{}_{\textit{sequence}}               & \underbrace{}_{\textit{sequence}}               & \underbrace{}_{\textit{sequence}}          &        &
 \end{tikzcd}
+\end{center}
 \end{example}\end{tcolorbox}
 
 \begin{lemma}[zig-zag lemma]
@@ -2046,12 +2055,15 @@ Thus, $\hat{\tilde \phi}$ is a bijection.
 \end{lemma}
 
 \begin{tcolorbox}\begin{example}
-  See also example \ref{seqexample}.\\
+  We have:
+    \begin{center}
   \begin{tikzcd}
 H^0(U) \arrow[r, "d"] \arrow[d, "\phi^*"']                                               & H^1(U) \arrow[r, "d"] \arrow[d, "\phi^*"']                                               & H^2(U) \arrow[r] \arrow[d, "\phi^*"']                                               & \ldots \\
 H^0(V) \arrow[r, "d"] \arrow[d, "\psi^*"']                                               & H^1(V) \arrow[r, "d"] \arrow[d, "\psi^*"']                                               & H^2(V) \arrow[r] \arrow[d, "\psi^*"']                                               & \ldots \\
 H^0(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, bend left] & H^1(W) \arrow[r, "d"] \arrow[ruu, "\color{gray}{\delta}" description, dotted, bend left] & H^2(W) \arrow[r] \arrow[ruu, "\color{gray}{\delta}" description, dotted, bend left] & \ldots
 \end{tikzcd}
+\end{center}
+See also example \ref{seqexample}.
 \end{example}\end{tcolorbox}
 
 \begin{theorem}[Mayer-Vietoris] \label{mvthm}
@@ -2795,10 +2807,10 @@ Using the geometric definition:
 \begin{definition}
 For a manifold $M$ of dimension $n$, let 
 \begin{align}
-TM = \bigcup_{p \in M} \tangentphys{p} M & \overset{\text{pr}}{\longrightarrow} M \\
+TM = \bigsqcup_{p \in M} \tangentphys{p} M & \overset{\text{pr}}{\longrightarrow} M \\
 v &\longmapsto p \nonumber
 \end{align}
-This map is the bundle projection of the tangent bundle $TM$.
+This map is the bundle projection of the tangent bundle $TM$. Notice that we are using the notation $v$ instead of $(p, v)$ to denote an element of the tangent bundle, for the sake of simplicity (see also remark \ref{disjointrem}).
 \end{definition}
 \begin{remarkbox}\begin{remark}
 $TM$ is a manifold, if equipped with the following structure. Pick an atlas $(U_i, \varphi_i)_{i \in I}$ of $M$ (remember: $\varphi \colon M \supset U_i \rightarrow \rfield^n, U_i$ open). Thanks to the second-countability property, we can take $I$ as a countable set without loss of generality. Then, one defines local coordinates (i.e. a local parametrization) on $\pr^{-1}(U_i)$ via
@@ -2849,10 +2861,11 @@ where the map $t \mapsto (v + tw)$ goes from $(-\varepsilon, \varepsilon) \subse
 \end{remark}\end{remarkbox}
 
 \begin{definition}
-In a manner similar to $TM$ becoming a manifold, one can define the manifold given by the cotangent bundle
+In a manner similar to $TM$ becoming a manifold, one can define the manifold given by the cotangent bundle:
 \begin{equation}
-T^*M = \bigcup_{p \in M} T_p^*M \overset{\pr}{\longrightarrow} M
+T^*M = \bigsqcup_{p \in M} T_p^*M \overset{\pr}{\longrightarrow} M
 \end{equation}
+where $T^*_pM = (T_pM)^*$ is the cotangent space, defined similarly to def. \ref{cotangentspace}.
 \end{definition}
 
 \begin{definition}[1-form]

@@ -10,7 +10,12 @@ Missing parts:
 
 Last changes:
 
+21-03-20:
+- Definition of cotangent space added, some small correction on definition of tangent and cotangent spaces was done,
+- Symbols for disjoint union corrected (definitions of tangent bundle and cotangent bundle).
+
 19-03-20:
+- definition 9.6, indices of last formula corrected
 - Example 10.7 corrected,
 - page 19 after 8.12: "vector basis"->"basis vector",
 - some typos corrected in the rest of the document.
