@@ -11,6 +11,7 @@ Missing parts:
 Last changes:
 
 26-03-20:
+- de Rham cohomology section changed (def. of cohomology theory added)
 - def. 10.16 and remark 10.17 added (nondegenerate 2-form),
 - remark 16.10 corrected (\ne instead of =).
 - some typos corrected in all the document.

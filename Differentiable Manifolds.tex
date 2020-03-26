@@ -22,7 +22,8 @@
 \usepackage{stackengine}
 \usepackage{fancyhdr}
 \usepackage{musicography}
-
+\usepackage[numbers]{natbib}
+\defcitealias{Lee}{[IntroSmoothMan]}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -125,6 +126,8 @@
       ($(right)+(3em,-1.0em)$);}
 }
 
+
+
 \begin{document}
 \pagenumbering{gobble}
 
@@ -157,7 +160,7 @@
 %\chapter{Part I}
 \section[Introduction]{\crule[red!50!white]{0.3cm}{0.4cm}  Introduction}
 
-From the Lee book \cite{Lee}: "The central idea of calculus is \textit{linear approximation}". A function of one variable can be approximated by its tangent line, a curve by a tangent vector (i.e. velocity vector), a surface in $\rfield^3$ can be approximated by its tangent plane, and a map from $\rfield^n$ to $\rfield^m$ by its total derivative.
+From the Lee book \citetalias{Lee}: "The central idea of calculus is \textit{linear approximation}". A function of one variable can be approximated by its tangent line, a curve by a tangent vector (i.e. velocity vector), a surface in $\rfield^3$ can be approximated by its tangent plane, and a map from $\rfield^n$ to $\rfield^m$ by its total derivative.
 Here it comes the importance of tangent spaces.
 
 Main idea: in order to study tangent vectors, we identify them with "directional derivatives". In particular, there is a natural one-to-one correspondence between geometric tangent vectors and linear maps from $C^{\infty}(\rfield^n)$ to $\rfield$ satisfying the product rule. Such maps are called \textit{derivations}.
@@ -769,7 +772,7 @@ where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}
   However, the definition \ref{setsfields} is a bit different. Why?
   The fact is, we can consider a vector of $\rfield^n$ as a directional derivative, cf. remark \ref{vectorasder} (we are not considering any fixed point here, but the results do not change). Now a derivation, as defined in def. \ref{derivation}, is a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$, i.e. we can say that a derivation is a very smooth element of $\mathbb{F}(\rfield^n) = \{ \text{functions } f \colon \rfield^n \rightarrow \rfield\}$. So, $\mathfrak{X}(\rfield^n) \cong X(\rfield^n)$ because we can associate a derivation of $\mathfrak{X}(\rfield^n)$ to each vector of $X(\rfield^n)$, and vice versa. Then we also explained why in the definition of $\mathfrak{X}( \rfield^n)$ every element must be $\rfield$-linear and satisfy the Leibnitz rule: it follows from the definition of derivations.
 
-  Now, a question arises: given $v$ vector field, should we write $v(p)$ (i.e. it takes vectors as argument) or should we write $v(f)$ (i.e. it takes smooth functions as arguments)? The answer is: it depends on the case, since they are two different "$v$"s. Which is, we will use vectors when we think of $v$ as a function who takes elements of $\rfield^n$, and we will use functions in the other case. And we can choose which case to use, since we can identify every vector field with a derivation, and every derivation with a vector field (for more info, see pag. 181 of \cite{Lee}). Now, let us analyze how $v(f)$ is made in the latter case.
+  Now, a question arises: given $v$ vector field, should we write $v(p)$ (i.e. it takes vectors as argument) or should we write $v(f)$ (i.e. it takes smooth functions as arguments)? The answer is: it depends on the case, since they are two different "$v$"s. Which is, we will use vectors when we think of $v$ as a function who takes elements of $\rfield^n$, and we will use functions in the other case. And we can choose which case to use, since we can identify every vector field with a derivation, and every derivation with a vector field (for more info, see pag. 181 of \citetalias{Lee}). Now, let us analyze how $v(f)$ is made in the latter case.
   Given $v \in \mathfrak{X}(\rfield^n), f: \rfield^n \rightarrow \rfield$, we define the function $v(f)$ as
   \begin{align} \label{vfpdef}
     v(f) \colon \rfield^n &\rightarrow \rfield \nonumber \\
@@ -1224,7 +1227,7 @@ Now, we want to give another name to the differential of a function.
 
 \begin{remarkbox}\begin{remark}[Pushforward of composition of functions]
 In our mind, we'll think of the pushforward as the differential of a map: $df_p = (f_*)_p$, at least until this concept is generalized. 
-By definition of differential: $df_p(v) = v(f)$, where $v$ is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v(f)$ is the directional derivative of $f$ with respect to $v$ (not evaluated at any point, for now!). In particular, if we apply the definition to a point $h(q)$, where $h \in C^{\infty}(\rfield^n, \rfield^m)$ and $q \in \rfield^n$, we have (cf. also pag. 55 Lee \cite{Lee}):
+By definition of differential: $df_p(v) = v(f)$, where $v$ is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v(f)$ is the directional derivative of $f$ with respect to $v$ (not evaluated at any point, for now!). In particular, if we apply the definition to a point $h(q)$, where $h \in C^{\infty}(\rfield^n, \rfield^m)$ and $q \in \rfield^n$, we have (cf. also pag. 55 Lee \citetalias{Lee}):
 $$\restrict{(f_*)_p (v)(h)}{q} \overset{(1)}{=} \restrict{v(h \circ f)}{q}  = \restrict{v(h(f))}{q} \overset{(2)}{=} \restrict{v (f^* h) }{q}$$
 where we used: (1) $(f_*)_p (v)(h)  = v(h \circ f)$, it can be proved that it is the right expression in a similar way to what we did to prove that $(f_*)_p (v)= v(f)$ is the right expression (cf. remark \ref{diffcoordremark}), (2) the expression of the pullback for a differentiable function, which is completely legal since we defined it for differentiable $k$-forms, and a differentiable function is just a 0-form.
 \end{remark}\end{remarkbox}
@@ -1894,18 +1897,47 @@ We can limit ourselves to consider continuous curves, thanks to the two followin
   If $\gamma_1$ and $\gamma_2$ are homotopic maps between $U$ and $V$ then they are smoothly homotopic. %TO CHECK
 \end{theorem}
 \section[de Rham Cohomology]{\crule[green!50!white]{0.3cm}{0.4cm}  de Rham Cohomology}
-Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vector space over $\rfield$. Indeed, if $\alpha, \beta \in \Omega^k(U)$, then $a \alpha + b \beta \in \Omega^k(U), \forall\, a, b, \in \rfield$. And also the remaining properties of a vector space are satisfied.
+
+
+Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vector space over $\rfield$. Indeed, if $\alpha, \beta \in \Omega^k(U)$, then $a \alpha + b \beta \in \Omega^k(U), \forall\, a, b, \in \rfield$. Also the remaining properties of a vector space are satisfied.
 
 \begin{remarkbox}\begin{remark}
-  We say that $\Omega^k(U, \mathbb{Z}) = \{k\text{-forms on } U \text{ with coefficients in } \mathbb{Z}\}$  forms a group (and not a vector space) since $\mathbb{Z}$ is not a field. In contrast, $\Omega^k(U, \rfield)$ is a vector space.
+  We say that $\Omega^k(U, \mathbb{Z}) = \{k\text{-forms on } U \text{ with coefficients in } \mathbb{Z}\}$  forms a group (and not a vector space) since $\mathbb{Z}$ is not a field. In contrast, $\Omega^k(U, \rfield)$ is a vector space. We will denote $\Omega^k(U, \rfield)$ just by $\Omega^k(U)$.
 \end{remark}\end{remarkbox}
 
-\begin{definition}
+Now, we want to introduce some concepts of cohomology theory (see also page 460, \citetalias{Lee}).
+
+\begin{definition}[Complex]
+Let $\mathcal{R}$ be a commutative ring (let's suppose $\mathcal{R} = \rfield$ because it is the case we are interested in). Let's consider the sequence
+\[ \cdots  \longrightarrow A^{k-1} \overset{d}{\longrightarrow} A^k \overset{d}{\longrightarrow}A^{k+1} \longrightarrow \cdots \]
+where for every $k$, $A^k$ is a vector space on $\rfield$ and the maps $d$ are linear maps. Such a sequence is said to be a complex if the composition of any two successive applications of $d$ is the zero map:
+\[ d \circ d = 0 \colon A^k \rightarrow A^{k+2} \text{ for each } k\, . \]
+Sometimes it is also called a cochain complex, whereas it is called a chain complex if the arrows go in the opposite direction.
+It's easy to see that such a definition implies that $\im(d_k) \subset \ker(d_{k+1})$. 
+\end{definition}
+
+\begin{definition}[Exact sequence]
+Let $A^*$ be a complex. It is called an exact sequence if $\im(d_k) = \ker(d_{k+1})$.
+\end{definition}
+
+\begin{definition}[K-th cohomology group]
+Let $A^*$ be a complex. We define the k-th cohomology group of $A^*$ to be the quotient module
+\[H^k(A^*) \equiv \faktor{\ker(d_{k+1})}{\im(d_k)}\, . \]
+It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cochain complex. If we are dealing with a chain complex, it is called homology group instead of cohomology group. The linear map $d$ can be any map, but when $d$ is the exterior derivative and the complex is given by a sequence of the vector spaces $\Omega^k(U)$, the cohomology group gives us information about the failure of exactness at $\Omega^k(U)$ (it is an information about the space, not about the forms).
+\end{definition}
+
+\begin{definition}[de Rham complex]
+  The de Rham complex is the sequence
+  $$\cdots \overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0 $$
+  where $d$ is the exterior derivative now. It is well defined since we know that $d^2 = d \circ d = 0$ from the properties of the exterior derivative. Thus, $\im(d_k) \subset \ker(d_{k+1})$.
+\end{definition}
+
+\begin{definition}[de Rham cohomology group] \label{drremark}
   Let $U \subset \rfield^n$, $U$ open, $\dim(U) = m \le n$. Then:
   \begin{itemize}
     \item The set of closed $k$-forms is the $k$-th \textit{cocycle group} $Z^k(U, \rfield)$ (it is a group with respect to addition),
-    \item The set of exact $k$-forms is the $k$-th \textit{coboundary group} $B^k(u, \rfield)$,
-    \item The $k$-th \textit{de Rham cohomology group} $H^k(U, \rfield)$ is defined as: $$H^k(U, \rfield) = \faktor{Z^k(U, \rfield)}{B^k(U, \rfield)} \, .$$
+    \item The set of exact $k$-forms is the $k$-th \textit{coboundary group} $B^k(U, \rfield)$,
+    \item The $k$-th \textit{de Rham cohomology group} $H^k(U, \rfield)$ is defined as: $$H^k(U, \rfield) \equiv \faktor{Z^k(U, \rfield)}{B^k(U, \rfield)} = \faktor{\ker(d_{k+1})}{\im(d_k)} \, .$$
   \end{itemize}
 \end{definition}
 
@@ -1925,7 +1957,7 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
 \end{example}\end{tcolorbox}
 
 \begin{definition}
-  If $M \subset \rfield^n$, then we define :
+  If $M \subset \rfield^n$, then we define:
   \[  \Omega^*(M, \rfield) \equiv \bigoplus_{k=0}^n \Omega^k(M, \rfield) \, . \]
 \end{definition}
 
@@ -1933,28 +1965,14 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
   $\wedge \colon \Omega^* \times \Omega^* \rightarrow \Omega^*$ endows $\Omega^*$ with the structure of a ring.
 \end{remark}\end{remarkbox}
 
-\begin{definition}[de Rham complex]
-  The de Rham complex is defined by $\Omega^*(M, \rfield)$ together with the sequence
-  $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0$$
-  with $\im(d_k) \subset \ker(d_{k+1})$ (since $d^2 = d \circ d = 0$).
-\end{definition}
+\begin{remarkbox}\begin{remark} [Exact sequence] \label{exsequence}
+  If $H^k(M, \rfield) = 0$ for $k=1, \ldots, n$, then
+    $$\cdots \overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
+    is an exact sequence because every closed form is exact, so $\ker(d_{k+1}) = \im(d_k)$. Notice that for $k=0$, $\Omega^0 = \{\text{functions}\}$, then $H^0 \ne 0$.
+\end{remark} \end{remarkbox}
 
-\begin{remarkbox}\begin{remark} \label{drremark}
-  $H^k(M) = \faktor{\ker(d_{k+1})}{\im(d_k)}$.
-\end{remark}\end{remarkbox}
-
-\begin{definition} [exact sequence] \label{exsequence}
-  If $H^k(M, \rfield) = 0, k=1, \ldots, n$, then
-    $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
-    is an exact sequence if and only if $\ker(d_{k+1}) = \im(d_k)$.
-\end{definition}
-
-\begin{remarkbox}\begin{remark}
-  For $k=0$, $\Omega^0 = \{\text{functions}\}$, then $H^0 \ne 0$.
-\end{remark}\end{remarkbox}
-
-\begin{definition}[Cohomology ring]
-  The cohomology ring is defined as
+\begin{definition}[de Rham cohomology ring]
+  The de Rham cohomology ring is defined as
   \[ H^*(M, \rfield) = \bigoplus_{k=0}^n H^k(M, \rfield) \, .\]
 \end{definition}
 
@@ -2021,9 +2039,11 @@ $$\left (\hat{\tilde \phi}^* \circ \hat{\tilde \psi}^* \right)_{H^n(U, \rfield)}
 Thus, $\hat{\tilde \phi}$ is a bijection.
 \end{proof}
 
-\begin{definition}[(co)chain map] %add def of (co)chain complex
-  Let $A^*$ and $B^*$ be two (co)chain complexes (a (co)chain complex is a generalization of a de Rham complex, e.g. think about $A^*=\Omega^*$).
-  A (co)chain map $\hat \phi^* \colon A^* \rightarrow B^*$ is a collection of linear maps $\phi^* \colon A^n \rightarrow B^n$ s.t. $d \circ \phi^* = \phi^* \circ d \colon A^n \rightarrow B^{n+1}$. We often denote $\hat \phi^*$ by $\phi^*$.
+The following definitions will be given for cochain complexes, but the respective definitions for chain complexes are analogous (you just need to replace "cochain" with "chain" and "cohomology" with "homology").
+
+\begin{definition}[Cochain map] 
+  Let $A^*$ and $B^*$ be two cochain complexes.
+  A cochain map $\hat \phi^* \colon A^* \rightarrow B^*$ is a collection of linear maps $\phi^* \colon A^n \rightarrow B^n$ s.t. $d \circ \phi^* = \phi^* \circ d \colon A^n \rightarrow B^{n+1}$. We often denote $\hat \phi^*$ simply by $\phi^*$.
 \end{definition}
 
 \begin{tcolorbox}\begin{example}
@@ -2032,11 +2052,11 @@ Thus, $\hat{\tilde \phi}$ is a bijection.
     A^* &= \Omega^*(U, \rfield) = \Omega^0(U, \rfield) \oplus \Omega^1(U, \rfield) \oplus \ldots \\
     B^* &= \Omega^*(V, \rfield) = \Omega^0(V, \rfield) \oplus \Omega^1(V, \rfield) \oplus \ldots
   \end{align*}
-  And we consider $\hat \phi^*\colon A^* \rightarrow B^*$, $\phi^* \colon \Omega^0(U, \rfield) \rightarrow \Omega^0(V, \rfield)$, $\phi^* \colon \Omega^1(U, \rfield) \rightarrow \Omega^1(V, \rfield)$, etc.
+  Then some cochain maps might be given by $\hat \phi^*\colon A^* \rightarrow B^*$, $\phi^* \colon \Omega^0(U, \rfield) \rightarrow \Omega^0(V, \rfield)$, $\phi^* \colon \Omega^1(U, \rfield) \rightarrow \Omega^1(V, \rfield)$, etc.
 \end{example}\end{tcolorbox}
 
 \begin{definition}
-  A short exact sequence (\textit{SES}) is a collection of (co)chain complexes $A^*, B^*, C^*$ and (co)chain maps $\phi^* \colon A^n \rightarrow B^n, \psi^* \colon B^n \rightarrow C^n$ such that for each $n$:
+  A short exact sequence (\textit{SES}) is a collection of cochain complexes $A^*, B^*, C^*$ and cochain maps $\phi^* \colon A^n \rightarrow B^n, \psi^* \colon B^n \rightarrow C^n$ such that for each $n$:
   \begin{equation}
     0 \longrightarrow A^n \overset{\phi^*}{\longrightarrow} B^n \overset{\psi^*}{\longrightarrow} C^n \longrightarrow 0
   \end{equation}
@@ -2058,9 +2078,10 @@ Thus, $\hat{\tilde \phi}$ is a bijection.
 \underbrace{}_{\textit{sequence}}               & \underbrace{}_{\textit{sequence}}               & \underbrace{}_{\textit{sequence}}          &        &
 \end{tikzcd}
 \end{center}
+Since the cochain maps commute with $d$, every small square is a commuting diagram.
 \end{example}\end{tcolorbox}
 
-\begin{lemma}[zig-zag lemma]
+\begin{lemma}[Zig-zag lemma]
   Let's consider $\phi^*, \psi^*$ as in the previous definitions. Then there exists a linear map $\delta$ such that:
   \begin{align*}
     \ldots \longrightarrow &H^{n-1}(C^*) \overset{\delta}{\longrightarrow} H^n(A^*) \overset{\phi^*}{\longrightarrow} H^n(B^*) \overset{\psi^*}{\longrightarrow} \\
@@ -2097,7 +2118,7 @@ See also example \ref{seqexample}.
   \end{align*}
   Then, for each $k$ there exists a linear map $\delta$ such that:
   \begin{align*}
-    \ldots \longrightarrow &H^k(M) \overset{f^* \oplus g^*}{\longrightarrow} H^k(U) \oplus H^k(V) \overset{i^* - j^*}{\longrightarrow} H^k(U \cap V) \overset{\delta}{\longrightarrow} H^{k+1}(M) \longrightarrow \ldots
+    \cdots \longrightarrow &H^k(M) \overset{f^* \oplus g^*}{\longrightarrow} H^k(U) \oplus H^k(V) \overset{i^* - j^*}{\longrightarrow} H^k(U \cap V) \overset{\delta}{\longrightarrow} H^{k+1}(M) \longrightarrow \cdots
   \end{align*}
   is exact.
 \end{theorem}
@@ -2162,7 +2183,7 @@ Let's analyze two of the four definitions of a submanifold of $\rfield^n$. \begi
 \vspace{1em}
      \centering
      \includegraphics[width=0.9\textwidth]{Images/notinjnotsurj.pdf} \label{Fig:notinjnotsurj}
-     \captionof{figure}{If $\phi$ is not injective, we have problems in $A$. If not surjective, we have problems in $B$ (taken from page 182, Lee \cite{Lee}).} 
+     \captionof{figure}{If $\phi$ is not injective, we have problems in $A$. If not surjective, we have problems in $B$ (taken from page 182, \citetalias{Lee}).} 
      \vspace{1em}     
 \end{minipage}
 
@@ -2558,7 +2579,7 @@ where we could swap the sums since they are finite (they are finite because $M$ 
   What happens with boundaries? If $p \in \partial M$, there is no neighbourhood of $p$ homeomorphic to an open set $U \subset \rfield^n$.
   Let's define the following set:
   $$H^n = \{ (x^1, \ldots, x^n) \in \rfield^n \, | \, x^1 \ge 0 \}$$
-  \textbf{Note} that on Lee \cite{Lee}, $H^n$ is defined as
+  \textbf{Note} that on \citetalias{Lee}, $H^n$ is defined as
   $$H^n = \{ (x^1, \ldots, x^n) \in \rfield^n \, | \, x^n \ge 0 \}$$
   (everything is the same, but with $x^1$ replaced by $x^n$).
 \end{remark}\end{remarkbox}
@@ -3795,9 +3816,10 @@ is an isomorphism. Moreover, we have:
 \end{corollary}
 
 \begin{remarkbox}\begin{remark}
-$ $
+$ $\newline
 \textbf{Fact}: $\mathcal{H}^k(M)$ has finite dimension ($\Delta$ is an elliptic operator).
-\textbf{Fact}(Hodge decomposition):
+
+\textbf{Fact} (Hodge decomposition):
 $$\Omega^k(M) = \mathcal{H}^k(M) \oplus d_{k-1} \Omega^{k-1}(M) \oplus \delta_{n-k-1} \Omega^{k+1}$$
 is an orthogonal sum decomposition.
 \end{remark} \end{remarkbox}
@@ -3809,7 +3831,7 @@ is an orthogonal sum decomposition.
 \begin{thebibliography}{AA}
 \addcontentsline{toc}{section}{Bibliography}
 \bibitem{Lee}
-{J.} M. Lee, Introduction to Smooth Manifolds, Springer
+J. M. Lee, Introduction to Smooth Manifolds, Springer
 \bibitem{Notes}
 \href{https://www.physik.uni-muenchen.de/lehre/vorlesungen/wise_19_20/Differentiable-Manifolds/material/skript-TMP.pdf}{Lecture notes} (Differentiable Manifolds Sachs, Vogel WS 19)
 \end{thebibliography}
