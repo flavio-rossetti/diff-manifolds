@@ -1184,6 +1184,20 @@ $$i_z \left( i_z(\omega) \right) (v_1, \ldots, v_{k-2}) = i_z \omega (z, v_1, \l
   In the above proposition there is a little abuse of notation when we claimed $i_z(i_z \omega) = 0$, see also the remark \ref{abusenot1}.
 \end{remark}\end{remarkbox}
 
+\begin{definition}[Nondegenerate 2-form]
+An exterior form $\omega$ of degree 2 on a vector space $V$, $\omega \in \Lambda^2V^*$, is said to be nondegenerate if the map $z \mapsto i_z \omega$ is invertible for $z \in V$.
+\end{definition}
+
+\begin{remarkbox}\begin{remark}[Alternative definitions of nondegenerate form]
+The following ones are equivalent:
+\begin{enumerate}
+\item $\omega$ is non degenerate,
+\item for each nonzero $v \in V$, there exists $w \in V$ such that $\omega(v, w) \ne 0$,
+\item in terms of some basis, the matrix $(\omega_{ij})$ representing $\omega$ is nonsingular.
+\end{enumerate}
+
+\end{remark}\end{remarkbox}
+
 Now, let's talk about \textit{pullbacks} and \textit{pushforwards} for functions and $k$-forms.
 
 \begin{definition}[Pullback]
@@ -1413,7 +1427,7 @@ We can also visualize the family of integral curves in the following way.
     \dot\theta_t(p) &= v_{\theta_t(p)} , \, &\forall \, p \in \rfield^n \\
     \theta_0(p) &= p, \, &\forall \, p \in \rfield^n
   \end{align}
-Under the right hypothesis (e.g. Lipschitz hypothesis and smoothness of $v$) we can prove existence and uniqueness of the solution of such ODEs ($\forall\, p \in \rfield^n$).
+Under the right hypotheses (e.g. Lipschitz hypothesis and smoothness of $v$) we can prove existence and uniqueness of the solution of such ODEs ($\forall\, p \in \rfield^n$).
 By fixing either the time or the starting point of the flow, we can consider two maps:
 \begin{itemize}
 \item $p \mapsto \theta_t(p)$, for each fixed $t$ (we are observing several integral curves at the same time $t$)
@@ -1889,9 +1903,9 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
 \begin{definition}
   Let $U \subset \rfield^n$, $U$ open, $\dim(U) = m \le n$. Then:
   \begin{itemize}
-    \item The set of closed $k$-forms is the $k$-th \textit{cocycle group} $Z^k(U, \rfield)$ (it is a group with respect to addition).
-    \item The set of exact $k$-forms is the $k$-th \textit{coboundary group} $B^k(u, \rfield)$
-    \item The $k$-th \textit{de Rham cohomology group} $H^k(U, \rfield)$ is defined as: $$H^k(U, \rfield) = \faktor{Z^k(U, \rfield)}{B^k(U, \rfield)}$$
+    \item The set of closed $k$-forms is the $k$-th \textit{cocycle group} $Z^k(U, \rfield)$ (it is a group with respect to addition),
+    \item The set of exact $k$-forms is the $k$-th \textit{coboundary group} $B^k(u, \rfield)$,
+    \item The $k$-th \textit{de Rham cohomology group} $H^k(U, \rfield)$ is defined as: $$H^k(U, \rfield) = \faktor{Z^k(U, \rfield)}{B^k(U, \rfield)} \, .$$
   \end{itemize}
 \end{definition}
 
@@ -1902,45 +1916,46 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
 \begin{tcolorbox}\begin{example}
   Let's consider the following examples:
   \begin{itemize}
-    \item If $U$ is contractible, then $H^k(U, \rfield) = \{0\}$ by Poincarè lemma.
-    \item $U=\rfield^2 \setminus \{0\}$, $H^0(\rfield^2 \setminus \{0\}, \rfield) = \rfield$ (constant functions)
-    \item $H^1(\rfield^2 \setminus \{0\}, \rfield) = \rfield$
-    \item $H^2(\rfield^2 \setminus \{0\}, \rfield) = \{0\}$
-    \item Torus $T$: $H^0(T) = \rfield$,  $H^1(T) = \rfield \oplus \rfield$, $H^2(T) = \rfield$
+    \item If $U$ is contractible, then $H^k(U, \rfield) = \{0\}$ by Poincarè lemma,
+    \item $U=\rfield^2 \setminus \{0\}$, $H^0(\rfield^2 \setminus \{0\}, \rfield) = \rfield$ (constant functions),
+    \item $H^1(\rfield^2 \setminus \{0\}, \rfield) = \rfield$,
+    \item $H^2(\rfield^2 \setminus \{0\}, \rfield) = \{0\}$,
+    \item Torus $T$: $H^0(T) = \rfield$,  $H^1(T) = \rfield \oplus \rfield$, $H^2(T) = \rfield$.
   \end{itemize}
 \end{example}\end{tcolorbox}
 
 \begin{definition}
-  $M \subset \rfield^n, \Omega^*(M, \rfield) = \oplus_{k=0}^n \Omega^k(M, \rfield)$
+  If $M \subset \rfield^n$, then we define :
+  \[  \Omega^*(M, \rfield) \equiv \bigoplus_{k=0}^n \Omega^k(M, \rfield) \, . \]
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
   $\wedge \colon \Omega^* \times \Omega^* \rightarrow \Omega^*$ endows $\Omega^*$ with the structure of a ring.
 \end{remark}\end{remarkbox}
 
-\begin{definition}[de Rham Complex]
-  The de Rham Complex is defined by $\Omega^*(M, \rfield)$ together with the sequence
+\begin{definition}[de Rham complex]
+  The de Rham complex is defined by $\Omega^*(M, \rfield)$ together with the sequence
   $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0$$
-  with $\im(d_k) \subset \ker(d_{k+1})$ since $d^2 = d \circ d = 0$
+  with $\im(d_k) \subset \ker(d_{k+1})$ (since $d^2 = d \circ d = 0$).
 \end{definition}
 
 \begin{remarkbox}\begin{remark} \label{drremark}
-  $H^k(M) = \faktor{\ker(d_{k+1})}{\im(d_k)}$
+  $H^k(M) = \faktor{\ker(d_{k+1})}{\im(d_k)}$.
 \end{remark}\end{remarkbox}
 
 \begin{definition} [exact sequence] \label{exsequence}
   If $H^k(M, \rfield) = 0, k=1, \ldots, n$, then
     $$\overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
-    is an exact sequence if and only if $\ker(d_{k+1}) = \im(d_k)$
+    is an exact sequence if and only if $\ker(d_{k+1}) = \im(d_k)$.
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-  For $k=0$, $\Omega^0 = \{\text{functions}\}$, then $H^0 = 0$
+  For $k=0$, $\Omega^0 = \{\text{functions}\}$, then $H^0 \ne 0$.
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Cohomology ring]
   The cohomology ring is defined as
-  $$H^*(M, \rfield) = \oplus_{k=0}^n H^k(M, \rfield)$$
+  \[ H^*(M, \rfield) = \bigoplus_{k=0}^n H^k(M, \rfield) \, .\]
 \end{definition}
 
 \begin{tcolorbox}\begin{example}
@@ -1969,10 +1984,10 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
  \begin{tcolorbox}\begin{example}
    Let's consider the following examples:
    \begin{itemize}
-     \item Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse (i.e. inverse up to a homotopy) $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point)
-     \item A circle is homotopy equivalent to $\rfield^2 \setminus \{0\}$
-     \item $S^{n-1}$ is homotopy equivalent to $\rfield^n \setminus \{0\}$
-     \item A solid torus is homotopy equivalent to a tea cup
+     \item We call "homotopy inverse" the inverse of a function up to a homotopy. Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point),
+     \item A circle is homotopy equivalent to $\rfield^2 \setminus \{0\}$,
+     \item $S^{n-1}$ is homotopy equivalent to $\rfield^n \setminus \{0\}$,
+     \item A solid torus is homotopy equivalent to a tea cup.
    \end{itemize}
  \end{example}\end{tcolorbox}
 
@@ -1984,7 +1999,7 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
  $$d(I H^* \omega) + I(d H^* \omega) = i_1^* H^* \omega - i_0^* H^* \omega$$
  with: $i_0(p) = (0, p), i_1(p) = (1, p)$ (recall the definition of the inclusion \eqref{definclusion}).
  Here, $H \circ i_0 = \restrict{\id}{V}, H \circ i_1= 0$. Thus: 
- $$(\phi^* - \id^*)(\omega) = dI (H^* \omega) + I(\underbrace{d H^* \omega}_{=H^*d \omega = 0})$$
+ $$(\phi^* - \id^*)(\omega) = dI (H^* \omega) + I(\underbrace{d H^* \omega}_{=H^*d \omega = 0})\, .$$
  Using the naturality of the pullback and the fact that $\omega \in H^*(V) \Rightarrow \omega$ is closed. 
  \end{proof}
 
@@ -1995,14 +2010,14 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
 \begin{theorem}
   Let $\phi \colon U \rightarrow V$ be a homotopy equivalence between $U$ and $V$ with homotopy inverse $\psi \colon V \rightarrow U$. then $\phi^*$ induces an isomorphism $\hat \phi^*$ such that:
   \begin{equation}
-    H^n(V, \rfield) \cong H^n(U, \rfield), \forall\, n
+    H^n(V, \rfield) \cong H^n(U, \rfield), \forall\, n \, .
   \end{equation}
 \end{theorem}
 \begin{proof}
 Let $\varphi \equiv \tilde{\phi} \circ \tilde{\psi}$, where $\tilde{\phi}$ is smooth and smoothly homotopy equivalent to $\phi$. $\tilde{\psi}$ is smooth and smoothly homotopy equivalent to $\psi$. So, $\varphi$ is homotopy equivalent to the identity, i.e. $\varphi \simeq \id_V$. Thus: 
 $$\hat \id^*_{H^n(V, \rfield)} = \hat \varphi^*_{H^n(V,\rfield)} = \left (\hat{ \tilde \psi}^* \circ \hat {\tilde \phi}^* \right )_{H^n(V, \rfield)}$$
 by lemma \ref{homlemma}. In the same way:
-$$\left (\hat{\tilde \phi}^* \circ \hat{\tilde \psi}^* \right)_{H^n(U, \rfield)} = \hat \id^*_{H^n(U, \rfield)}$$
+$$\left (\hat{\tilde \phi}^* \circ \hat{\tilde \psi}^* \right)_{H^n(U, \rfield)} = \hat \id^*_{H^n(U, \rfield)}\, .$$
 Thus, $\hat{\tilde \phi}$ is a bijection.
 \end{proof}
 
@@ -2025,7 +2040,7 @@ Thus, $\hat{\tilde \phi}$ is a bijection.
   \begin{equation}
     0 \longrightarrow A^n \overset{\phi^*}{\longrightarrow} B^n \overset{\psi^*}{\longrightarrow} C^n \longrightarrow 0
   \end{equation}
-  is exact
+  is exact.
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
@@ -2046,7 +2061,7 @@ Thus, $\hat{\tilde \phi}$ is a bijection.
 \end{example}\end{tcolorbox}
 
 \begin{lemma}[zig-zag lemma]
-  $\phi^*, \psi^*$ as in the previous definitions. Then there exists a linear map $\delta$ such that:
+  Let's consider $\phi^*, \psi^*$ as in the previous definitions. Then there exists a linear map $\delta$ such that:
   \begin{align*}
     \ldots \longrightarrow &H^{n-1}(C^*) \overset{\delta}{\longrightarrow} H^n(A^*) \overset{\phi^*}{\longrightarrow} H^n(B^*) \overset{\psi^*}{\longrightarrow} \\
     \overset{\psi^*}{\longrightarrow} &H^n(C^*) \overset{\delta}{\longrightarrow} H^{n+1}(A^*) \overset{\phi^*}{\longrightarrow} \ldots
@@ -2142,7 +2157,7 @@ and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
 
 \begin{remarkbox}\begin{remark}[4 definitions]
 Let's analyze two of the four definitions of a submanifold of $\rfield^n$. \begin{description}
-\item[a)] The hypothesis of homeomorphism is quite intuitive: we want our space to be locally similar to $\rfield^n$. As regards the hypothesis of injectivity, we want that the vector field given by the differential of $\phi$ is well-defined. Indeed, the map $\phi$ can define a vector field on $M$ through its differential $d\phi=\phi_*$, if $\phi_*$ is a bijective map. If $\phi$ is not injective, we would have some points on $M$ such that the tangent vector about these points is not unique (and the physical meaning would be lost). If $\phi$ is not surjective, we would have some points on $M$ that have no tangent vector at all. 
+\item[a)] The homeomorphism hypothesis is quite intuitive: we want our space to be locally similar to $\rfield^n$. As regards the hypothesis of injectivity, we want that the vector field given by the differential of $\phi$ is well-defined. Indeed, the map $\phi$ can define a vector field on $M$ through its differential $d\phi=\phi_*$, if $\phi_*$ is a bijective map. If $\phi$ is not injective, we would have some points on $M$ such that the tangent vector about these points is not unique (and the physical meaning would be lost). If $\phi$ is not surjective, we would have some points on $M$ that have no tangent vector at all. 
 \begin{minipage}{0.9\textwidth}
 \vspace{1em}
      \centering
@@ -2617,7 +2632,7 @@ $\varphi_i$ are homeomorphisms, $V_i$ is an open subset of $\rfield^n$ and $U_i 
 $$\varphi_i \circ \varphi_j^{-1} \colon \varphi_j(U_i \cap U_j) \rightarrow \varphi_i (U_i \cap U_j)$$ are smooth (i.e. $C^{\infty}$). We are considering equivalence classes. we recall that the equivalence relation is the following one: two atlases are equivalent if their union is still a smooth atlas.
 \end{definition}
 
-\begin{remarkbox} \begin{remark}[2nd Countable hypothesis for a manifold]
+\begin{remarkbox} \begin{remark}[2nd countable hypothesis for a manifold]
 We require the hypothesis of second countability for manifolds in order to apply several theorems or lemmas, e.g. Sard's theorem.
 \end{remark} \end{remarkbox}
 
@@ -3458,7 +3473,7 @@ where we used: $(f^* \omega)(\alpha) = \omega(f_* \alpha) = k \,\omega(\alpha) =
 \end{tcolorbox}
 
 \begin{theorem}
-For all $f \colon M \rightarrow N$, in the hypothesis of def. \ref{degreemap}, the degree of $f$ is an integer. In particular, it is the signed count of preimages of a regular value.
+For all $f \colon M \rightarrow N$, in the hypotheses of def. \ref{degreemap}, the degree of $f$ is an integer. In particular, it is the signed count of preimages of a regular value.
 \end{theorem}
 \begin{proof}
 Let consider a regular value $p\in N$ of $f$. $p$ exists thanks to \href{https://en.wikipedia.org/wiki/Sard's_theorem}{Sard's theorem}. Sard's theorem states that the set of the critical values of a smooth function $f$ from a manifold to another is a null-measure set. We can apply this theorem to our case (and whenever $f$ is not smooth we can approximate it by smooth functions if it is at least continuous). Indeed, if the set of critical values has zero measure, its complementary set (the regular values) has dimension $n$.

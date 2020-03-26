@@ -10,6 +10,11 @@ Missing parts:
 
 Last changes:
 
+26-03-20:
+- def. 10.16 and remark 10.17 added (nondegenerate 2-form),
+- remark 16.10 corrected (\ne instead of =).
+- some typos corrected in all the document.
+
 21-03-20:
 - Definition of cotangent space added, some small correction on definition of tangent and cotangent spaces was done,
 - Symbols for disjoint union corrected (definitions of tangent bundle and cotangent bundle).
