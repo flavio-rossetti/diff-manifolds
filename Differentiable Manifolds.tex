@@ -1965,7 +1965,7 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
 \begin{remarkbox}\begin{remark}
   If $\phi \colon U \rightarrow V$, $U, V$ subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$ forms. By the construction above, we can also define such pullback on $H^k$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms.
   If $\phi$ is a diffeomorphism, then $\phi^*$ is an isomorphism. Thus, $H^k(V) \cong H^k(U)$.
-  Question: what if $U$ and $V$ are not diffeomorphic, but only homotopic equivalent? We want to show that the final result is the same.
+  Question: what if $U$ and $V$ are not diffeomorphic, but only homotopy equivalent? We want to show that the final result is the same.
  \end{remark}\end{remarkbox}
 
 \begin{definition}[Homotopy between maps]
@@ -3434,7 +3434,7 @@ Let's now consider the map: $\iota \colon S^{n-1} \rightarrow \overline{B_1(0)}$
 $$\id_{S^{n-1}}^* = \iota^* \circ F^* \quad \oast$$
 where we consider $F^*$ acting on closed-but-not-exact forms: $F^* \colon H^*(S^{n-1}) \rightarrow H^*(\overline{B_1(0)})$. If $* = n-1$, the map:
 $$F^* \colon \underbrace{H^{n-1}(S^{n-1})}_{\cong \rfield} \longrightarrow \underbrace{H^{n-1}(\overline{B_1(0)})}_{\cong \,0}$$
-has to be injective because of $\oast$ (if the composition of maps is injective, the first map acting is injective). But this is impossible because $H^{n-1}(S^{n-1}) \cong \rfield$ (maybe it was proved in the exercise sheets?) and $H^{n-1}(\overline{B_1(0)}) \cong 0$, with $B_1(0)$ $n$-dimensional ball. In order to prove the latter, we can't use the Poincarè lemma because $\overline{B_1(0)}$ is not homeomorphic to $\rfield^n$ (one is compact and the other is not, and compactness is left invariant under homeomorphisms). But we can prove that $\id \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ is homotopic equivalent to the map $\text{zero} \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ that sends every element of $\overline{B_1(0)}$ to $0 \in \overline{B_1(0)}$. Once we do this, we use the fact that the space itself is homotopic equivalent to the trivial set (for $n \ge 2$) and then the de Rham cohomology must be trivial as well.
+has to be injective because of $\oast$ (if the composition of maps is injective, the first map acting is injective). But this is impossible because $H^{n-1}(S^{n-1}) \cong \rfield$ (maybe it was proved in the exercise sheets?) and $H^{n-1}(\overline{B_1(0)}) \cong 0$, with $B_1(0)$ $n$-dimensional ball. In order to prove the latter, we can't use the Poincarè lemma because $\overline{B_1(0)}$ is not homeomorphic to $\rfield^n$ (one is compact and the other is not, and compactness is left invariant under homeomorphisms). But we can prove that $\id \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ is homotopy equivalent to the map $\text{zero} \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ that sends every element of $\overline{B_1(0)}$ to $0 \in \overline{B_1(0)}$. Once we do this, we use the fact that the space itself is homotopy equivalent to the trivial set (for $n \ge 2$) and then the de Rham cohomology must be trivial as well.
 \end{proof}
 
 \begin{remarkbox}\begin{remark}
