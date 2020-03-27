@@ -10,6 +10,11 @@ Missing parts:
 
 Last changes:
 
+27-03-20:
+- 4 definitions of submanifolds slightly changed,
+- figure 9 corrected,
+- remark 17.5 changed.
+
 26-03-20:
 - de Rham cohomology section changed (def. of cohomology theory added)
 - def. 10.16 and remark 10.17 added (nondegenerate 2-form),

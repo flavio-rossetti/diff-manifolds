@@ -1929,7 +1929,7 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
 \begin{definition}[de Rham complex]
   The de Rham complex is the sequence
   $$\cdots \overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0 $$
-  where $d$ is the exterior derivative now. It is well defined since we know that $d^2 = d \circ d = 0$ from the properties of the exterior derivative. Thus, $\im(d_k) \subset \ker(d_{k+1})$.
+  where $d$ is the exterior derivative now. It is well defined since we know that $d^2 = d \circ d = 0$ from the properties of the exterior derivative. Thus, $\im(d_k) \subset \ker(d_{k+1})$. Notice that we wrote $\Omega^k$ instead of $\Omega^k(U)$ for the sake of simplicity, and that the sequence stops at $\Omega^n$ because $U \subset \rfield^n$.
 \end{definition}
 
 \begin{definition}[de Rham cohomology group] \label{drremark}
@@ -2125,70 +2125,78 @@ See also example \ref{seqexample}.
 \section[Submanifolds of $\rfield^n$]{\crule[blue!30!white]{0.3cm}{0.4cm}  Submanifolds of $\rfield^n$}
 \textbf{Premise:} We want to go outside $\rfield^n$, and analyze more general topologies. For now, we can think about them as generalizations of curves and surface of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
 We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ in $\rfield^n$ ($m \le n$).
-\begin{definition}[(a) Submanifold - Local parametrization]
-  $\forall \, p \in M \subset \rfield^n, \exists$ a neighbourhood $V$, $p \in V$, $V \subset \rfield^n$ and $U \subset \rfield^m, U, V$ open, $m \le n$, and a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
+\begin{definition}[Submanifold - Local parametrization] \label{sub1}
+  $M \subset \rfield^n$ is a submanifold of $\rfield^n$ if $\forall \, p \in M$ there exists an open neighbourhood $V \subset \rfield^n$ of $p$ and an open set $U \subset \rfield^m$, where $m \le n$, and there exists a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
   \begin{itemize}
     \item $\phi \colon U \rightarrow M \cap V$ is a homeomorphism,
-    \item $\phi_* (x) \colon \rfield^m \rightarrow \rfield^n$ is injective $\forall \, x \in U$
+    \item $\phi_* (x) \colon \rfield^m \rightarrow \rfield^n$ is injective $\forall \, x \in U$.
   \end{itemize}
   \begin{figure}[H] \label{Fig:submanifold1}
      \centering
      \includegraphics[width=0.75\textwidth]{Images/submanifold1.pdf} 
-     \caption{a) Submanifold: local parametrization}      
+     \caption{Submanifold - local parametrization}      
 \end{figure}
 \end{definition}
 
-\begin{definition}[(b) Submanifold - Locally flat]
-  $\forall p \in M, \exists$ a neighbourhood $V \subset \rfield^n, p \in V$ and a neighbourhood $W \subset \rfield^n$, $0 \in W$, and a diffeomorphism $\Phi, \Phi \colon W \rightarrow V$ such that:
-  \[\Phi \left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right ) = V \cap M\]
+\begin{definition}[Submanifold - Locally flat] \label{sub2}
+  $M \subset \rfield^n$ is a submanifold of $\rfield^n$ if $\forall \, p  \,\in M$, there exists a neighbourhood $V \subset \rfield^n$ of $p$, a neighbourhood $W \subset \rfield^n$ of $0$, and a diffeomorphism $\Phi \colon W \rightarrow V$ such that:
+  \[\Phi \left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right ) = V \cap M \, .\]
   \begin{figure}[H]
   \label{Fig:submanifold2}
      \centering
      \includegraphics[width=0.8\textwidth]{Images/submanifold2.pdf} 
-     \caption{b) Submanifold: locally flat}      
+     \caption{Submanifold - locally flat}      
 \end{figure}
 \end{definition}
 
-\begin{definition}[(c) Submanifold - Locally  a zero set]
-$\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n, V$ open, and a smooth map $F \colon V \rightarrow \rfield^{n-m}$ such that:
-$$V \cap M = \{x \in V \, | \, F(x) = 0\}$$
-and $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
+\begin{definition}[Submanifold - Locally  a zero set] \label{sub3}
+$M \subset \rfield^n$ is a submanifold of $\rfield^n$ if
+$\forall \, p \in M$ there exists an open neighbourhood $V \subset \rfield^n$ of $p$, and a smooth map $F \colon V \rightarrow \rfield^{n-m}$ such that:
+\begin{itemize}
+\item $V \cap M = \{x \in V \, | \, F(x) = 0\}$,
+\item $F_* \colon V \rightarrow \rfield^{n-m}$ is surjective.
+\end{itemize}
+
 \begin{figure}[H]
   \label{Fig:submanifold3}
      \centering
      \includegraphics[width=0.8\textwidth]{Images/submanifold3.pdf} 
-     \caption{c) Submanifold: locally a zero set}      
+     \caption{Submanifold - locally a zero set}      
 \end{figure}
 \end{definition}
 
-\begin{definition}[(d) Submanifold - Locally a graph]
-  $\forall \, p \in M, \exists$ a neighbourhood $V \subset \rfield^n$ and a permutation $\sigma \colon \{1, \ldots, n\} \rightarrow \{1, \ldots, n\}$ and $U \subset \rfield^m, U$ open, together with a smooth map $g \colon U \rightarrow \rfield^{n-m}$ such that:
+\begin{definition}[Submanifold - Locally a graph] \label{sub4}
+  $M \subset \rfield^n$ is a submanifold of $\rfield^n$ if $\forall \, p \in M$ there exists a neighbourhood $V \subset \rfield^n$ of $p$, a permutation $\sigma \colon \{1, \ldots, n\} \rightarrow \{1, \ldots, n\}$ and an open set $U \subset \rfield^m, U$, together with a smooth map $g \colon U \rightarrow \rfield^{n-m}$ such that:
   \begin{align*}
-  V \cap M = \{ &(x_{\sigma(1)} \cdots x_{\sigma(n)}) \, |\, (x_1, \ldots, x_m) \in U \\
-   &\text{ and } (x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m)\}
+  V \cap M = \{ &(x_{\sigma(1)}, \ldots, x_{\sigma(n)}) \, |\, (x_1, \ldots, x_m) \in U \\
+   &\text{ and } (x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m)\} \, .
 \end{align*}
-  (g is called a \textit{graph}).
+  The map g is called a \textit{graph}.
   \begin{figure}[H]
   \label{Fig:submanifold4}
      \centering
      \includegraphics[width=0.4\textwidth]{Images/submanifold4.pdf} 
-     \caption{d) Submanifold: locally graph}      
+     \caption{Submanifold - locally a graph}      
 \end{figure}
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[4 definitions]
-Let's analyze two of the four definitions of a submanifold of $\rfield^n$. \begin{description}
-\item[a)] The homeomorphism hypothesis is quite intuitive: we want our space to be locally similar to $\rfield^n$. As regards the hypothesis of injectivity, we want that the vector field given by the differential of $\phi$ is well-defined. Indeed, the map $\phi$ can define a vector field on $M$ through its differential $d\phi=\phi_*$, if $\phi_*$ is a bijective map. If $\phi$ is not injective, we would have some points on $M$ such that the tangent vector about these points is not unique (and the physical meaning would be lost). If $\phi$ is not surjective, we would have some points on $M$ that have no tangent vector at all. 
+Let's analyze two of the four definitions of a submanifold of $\rfield^n$. 
+\begin{description}
+\item[\ref{sub1})] The homeomorphism hypothesis is quite intuitive: we want our space to be locally similar to $\rfield^n$. In fact, the fact that $\phi$ is an isomorphism make the vector field given by the differential of $\phi$ well-defined. Indeed, the map $\phi$ can define a vector field on $M$ through its differential $d\phi=\phi_*$, if $\phi_*$ is a bijective map. 
+\begin{center}
 \begin{minipage}{0.9\textwidth}
 \vspace{1em}
      \centering
      \includegraphics[width=0.9\textwidth]{Images/notinjnotsurj.pdf} \label{Fig:notinjnotsurj}
-     \captionof{figure}{If $\phi$ is not injective, we have problems in $A$. If not surjective, we have problems in $B$ (taken from page 182, \citetalias{Lee}).} 
+     \captionof{figure}{If $\phi$ is not injective, we have problems in $A$. If not surjective, we have problems in $B$ (see also page 182, \citetalias{Lee}).} 
      \vspace{1em}     
 \end{minipage}
-
-In particular, we want $\phi$ to be a smooth embedding (see also the def. \ref{smoothembedd} that will be given in the next sections).
-\item[c)] The hypothesis of surjectivity is required because of what we said about def. (a). In particular, we require $F$ to be a smooth submersion (see also the def. \ref{smoothsubm} that will be given in the next sections).
+\end{center}
+If $\phi$ is not injective, we would have some points on $M$ such that the tangent vector about these points is not unique: the physical meaning would be lost, and also the map would not be well defined since it assigns more than one element to the initial vector. 
+If $\phi$ is not surjective, we would have some points on $M$ that have no tangent vector at all. 
+Moreover, we have the hypothesis of injectivity of $\phi_*$. It means that $\phi$ is a smooth embedding (see also the def. \ref{smoothembedd} that will be given in the next sections). Being a smooth embedding means that $U$ is being included in $V \cap M$. In fact, the Rank theorem (page 81 \citetalias{Lee}) says that a such a map behaves like an inclusion ($U$ is "injected" in $V \cap M$).
+\item[\ref{sub3})] The hypothesis of surjectivity is required because of what we previously said about the Rank theorem. In particular, we require $F$ to be a smooth submersion (see also the def. \ref{smoothsubm} that will be given in the next sections). Using the Rank theorem, it means that the map $F$ behaves like a projection ($V \cap M$ is projected into the zero set).
 \end{description}
 \end{remark}\end{remarkbox}
 
@@ -2245,7 +2253,7 @@ because $\Phi$ acts like $\phi$ for $y=0$.
   Let:
   $$\phi \colon \rfield^m \supset U \rightarrow V \cap M$$
   $$\phi' \colon \rfield^m \supset U' \rightarrow V' \cap M$$
-  be local parametrizations. then
+  be local parametrizations. Then:
   $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (V \cap V' \cap M) \rightarrow \phi^{-1}(V \cap V' \cap M)$$
   is a diffeomorphism. %write that they are open sets? intersection color...check
 \end{corollary}
@@ -2303,10 +2311,10 @@ because $\Phi$ acts like $\phi$ for $y=0$.
 $\phi^{-1} \circ \phi'$ is a homeomorphism because $\phi$ and $\phi'$ are homeomorphisms. We want to show that they are smooth. Let:
 \begin{align*}
 &q' \in (\phi')^{-1}(V \cap V' \cap M) \subset U' \\
-&q \in \phi^{-1} \circ \phi' (q') \in U
+&q \in \phi^{-1} \circ \phi' (q') \in U \, .
 \end{align*}
 By the proof of (a) $\Rightarrow$ (b) of the theorem \ref{allequiv}, we know that there exists a diffeomorphism $\Phi \colon \rfield^n \supset W \rightarrow V'' \subset \rfield^n$, with $(q, 0) \in W$, such that:
-\[ \restrict{\Phi}{W \cap \rfield^m} = \restrict{\phi}{W \cap \rfield^m} \]
+\[ \restrict{\Phi}{W \cap \rfield^m} = \restrict{\phi}{W \cap \rfield^m} \, . \]
 Thus:
 \[\restrict{\phi^{-1} \circ \phi'}{(\phi')^{-1} \circ \phi(W \cap \rfield^m)} = \restrict{\Phi^{-1} \circ \phi'}{(\phi')^{-1} \circ \phi(W \cap \rfield^m)} \]
 where the right-hand side is smooth. We can prove the same result the other way round.
@@ -2315,26 +2323,26 @@ where the right-hand side is smooth. We can prove the same result the other way 
 \begin{tcolorbox}\begin{example}[Submanifolds of $\rfield^n$]
   Let's consider some examples.
   \begin{enumerate}
-    \item An open subset of dimension $n$ in $\rfield^n$ is a submanifold (by definition (a), we just take $\phi = id$). For instance $B^n\subset \rfield^n$ is a submanifold of $\rfield^n$.
+    \item An open subset of dimension $n$ in $\rfield^n$ is a submanifold (by definition (a), we just take $\phi = \id$). For instance $B^n\subset \rfield^n$ is a submanifold of $\rfield^n$.
     \item $S^{n-1} = \partial B^n$ is a submanifold of $\rfield^n$. Indeed, by definition (c), it is the zero set of the function:
-    $$F(\underline{x}) = (x^1)^2 + (x^2)^2 + \ldots + (x^n)^2 - 1 = \underline{x}^2 -1, \underline{x} \in \rfield^n$$
-    and $F_*$ is surjective: $F_*(\underline{x}) = 2 \underline{x}$
+    $$F(\underline{x}) = (x^1)^2 + (x^2)^2 + \ldots + (x^n)^2 - 1 = \underline{x}^2 -1, \, \underline{x} \in \rfield^n$$
+    and $F_*$ is surjective: $F_*(\underline{x}) = 2 \underline{x}$.
     \item $O(n) = \{A \, | \, AA^t = E\} \subset Mat(n \times n, \rfield) \cong \rfield^{n^2}$, with $E$ identity matrix. $O(n)$ is a submanifold of dimension $\frac{n(n-1)}{2}$. Indeed, using definition (c), it is the zero set of the function:
     \begin{align*}
       F \colon Mat(n \times n, \rfield) &\rightarrow Symm(n, \rfield) \\
-      A &\mapsto AA^t - E
+      A &\mapsto AA^t - E \, .
     \end{align*}
     What is more, $F_*$ is surjective. In order to prove that, we prove that "$\restrict{F_*}{A}(X)=0, \forall\, A \Rightarrow X = 0$" (then we know that for a linear map $L$ on a vector space $V$, $\dim(V) = \dim Ker(L) + \dim Ran(L)$, so the dimension of the range of $\restrict{F_*}{A}$ must be $\dim Mat(n\times n, \rfield)$, so the map is surjective).
     In fact:
     \begin{align*}
     \restrict{F_*}{A} &= \restrict{\frac{d}{dt}}{t=0}F(A + tX) = \restrict{\frac{d}{dt}}{t=0} \left[ AA^t + tAX^t + tXA^t + t^2XX^t \right] = \\
-    & = AX^t + XA^t
+    & = AX^t + XA^t \, .
   \end{align*}
     And the solution of:
     $AX^t + XA^t = S \in Symm(n, \rfield)$
     is $X = \frac{SA}{2}$ because $\frac{AA^t}{2}S + S\frac{AA^t}{2} = S$.
     Then:
-    $$AX^t + XA^t = 0 \Longrightarrow X=0$$
+    $$AX^t + XA^t = 0 \Longrightarrow X=0 \, .$$
   \end{enumerate}
 \end{example}\end{tcolorbox}
 
@@ -2348,7 +2356,7 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
   \end{align}
   such that:
   \begin{itemize}
-    \item $\cup_{\alpha \in I} W_{\alpha} = M$
+    \item $\cup_{\alpha \in I} W_{\alpha} = M$,
     \item $\forall\, \alpha, \beta \in I$ with $W_{\alpha} \cap W_{\beta} \not = \emptyset$,
     $$\phi^{-1}_{\beta} \circ \phi_{\alpha} \colon \phi^{-1}_{\alpha}(W_{\alpha} \cap W_{\beta}) \rightarrow \phi_{\beta}^{-1}(W_{\alpha} \cap W_{\beta})$$
     is a diffeomorphism.
@@ -2539,7 +2547,7 @@ Now, if $f \colon M \rightarrow \rfield$, we can consider $f_i = \varphi_i f \co
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Curve on a manifold]
-  A curve $\gamma \colon (a, b) \rightarrow M$ is continuous [differentiable] if $\phi_{\alpha}^{-1} \circ \gamma \colon (a, b) \rightarrow U_{\alpha}$ is continuous [differentiable]
+  A curve $\gamma \colon (a, b) \rightarrow M$ is continuous [differentiable] if $\phi_{\alpha}^{-1} \circ \gamma \colon (a, b) \rightarrow U_{\alpha}$ is continuous [differentiable].
 \end{definition}
 \section[Integration of differential forms on a compact manifold]{\crule[orange!50!white]{0.3cm}{0.4cm}  Integration of differential forms on a compact manifold}
 
