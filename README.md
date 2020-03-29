@@ -10,6 +10,9 @@ Missing parts:
 
 Last changes:
 
+29-03-20:
+- remark 17.5 corrected
+
 27-03-20:
 - 4 definitions of submanifolds slightly changed,
 - figure 9 corrected,
