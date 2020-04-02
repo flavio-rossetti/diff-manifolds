@@ -10,6 +10,15 @@ Missing parts:
 
 Last changes:
 
+02-04-20:
+- remark 13.6 added,
+- remark 16.7 expanded (cohomologous forms),
+- remark 21.11 (cohomologous bump forms) corrected,
+- thm 21.26 slightly changed (n-th de Rham cohomology of closed orientable connected smooth manifold of dim n is R),
+- remark 21.23 corrected (degree of a map does not depend on the form),
+- typos corrected.
+
+
 29-03-20:
 - remark 17.5 corrected
 

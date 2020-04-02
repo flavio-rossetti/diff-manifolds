@@ -1537,6 +1537,10 @@ $ $
 See problem sheet 4, exercise 4.
 \end{proof}
 
+\begin{remarkbox} \begin{remark}[Naturality of the Lie bracket]
+The property (5) of lemma \ref{commlemma} is called the \textbf{naturality} of the commutator. It implies that if $u, v$ are vector fields tangent to some space, then $[u, v]$ is tangent to the same space. See also problem sheet 12, ex. 3.
+\end{remark} \end{remarkbox}
+
   \section[Stokes' Theorem on $\rfield^n$]{\crule[black!50!white]{0.3cm}{0.4cm}  Stokes' Theorem on $\rfield^n$}
 
 \begin{itemize}
@@ -1902,7 +1906,7 @@ We can limit ourselves to consider continuous curves, thanks to the two followin
 Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vector space over $\rfield$. Indeed, if $\alpha, \beta \in \Omega^k(U)$, then $a \alpha + b \beta \in \Omega^k(U), \forall\, a, b, \in \rfield$. Also the remaining properties of a vector space are satisfied.
 
 \begin{remarkbox}\begin{remark}
-  We say that $\Omega^k(U, \mathbb{Z}) = \{k\text{-forms on } U \text{ with coefficients in } \mathbb{Z}\}$  forms a group (and not a vector space) since $\mathbb{Z}$ is not a field. In contrast, $\Omega^k(U, \rfield)$ is a vector space. We will denote $\Omega^k(U, \rfield)$ just by $\Omega^k(U)$.
+  We say that $\Omega^k(U, \mathbb{Z}) = \{k\text{-forms on } U \text{ with coefficients in } \mathbb{Z}\}$  forms a group (and not a vector space) since $\mathbb{Z}$ is not a field. In contrast, $\Omega^k(U, \rfield)$ is a vector space. We will often denote $\Omega^k(U, \rfield)$ just by $\Omega^k(U)$.
 \end{remark}\end{remarkbox}
 
 Now, we want to introduce some concepts of cohomology theory (see also page 460, \citetalias{Lee}).
@@ -1913,6 +1917,7 @@ Let $\mathcal{R}$ be a commutative ring (let's suppose $\mathcal{R} = \rfield$ b
 where for every $k$, $A^k$ is a vector space on $\rfield$ and the maps $d$ are linear maps. Such a sequence is said to be a complex if the composition of any two successive applications of $d$ is the zero map:
 \[ d \circ d = 0 \colon A^k \rightarrow A^{k+2} \text{ for each } k\, . \]
 Sometimes it is also called a cochain complex, whereas it is called a chain complex if the arrows go in the opposite direction.
+Sometimes we use the notation $d_k \colon A^{k-1} \rightarrow A^k$ to denote the position of the map in the sequence.
 It's easy to see that such a definition implies that $\im(d_k) \subset \ker(d_{k+1})$. 
 \end{definition}
 
@@ -1941,8 +1946,14 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
   \end{itemize}
 \end{definition}
 
-\begin{remarkbox}\begin{remark}
-  $H^k(U, \rfield)$ contains the closed $k$-forms defined on $U$ which are not exact. See also the example \ref{quotientexample}.
+\begin{remarkbox}\begin{remark}[Cohomologous forms]
+  $H^k(U, \rfield)$ contains the closed $k$-forms defined on $U$ which are not exact. Indeed, remember the definition of $d_k\colon \Omega^{k-1} \rightarrow \Omega^k $. The set $\ker(d_{k+1})$ contains all the $k$ forms that are closed. The set $\im(d_k)$ contains the exact forms. As usual when we deal with vector spaces, the equivalence relation is:
+  \begin{equation} \label{cohomol}
+  \omega \sim \omega' \Leftrightarrow \omega - \omega' \in \im(d_k) \Leftrightarrow \omega - \omega' = d\alpha \text{ for some (} k-1 \text{)-form } \alpha \, .
+  \end{equation} 
+  From the above definition, we see that two closed forms $\omega, \omega'$ are in the same equivalence class (so they are said to be \textbf{cohomologous}) if they differ by an exact form.
+  Obviously, if $\omega$ and $\omega'$ are exact, we have $\omega = dF$ and $\omega'=dG$ for some ($k-1$)-forms $F$ and $G$. So, the two forms are cohomologous because the $\alpha$ that we need in the definition \eqref{cohomol} is $\alpha = F - G$. All the exact forms are identified with the 0 element of $H^k(U, \rfield)$, because 0 is value of $d_k\omega$ if $\omega$ is an exact ($k-1$)-form.
+  To read more about quotient spaces, see also the example \ref{quotientexample}.
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}\begin{example}
@@ -2648,7 +2659,7 @@ First, we prove the theorem for a rectangle and then, for a generic set, we fill
 
 \section[Abstract Manifolds]{\crule[red!50!white]{0.3cm}{0.4cm}  Abstract Manifolds}
 \begin{remarkbox}\begin{remark}[Non-Example of a manifold]
-The set $$M= (-\infty, 0) \cup (0, \infty) \cup \{a, b\}$$ (endowed with a particular topology that we will see later) is not a manifold. Here, $a, b$ are just two points (not necessary real numbers): just imagine $M$ as a subset of $\rfield^2$, consisting of a real line without the origin plus any two points in $\rfield^2$. Even if we have not defined a topology on $M$, we can feel that it doesn't look right: there are two maps $\varphi_a, \varphi_b$ identifying the subsets $U_a = M \setminus \{b\}$ and $U_b = M \setminus \{a\}$ with $\rfield$ (we are just calling the 0 element in other way). The transition function
+The set $$M= (-\infty, 0) \cup (0, \infty) \cup \{a, b\}$$ (endowed with a particular topology that we will see later) is not a manifold. Here, $a, b$ can be seen as point of $\rfield^2$: just imagine $M$ as a subset of $\rfield^2$, consisting of a real line without the origin plus any two points in $\rfield^2$. Even if we have not defined a topology on $M$, we can feel that it doesn't look right: there are two maps $\varphi_a, \varphi_b$ identifying the subsets $U_a = M \setminus \{b\}$ and $U_b = M \setminus \{a\}$ with $\rfield$. Indeed, in the first case the 0 element is given by the point $a$, whereas in the second case the 0 is given by $b$. The transition function
 $$\varphi_b \circ \varphi_a^{-1} \colon \varphi(U_a \cap U_b) = \rfield \setminus \{0\} \rightarrow \varphi_b(U_b \cap U_a) = \rfield \setminus \{0\}$$
 is the identity, and is smooth. \textbf{But}  a smooth function on $M$ must have the same value when evaluated at $a$ and $b$, and this does not look right (why?).
 \end{remark}\end{remarkbox}
@@ -2658,7 +2669,7 @@ is the identity, and is smooth. \textbf{But}  a smooth function on $M$ must have
 \begin{definition}[Manifold]
 A manifold $M$ of dimension $n$ is a topological space which is Hausdorff, second countable and admits an (equivalence class of) atlas(es) $\varphi_i \colon U_i \rightarrow V_i$, where the 
 $\varphi_i$ are homeomorphisms, $V_i$ is an open subset of $\rfield^n$ and $U_i \subset M$ is open so that the transition functions
-$$\varphi_i \circ \varphi_j^{-1} \colon \varphi_j(U_i \cap U_j) \rightarrow \varphi_i (U_i \cap U_j)$$ are smooth (i.e. $C^{\infty}$). We are considering equivalence classes. we recall that the equivalence relation is the following one: two atlases are equivalent if their union is still a smooth atlas.
+$$\varphi_i \circ \varphi_j^{-1} \colon \varphi_j(U_i \cap U_j) \rightarrow \varphi_i (U_i \cap U_j)$$ are smooth (i.e. $C^{\infty}$). Sometimes the roles of $U_i$ and $V_i$ are exchanged, without any loss of generality. We are considering equivalence classes. we recall that the equivalence relation is the following one: two atlases are equivalent if their union is still a smooth atlas.
 \end{definition}
 
 \begin{remarkbox} \begin{remark}[2nd countable hypothesis for a manifold]
@@ -2696,7 +2707,7 @@ Every open cover of a manifold admits a subordinate partition of unity which is 
 \begin{definition}[Smooth function from a manifold]
 Let $M$ be a smooth manifold, then $f \colon M \rightarrow \rfield $ is smooth at $p$ if for a chart $\varphi \colon U \rightarrow \rfield^n$, with $U \ni p$, we have that
 $$f \circ \varphi^{-1} \colon \varphi(U) \rightarrow \rfield$$
-is smooth near $\varphi(p)$
+is smooth near $\varphi(p)$.
 \end{definition}
 
 \begin{remarkbox}
@@ -2708,7 +2719,7 @@ is smooth around $p$ because the composition of smooth functions is smooth.
 \end{remarkbox}
 
 \begin{definition}[Smooth function between manifolds]
-Let $M, N$ be smooth manifolds. Then $f \colon M \rightarrow N$ is smooth around $p$ if $f$ is continuous and for charts $(U, \varphi)$ around $p$ and $(V, \psi)$ around $f(p)$ we have that $\psi \circ f \circ \varphi^{-1}$ is smooth on a neighbourhood of $\varphi(p)$
+Let $M, N$ be smooth manifolds. Then $f \colon M \rightarrow N$ is smooth around $p$ if $f$ is continuous and for charts $(U, \varphi)$ around $p$ and $(V, \psi)$ around $f(p)$ we have that $\psi \circ f \circ \varphi^{-1}$ is smooth on a neighbourhood of $\varphi(p)$.
 \end{definition}
 
 Now that we know when a map is smooth, we want to differentiate. For this, we want the concept of tangent vector. We will use three equivalent definitions.
@@ -2742,7 +2753,7 @@ A derivation $v$ on smooth functions $C^{\infty}(M)$ at $p$ is a $\rfield-$linea
 \begin{definition}[Alg. tangent space]
 We define the algebraic tangent space at $p$ as:
 \begin{equation*}
-\tangentalg M = \{\text{derivations of } p \}
+\tangentalg M = \{\text{derivations of } p \} \, .
 \end{equation*}
 \end{definition}
 
@@ -2752,7 +2763,7 @@ $ $
 \item Instead of using $C^{\infty}(M)$ (which is a ring) we could have used the space $\mathcal{E}^{\infty}_p (M) = \faktor{C^{\infty}}{\sim}$ of germs of functions, where the equivalence relation is the following one:
 $$f \sim g \Leftrightarrow f \equiv g \text{ on a neighbourhood of } p$$
 In such cases, $v(f) = v(g)$ for $v \in \tangentalg{p} M$. In fact, let's consider a smooth function $h$ with support $\overline{h^{-1}(\rfield \setminus {0})}$ (so, $h(0) = 0$) and $h \equiv 1$ near $p$. Then:
-$$0 \overset{(1)} {=} v\left(h(f-g)\right) = v(h)\underbrace{\left(f(p) - g(p)\right)}_{=0} + \underbrace{h(p)}_{=1}\left (v(f) - v(g) \right)$$
+$$0 \overset{(1)} {=} v\left(h(f-g)\right) \overset{(2)}{=} v(h)\underbrace{\left(f(p) - g(p)\right)}_{=0} + \underbrace{h(p)}_{=1}\left (v(f) - v(g) \right)$$
 where we used: (1) $h(f-g) = h(0) = 0$ near $p$ and the derivative of a constant function is 0 by the Leibnitz rule: $v(1) = v(1\cdot 1) = v(1)+v(1) \Rightarrow v(1)=0$. (2) Leibnitz rule again.
 We also say that the derivation $v$ is local.
 \item As we already pointed out, $\tangentalg{p} M$ is a vector space. The only non-trivial thing to prove is that $\dim \tangentalg {p}M = n$ if the dimension of $M$ is $n$. 
@@ -2762,37 +2773,37 @@ We also say that the derivation $v$ is local.
 \begin{lemma} \label{usefullemma}
 Let $f \colon \rfield^N \supset B_{\varepsilon}(0) \rightarrow \rfield$ be smooth, then there are smooth functions $f_i$ on $B_{\varepsilon}(0)$ so that:
 \begin{equation}
-f(x) = f(0) + \sum\limits_i x^i f_i(x^1, \ldots, x^n)
+f(x) = f(0) + \sum\limits_i x^i f_i(x^1, \ldots, x^n) \, .
 \end{equation}
 \end{lemma}
 \begin{proof}
 \begin{equation*}
-f(x)-f(0) = \int\limits_0^1 \diondi{t} f(tx^1, \ldots, x^n)\, dt = \int\limits_0^1 \sum_i x^i \deonde{x^i} f(tx^1, \ldots, tx^n) \, dt
+f(x)-f(0) = \int\limits_0^1 \diondi{t} f(tx^1, \ldots, x^n)\, dt = \int\limits_0^1 \sum_i x^i \deonde{x^i} f(tx^1, \ldots, tx^n) \, dt \, .
 \end{equation*}
 So, the $f_i$ we are looking for are:
 \begin{equation*}
-f_i = \int\limits_0^1 \defonde{f}{x^i}(tx^1, \ldots, tx^n)\, dt
+f_i = \int\limits_0^1 \defonde{f}{x^i}(tx^1, \ldots, tx^n)\, dt \, .
 \end{equation*}
 \end{proof}
 
 \begin{remarkbox}\begin{remark}
-Now, we can prove that the $\dim \tangentalg{p} M = n$. Let $v$ be a derivation at $p$ and $(U, \varphi)$ a local chart around $p$. $x^1, \ldots, x^n$ are the local coordinates, such that $p$ coincides with the origin ($x^i(p) = 0$). From lemma \ref{usefullemma}:
+Now, we can prove that the $\dim \tangentalg{p} M = n$. Let $v$ be a derivation at $p$ and $(U, \varphi)$ a local chart around $p$. Let $x^1, \ldots, x^n$ be the local coordinates, such that $p$ coincides with the origin ($x^i(p) = 0$). From lemma \ref{usefullemma}:
 $$f(x) = f(0) + \sum\limits_i x^i f_i(x)$$
 and
-$$v(f) = \underbrace{v(f(0))}_{=0} + \sum\limits_i \left( v(x^i) \underbrace{f_i(x^i)}_{=f_i(0)} + \underbrace{x^i}_{=0} v(f_i) \right)$$
+\[ v(f) = \underbrace{v(f(0))}_{=0} + \sum\limits_i \left( v(x^i) \underbrace{f_i(x^i)}_{=f_i(0)} + \underbrace{x^i}_{=0} v(f_i) \right) \, . \]
 Then, $v$ is defined by the way it reacts to coordinate functions around $p$. Thus, $\dim \tangentalg{p} M \le n$. Since $v_i = \deonde{x^i}$ is a derivation, we have $\dim \tangentalg{p} M = n$.
 \end{remark}\end{remarkbox}
 
-\begin{definition}[Physicists's tangent space]
+\begin{definition}[Physicists' tangent space]
 Let $M$ be a manifold of dimension $n$, then a tangent vector is a map
 \begin{equation}
 v \colon \{ \text{ charts } (U, \varphi) \text{ around } p \} \rightarrow \rfield^n
 \end{equation}
 where $v$ is defined such that if we change charts we have:
 \begin{equation} \label{phystransf}
-v(V, \psi) = D_p (\psi \circ \varphi^{-1})\, v((U, \varphi))
+v(V, \psi) = D_p (\psi \circ \varphi^{-1})\, v((U, \varphi)) \, .
 \end{equation}
-The space of such maps is called tangent space (according to the physicists's definition) and it is denoted by $\tangentphys{p} M$.
+The space of such maps is called tangent space (according to the physicists' definition) and it is denoted by $\tangentphys{p} M$.
 \end{definition}
 
 \begin{remarkbox}\begin{remark} \label{equivremark}
@@ -2821,7 +2832,7 @@ Accordingly, we also have three different definitions for differentiating, i.e. 
 \begin{equation}
 D_p f \colon T_pM \rightarrow T_{F(p)} N
 \end{equation}
-where $p \in M, F \colon M \rightarrow N$ smooth:
+(sometimes we denote it by $d$ instead of $D$) where $p \in M, F \colon M \rightarrow N$ smooth:
 \begin{enumerate}
 \item $D_p^{\text{geom}} F ([\gamma]) = [F \circ \gamma]$, where the right-hand side is an equivalence class of equivalence curves on $N$,
 \item $D_p^{\text{alg}} F (v) = \left \{C^{\infty}(N) \ni f \mapsto v(f \circ F) \right \}$,
@@ -2839,12 +2850,12 @@ commutes.
 
 \begin{lemma}[Chain rule]
 Let $M_0, M_1, M_2$ be smooth manifolds, and $f_0 \colon M_0 \rightarrow M_1, f_1 \colon M_1 \rightarrow M_2$ smooth. Then:
-$$D(f_1 \circ f_0) = Df_1 \circ Df_0$$
+\[ D(f_1 \circ f_0) = Df_1 \circ Df_0 \, . \]
 \end{lemma}
 \begin{proof}
 Using the geometric definition:
 \begin{equation*}
-[D(f_1 \circ f_0)][\gamma] = [(f_1 \circ f_0) \circ \gamma] = [f_1 \circ (f_0 \circ \gamma)] = (Df_1 \circ Df_0)[\gamma]
+[D(f_1 \circ f_0)][\gamma] = [(f_1 \circ f_0) \circ \gamma] = [f_1 \circ (f_0 \circ \gamma)] = (Df_1 \circ Df_0)[\gamma] \, .
 \end{equation*}
 \end{proof}
 
@@ -2852,7 +2863,7 @@ Using the geometric definition:
 For a manifold $M$ of dimension $n$, let 
 \begin{align}
 TM = \bigsqcup_{p \in M} \tangentphys{p} M & \overset{\text{pr}}{\longrightarrow} M \\
-v &\longmapsto p \nonumber
+v &\longmapsto p \, . \nonumber
 \end{align}
 This map is the bundle projection of the tangent bundle $TM$. Notice that we are using the notation $v$ instead of $(p, v)$ to denote an element of the tangent bundle, for the sake of simplicity (see also remark \ref{disjointrem}).
 \end{definition}
@@ -2860,15 +2871,15 @@ This map is the bundle projection of the tangent bundle $TM$. Notice that we are
 $TM$ is a manifold, if equipped with the following structure. Pick an atlas $(U_i, \varphi_i)_{i \in I}$ of $M$ (remember: $\varphi \colon M \supset U_i \rightarrow \rfield^n, U_i$ open). Thanks to the second-countability property, we can take $I$ as a countable set without loss of generality. Then, one defines local coordinates (i.e. a local parametrization) on $\pr^{-1}(U_i)$ via
 \begin{align} \label{TMmap}
 \hat{\varphi_i} \colon TM \supset \pr^{-1}(U_i) &\longrightarrow \varphi_i(U_i) \times \rfield^n \\
-v &\longmapsto \left ( \varphi(\pr(v)),\, v((U_i, \varphi_i)) \right ) \nonumber
+v &\longmapsto \left ( \varphi(\pr(v)),\, v((U_i, \varphi_i)) \right ) \, . \nonumber
 \end{align}
 This is a bijective map, and we define the topology on $TM$ as the topology so that $\hat{\varphi_i}$ is a homeomorphism for all $i$. This topology is Hausdorff, indeed: let $v_1, v_2 \in TM$. If $p_1 = \pr v_1 \not = \pr v_2 = p_2$, then there exist open sets $V_j \ni p_j, j =1, 2$ which are disjoint and open (because $M$ is Hausdorff). Let $U_{i(p_1)}, U_{i(p_2)}$ be charts around $p_1, p_2$. Then:
-$$\pr^{-1} \left( U_{i(p_1)} \cap V_1 \right) \cap \pr^{-1} \left( U_{i(p_2)} \cap V_2 \right) = \emptyset$$
+\[ \pr^{-1} \left( U_{i(p_1)} \cap V_1 \right) \cap \pr^{-1} \left( U_{i(p_2)} \cap V_2 \right) = \emptyset \, . \]
 On the other hand, if $\pr v_1 = \pr v_2$, let $\left( U_{i(v_1)}, \varphi_{i(v_1)} \right)$ be a chart containing $\pr v_1$. Then $\hat \varphi_i(v_1), \hat \varphi_i (v_2)$ differ in the second entry in $\rfield^n$: pick disjoint open sets $W_1, W_2$ of $\rfield^n$ separating those entries and consider the open sets $\hat{\varphi_i}^{-1} \left( \varphi_i(U_i) \times W_j \right), j =1, 2$.
 
 Moreover, the topology is second countable. Finally, we need to check the smoothness of the transition functions $\hat \varphi_j \circ \hat \varphi_i^{-1}$. Note that $\hat \varphi_i \left( \pr^{-1}(U_i) \cap \pr^{-1}(U_j) \right) = \varphi_i (U_i \cap U_j) \times \rfield^n$. By the transformation rule \eqref{phystransf}, and using \eqref{TMmap}:
 $$\hat \varphi_j \circ \hat \varphi_i^{-1} \left (x, w = (w^1, \ldots, w^n) \right) = (\varphi_j \circ \varphi_i^{-1}(x), D_x(\varphi_j \circ \varphi_i^{-1}) (w))$$
-This map is smooth. Note that $D_x(\cdots)$ is a linear transformation for fixed base point $x$. 
+This map is smooth. Note that $D_x(\cdots)$ is a linear transformation for a fixed base point $x$. 
 Thus $ T_pM = \pr^{-1}(p)$ is a vector space
 \end{remark}\end{remarkbox}
 
@@ -2889,9 +2900,9 @@ Let $X, Y$ be two vector fields on $M$. Then the assignment
 C^{\infty}(M) \ni f \longmapsto [X, Y](f) = X \left(Y(f)\right) - Y \left(X(f)\right)
 \end{equation*}
 is independent of the local coordinates  and satisfies the Leibniz rule (it can be easily verified): $[X, Y](fg) = g\, [X, Y](f) + f \, [X, Y](g)$. Moreover, the commutator satisfies the properties already seen in lemma \ref{commlemma}. And in local coordinates: 
-$$X= \sum\limits_i a^i \partial_i, \qquad Y= \sum\limits_j b^j \partial_j$$
+\[ X= \sum\limits_i a^i \partial_i, \qquad Y= \sum\limits_j b^j \partial_j \, . \]
 we have:
-$$[X, Y] = \sum\limits_{i, j}\left[ \left (a^i \deonde{x^i} b^j \right) \deonde{x^j} - \left(b^j \deonde{x^j}a^i \right) \deonde{x^i} \right]$$
+\[ [X, Y] = \sum\limits_{i, j}\left[ \left (a^i \deonde{x^i} b^j \right) \deonde{x^j} - \left(b^j \deonde{x^j}a^i \right) \deonde{x^i} \right] \, . \]
 \end{remark}\end{remarkbox}
 
 % TODO:MOVE THIS REMARK
@@ -2923,7 +2934,7 @@ $\alpha \colon$
 so that $\pr \circ \alpha = \id_M$ (it is a section of the bundle). $k$-forms are defined in an analogous fashion, and so are $\Omega^k(M), d \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M), f^*$ and $f_*$.
 \end{definition}
 
-In the following definitions $M$ and $N$ are two topological spaces, and $\rank F$ is the rank of the Jacobian matrix of $F$ at a fixed point. If we don't specify any point, we refer to the Jacobian at any point.
+In the following definitions, $M$ and $N$ are two topological spaces, and $\rank F$ is the rank of the Jacobian matrix of $F$ at a fixed point. If we don't specify any point, we refer to the Jacobian at any point.
 
 \begin{definition}[Topological embedding]
 A map $F\colon M \rightarrow N$ is a topological embedding if it is a homeomorphism onto its image, i.e. if $F\colon M \rightarrow F(M)$ is a homeomorphism.
@@ -3149,11 +3160,11 @@ The hypothesis of connection is necessary for theorem \ref{connliegroup}.
 \end{remark}
 \end{remarkbox}
 
-\section[Compactly Supported Cohomology and Poincarè Lemma]{\crule[orange!50!white]{0.3cm}{0.4cm}  Compactly Supported Cohomology and Poincarè Lemma}
+\section[Compactly Supported Cohomology]{\crule[orange!50!white]{0.3cm}{0.4cm}  Compactly Supported Cohomology}
 
 Let $M$ be a manifold with or without boundary. We have already seen (remark \ref{drremark}) that the $k$-th de Rham cohomology of $M$ is
 \begin{equation}
-H^k(M) \equiv H_{dR}^k(M) = \frac{\ker ( d \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M))  )}{\im ( d \colon \Omega^{k-1}(M) \rightarrow \Omega^k(M))  ) }
+H^k(M) \equiv H_{dR}^k(M) = \frac{\ker ( d_{k+1} \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M))  )}{\im ( d_k \colon \Omega^{k-1}(M) \rightarrow \Omega^k(M))  ) }
 \end{equation}
 And we have already considered the Poincarè lemma \ref{poinclemma}:
 \begin{equation} \label{poinclemmashort}
@@ -3168,7 +3179,7 @@ Now, we want to discuss about $k$-forms with compact support (i.e. when the func
 \begin{definition}[Compactly supported de Rham cohomology]
 We define the compactly supported de Rham cohomology of a manifold $M$ as:
 \begin{equation}
-H^k_c(M)= \frac{\ker \left ( \restrict{d}{\text{compact supp forms}} \right )}{\im \left ( \restrict{d}{\text{compact supp forms}} \right )}
+H^k_c(M)= \frac{\ker \left ( \restrict{d_{k+1}}{\text{compact supp forms}} \right )}{\im \left ( \restrict{d_k}{\text{compact supp forms}} \right )}
 \end{equation}
 \end{definition}
 
@@ -3177,7 +3188,7 @@ H^k_c(M)= \frac{\ker \left ( \restrict{d}{\text{compact supp forms}} \right )}{\
 The compactly supported de Rham cohomology is somehow different from the standard de Rham cohomology. Indeed, for the latter, given a map $f \colon U \rightarrow V$, we could consider the pullback:
 \begin{align*}
 f^* \colon H^k(V) &\rightarrow H^k(U) \\
-[\omega] &\mapsto [f^* \omega]
+[\omega] &\mapsto [f^* \omega] \, .
 \end{align*}
 For the compactly supported case, we can't do that anymore, because if $\omega$ is compactly supported, in general $f^* \omega$ might not be compactly supported (preimages of compact sets are not compact in general).
 \end{remark}
@@ -3189,7 +3200,7 @@ Now, we want to prove a compactly supported version of the Poincarè lemma. In o
 \begin{remark}[Integration over the fiber] \label{intfiberrem}
 Let $M$ be a smooth manifold, oriented. Let's consider the projection map
 \begin{equation}
-\pi \colon M \times \rfield \rightarrow M
+\pi \colon M \times \rfield \rightarrow M \, .
 \end{equation}
 Given $\omega \in \Omega^k(M), \pi^*\omega$ is not compactly supported in general. However, we can define a map 
 \begin{equation}
@@ -3235,9 +3246,9 @@ Moreover, $d \circ \pi_*( f(x, t) \, \pi^*\eta) = 0$.
 &=\defonde{F}{x}(x, t)dx \wedge \pi^* \eta + F(x) \, \pi^* d\eta 
 \end{align*}
 where we used the $F$ defined in \eqref{typeb}.
-Moreover,
+Moreover:
 \begin{align*}
-d \circ \pi_* (f(x, t) \, \pi^* \eta \wedge dt) = d(F(x)\, \pi^*\eta) = \defonde{F}{x}(x, t)dx \wedge \pi^* \eta + F(x) \, \pi^* d\eta 
+d \circ \pi_* (f(x, t) \, \pi^* \eta \wedge dt) = d(F(x)\, \pi^*\eta) = \defonde{F}{x}(x, t)dx \wedge \pi^* \eta + F(x) \, \pi^* d\eta  \, . 
 \end{align*}
 \end{itemize}
 \end{proof}
@@ -3245,11 +3256,11 @@ d \circ \pi_* (f(x, t) \, \pi^* \eta \wedge dt) = d(F(x)\, \pi^*\eta) = \defonde
 \begin{remarkbox}
 \begin{remark}
 Consequence of lemma \ref{pichain}: $\pi_*$ defines a map
-$$\pi_* \colon H_c^k(M \times \rfield) \rightarrow H^{k-1}_c(M)$$
+\[ \pi_* \colon H_c^k(M \times \rfield) \rightarrow H^{k-1}_c(M) \, . \]
 We want to prove that such a map is an isomorphism. Let's construct the inverse in the following way: let $e \colon \rfield \rightarrow \rfield$ be a smooth function with compact support  such that $\int_{-\infty}^{\infty} e(s) ds = 1$. Then, we define $e_*$ as:
 \begin{align} \label{einverse}
 e_* \colon \Omega^{k-1}_c (M) &\rightarrow \Omega^k(M \times \rfield) \\
-\eta &\mapsto e(t) \, \pi^*\eta \wedge dt \nonumber
+\eta &\mapsto e(t) \, \pi^*\eta \wedge dt \, . \nonumber
 \end{align}
 We have $\pi_* \circ e_* = \id_{\Omega_c^{k-1}(M)}$ \textbf{but} $e_* \circ \pi_* \not = \id_{\Omega_c^k(M \times \rfield)}$. Nevertheless, we just need $e_*$ to be the inverse of $\pi_*$ on $H_c^k(M \times \rfield)$, not on all $\Omega^k_c(M \times \rfield)$. This is true thanks to the two following results.
 \end{remark}
@@ -3265,12 +3276,12 @@ where, again, the differential in the left-hand side acts on $M \times \rfield$ 
 \begin{proof} 
 Let $\eta \in \Omega^{k-1}_c(M)$.
 \begin{equation*}
-d \circ e_*(\eta) = d \left ( e(t)  \pi^*\eta \wedge dt \right ) = e(t) d^{M \times \rfield} \pi^*\eta \wedge dt = e(t) \pi^*(d^M \eta) \wedge dt = e_* d \eta
+d \circ e_*(\eta) = d \left ( e(t)  \pi^*\eta \wedge dt \right ) = e(t) d^{M \times \rfield} \pi^*\eta \wedge dt = e(t) \pi^*(d^M \eta) \wedge dt = e_* d \eta \, . \qedhere
 \end{equation*}
 \end{proof}
 
 \begin{proposition} \label{kprop}
-$e_*, \pi_*$ are mutually inverse isomorphisms on $H_c$, since there is an operator $K \colon \Omega^k_c(M \times \rfield) \rightarrow \Omega_c^{k-1}(M)$ such that:
+The maps $e_*, \pi_*$ are mutually inverse isomorphisms on $H_c$, since there is an operator $K \colon \Omega^k_c(M \times \rfield) \rightarrow \Omega_c^{k-1}(M)$ such that:
 \begin{equation}
 \mathbb{1} - e_* \circ \pi_* = (-1)^{k-1} (d \circ K - K \circ d)
 \end{equation}
@@ -3278,15 +3289,15 @@ where:
 \begin{itemize}
 \item $K$ is defined as:
 \begin{align}
-&K(f(x, t)\, \pi^*\eta) = 0 \quad \text{on (type A) forms} \\
-&K(f(x, t)\, \pi^* \eta \wedge dt) = \int_{-\infty}^t f(x, s) ds\, \pi^* \eta - F(x) \left ( \int_{-\infty}^t e(s)ds \right) \pi^* \eta \, \, \text{on (type B) forms}
+&K(f(x, t)\, \pi^*\eta) = 0 \quad \text{on (type A) forms,} \\
+&K(f(x, t)\, \pi^* \eta \wedge dt) = \int_{-\infty}^t f(x, s) ds\, \pi^* \eta - F(x) \left ( \int_{-\infty}^t e(s)ds \right) \pi^* \eta \, \, \text{on (type B) forms.}
 \end{align}
 where $\eta$ is a $k$-form in the first case, and it is a ($k-1$)-form in the second case.
-\item $K$ is not a chain map (otherwise the right-hand side would be 0)
+\item $K$ is not a chain map (otherwise the right-hand side would be 0).
 \end{itemize}
 \end{proposition}
 \begin{proof}
-We will prove it for (type B) forms. Then, for (type A) forms it is analogous. Then, recalling the definition of the integration along the fiber $F$ contained in \eqref{typeb}:
+We will prove it for (type B) forms. Then, for (type A) forms it is analogous. By recalling the definition of the integration along the fiber $F$ contained in \eqref{typeb}:
 \begin{enumerate}
 \item
 \begin{align*}
@@ -3327,8 +3338,8 @@ The proof is by induction. The map used to prove the isomorphism for the case $k
 [\omega] \mapsto \int_{\rfield^n} \omega
 \end{equation}
 We notice that the integral is well defined because $\omega$ is compactly supported, and the integral does not depend on the element of the equivalence class chosen. In fact, if we consider another $n$-form $\omega'$ such that $[\omega'] = [\omega]$, then it means that $\omega'$ and $\omega$ differ by an exact form: $\omega' = \omega + d \alpha, \alpha \in \Omega_c^{n-1}(\rfield^n)$. Let's suppose, without loss of generality, that $\supp \alpha, \supp \omega, \supp \omega' \subset B_{2R}(0)$. Then:
-$$\int_{\rfield^n} \omega' = \int_{B_{2R}(0)} \omega' = \int_{B_{2R}(0)}(\omega + d \alpha) = \int_{B_{2R}(0)}\omega + \int_{B_{2R}(0)} d \alpha \overset{\text{Stokes}} = \int_{\rfield^n} \omega + \underbrace{\int_{\partial B_{2R}(0)} \alpha}_{=0}$$
-For $\fbox{n=1}$, the case $k \not = 1$ coincides with the case $k=0$: we are considering compactly supported closed 0-forms, i.e. functions which are 0 everywhere. Thus, the only compactly supported closed 0-form which is not exact is the trivial one:  $H^0_c(\rfield) = 0$. As regards the case $k=1$, by the standard Poincarè lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield^n$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported! Indeed let's write $\omega$ as $\omega=f(x) dx$, $f$ compactly supported function. If $\int_{\rfield} \omega = \int_{\rfield} f(x)dx = 0$, then the primitive $F(x)=\int_{-\infty}^x f(t)dt$ has compact support (for $x$ small we are outside of the support of $f$, whereas for $x$ big we integrate over all the support, i.e. it's like considering $\int_{\rfield} f(x) dx = 0$). Then $\omega$ is exact: $\omega = dF$ and $F$ has compact support $\Rightarrow [\omega]=0$. Indeed, this explains why we chose the map \eqref{mapn}: if the integral of the $n$-form is 0, the form is exact and it is the differential of a compactly supported $(n-1)$-form. In a similar way, we can choose another closed $n$-form $\eta=g(x)dx,\, g$ with compact support such that $\int_{\rfield}\eta = \int_{\rfield} g(x)dx=c \not=0$. In this case, the primitive is $G(x) = \int_{-\infty}^x g(t)dt$ and $\eta = dG$ (we already knew that such a $G$ existed, thanks to the standard Poincarè lemma), but $G$ is not compactly supported anymore (we have problems for $x$ big). Moreover, for each value of $c$ we get a different primitive. Since we can choose $g(x)$ such that we get any value of $c \in \rfield$, we have that $H_c^1(\rfield) \cong \rfield$. For $\fbox{n > 1}$: from proposition \ref{kprop}, we know that there is an isomorphism 
+\[ \int_{\rfield^n} \omega' = \int_{B_{2R}(0)} \omega' = \int_{B_{2R}(0)}(\omega + d \alpha) = \int_{B_{2R}(0)}\omega + \int_{B_{2R}(0)} d \alpha \overset{\text{Stokes}} = \int_{\rfield^n} \omega + \underbrace{\int_{\partial B_{2R}(0)} \alpha}_{=0} \, . \]
+For $\fbox{n=1}$, the case $k \not = 1$ coincides with the case $k=0$: we are considering compactly supported closed 0-forms, i.e. functions which are 0 everywhere. Thus, the only compactly supported closed 0-form which is not exact is the trivial one:  $H^0_c(\rfield) = 0$. As regards the case $k=1$, by the standard Poincarè lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported! Indeed let's write $\omega$ as $\omega=f(x) dx$, $f$ compactly supported function. If $\int_{\rfield} \omega = \int_{\rfield} f(x)dx = 0$, then the primitive $F(x)=\int_{-\infty}^x f(t)dt$ has compact support (for $x$ small we are outside of the support of $f$, whereas for $x$ big we integrate over all the support, i.e. it's like considering $\int_{\rfield} f(x) dx = 0$). Then $\omega$ is exact: $\omega = dF$ and $F$ has compact support $\Rightarrow [\omega]=0$. Indeed, this explains why we chose the map \eqref{mapn}: if the integral of the $n$-form is 0, the form is exact and it is the differential of a compactly supported $(n-1)$-form. In a similar way, we can choose another closed $n$-form $\eta=g(x)dx,\, g$ with compact support such that $\int_{\rfield}\eta = \int_{\rfield} g(x)dx=c \not=0$. In this case, the primitive is $G(x) = \int_{-\infty}^x g(t)dt$ and $\eta = dG$ (we already knew that such a $G$ existed, thanks to the standard Poincarè lemma), but $G$ is not compactly supported anymore (we have problems for $x$ big). Moreover, for each value of $c$ we get a different primitive. Since we can choose $g(x)$ such that we get any value of $c \in \rfield$, we have that $H_c^1(\rfield) \cong \rfield$. For $\fbox{n > 1}$: from proposition \ref{kprop}, we know that there is an isomorphism 
 \begin{equation} \label{hisomorph}
 H_c^k(M \times \rfield) \,  \substack{\overset{\pi_*}{\longleftarrow} \\ \underset{e_*}{\longrightarrow}} \, H_c^{k-1}(M)
 \end{equation}
@@ -3337,29 +3348,29 @@ Let's suppose the thesis is true for $n-1$, then we can consider $M=\rfield^{n-1
 
 \begin{remarkbox}
 \begin{remark}
-The Poincarè lemma \ref{compsupppoinclemma} is valid for $\rfield^n$, but it also holds for open subsets of manifolds which are diffeomorphic to $\rfield^n$. For instance, we can consider the convex subsets $U$ of $\rfield^n$ contained in a manifold. The form $\eta \in \Omega_c^{n-1}(U)$ with $d\eta=\omega$ produced in the proof of the Poincarè lemma for a compactly supported form $\omega$ can be extended by zero to a smooth form on the entire manifold. We will not make any distinction between the extended form and the form on $U$.
+The Poincarè lemma \ref{compsupppoinclemma} is valid for $\rfield^n$, but it also holds for open subsets of manifolds which are diffeomorphic to $\rfield^n$. For instance, we can consider the convex subsets $U$ contained in a manifold. The form $\eta \in \Omega_c^{n-1}(U)$ with $d\eta=\omega$ produced in the proof of the Poincarè lemma for a compactly supported form $\omega$ can be extended by zero to a smooth form on the entire manifold. We will not make any distinction between the extended form and the form on $U$.
 \end{remark}
 \end{remarkbox}
 
 We will now analyze some consequences of the compactly supported Poincarè lemma.
 
 \begin{definition}[Bump form] \label{bumpform}
-A bump form on $M^n$ (manifold of dimension $n$) is a compactly supported $n$-form $\omega = \rho \, dx^1 \wedge \ldots \wedge dx^n$ in a coordinate domain $(U, \varphi), \varphi \colon U \rightarrow \rfield^n \supseteq \varphi(U)$ so that $\left | \int_U \omega \right | = 1$.
+A bump form on $M^n$ (manifold of dimension $n$) is a compactly supported $n$-form $\omega = \rho \, dx^1 \wedge \ldots \wedge dx^n$ in a coordinate domain $(U, \varphi), \varphi \colon U \rightarrow \varphi(U) \subseteq \rfield^n $ so that $\left | \int_U \omega \right | = 1$.
 \end{definition}
 
-\begin{remarkbox}\begin{remark} \label{bumpremark}
-The Poincarè lemma tells us that: given $\omega, \omega'$ bump forms in $U$, then:
+\begin{remarkbox}\begin{remark} [Cohomologous bump forms] \label{bumpremark}
+We know that two forms are cohomologous in $H^k(U)$ if and only if they differ by an exact form (see remark \ref{cohomol}). The Poincarè lemma tells us that bump forms are cohomologous on $U$ if their integral on $U$ is the same. Given $\omega, \omega'$ bump forms in $U$, then:
 \begin{equation}
-\omega = \omega' + d \eta,\, \eta \in \Omega_c^{n-1}(U) \Leftrightarrow \int_U \omega = \int_U \omega'
+\omega = \omega' + d \eta,\, \eta \in \Omega_c^{n-1}(U) \Longleftrightarrow \int_U \omega = \int_U \omega'
 \end{equation}
-Indeed, the "$\Rightarrow$" is always true thanks to Stokes's theorem, whereas the "$\Leftarrow$" follows from the proof of the Poincarè lemma \ref{compsupppoinclemma}, because bump forms are $n$-forms in a $n$-dimensional manifold and the equality between the integrals implies that $[\omega] = [\omega']$ (because the isomorphism used in the proof is given by the integral map \eqref{mapn}). Thus, the two forms differ by an exact form. If $[\omega] = [\omega']$, the two forms are called \textit{cohomologous}, and we will also write $\omega \sim \omega'$.
+Indeed, the "$\Rightarrow$" is always true thanks to Stokes's theorem, whereas the "$\Leftarrow$" follows from the proof of the Poincarè lemma \ref{compsupppoinclemma}, because bump forms are $n$-forms in a $n$-dimensional manifold and the equality between the integrals implies that $[\omega] = [\omega']$ (because the isomorphism used in the proof is given by the integral map \eqref{mapn}). Thus, the two forms differ by an exact form.
 \end{remark}\end{remarkbox}
 
 \begin{proposition} \label{prop2bumpforms}
 $M$ connected manifold, then any two bump forms are cohomologous (on $M$) up to a sign.
 \end{proposition}
 \begin{proof}
-Let's consider two bump forms $\omega, \omega'$, compactly supported on $(U, \varphi), (U', \varphi')$, respectively. If $(U, \varphi) = (U', \varphi')$, then we have that $\int_U \omega = \int_U \omega'$ up to a sign (by definition \ref{bumpform}). Then, by the previous remark \ref{bumpremark} we have that $\omega$ and $\omega'$ are cohomologous up to a sign. On the other hand, if $(U, \varphi) \not = (U', \varphi')$, we do in the following way: since $M$ is a connected manifold, it is also path-connected (see problem set 12, ex. 1.(e)). Thus, we can find a path between $U$ and $U'$, and we can cover it with open sets $U_1, U_2, \ldots$.
+Let's consider two bump forms $\omega, \omega'$, compactly supported on $(U, \varphi), (U', \varphi')$, respectively. If $(U, \varphi) = (U', \varphi')$, then we have that $\int_U \omega = \int_U \omega'$ up to a sign (by definition \ref{bumpform}). Then, by the previous remark \ref{bumpremark} we have that $\omega$ and $\omega'$ are cohomologous up to a sign. On the other hand, if $(U, \varphi) \not = (U', \varphi')$, we do it in the following way: since $M$ is a connected manifold, it is also path-connected (see problem set 12, ex. 1.(e)). Thus, we can find a path between $U$ and $U'$, and we can cover it with open sets $U_1, U_2, \ldots$.
 \begin{figure}[H] \label{Fig:bumpforms1}
      \centering
      \includegraphics[width=0.8\textwidth]{Images/bumpforms1.pdf} 
@@ -3373,8 +3384,8 @@ Every $n$-form on $M$ is cohomologous to a locally finite sum of bump forms.
 \end{lemma}
 \begin{proof}
 Pick a cover $(U_i, \varphi_i), \varphi_i \colon U_i \rightarrow \varphi_i(U_i) \subseteq \rfield^n$, and a locally finite refinement $V_j$ (recall the definition contained in def. \ref{paracompactness}) with a subordinate partition of unity $\lambda_j$ (i.e. $\sum_j \lambda_j = 1$). Then:
-$$\omega = \sum\limits_j (\lambda_j \omega) \sim \sum\limits_{\substack{j \text{ s.t. } \\ \int \lambda_j \omega \not = 0}} \underbrace{\left( \frac{\lambda_j \omega}{\int \lambda_j \omega} \right)}_{\text{bump form}} \cdot \underbrace{\left ( \int \lambda_j \omega \right )}_{\text{coefficients}}$$
-And the sum if locally finite because we chose a locally finite refinement, which is always possible since manifolds are paracompact (thm \ref{paracompactnessthm}).
+\[ \omega = \sum\limits_j (\lambda_j \omega) \sim \sum\limits_{\substack{j \text{ s.t. } \\ \int \lambda_j \omega \not = 0}} \underbrace{\left( \frac{\lambda_j \omega}{\int \lambda_j \omega} \right)}_{\text{bump form}} \cdot \underbrace{\left ( \int \lambda_j \omega \right )}_{\text{coefficients}}  \, .\]
+And the sum is locally finite because we chose a locally finite refinement, which is always possible since manifolds are paracompact (thm \ref{paracompactnessthm}).
 \end{proof}
 
 \begin{theorem} \label{surjintegral}
@@ -3386,19 +3397,19 @@ H^n(M) &\rightarrow \rfield \\
 is well defined and surjective.
 \end{theorem}
 \begin{proof}
-Since $\partial M = \emptyset$, we have $\int_M (\omega + d \eta) = \int_M \omega$ by Stokes's theorem. So, the definition does not depend on the element of the equivalence class chosen. Moreover, let $(U_i, \varphi_i)$  be a chart from the oriented atlas, and let $\omega=f(x_1, \ldots, x_n) dx^1 \wedge \ldots dx^n$ in $U_i$, with $f$ smooth function, $f > 0$. Then, $\int_M \omega > 0$. Since $\omega$ and $c \, \omega$ are cohomologous $\forall \, c \in \rfield$, we have that for every real number $\lambda$ we can consider a $n$-form $c\,  \omega$ such that $\int_M c\, \omega = \lambda$. So, the map is surjective.
-\end{proof}
-
-\begin{theorem}
-If $M$ is a connected, smooth manifold of dimension $n$, $\dim \left( H^n(M) \right) \le 1$.
-\end{theorem}
-\begin{proof}
-Using the previous theorem \ref{surjintegral}, we just need to verify how many values $\int_U \omega$ can have, where $U$ open subset of $M$ diffeomorphic to $\rfield^n$ (Notice: $\partial U = \emptyset$ because $U$ is open). Now, every element of $H^n(M)$ is cohomologous to a (real) multiple of  a bump form in a fixed chart $(U, \varphi)$. Bump forms have integral $ =\pm 1$. Therefore, the value of the integral of a closed-but-not-exact $n$-form in $H^n(M)$ can be any real number. Since the map \eqref{surjmap} is surjective, we have the thesis.
+Since $\partial M = \emptyset$, we have $\int_M (\omega + d \eta) = \int_M \omega$ by Stokes's theorem. So, the definition does not depend on the element of the equivalence class chosen. Moreover, let $(U_i, \varphi_i)$  be a chart from the oriented atlas, and let $\omega=f(x_1, \ldots, x_n) dx^1 \wedge \ldots \wedge dx^n$ in $U_i$, with $f$ smooth function, $f > 0$. Then, $\int_M \omega > 0$. Since $\omega$ and $c \, \omega$ are cohomologous $\forall \, c \in \rfield$, we have that for every real number $\lambda$ we can consider a $n$-form $c\,  \omega$ such that $\int_M c\, \omega = \lambda$. So, the map is surjective.
 \end{proof}
 
 \begin{definition} \label{closedman}
 A manifold $M$ is closed if it is compact and $\partial M = \emptyset$.
 \end{definition}
+
+\begin{theorem} \label{1dimthm}
+If $M$ is a connected, smooth manifold of dimension $n$, $\dim \left( H^n(M) \right) \le 1$. If $M$ is also closed and oriented, $H^n(M) \cong \rfield$.
+\end{theorem}
+\begin{proof}
+Using the previous theorem \ref{surjintegral}, we just need to verify how many values $\int_U \omega$ can have, where $U$ open subset of $M$ diffeomorphic to $\rfield^n$ (Notice: $\partial U = \emptyset$ because $U$ is open). Now, every element of $H^n(M)$ is cohomologous to a (real) multiple of  a bump form in a fixed chart $(U, \varphi)$. Bump forms have integral $ =\pm 1$. Therefore, the value of the integral of a closed-but-not-exact $n$-form in $H^n(M)$ can be any real number. Since the map \eqref{surjmap} is surjective, we have the first thesis. If $M$ is also closed, then the map \eqref{surjmap} given by integration is also injective. The proof of this is on page 454, \citetalias{Lee}, using that $H^k(M)=H_c^k(M)$ if $M$ is compact. 
+\end{proof}
 
 \begin{theorem}
 Let $M$ be a connected, compact, orientable manifold with $\partial M \not = \emptyset$ and of dimension $n$. Then $H^n(M) = 0$.
@@ -3410,12 +3421,12 @@ It suffices to find a bump form which is cohomologous to zero in $M$. Once we fi
      \includegraphics[width=0.8\textwidth]{Images/bumpforms2.pdf} 
      \caption{We can find a bump form cohomologous to a zero form}      
 \end{figure}
-Let's find such a bump form. First, let's consider a boundary chart $(U, \varphi), \varphi \colon U \rightarrow \rfield^n \cap {x_1 < 0}$ (such that $\varphi(U)$ is a half-ball) and a bump form $\omega$ compactly supported in the interior of the half-ball. We will also consider the other half-ball. We will call $B_l$ the lower half-ball ($B_l = \varphi(U)$) and we will call $B_u$ the other half. We consider another bump form $\omega_u$ contained in $B_u$ such that:
-$$\int_{B_u} \omega_u = \int_{B_l} - \omega$$
+Let's find such a bump form. First, let's consider a boundary chart $(U, \varphi), \varphi \colon U \rightarrow \rfield^n \cap \{x_1 < 0\}$ (such that $\varphi(U)$ is a half-ball) and a bump form $\omega$ compactly supported in the interior of the half-ball. We will also consider the other half-ball. We will call $B_l$ the lower half-ball ($B_l = \varphi(U)$) and we will call $B_u$ the other half. We consider another bump form $\omega_u$ contained in $B_u$ such that:
+\[ \int_{B_u} \omega_u = \int_{B_l} - \omega \, . \]
 It is always possible, because bump forms can only have integral $=\pm 1$.
 Now, we consider the form $\omega_u + \omega$ and we extend it by zero. It is compactly supported in the open ball $B \equiv B_u \cup B_l$. We notice that $\int_{B} (\omega_u + \omega) = \int_B d\eta, \, \eta \in \Omega_c(B)$ by Stokes's theorem and using that $\partial B =\emptyset$. Then, by remark \ref{bumpremark} we have that $d\eta = \omega_u + \omega$. Thus:
-$$\restrict{d\eta}{B_l} = \restrict{\omega_u}{B_l} + \restrict{\omega}{B_l} = \restrict{\omega}{B_l}$$
-Then, if $\varphi^* \eta$ is a primitive of the bump form $\varphi^* \omega$. So, $\varphi^* \omega$ is the zero form we were looking for.
+\[ \restrict{d\eta}{B_l} = \restrict{\omega_u}{B_l} + \restrict{\omega}{B_l} = \restrict{\omega}{B_l} \, . \]
+Then, $\varphi^* \eta$ is a primitive of the bump form $\varphi^* \omega$. So, $\varphi^* \omega$ is the zero form we were looking for.
 \end{proof}
 
 What if we remove orientation? Recall that we can't compute integrals without orientation.
@@ -3430,16 +3441,16 @@ Let's cover $M$ by an atlas $(U_i, \varphi_i), \varphi_i \colon U_i \rightarrow 
      \caption{We can consider two paths connecting $U_0$ and $U_i$}      
 \end{figure}
 Let's consider another set $U_i$ from the cover, $U_0 \not = U_i$. Since $M$ is a connected manifold, it is also path-connected, so there exists a path $\gamma \colon [0, 1] \rightarrow M$ that connects $U_0$ to $U_i$. By the same reasoning of the proof of proposition \ref{prop2bumpforms}, we get that a bump form $\omega_0$ contained  in $U_0$ is cohomologous to a bump form $\omega_i(\gamma)$ contained in $U_i$. But, since $M$ is not orientable, there also exists a second path $\gamma'$ connecting $U_0$ and $U_i$, and a second chain of charts covering $\gamma'$, such that, repeating the same procedure, $\omega_0$ is cohomologous to $\omega_{i'}(\gamma')$ with the opposite sign of before (i.e. the integrals have opposite signs). Notice that even if we cannot integrate on $M$, we can integrate on the charts. It means that:
-$$\omega_i(\gamma) \sim \omega_0 \sim \omega_{i'}(\gamma') \sim -\omega_0$$
+\[ \omega_i(\gamma) \sim \omega_0 \sim \omega_{i'}(\gamma') \sim -\omega_0 \, . \]
 So, $\omega \sim - \omega \Leftrightarrow 2 \omega \sim 0$.
 \end{proof}
 
 \begin{remarkbox}\begin{remark}
 The proofs of the following facts are similar to the previous ones: given a connected manifold $M$:
 \begin{itemize}
-\item $M$ not compact, $\partial M = \emptyset \Rightarrow H^n(M)=0$
-\item $M$ compact $\Rightarrow H_c^*(M) = H^*(M)$
-\item $M$ not compact, oriented, $\partial M= \emptyset \Rightarrow H^n_c(M)=\rfield$ 
+\item $M$ not compact, $\partial M = \emptyset \Rightarrow H^n(M)=0$,
+\item $M$ compact $\Rightarrow H_c^*(M) = H^*(M)$,
+\item $M$ not compact, oriented, $\partial M= \emptyset \Rightarrow H^n_c(M)=\rfield$. 
 \end{itemize}
 \end{remark}\end{remarkbox}
 
@@ -3473,12 +3484,12 @@ The important assumption of the Brouwer theorem \ref{brouwerthm} is that the ent
 \begin{definition}[degree of a map] \label{degreemap}
 Let $f \colon M \rightarrow  N$ be smooth, $N, M$ closed manifolds (see def.  \ref{closedman}), orientable and of the same dimension. Then, the degree of $f$ is
 \begin{equation}
-\deg(f) = \frac{\int_M f^* \omega}{\int_N \omega}, \quad \text{for a form } \omega \in \Omega^n(N) \text{ s.t. } \int_N\omega \not = 0
+\deg(f) = \frac{\int_M f^* \omega}{\int_N \omega}, \quad \text{for a form } \omega \in \Omega^n(N) \text{ s.t. } \int_N\omega \not = 0 \, .
 \end{equation}
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-The definition \ref{degreemap} does not depend on the $\omega$ chosen: if $\omega_1, \omega_2$ are $n$-forms with the same integral, by remark \ref{bumpremark} they are cohomologous, i.e. they differ by an exact form $d\eta$. Then we can write $\omega_1 = \omega_2 + d\eta$ and we get the same degree by using the naturality of the pullback ($f^* d \eta = d f^* \eta$) and Stokes's theorem. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
+The definition \ref{degreemap} does not depend on the $\omega$ chosen: if $\omega_1, \omega_2$ are $n$-forms with the same integral, they are cohomologous by the proof of theorem \ref{1dimthm} (the isomorphism is given by integration). Then we can write $\omega_1 = \omega_2 + d\eta$ and we get the same degree by using the naturality of the pullback ($f^* d \eta = d f^* \eta$) and Stokes's theorem. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}
@@ -3486,8 +3497,8 @@ The definition \ref{degreemap} does not depend on the $\omega$ chosen: if $\omeg
 $ $
 \begin{itemize}
 \item $\deg(\id_M) = 1$,
-\item $\deg($constant map$)=0$, because the definition of pullback uses the pushforward: $f^* \omega = \omega (f_*, \ldots)$
-\item If $M, N$ are closed, orientable and of the same dimensions, from the previous two points we know that the identity map cannot be homotopy equivalent to a constant map.
+\item $\deg($constant map$)=0$, because the definition of pullback uses the pushforward: $f^* \omega = \omega (f_*, \ldots)$,
+\item If $M, N$ are closed, orientable and of the same dimensions, from the previous two points we know that the identity map cannot be homotopy equivalent to a constant map,
 \item If $M=N=S^1$, let's consider
 \begin{align*}
 f_k \colon S^1 &\rightarrow S^1 \subset \mathbb{C} \\
@@ -3495,7 +3506,7 @@ e^{i \varphi} = z &\mapsto z^k
 \end{align*}
 Then we have $\deg(f_k) = k$, indeed we can consider $\omega = d\varphi, \varphi$ angular coordinate on $S^1$ (cf. example \ref{angexample}). We stress out that $d\varphi$ is not exact (it is just a bad notation) because $\varphi$ is not a well defined function (it is well defined up to a $2\pi$ angle). Then, we have:
 $$\int_{S^1} \omega = 2\pi, \quad \int_{S^1} f_k^* d\varphi = \int_{S^1} k \,d\varphi = 2\pi k \, \Rightarrow \,  \deg(f_k)=k$$
-where we used: $(f^* \omega)(\alpha) = \omega(f_* \alpha) = k \,\omega(\alpha) = k \,d\varphi$.
+where we used that $\varphi$ is the angular coordinate, so $f(e^{i\varphi}) = e^{i k \varphi}$,
 \item For the next theorem, we introduce the concept of critical value and regular value of a function $f$. A critical value is the image of a critical point. A point $p$ is a regular value for $f$ if $D_q f$ is a surjective map for every $q \in f^{-1}(p)$: in a simpler way, $p$ is a regular value if it is not a critical value.
 \end{itemize}
 \end{example}
@@ -3505,7 +3516,7 @@ where we used: $(f^* \omega)(\alpha) = \omega(f_* \alpha) = k \,\omega(\alpha) =
 For all $f \colon M \rightarrow N$, in the hypotheses of def. \ref{degreemap}, the degree of $f$ is an integer. In particular, it is the signed count of preimages of a regular value.
 \end{theorem}
 \begin{proof}
-Let consider a regular value $p\in N$ of $f$. $p$ exists thanks to \href{https://en.wikipedia.org/wiki/Sard's_theorem}{Sard's theorem}. Sard's theorem states that the set of the critical values of a smooth function $f$ from a manifold to another is a null-measure set. We can apply this theorem to our case (and whenever $f$ is not smooth we can approximate it by smooth functions if it is at least continuous). Indeed, if the set of critical values has zero measure, its complementary set (the regular values) has dimension $n$.
+Let consider a regular value $p\in N$ of $f$. The value $p$ exists thanks to \href{https://en.wikipedia.org/wiki/Sard's_theorem}{Sard's theorem}. Sard's theorem states that the set of the critical values of a smooth function $f$ from a manifold to another one is a null-measure set. We can apply this theorem to our case (and whenever $f$ is not smooth we can approximate it by smooth functions if it is at least continuous). Indeed, if the set of critical values has zero measure, its complementary set (the regular values) has dimension $n$.
 In particular, $f^{-1}(q)$ is a submanifold of dimension 0 or, analogously, a submanifold of codimension $n$ (not proved). So, $f^{-1}(p)$ consists of a finite collection of points $q_1, \ldots, q_m$. By the inverse function theorem, there exists a neighbourhood $U_i$ of $q_i \in f^{-1}(p)$ such that $\restrict{f}{U_i}$ is a diffeomorphism onto its image. Let $\omega$ be a bump form supported in $\bigcap_i f(U_i) = V$. Then:
 $$\int_M f^* \omega = \sum\limits_i \underbrace{\int_{U_i} f^* \omega}_{\substack{=\pm \int_{f(U_i)} \omega \\ \text{depending} \\ \text{on orientation}}} = \sum\limits_i \left ( \pm \int_V \omega \right )$$ 
 So, the degree is an integer: the signed count of preimages of a regular value. The sign depends on the orientation (i.e. the sign of the determinant of the Jacobian at $p_i, \forall\, i$).
@@ -3524,7 +3535,7 @@ Let's consider a smooth map $f \colon S^2 \rightarrow T^2=S^1 \times S^1$.
      \includegraphics[width=0.6\textwidth]{Images/torus.pdf} 
      \captionof{figure}{$f \colon S^2 \rightarrow T^2$}      
 \end{minipage}
-$f$ has degree 0, indeed the pullback $f^*\colon H^2(T^2) \rightarrow H^2(S^2)$ is the zero map. In order to show this, we consider two projection maps, $\pr_1$ and $\pr_2$, defined as follows:
+The map $f$ has degree 0, indeed the pullback $f^*\colon H^2(T^2) \rightarrow H^2(S^2)$ is the zero map. In order to show this, we consider two projection maps, $\pr_1$ and $\pr_2$, defined as follows:
 \begin{center}
 \begin{tikzcd}
                     & T^2=S^1 \times S^1 \arrow[ld, "\text{pr}_1"'] \arrow[rd, "\text{pr}_2"] &                     \\
@@ -3534,9 +3545,9 @@ $f$ has degree 0, indeed the pullback $f^*\colon H^2(T^2) \rightarrow H^2(S^2)$ 
 where  $\varphi_i$ are angular functions and $d\varphi_1$ and $d\varphi_2$ are not exact, as already seen in the example \ref{degreeexample}.
 We choose $\omega \equiv (\pr_1^* d \varphi_1) \wedge (\pr_2^* d\varphi_2)$. We have:
 $$\int_{S^1 \times S^1} \omega = \int_{S^1} d\varphi_1 \int_{S^1} d\varphi_2 = 4 \pi^2$$
-Now, 
+Now, we have:
 $$f^* \omega = \underbrace{\left ( (\pr_1 \circ f)^* d \varphi_1 \right )}_{\text{closed 1-form on }S^2} \wedge \underbrace{\left( \pr_2 \circ f)^* d \varphi_2 \right)}_{\text{also closed}}$$
- because we used the proposition \ref{pullbackprop}, point 3 and because of the naturality of the pullback. Now, $H^1(S^2)=0$ (not proved, but it can be computed using the Mayer-Vietoris theorem \ref{mvthm}). So, every closed form on $S^2$ is exact. Thus, the two closed 1-forms above are actually exact forms.
+ because we used the proposition \ref{pullbackprop}, point 3, and because of the naturality of the pullback. Now, $H^1(S^2)=0$ (not proved, but it can be computed using the Mayer-Vietoris theorem \ref{mvthm}). So, every closed form on $S^2$ is exact. Thus, the two closed 1-forms above are actually exact forms.
 So, $(\pr_1\circ f)^*d\varphi_1 = d g$ and we have that
 $$f^*\omega = dg \wedge \left( (\pr_2 \circ f)^* d \varphi_2 \right)$$ is exact because the product between an exact form  and a closed one is an exact form. Finally:
 $$\int_{S^2} f^* \omega = 0$$

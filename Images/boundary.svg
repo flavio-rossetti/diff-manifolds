@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="485.18006"
-     inkscape:cy="685.63464"
+     inkscape:zoom="2.8"
+     inkscape:cx="572.95527"
+     inkscape:cy="750.06438"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,13 +55,13 @@
      id="layer1">
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 120.00402,98.953279 c -1.40927,5.862961 47.69075,20.979221 56.39386,15.635271 6.60552,-18.12377 1.27058,-39.984569 -19.37704,-43.965843 -20.86945,-2.674154 -30.70774,11.118452 -37.01682,28.330572 z"
+       d="m 120.00402,98.953279 c -1.40927,5.862961 51.39964,21.617051 56.39386,15.635271 6.60552,-18.12377 1.27058,-39.984569 -19.37704,-43.965843 -20.86945,-2.674154 -30.70774,11.118452 -37.01682,28.330572 z"
        id="path817"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.1199999, 1.05999995;stroke-dashoffset:2.64999986;stroke-opacity:1"
-       d="m 120.00402,98.953279 c 10.67527,-5.039128 51.21177,6.699341 56.39386,15.635271"
+       d="m 120.00402,98.953279 c 2.12265,-7.477962 57.57613,9.154881 56.39386,15.635271"
        id="path819"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -85,8 +85,8 @@
     <circle
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.14620687;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path833-1"
-       cx="135.80856"
-       cy="108.32317"
+       cx="135.92668"
+       cy="108.08694"
        r="0.7559523" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -306,4 +306,9 @@
       </g>
     </g>
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:none" />
 </svg>
