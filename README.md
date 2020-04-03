@@ -10,6 +10,10 @@ Missing parts:
 
 Last changes:
 
+03-04-20 (changes about Riemannian Metric and Hodge-Star operator):
+- remark 23.7 corrected (pullback),
+- typos corrected.
+
 02-04-20:
 - remark 13.6 added,
 - remark 16.7 expanded (cohomologous forms),
