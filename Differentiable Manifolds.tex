@@ -3604,18 +3604,21 @@ It is not true that every manifold admits a Lorentzian metric. For instance, $S^
 \end{remark}\end{remarkbox}
 
 A Riemannian metric assigns lengths to vectors, angles between vectors...we want to extend this (or, analogously, a Lorentzian metric) to alternating forms.
-\begin{remarkbox}\begin{remark} \label{genmetricrem}
+\newline
+\begin{remarkbox} 
+%[label=genmetricremark]
+ \begin{remark} \label{genmetricremark} 
 A Riemannian metric provides an isomorphism:
 \begin{align*}
 \musFlat \colon T_p M &\rightarrow (T_p M)^* \\
-v &\mapsto (\omega \mapsto g(v, w))
+v &\mapsto (\omega \mapsto g(v, w)) \, .
 \end{align*}
-And the inverse is the map $\musSharp \equiv \musFlat^{-1}$. To extend the metric from $T_p^* M$ to $\Lambda^kT_p^* M \equiv \text{Alt}^k T_p^* M$ we observe that there exists an isomorphism:
+And the inverse is the map $\musSharp \equiv \musFlat^{-1}$. To extend the metric from $T_p^* M$ to $\Lambda^kT_p^* M \equiv \text{Alt}^k (T_p^* M)$ we observe that there exists an isomorphism:
 \begin{align*}
 \text{Alt}^k(T_p^*M) & \overset{\sim}{\longrightarrow} (\text{Alt}^k(T_p M))^* \\
-\varphi &\longmapsto \tilde{\varphi} (x^1 \wedge \ldots \wedge x^k) = \varphi(x_1, \ldots x_k)
+\varphi &\longmapsto \tilde{\varphi} (x^1 \wedge \ldots \wedge x^k) = \varphi(x_1, \ldots x_k) \, .
 \end{align*}
-It is an isomorphism and it is also canonical. It means that it lets us define a Lorentzian metric on forms. In particular, if $e_1, \ldots, e_n$ is an orthonormal basis of $T_pM$ and $\delta^1, \ldots, \delta^n$ is the dual basis, then:
+It is an isomorphism and it is also canonical. It means that it lets us define a Lorentzian metric on forms: we use the fact that vector fields are sections of the tangent bundle, and that forms are sections of the cotangent bundle. In particular, if $e_1, \ldots, e_n$ is an orthonormal basis of $T_pM$ and $\delta^1, \ldots, \delta^n$ is the dual basis, then:
 \begin{equation*}
 \langle \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}, \delta^{\lambda_1}\wedge \ldots \wedge \delta^{\lambda_k} \rangle = \begin{cases*}
 0, & if $(\lambda_1, \ldots, \lambda_k) \not = (\mu_1, \ldots, \mu_k)$\\
@@ -3623,7 +3626,7 @@ It is an isomorphism and it is also canonical. It means that it lets us define a
 \end{cases*}
 \end{equation*}
 where: $g(\cdot, \cdot) = \langle\cdot, \cdot\rangle$ is the Lorentzian/Riemannian metric defined on forms, $\mu_1 < \ldots < \mu_k$, $\lambda_1 < \ldots < \lambda_k$, and $\varepsilon_{\lambda_i}= \langle e_i, e_i \rangle = \pm1$ (we always have the "$+$" sign for the Riemannian metric, whereas we have some "$-$" sign for a Lorentzian metric). Thus, $\langle \cdot, \cdot \rangle$ for alternating forms is symmetric.
-\end{remark}\end{remarkbox}
+\end{remark} \end{remarkbox}
 
 \begin{definition}[Volume form]
 If $M$ is an oriented manifold, then a volume form $\omega$ on $T_pM$ is a  differential $n$-form such that:
@@ -3638,16 +3641,17 @@ If $e_1', \ldots, e_n'$ is another oriented orthonormal basis, then $\exists$ a 
 f \colon T_pM &\rightarrow T_p M \\
 e_i &\mapsto e_i'
 \end{align*}
-$f$ linear map, orthogonal and positive definite (i.e. $\det f = 1$). Moreover:
-$$\omega(e_1', \ldots e_n') = \omega(f(e_1), \ldots, f(e_n)) = (f^* \omega) (e_1, \ldots, e_n) = ((\det f) \omega)(e_1, \ldots, e_n) =1$$
-where we used the definition of pullback of a linear map: $f^* \omega = \det f \omega$.
+is a linear map, orthogonal and positive definite (i.e. $\det f = 1$). Moreover:
+$$\omega(e_1', \ldots, e_n') = \omega(f(e_1), \ldots, f(e_n))  = (\det f) \omega(e_1, \ldots, e_n) =1$$
+where we used the alternating property of forms: 
+\[ \omega (T e_1, \ldots, T e_n) = (\det T) \omega(e_1, \ldots, e_n) \] when $T$ is a linear map (see page 354 of \citetalias{Lee} for more details).
 \end{remark}\end{remarkbox}
 We saw how a volume form reacts to an orthonormal basis. How about a general basis?
 
 \begin{lemma}
 Let $f_1, \ldots f_n$ be an oriented basis (not orthonormal) of $T_p M$. Let $\omega$ be a volume form. Then:
 \begin{equation}
-\omega(f_1, \ldots, f_n)=\sqrt{\det g_{ij}}, \qquad g_{ij} \equiv \langle f_i, f_j \rangle 
+\omega(f_1, \ldots, f_n)=\sqrt{\det g_{ij}}, \qquad g_{ij} \equiv \langle f_i, f_j \rangle  \, .
 \end{equation}
 \end{lemma}
 \begin{proof}
@@ -3657,11 +3661,11 @@ F \colon T_pM &\rightarrow T_p M \\
 e_i &\mapsto f_i
 \end{align*}
 which has positive determinant. With respect to the basis $e_1, \ldots, e_n$, $F$ is represented by the matrix $A=(\alpha_{ij})$, where $\alpha_{ij}$ such that $f_i = \sum \alpha_{ij} e_j$. Now,
-$$\langle f_i, f_j \rangle = \left \langle \sum\limits_l \alpha_{il} e_l, \sum\limits_m \alpha_{jm}e_m \right \rangle = \ldots= \sum\limits_l \alpha_{il}\alpha_{jl} = \left( A^t A \right )_{ij}$$
+$$\langle f_i, f_j \rangle = \left \langle \sum\limits_l \alpha_{il} e_l, \sum\limits_m \alpha_{jm}e_m \right \rangle = \ldots= \sum\limits_l \alpha_{il}\alpha_{jl} = \left( A^t A \right )_{ij} \, .$$
 Thus,
 \begin{align*}
 \omega(f_1, \ldots, f_n) &= \omega(F(e_1), \ldots, F(e_n)) = (F^* \omega)(e_1, \ldots, e_n)= \det A \, \omega(e_1, \ldots, e_n) =\\
-&= \det A = \sqrt{\det g_{ij}}
+&= \det A = \sqrt{\det g_{ij}} \, .
 \end{align*}
 where we used again the definition of pullback for linear maps (see remark \ref{diffbasisrem}), the formula $\det(A A^t) = \det(A)^2$, and the fact that $\omega$ is a volume form.
 \end{proof}
@@ -3672,15 +3676,15 @@ Let $V$ be an oriented\footnote{In 3 dimensions, a vector space is "right-orient
 \star \colon \Lambda^k V^* \rightarrow \Lambda^{n-k}V^* , \qquad \forall\, k=0, 1, \ldots, n
 \end{equation}
 such that:
-$$\langle \eta, \zeta \rangle \omega = \eta \wedge \star \zeta, \qquad \forall \, \eta, \zeta \in \Lambda^k V^*$$
-$\star$ is the Hodge-$\star$ (Hodge star) operator.
+$$\langle \eta, \zeta \rangle \omega = \eta \wedge \star \zeta, \qquad \forall \, \eta, \zeta \in \Lambda^k V^* \, .$$
+The map $\star$ is the Hodge-$\star$ (Hodge star) operator.
 \end{lemma}	
-\begin{proof}
+\begin{proof} $ $
 \begin{description}
 \item[Uniqueness:] Assume $\star, \tilde{\star}$ satisfy the assumption. Then:
-$$\underbrace{\eta}_{\in \Lambda^k V^*} \wedge \underbrace{(\star \zeta - \tilde{\star} \zeta)}_{\Lambda^{n-k} V^*} = 0, \qquad \forall\, \eta, \zeta \in \Lambda^k V^*$$
+$$\underbrace{\eta}_{\in \Lambda^k V^*} \wedge \underbrace{(\star \zeta - \tilde{\star} \zeta)}_{\Lambda^{n-k} V^*} = 0, \qquad \forall\, \eta, \zeta \in \Lambda^k V^* \, .$$
 If $\star \not = \tilde{\star} \Rightarrow \exists \, \zeta : \, \forall\, \eta, \, \eta \wedge \underbrace{(\star \zeta- \tilde{\star} \zeta)}_{\not = 0} = 0$, but it is easy to find an $\eta$ violating this equality, writing $\star \zeta - \tilde{\star} \zeta \in \Lambda^{n-k} V^*$ in terms of a basis.
-\item[Existence:]   To prove existence, we use an orthonormal basis  $e_1, \ldots, e_n$ of $V$ and the dual basis $\delta^1, \ldots, \delta^n$ of $V^*$. Recall that for $1 \le \mu_1 < \ldots < \mu_k \le n, 1 \le \lambda_1 < \ldots < \lambda_k \le n$, we have (see also remark \ref{genmetricrem}):
+\item[Existence:]   To prove existence, we use an orthonormal basis  $e_1, \ldots, e_n$ of $V$ and the dual basis $\delta^1, \ldots, \delta^n$ of $V^*$. Recall that for $1 \le \mu_1 < \ldots < \mu_k \le n, 1 \le \lambda_1 < \ldots < \lambda_k \le n$, we have (see also remark \ref{genmetricremark}):
 $$\oast = \langle \delta^{\lambda_1} \wedge \ldots \wedge \delta^{\lambda_k}, \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k} \rangle \omega = \begin{cases*}
 \varepsilon_{\mu_1}\cdots \varepsilon_{\mu_k} \omega, &if $(\lambda_1, \ldots, \lambda_k) = (\mu_1, \ldots, \mu_k)$ \\
 0, &otherwise
@@ -3696,7 +3700,7 @@ $$\star(\delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}) = \varepsilon_{\mu_1
 \delta^{\nu_1} \wedge \ldots \wedge \delta^{\nu_{n-k}}
 $$
 This holds without any assumption on the order of the $\lambda_i$, and it defines $\star$ on a basis. The resulting operator has the desired property: 
-$$\langle \eta, \zeta \rangle \omega = \eta \wedge \star \zeta, \qquad \forall\, \eta, \zeta \in \Lambda^kV^*$$
+\[ \langle \eta, \zeta \rangle \omega = \eta \wedge \star \zeta, \qquad \forall\, \eta, \zeta \in \Lambda^kV^* \, .  \qedhere \] 
 \end{description}
 \end{proof}
 
@@ -3734,7 +3738,7 @@ k -n+1 \ldots n & \ \ldots n-k
 &= \varepsilon_1 \ldots \varepsilon_n (-1)^{k(n-k)} \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}
 \end{align*}
 where we used: (1) $\sgn(\sigma^{-1}) = \sgn(\sigma)$. So, up to a sign, $\star \star$ is an involution. Moreover, up to a sign, $\star$ is an isometry. Indeed:
-$$\star \eta \wedge \star \star \zeta = \langle \star \eta , \star \zeta \rangle \omega = (-1)^{\Index V} \langle \eta, \zeta \rangle \omega$$
+$$\star \eta \wedge \star \star \zeta = \langle \star \eta , \star \zeta \rangle \omega = (-1)^{\Index V} \langle \eta, \zeta \rangle \omega \, .$$
 \end{remark}\end{remarkbox}
 
 \begin{lemma}
@@ -3750,7 +3754,7 @@ The map $\delta = (-1)^k \star d \star^{-1} \colon \Omega^{n-k}(M) \rightarrow \
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-We notice that $\\delta^2 = 0$. Moreover, we want to compare $\star \delta $ and $d \star$. So, let $\zeta \in \Omega^{k+1}(M)$, we compute the following:
+We notice that $\delta^2 = 0$. Moreover, we want to compare $\star \delta $ and $d \star$. So, let $\zeta \in \Omega^{k+1}(M)$, we compute the following:
 \begin{align*}
 \overbrace{d \underbrace{\star\, \zeta}_{n-k-1}}^{n-k} &\overset{\eqref{starprop}}{=} (-1)^{k(n-k) + \Index(M)} \star \star d \star \zeta \overset{(1)}{=} (-1)^{k(n-k) + \Index(M)} \star \star d \star \star \underbrace{\star^{-1} \zeta}_{n-(k+1)} \overset{\eqref{starprop}}{=} \\
 &=(-1)^{k(n-k) + 2\Index(M) + (n-k-1)(k+1)} \star \star d \star^{-1} \zeta = \ldots = (-1)^k \star \delta \zeta
@@ -3758,13 +3762,13 @@ We notice that $\\delta^2 = 0$. Moreover, we want to compare $\star \delta $ and
 where we used: (1) $1=\star \star^{-1}$.
 \end{remark}\end{remarkbox}
 
-\begin{lemma}
+\begin{lemma} The following holds:
 \begin{equation}
 d(\eta \wedge \star \zeta) = (d\eta) \wedge \star \zeta + (-1)^{\deg \eta} \eta \wedge d \star \zeta = \ldots = d \eta \wedge \star \zeta + \eta \wedge \star \delta \zeta
 \end{equation}
 where $\eta \in \Omega^k(M), \zeta \in \Omega^{k+1}(M)$. If $M$ is closed, then:
 \begin{equation}
-0 = \int_M d(\eta \wedge \star \zeta) = \langle d \eta, \zeta \rangle_M + \langle \eta, \delta \zeta \rangle_M
+0 = \int_M d(\eta \wedge \star \zeta) = \langle d \eta, \zeta \rangle_M + \langle \eta, \delta \zeta \rangle_M \, .
 \end{equation}
 Using the notations of mathematical analysis (where an operator $A^*$ is the adjoint of $A$ if $\langle A^*x,  y \rangle = \langle x, Ay \rangle, \forall\, x, y  $ in the domain of $A$ and $A^*$), we say that $-\delta$ is formally the adjoint of $d$.
 \end{lemma}
@@ -3778,7 +3782,7 @@ $$(-1)^k \delta_k \star = \star \delta_k$$
 and $-\delta_k$ is the formal adjoint of $d_{n-k-1}$ (via $\langle \cdot, \cdot \rangle_M$).  In addition, $(-1)^k \delta_k$ is conjugate to $d_k$ (via $\star$).
 Let's look again at the adjointness condition:
 \begin{equation} \label{adjcondition}
-\oast \quad \langle d_k \eta, \zeta \rangle _m + \langle \eta, \delta_{n-k-1} \zeta \rangle _M = 0
+\oast \quad \langle d_k \eta, \zeta \rangle _m + \langle \eta, \delta_{n-k-1} \zeta \rangle _M = 0 \, .
 \end{equation}
 \textbf{Fact}: From $\oast$, it follows that $\ker d_k \subset (\im \delta_{n-k-1})^{\bot}$. Actually, also $\supset$ holds. Furthermore: $\ker \delta_{n-k} = (\im d_{k-1})^{\bot}$.
 For finite-dimensional vector spaces, this would imply:
@@ -3788,44 +3792,44 @@ For finite-dimensional vector spaces, this would imply:
 Actually, $\ocdot$ holds also for infinite-dimensional spaces, thanks to the following theorem.
 \end{remark}\end{remarkbox}
 
-\begin{theorem}[Fundamental theorem of Hodhe-de Rham theory]
-$\ocdot$ above is an orthogonal direct sum decomposition.
+\begin{theorem}[Fundamental theorem of Hodge-de Rham theory]
+The expression $\ocdot$ above is an orthogonal direct sum decomposition.
 \end{theorem}
 
-\begin{corollary}
+\begin{corollary} The following holds:
 \begin{align}
 \ker d_k &= \Omega^k(M) \cap \ker d_k = \left ( \ker (\delta_{n-k} \oplus \im(d_{k-1}) \right ) \cap \ker d_k = \\
-&= \left ( (\ker \delta_{n-k}) \cap \ker d_k \right) \oplus \im d_{k-1} \nonumber
+&= \left ( (\ker \delta_{n-k}) \cap \ker d_k \right) \oplus \im d_{k-1} \, . \nonumber
 \end{align}
 Comparing first and last term, and remembering that the de Rham cohomology of $M$ is $H^{k-1}(M) = \faktor{\ker d_k}{\im d_{k-1}}$, we have that $H^{k-1}(M) \cong \left ( (\ker \delta_{n-k}) \cap \ker d_k \right)$. In a similar way:
 \begin{equation}
-\ker \delta_{n-k} = \im \delta_{n-k-1} \oplus \left ( \ker d_k \cap \ker \delta _{n-k} \right )
+\ker \delta_{n-k} = \im \delta_{n-k-1} \oplus \left ( \ker d_k \cap \ker \delta _{n-k} \right ) \, .
 \end{equation}
 \end{corollary}
 
 \begin{lemma}[Harmonic forms]
 Elements of $\mathcal{H}^k(M) \equiv \ker d_k \cap \ker \delta_{n-k}$ are closed and coclosed (i.e. closed with respect to $\delta$), and they are said to be harmonic. The Laplace operator is $\Delta = d \circ \delta + \delta \circ d$, and 
 \begin{equation} \label{deltaeqn}
-\mathcal{H}^k(M) = \ker \left ( \restrict{\Delta}{\Omega^k(M)} \right )
+\mathcal{H}^k(M) = \ker \left ( \restrict{\Delta}{\Omega^k(M)} \right ) \, .
 \end{equation}
 \end{lemma}
 \begin{proof}[Proof of \ref{deltaeqn}]
 $\eta, \zeta \in \Omega^k(M)$.
 \begin{description}
 \item["$\subseteq$":] trivial by definition of $\Delta$,
-\item["$\supseteq$":] 
-$$0 = \langle \Delta \eta, \zeta \rangle_M = \langle d \circ \delta \eta + \delta \circ d \eta, \zeta \rangle_M =- \langle d \eta, d \zeta \rangle_M - \langle \delta \eta, \delta \zeta \rangle_M, \, \forall\, \zeta$$
+\item["$\supseteq$":]  We have:
+$$0 = \langle \Delta \eta, \zeta \rangle_M = \langle d \circ \delta \eta + \delta \circ d \eta, \zeta \rangle_M =- \langle d \eta, d \zeta \rangle_M - \langle \delta \eta, \delta \zeta \rangle_M, \quad \forall\, \zeta \, .$$
 where we used the adjointness \eqref{adjcondition}. Since it holds for every $\zeta$, it is also true for $\zeta = \eta$:
 $$0 = - \underbrace{|| d \eta ||^2}_{\ge 0} - \underbrace{||\delta \eta||^2}_{\ge 0}$$
 and the equality holds $\Leftrightarrow \eta \in \ker d_k, \eta \in \ker \delta_{n-k}$.\qedhere
 \end{description}
 \end{proof}
 
-\begin{corollary}[Hodge theorem]
+\begin{corollary}[Hodge theorem] There is an isomorphism
 \begin{equation}
-\mathcal{H}^k(M) \rightarrow H^k(M)
+\mathcal{H}^k(M) \rightarrow H^k(M) \, .
 \end{equation}
-is an isomorphism. Moreover, we have:
+Moreover, we have:
 \begin{center}
 \begin{tikzcd}
 \mathcal{H}^k(M) \arrow[r] \arrow[d, "\star^{-1}"', shift right] & H^k(M) \arrow[d, shift right]                        \\
