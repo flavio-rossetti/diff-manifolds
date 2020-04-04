@@ -3116,12 +3116,12 @@ D_e \exp \equiv \id_{\lie{g}}
 \begin{lemma}
 Let $f \colon G \rightarrow H$ be a smooth group homomorphism. then
 \begin{equation}
-\exp^H \left(Df(X) \right) = f \left( \exp^G(X) \right)
+\exp^H \left(D_ef(X) \right) = f \left( \exp^G(X) \right)
 \end{equation}
-where $Df \colon \lie{g} \rightarrow \lie{h}$ with $\lie{g} \cong T_e G, \lie{h} \cong T_e H$, as usual.
+where $D_ef \colon \lie{g} \rightarrow \lie{h}$ with $\lie{g} \cong T_e G, \lie{h} \cong T_e H$, as usual.
 \end{lemma}
 \begin{proof}
-Given $Df(X)$, $\alpha^{Df(X)} \colon \rfield \rightarrow H$ is a 1-parameter subgroup (i.e. it satisfies the same properties of $\alpha^X$, see also remark \ref{alphacurve}). $\alpha^{Df(x)}$ coincides with $f \circ \alpha^X$. i.e. the following diagram commutes:
+Here and in the following, we will use the notation $Df$ instead of $D_ef$ in order to avoid too many symbols in the notations. Given $Df(X)$, $\alpha^{Df(X)} \colon \rfield \rightarrow H$ is a 1-parameter subgroup (i.e. it satisfies the same properties of $\alpha^X$, see also remark \ref{alphacurve}). $\alpha^{Df(x)}$ coincides with $f \circ \alpha^X$. i.e. the following diagram commutes:
 \begin{center}
 \begin{tikzcd}
 \mathfrak{g} \arrow[r, "Df"] \arrow[d, "\exp^G"'] & \mathfrak{h} \arrow[d, "\exp^H"] \\
@@ -3134,14 +3134,14 @@ G \arrow[r, "f"]                                  & H
 Let $G$ be a connected Lie group. Then, if $f \colon G \rightarrow H$ is a smooth homomorphism, it is determined by its differential at the identity element $D_e f$.
 \end{lemma}
 \begin{proof}
-Let's take a lok at the diagram of the previous proof. It would be nice if we could go back from $G$ to $\lie{g}$ like this: 
+Let's take a look at the diagram of the previous proof. It would be nice if we could go back from $G$ to $\lie{g}$ like this: 
 \begin{center}
 \begin{tikzcd}
 \mathfrak{g} \arrow[d, "\exp^G"'] \\
 G \arrow[u, bend right]          
 \end{tikzcd}
 \end{center}
-If it was true, then the thesis would be satisfied because the diagram of the previous proof commutes. Unfortunately, this is not always true. It is \textit{locally} true because $D_e \exp^G \equiv \id_{\lie{g}}$ (think about the Taylor expansion, see \eqref{deexp}). Since it is locally true, there exists a neighbourhood $\mathfrak{U} \subset \lie{g}$ of 0 and a neighbourhood $\mathcal{U} \subset G$ of $e$ such that 
+If it was true, then the thesis would be satisfied because the diagram of the previous proof commutes (we could write $f$ using $Df$, $\exp^H$ and $(\exp^G)^{-1}$). Unfortunately, this is not always true. It is \textit{locally} true because $D_e \exp^G \equiv \id_{\lie{g}}$ (think about the Taylor expansion, see \eqref{deexp}). Since it is locally true, there exists a neighbourhood $\mathfrak{U} \subset \lie{g}$ of 0 and a neighbourhood $\mathcal{U} \subset G$ of $e$ such that 
 $$\restrict{\exp^G}{\mathfrak{U}} \colon \mathfrak{U} \rightarrow \mathcal{U}$$
 is a diffeomorphism. Thus, on $\mathcal{U}$ the $f$ is defined by:
 $$f = \exp^H \circ Df \circ \left(\restrict{\exp^G}{\mathfrak{U}}\right)^{-1} \, .$$
@@ -3150,7 +3150,7 @@ $$V \equiv \mathcal{U} \cap \mathcal{U}^{-1} \, .$$
 It is an open neighbourhood, because intersection of open sets, with 
 $\mathcal{U}^{-1} = \left \{u^{-1} \, | \, u \in \mathcal{U} \right \}$. Moreover,
 $$G^V \equiv \bigcup_{j=0}^{\infty} V^j, \qquad V^j \equiv \left \{v_1 \cdot \ldots \cdot v_j \, | \, v_i \in V \right \} \, .$$
-$G^V$ is a subgroup of $G$, and it is open because every element of the union is open: $V$ is open, $V^2 = \bigcup_{v \in V} v V$ is open, etc... We will now show that also the complement is open:
+$G^V$ is a subgroup of $G$, and it is open because every element of the union is open: $V$ is open, $V^2 = \bigcup_{v \in V} v V$ is open, etc... We will now show that also the complement is open. First, we have that:
 $$G = \bigcup_{[g] \in \faktor{G}{G^V}} g G^V$$ 
 because: 
 \begin{itemize}
@@ -3158,8 +3158,8 @@ because:
 \item "$\subseteq$" follows from the fact that "$[g] \in \faktor{G}{G^V}$" means that if $g \in G^V$, then "$gG^V$" yields the entire subgroup $G^V$. If $g \not \in G^V$, then we are considering the elements in $G \setminus G^V$. Since "$g G^V$" means that we are multiplying $g$ by all possible element of $G^V$, and since $G^V$ contains the identity element (because it is a subgroup), we can get all the possible elements of $G \setminus G^V$ from the right-hand side. Then $G \subseteq \bigcup_{[g] \in \faktor{G}{G^V}} g G^V$.
 \end{itemize}
 Thus, we can obtain $G \setminus G^V$ if $g \not \in G^V$ in the union:
-$$G \setminus G^V = \bigcup_{[g] \not = [e]} g G^V \text{ is open} \, .$$
-Now, given that $G$ is connected (see definition \ref{connspace}), either $G^V$ or $G \setminus G^V$ must be empty. $G^V$ contains at least the identity element if $G$ is non-empty, so $G \setminus G^V$ must be the empty one. So, $G=G^V$.
+$$G \setminus G^V = \bigcup_{[g] \not = [e]} g G^V \text{ (it is an open set)} \, .$$
+Now, given that $G$ is connected (see definition \ref{connspace}), either $G^V$ or $G \setminus G^V$ must be empty. $G^V$ contains at least the identity element (obviously we are assuming that $G$ is non-empty), so $G \setminus G^V$ must be the empty one. So, $G=G^V$.
 \end{proof}
 
 \begin{remarkbox}
