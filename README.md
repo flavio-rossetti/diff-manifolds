@@ -10,6 +10,12 @@ Missing parts:
 
 Last changes:
 
+04-04-20:
+- remark 19.29 added,
+- remark 20.2 corrected (Aut(T_e g) is a Lie group),
+- remark 20.4 corrected (g is a Lie algebra),
+- typos corrected in the section "Lie groups".
+
 03-04-20 (changes about Riemannian Metric and Hodge-Star operator):
 - remark 23.7 corrected (pullback),
 - typos corrected.
