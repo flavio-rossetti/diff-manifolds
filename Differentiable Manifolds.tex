@@ -2977,7 +2977,7 @@ $ $
 A Lie group $G$ is a group and a smooth manifold, such that the operation of the group and the inverse of the group are smooth. i.e. the maps
 \begin{align}
 \mu \colon G \times G &\rightarrow G \\
-(g, h) & \mapsto g \cdot h \nonumber \\
+(g, h) & \mapsto g \cdot h = gh \nonumber \\
 \text{inv} \colon G &\rightarrow G \\
 g & \mapsto g^{-1} \nonumber
 \end{align}
@@ -2992,7 +2992,7 @@ h &\mapsto g h g^{-1} \nonumber
 \end{align}
 $c_g$ is  a smooth group homomorphism (i.e. $c_g(h)c_g(k)=c_g(hk)$) and has the property 
 \begin{equation} \label{cgprop}
-c_g \circ c_{g'} = c_{g \circ g'}
+c_g \circ c_{g'} = c_{g g'}
 \end{equation}
  It also preserves the identity element: $c_g(e) = e$. If we differentiate at $e$:
 \begin{equation}
