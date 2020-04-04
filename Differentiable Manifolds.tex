@@ -3019,7 +3019,7 @@ So, since the map given by $\ref{grouphom}$ is bijective, we have that $G \cong 
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Left-invariant vector field]
-A vector field $X$ on a Lie group is left-invariant if $l_{g*}X = X\, \forall \, g \in G$, where $l_g$ is the map given by
+A vector field $X$ on a Lie group is left-invariant if $l_{g*}X = X\, \forall \, g \in G$, where $l_g$ is the homomorphism given by
 \begin{align}
 l_g \colon G &\rightarrow G \\
 h &\mapsto gh \, . \nonumber
@@ -3034,11 +3034,11 @@ Let's consider:
 X &\mapsto X(e) = X_e \, . \nonumber
 \end{align}
 It is an isomorphism since it is linear, i.e. $(X + Y)_e = X_e + Y_e$, and we can get the vector field back from the vector field itself evaluated at $e$. Indeed, the inverse is:
-$$X_h = l_{h*} X_e= (Dl_h)(X_e) \quad \oast$$
-by left-invariance. In fact, we can prove $\oast$ in the following way: the left-invariance condition $D l_g X = l_{g*}X = X$ means that: 
+$$X_h = (l_{h*})_e X_e= (Dl_h)_e(X_e) \quad \oast$$
+by left-invariance. In fact, we can analyze and prove $\oast$ in the following way: the left-invariance condition $D l_g X = l_{g*}X = X$ means that 
 $$D(l_g)_{g'}\, (X_{g'}) = X_{g g'}, \, \forall\, g, g' \in G$$
-where we wrote explicitly the element $g'$ about which we compute the derivation and the vector field. In the right-hand side the product $gg'$ must be interpreted using the operation of the group $G$. Then, by left-invariance, we have that:
-$$D_e(l_h)\, (X_e) = X_{e h} = X_h$$
+where $D(l_g)_{g'}$ means that the derivation is computed at $g'$ (we use this notation instead of $D_{g'}(l_g)$) and $g'$ is also the point at which we consider our vector field $X$. In the right-hand side the product $gg'$ must be interpreted using the operation of the group $G$. Then, by left-invariance, we have that:
+$$D(l_h)_e\, (X_e) = X_{e h} = X_h$$
 which is what we wanted to prove.
 So, we have $\lie{g} \cong T_e G$. In order to prove that $\lie{g}$ is a Lie algebra, we need Lie brackets that satisfy Lie algebra properties. In order to solve the problem, we notice that $l_g$ is not only a homomorphism, but also a diffeomorphism. By lemma \ref{commlemma}, point 5, and by recalling that the commutator of vector fields is still a vector field:
 $$Dl_g [V, W] = [Dl_g V, Dl_g W] \quad \text{for vector fields } V, W$$
