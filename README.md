@@ -10,6 +10,12 @@ Missing parts:
 
 Last changes:
 
+07-04-20:
+- "Derivations" section merged with "Multilinear forms" section (in the previous changes numbers are shifted by 1, e.g. remark 19.29 became remark 18.29),
+- remark 17.2 corrected (last part added),
+- remark 16.18 corrected (local coordinates),
+- typos corrected.
+
 04-04-20:
 - remark 19.29 added,
 - remark 20.2 corrected (Aut(T_e g) is a Lie group),
