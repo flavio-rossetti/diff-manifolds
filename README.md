@@ -10,6 +10,16 @@ Missing parts:
 
 Last changes:
 
+10-04-20:
+- proof lemma 12.3 corrected,
+- proof thm 14.15 corrected,
+- remark 14.20 corrected,
+- remark 14.21 deleted,
+- def. 18.14 and 18.15 corrected,
+- remark 22.15 corrected,
+- corollary 22.17 corrected (H^k instead of H^{k-1}),
+- typos corrected.
+
 07-04-20:
 - "Derivations" section merged with "Multilinear forms" section (in the previous changes numbers are shifted by 1, e.g. remark 19.29 became remark 18.29),
 - remark 17.2 corrected (last part added),
