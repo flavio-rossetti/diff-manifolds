@@ -10,6 +10,9 @@ Missing parts:
 
 Last changes:
 
+05-09-20:
+- typos in some proofs.
+
 10-04-20:
 - proof lemma 12.3 corrected,
 - proof thm 14.15 corrected,

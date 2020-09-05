@@ -461,7 +461,7 @@ We can also use another useful characterization of the quotient topology: a set 
 \item "$(1) \Rightarrow (2)$": $U$ open in the quotient topology, then $\pi^{-1}(U)$ is open in $M$ by (1), because $\pi$ is a continuous map. If $\pi^{-1}(U)$ is open in $M$, then $U$ is open in $\faktor{M}{\sim}$ because in $(1)$ we have defined the topology on $\faktor{M}{\sim}$ as the \textit{largest} topology such that $\pi$ is continuous!
 \item "$(2) \Rightarrow (1)$: $\pi$ is obviously continuous. And the topology we get is the \textit{largest} one such that $\pi$ is continuous because if $\pi^{-1}(U)$ is not open in $M$, then $U$ is not open in the quotient space (read also below).
 \end{itemize}
-\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that it exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. It is true when we consider the largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous, like in case $"(1) \Rightarrow (2)"$ above. The "largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous" means that the topology on $Y$ has the same open sets of the "power set topology" (i.e. every set is open, cf. remark \ref{topexamples}) except for some sets. Which sets are excluded? Let's consider the following reasoning. We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
+\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that there exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. It is true when we consider the largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous, like in case $"(1) \Rightarrow (2)"$ above. The "largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous" means that the topology on $Y$ has the same open sets of the "power set topology" (i.e. every set is open, cf. remark \ref{topexamples}) except for some sets. Which sets are excluded? Let's consider the following reasoning. We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}\begin{example}[Cofinite topology]
@@ -537,14 +537,14 @@ Let $\{U_i\}_{i \in I}$ be an open cover of $A$. There are open sets $V_i \subse
 If $A$ is compact and $f \colon A \rightarrow Y$ is continuous, then $f(A)$ is compact.
 \end{lemma}
 \begin{proof}
-Let $\{U_i\}_{i \in I}$ be an open cover of $f(A)$. Then $\exists\,  \{V_i\}_{i \in I}, V_i \subset Y$ open, so that $U_i = V_i \cap f(A)$ (by definition of open sets in subspace topology). Since $f$ is continuous, $f^{-1}(V) \subset A$ is open, and $f^{-1}(V)$ covers $A$. Since $A$ is compact, there exist $i_1, \ldots, i_k$ such that $f^{-1}(V_{i_1}), \ldots, f^{-1}(V_{i_k})$ still cover $A$. Thus, $V_{i_1},\ldots, V_{i_k}$ is a collection of open sets in $Y$ covering $f(A)$. In the subspace toplogy, $U_{i_1} = V_{i_1} \cap f(A), \ldots, U_{i_k} = V_{i_k} \cap f(A)$ cover $f(A)$.
+Let $\{U_i\}_{i \in I}$ be an open cover of $f(A)$. Then $\exists\,  \{V_i\}_{i \in I}, V_i \subset Y$ open, so that $U_i = V_i \cap f(A)$ (by definition of open sets in subspace topology). Let $V = \bigcup_i V_i$. Since $f$ is continuous, $f^{-1}(V) \subset A$ is open, and $f^{-1}(V)$ covers $A$. Since $A$ is compact, there exist $i_1, \ldots, i_k$ such that $f^{-1}(V_{i_1}), \ldots, f^{-1}(V_{i_k})$ still cover $A$. Thus, $V_{i_1},\ldots, V_{i_k}$ is a collection of open sets in $Y$ covering $f(A)$. In the subspace toplogy, $U_{i_1} = V_{i_1} \cap f(A), \ldots, U_{i_k} = V_{i_k} \cap f(A)$ cover $f(A)$.
 \end{proof}
 
 \begin{lemma}[Compact set in a Hausdorff] \label{compinhauss}
 Let $X$ be Hausdorff. Let $A \subset X$. Assume $A$ is compact. Then $A$ is closed.
 \end{lemma}
 \begin{proof}
-Let $x \in X \setminus A$. For every $a \in A$, there are $U_a \subset X, V_x(a) \subset X$ open sets such that $U_a \cap V_x(a) = \emptyset$ (because of the Hausdorff hypothesis). Here, we used the notation $V_x(a)$ to stress out the dependence of $V$ on $x$ and $a$. The sets $\{U_a \cap A\}_{a \in A}$ form an open covers of $A$. Since $A$ is compact, there are finitely many $a_1, \ldots a_k$ so that $U_{a_1} \cap A, \ldots, U_{a_k} \cap A$ cover $A$. Now, $V_x = V_x(a_1) \cap \ldots \cap V_x(a_k)$ contains $x$ and it is open. Moreover, $V_x \,\cap A = \emptyset$ because $V_x$ is disjoint from each $U_{a_i} \Rightarrow X \setminus A$ is open, because for each point we can find an open set that contains the point and that is contained in $X \setminus A$.
+Let $x \in X \setminus A$. For every $a \in A$, there are $U_a \subset X, V_x(a) \subset X$ open sets such that $U_a \cap V_x(a) = \emptyset$ (because of the Hausdorff hypothesis). Here, we used the notation $V_x(a)$ to stress out the dependence of $V$ on $x$ and $a$. The sets $\{U_a \cap A\}_{a \in A}$ form an open cover of $A$. Since $A$ is compact, there are finitely many $a_1, \ldots a_k$ so that $U_{a_1} \cap A, \ldots, U_{a_k} \cap A$ cover $A$. Now, $V_x = V_x(a_1) \cap \ldots \cap V_x(a_k)$ contains $x$ and it is open. Moreover, $V_x \,\cap A = \emptyset$ because $V_x$ is disjoint from each $U_{a_i} \Rightarrow X \setminus A$ is open, because for each point we can find an open set that contains the point and that is contained in $X \setminus A$.
 \end{proof}
 
 \begin{theorem} [How to get a homeomorphism]
@@ -556,16 +556,16 @@ The only thing which is left to prove is that $f^{-1}$ is a continuous function.
 
 \begin{remarkbox}
 \begin{remark}
-We can consider the concept of sequential compactness: $X$ is sequentially compact if every sequence in $X$ contains a convergent subsequence in $X$. In general, $X$ compact $\not \Rightarrow X$ sequentially compact. But, $X$ compact $+$ first countable $\Rightarrow X$ sequentially compact. Here, $X$ is first countable if $\forall\, x \in X\, \exists \,  N_1, N_2, \ldots, N_i$ (where $i \in I, I $) countable collection of neighbourhoods of $x$ such that every neighbourhood contains one of the $N_i$. Notice that manifolds are first countable! (not proved.)
+We can consider the concept of sequential compactness: $X$ is sequentially compact if every sequence in $X$ contains a convergent subsequence in $X$. In general, $X$ compact $\not \Rightarrow X$ sequentially compact. But, $X$ compact $+$ first countable $\Rightarrow X$ sequentially compact. Here, $X$ is first countable if $\forall\, x \in X\,$ there exists a countable collection $ \,  N_1, N_2, \ldots, N_i$ of open sets containing $x$ such that every neighbourhood of $x$ contains one of the $N_i$. Notice that manifolds are first countable! (not proved.)
 \end{remark}
 \end{remarkbox}
 
 \begin{definition}[Compact exhaustion]
-Let $X$ be a topological space. A compact exhaustion $\{K_i\}_{i \in \mathbb{N}}$ of $X$ is a countable collection of compact sets $K$ so that $\bar K_i \subset \mathring K_{i+1}$
+Let $X$ be a topological space. A compact exhaustion of $X$ is a countable collection of compact sets $\{K_i\}_{i \in \mathbb{N}}$ such that $\bar K_i \subset \mathring K_{i+1}$ and $\bigcup_{i=1}^{\infty} K_i = X$.
 \end{definition}
 
 \begin{definition}[Paracompactness] \label{paracompactness}
-A topological space is paracompact if  every open cover admits a locally finite refinement. i.e. if $\{U_i\}_{i \in I}$ is an open cover of $X$, there is another open cover $\{V_j\}_{j \in J}$ of $X$ such that $V_j \subset U_i(j)$ (refinement) and every point $x$ has a neighbourhood $V_x$ such that $V_x$ intersects only a finite number of $V_j$ (locally finite).
+A topological space is paracompact if  every open cover admits a locally finite refinement. In other words: if $\{U_i\}_{i \in I}$ is an open cover of $X$, there is another open cover $\{V_j\}_{j \in J}$ of $X$ such that $V_j \subset U_{i(j)}$ for every $j$ and for some index $i(j)$ (refinement) and, moreover, every point $x$ has a neighbourhood $E_x$ such that $E_x$ intersects only a finite number of $V_j$'s (locally finite).
 \end{definition}
 
 \begin{definition}[Partition of unity]
@@ -574,7 +574,7 @@ $$\sum\limits_{j \in J}f_j(x) \equiv 1 \, .$$
 \end{definition}
 
 \begin{definition}[Connected space]\label{connspace}
-A topological space $X$ is connected if it cannot be written as union of two non-empty, disjoint open sets.
+A topological space $X$ is connected if it cannot be written as a union of two non-empty, disjoint open sets.
 \end{definition}
 
 \begin{remarkbox}
@@ -845,7 +845,7 @@ where, given $(x_1, \ldots, x_k) \in \underbrace{V \times \ldots \times V}_{k \t
   \varphi^1 \wedge \ldots \wedge \varphi^k (x_1, \ldots, x_k) =  \det\left (\varphi^i(x_j) \right) \, .
 \end{equation}
 This is a particular case of an exterior $k$-form (because the sign of determinant changes if we swap two rows or two columns).
-Now let's consider and explicit computation using the determinant, in $\rfield^3$, with coordinates $x, y, z$, and with $\varphi^1, \varphi^2, \varphi^3$ corresponding to the three elements of the dual basis $dx \equiv e^{*1} = dx^1, dy \equiv e^{*2} = dx^2$ and $ dz \equiv e^{*3} = dx^3$:
+Now let's consider an explicit computation using the determinant, in $\rfield^3$, with coordinates $x, y, z$, and with $\varphi^1, \varphi^2, \varphi^3$ corresponding to the three elements of the dual basis $dx \equiv e^{*1} = dx^1, dy \equiv e^{*2} = dx^2$ and $ dz \equiv e^{*3} = dx^3$:
 \begin{equation*}
 (dx \wedge dy \wedge dz)(x, y, z) = \det\left (dx^i(e_j) \right) = \det \left(
 \begin{matrix}
@@ -873,7 +873,7 @@ and we can use that $dx^i(e_j) = \delta^i_j$. For instance, we can verify that t
   If $\{e_i\}_{i=1,\ldots,n}$ is a basis in $V$, then $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}_{i_1 < \ldots < i_k, k \le n}$ forms a basis of $\Lambda ^k V^*$.
 \end{proposition}
 \begin{proof}[Proof]
-In the statement we implicitly assumed that the elements of $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}$ are defined as usual, for instance $e^{*i_1}(e_{j_1}) = \delta^{i_1}_{j_1}$. In order to prove that it is a basis, we need to prove that the element of the basis are linearly independent and that they span the entire space.
+In the statement we implicitly assumed that the elements of $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}$ are defined as usual, for instance $e^{*i_1}(e_{j_1}) = \delta^{i_1}_{j_1}$. In order to prove that it is a basis, we need to prove that the elements of the basis are linearly independent and that they span the entire space.
 \begin{itemize}
 \item Linear independence: If
 $$0 = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} (e^{*i_1} \wedge \ldots \wedge e^{*i_k})(e_{j_1}, \ldots, e_{j_k}), \quad \forall \, (e_{j_1}, \ldots, e_{j_k})$$
@@ -883,9 +883,9 @@ then $a_{i_1 \cdots i_k} = 0, \forall\, i_1, \ldots, i_k$. Indeed, if it is true
 & + \sum\limits_{\substack{j_1 < \ldots < j_k \\
 j_1 \not = i_1, j_2 \not = i_2, \ldots}} a_{j_1 \cdots j_k} \underbrace{(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k})}_{= 0} = a_{i_1 \cdots i_k} \, .
 \end{align*}
-The second term is zero because $(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k}) = \det \left (e^{*j_l} (e_{i_l}) \right)$ and the matrix $e^{*j_l} (e_{i_l})$ has null coefficients on the main diagonal (because $j_1 \not = i_1, j_2 \not = i_2, \ldots$) and null coefficients on the lower triangle (because we have the ordering $j_1 < \ldots < j_k$). Thus, we are computing the determinant of an upper triangular matrix with null elements on the diagonal, i.e. the determinant is 0.
+The second term is zero because $(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k}) = \det \left (e^{*j_l} (e_{i_m}) \right)$. Indeed, the matrix $e^{*j_l} (e_{i_m})$ has null coefficients on the main diagonal (because $j_1 \not = i_1, j_2 \not = i_2, \ldots$) and one of the rows must be 0 because of  the ordering $j_1 < \ldots < j_k$ and $i_1 < \ldots < i_k$ (e.g. consider the case $j_2 = i_1, \ldots$). Thus, the determinant is 0.
 Therefore, $a_{i_1 \cdots i_k} = 0$.
-So, we proved the linear independence for the case in which we consider the basis vectors $e_{j_1}, \ldots, e_{j_k}$. Because of multilinearity, the result holds for all vectors
+So, we proved the linear independence in case we consider the basis vectors $e_{j_1}, \ldots, e_{j_k}$. Because of multilinearity, the result holds for all vectors
  $(x_1, \ldots, x_k)$ as well.
 \item Completeness: given $\psi \in \Lambda^k V^*$, we want to prove that there exists a coefficient $a_{i_1 \cdots i_k}$ such that $\psi = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} (e^{*i_1} \wedge \ldots \wedge e^{*i_k})$, i.e. we want to prove that we can write any element of $\Lambda^k V^*$ as a linear combination of elements of $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}$. Let's consider $(v_1, \ldots v_k) \in V \times \ldots \times V$. Then:
 \begin{align*}
@@ -895,7 +895,7 @@ So, we proved the linear independence for the case in which we consider the basi
 &= \sum\limits_{i_1 < \ldots < i_k} \psi(e_{i_1}, \ldots, e_{i_k}) (e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (x_{i_1}e_{i_1}, \ldots, x_{i_k}e_{i_k}) \overset{(5)}{=} \\
 &= \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k}(e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (v_1, \ldots, v_k) \, .
 \end{align*}
-Where we used: (1) $v_1 = \sum\limits_{i_1 = 1}^k x_{i_1}e_{i_1}$ in the $\{e_i\}_{i=1}^n$ basis, (2) we can simplify the sum since $\psi=0$ if two entries are repeated, (3) $1 = (e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (e_{i_1}, \ldots, e_{i_k})$, (4) multilinearity, (5) $0 = e^{*i}(e_j)$ if $i \not = j$ and $a_{i_1 \cdots i_k} \equiv \psi(e_{i_1}, \ldots e_{i_k})$. \qedhere
+Where we used: (1) $v_1 = \sum\limits_{i_1 = 1}^k x_{i_1}e_{i_1}$ in the $\{e_i\}_{i=1}^n$ basis, (2) we can simplify the sum since $\psi=0$ if two entries are repeated (and any sign is absorbed in the coefficients $x_i$), (3) $1 = (e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (e_{i_1}, \ldots, e_{i_k})$, (4) multilinearity, (5) $0 = e^{*i}(e_j)$ if $i \not = j$ and $a_{i_1 \cdots i_k} \equiv \psi(e_{i_1}, \ldots e_{i_k})$. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -970,7 +970,7 @@ $ $
   \begin{equation} \label{kformdef}
     \omega(p) = \sum\limits_{i_1 < \ldots < i_k} \underbrace{a_{i_1 \cdots i_k}(p)}_{\text{now it is a function!}} e^{*i_1} \wedge \cdots \wedge e^{*i_k} \, .
     \end{equation}
-    The form $\omega$ is a differential form if $a_{i_1 \cdots i_k}$ are differentiable functions. The set of differential $k$-forms is denoted by $\Omega^k(\rfield^n)$.
+    The form $\omega$ is a differential form if $a_{i_1 \cdots i_k}$ are differentiable functions. The set of differential $k$-forms with coefficients in $\rfield^n$ is denoted by $\Omega^k(\rfield^n)$.
 \end{definition}
 
 Another (equivalent) definition:
@@ -1086,7 +1086,7 @@ with $d a_{j_1, \ldots, j_k}$ differential of the function $a_{j_1, \ldots, j_k}
     v(x^2) &= dx^2(v)
     \end{align*}
 where $x^2$ is a function, the coordinate function defined in \eqref{coofunc}. We also have:
-    $$d \omega (u, v) = u(x^2)dx^1(v) - v(x^2)dx^2(u) \, .$$
+    $$d \omega (u, v) = u(x^2)dx^1(v) - v(x^2)dx^1(u) \, .$$
   \end{enumerate}
 \end{example}\end{tcolorbox}
 
@@ -1106,8 +1106,8 @@ $ $
 	$$d \omega_1 = \sum\limits_{j_1 < \ldots < j_k} \left (d a^{(1)}_{j_1 \cdots j_k} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k}$$
 	and similarly for $\omega_2$. Then we use the linearity of the differential: $d(a^{(1)} + a^{(2)}) = da^{(1)} + da^{(2)}$.
 	\item We have
-	$$d(\omega_1 \wedge \omega_2) = \sum\limits_{\substack{j_1 < \ldots < j_k \\ i_1 < \ldots < i_k}} d \left (a^{(1)}_{j_1 \cdots j_k} a^{(2)}_{i_1 \cdots i_k} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k} \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_k} \, .$$
-	Using the product rule we have a term $\left ( da^{(1)} \right ) a^{(2)} + a^{(1)} \left(da^{(2)}\right)$ inside the sum. Now, $\left( da^{(1)} \right) a^{(2)}$ gives the term $d \omega_1 \wedge \omega_2$. In order to get the term $(-1)^k \omega_1 \wedge d \omega_2$ we consider $a^{(1)}\left(da^{(2)} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k} \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_k}$ inside the sum and we move the factor $da^{(2)}$ to the right for $k$ times. So we get the factor $(-1)^k$) and the wedge product $\omega_1 \wedge d \omega_2$.
+	$$d(\omega_1 \wedge \omega_2) = \sum\limits_{\substack{j_1 < \ldots < j_k \\ i_1 < \ldots < i_p}} d \left (a^{(1)}_{j_1 \cdots j_k} a^{(2)}_{i_1 \cdots i_p} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k} \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_p} \, .$$
+	Using the product rule we have a term $\left ( da^{(1)} \right ) a^{(2)} + a^{(1)} \left(da^{(2)}\right)$ inside the sum. Now, $\left( da^{(1)} \right) a^{(2)}$ gives the term $d \omega_1 \wedge \omega_2$. In order to get the term $(-1)^k \omega_1 \wedge d \omega_2$ we consider $a^{(1)}\left(da^{(2)} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k} \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_p}$ inside the sum and we move the factor $da^{(2)}$ to the right for $k$ times. So we get the factor $(-1)^k$) and the wedge product $\omega_1 \wedge d \omega_2$.
 	\item Let's consider
 	$$d(d \omega) = \sum\limits_{j_1 < \ldots < j_k} d \left (da_{j_1 \cdots j_k} \right) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_k} \, .$$
 	Now,
@@ -1144,7 +1144,7 @@ $ $
 \end{example}\end{tcolorbox}
 
 \begin{remarkbox}\begin{remark}
-  In the definition \ref{intder} above, we used the algebraic definition of differential $k$-forms, i.e. definition \ref{algkforms}
+  In the definition \ref{intder} above, we used the algebraic definition of differential $k$-forms, i.e. definition \ref{algkforms}.
 \end{remark}\end{remarkbox}
 
 Now some properties for interior derivatives.
@@ -1160,9 +1160,9 @@ Now some properties for interior derivatives.
 $ $
 \begin{itemize}
 \item First, we assume $k+p \le n$, otherwise $\omega \wedge \eta$ would be 0. Then, let's consider a basis $\mathcal{B} = \{e_1, \ldots, e_n\}$ in $\rfield^n$ which is positively oriented (i.e. if $A$ is the matrix that we use to change coordinates from the canonical basis to $\mathcal{B}$, we have $\det A > 0$). Let's choose $\mathcal{B}$ such that the vector field $e_1$ is the tangent vector to the vector field $z$ in one point (we will make a pointwise reasoning). Moreover, $\{dx^l\}_{l=1}^n$ is the dual basis with respect to the canonical basis, and $\{e^{*l}\}_{l=1}^n$ is the dual basis with respect to $\mathcal{B}$. We have
-$$\omega = \sum\limits_{i_1 < \ldots i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k}$$
+$$\omega = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k}$$
 and
-$$\omega \wedge \eta = \sum\limits_{\substack{i_1 < \ldots i_k \\ j_1 < \ldots j_p }} a_{i_1 \cdots i_k} b_{j_1 \cdots j_p} dx^{i_1} \wedge \ldots \wedge dx^{i_k} \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_p} \, .$$
+$$\omega \wedge \eta = \sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p }} a_{i_1 \cdots i_k} b_{j_1 \cdots j_p} dx^{i_1} \wedge \ldots \wedge dx^{i_k} \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_p} \, .$$
 Then either:
 \begin{enumerate}
 \item $dx^{i_r} = e^{*1}$ for some $i_r, r= 1, \ldots, k$, or
@@ -1171,11 +1171,11 @@ Then either:
 \end{enumerate}
 So, $i_z (\omega \wedge \eta) = (\omega \wedge \eta)(z, \ldots)$ is either equal to:
 \begin{enumerate}
-\item $\sum\limits_{\substack{i_1 < \ldots i_k \\ j_1 < \ldots j_p }} a_{i_1 \cdots i_k} b_{j_1 \cdots j_p} i_z \left( dx^{i_1} \wedge \ldots \wedge dx^{i_k} \right ) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_p}$ ,because the only non-zero term comes from $i_z(e^{*1}) = e^{*1}(z) = e^{*1}(e_1) = 1$ (locally), and we know that the non-zero term must be hidden in the first $k$ wedge products, or
-\item $\sum\limits_{\substack{i_1 < \ldots i_k \\ j_1 < \ldots j_p }} (-1)^k a_{i_1 \cdots i_k} b_{j_1 \cdots j_p}  dx^{i_1} \wedge \ldots \wedge dx^{i_k}  \wedge i_z \left( dx^{j_1} \wedge \ldots \wedge dx^{j_p} \right)$ , for the same reason above, and we have the factor $(-1)^k$ because we moved the interior derivative $k$ times (it is like moving an entry of a $(k+p)$-form $k$ times), or
+\item $\sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p }} a_{i_1 \cdots i_k} b_{j_1 \cdots j_p} i_z \left( dx^{i_1} \wedge \ldots \wedge dx^{i_k} \right ) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_p}$, because the only non-zero term comes from $i_z(e^{*1}) = e^{*1}(z) = e^{*1}(e_1) = 1$ (locally), and we know that the non-zero term must be hidden in the first $k$ wedge products, or
+\item $\sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p }} (-1)^k a_{i_1 \cdots i_k} b_{j_1 \cdots j_p}  dx^{i_1} \wedge \ldots \wedge dx^{i_k}  \wedge i_z \left( dx^{j_1} \wedge \ldots \wedge dx^{j_p} \right)$ , for the same reason above, and we have the factor $(-1)^k$ because we moved the interior derivative $k$ times (it is like moving an entry of a $(k+p)$-form $k$ times), or
 \item 0.
 \end{enumerate}
-Then, $i_z(\omega \wedge \eta)$ is the sum of these non-zero terms.
+Then, $i_z(\omega \wedge \eta)$ is the sum of these possible terms.
 \item Using the fact that a differential form gives 0 if two or more entries are repeated:
 $$i_z \left( i_z(\omega) \right) (v_1, \ldots, v_{k-2}) = i_z \omega (z, v_1, \ldots, v_{k-2}) = \omega (z, z, v_1, \ldots, v_{k-2}) = 0 \, .$$ \qedhere
 \end{itemize}
@@ -1186,7 +1186,7 @@ $$i_z \left( i_z(\omega) \right) (v_1, \ldots, v_{k-2}) = i_z \omega (z, v_1, \l
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Nondegenerate 2-form]
-An exterior form $\omega$ of degree 2 on a vector space $V$, $\omega \in \Lambda^2V^*$, is said to be nondegenerate if the map $z \mapsto i_z \omega$ is invertible for $z \in V$.
+An exterior form $\omega$ of degree 2 on a vector space $V$, $\omega \in \Lambda^2V^*$, is said to be nondegenerate if the map from $V$ to $V^*$ defined as $z \mapsto i_z \omega$ is invertible.
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Alternative definitions of nondegenerate form]
@@ -1223,7 +1223,7 @@ Now, we want to give another name to the differential of a function.
 \end{align*}
 \end{definition}
 
-\begin{remarkbox}\begin{remark}[Pushforward of composition of functions]
+\begin{remarkbox}\begin{remark}[Pushforward of composition of functions] \label{pushfcomposition}
 In our mind, we'll think of the pushforward as the differential of a map: $df_p = (f_*)_p$, at least until this concept is generalized.
 By definition of differential: $df_p(v) = v(f)$, where $v$ is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v(f)$ is the directional derivative of $f$ with respect to $v$ (not evaluated at any point, for now!). In particular, if we apply the definition to a point $h(q)$, where $h \in C^{\infty}(\rfield^n, \rfield^m)$ and $q \in \rfield^n$, we have (cf. also pag. 55 Lee \citetalias{Lee}):
 $$\restrict{(f_*)_p (v)(h)}{q} \overset{(1)}{=} \restrict{v(h \circ f)}{q}  = \restrict{v(h(f))}{q} \overset{(2)}{=} \restrict{v (f^* h) }{q}$$
@@ -1259,29 +1259,38 @@ f^*(\omega + \varphi) &= (\omega + \varphi)(f(p)) (f_*(u_1), \ldots, f_*(u_k)) =
 &=  f^*(\omega) + f^*(\varphi) \, .
 \end{align*}
 \item $f^*(h \omega) (z_1, \ldots, z_k)(p) = h(f(p))\, \omega (f_* z_1, \ldots, f_* z_k) (f(p)) = f^*(h)f^*(\omega)$.
-\item We will use: $(f \circ g)_* v(h) = v \left(f \circ g)^* h \right) = v(g^* \circ f^*(h)) = g_*v(f^*h) = f_* \tilde v (h) = f_* \circ g_* v$, where $\tilde v \equiv g_* v$. Then:
+\item We will use: $(f \circ g)_* v(h) = v \left ( (f \circ g)^* h \right) = v(g^* \circ f^*(h)) \overset{(1)}{=} g_*v(f^*h) = f_* \tilde v (h) = f_* \circ g_* v$, where $\tilde v \equiv g_* v$.  In (1) we used $v(h \circ f) = f_* (v \circ h)$ with $f, h$ differentiable functions, $v$ smooth vector field (see remark \ref{pushfcomposition}). Then:
 \begin{align*}
 (f \circ g)^* \omega(z_1, \ldots, z_k) &= \omega ((f \circ g)_* z_1, \ldots, (f \circ g)_* z_k)) = \omega(f_* \circ g_* z_1, \ldots, f_* \circ g_* z_k) = \\ &= g^*(f^* \omega)(z_1, \ldots, z_k) \, .
 \end{align*}
 \item We have: \begin{align*}
-f^*(\varphi^1 \wedge \varphi^k)(z_1, \ldots, z_k) &= (\varphi^1 \wedge \ldots \wedge \varphi^k)(f_* z_1, \ldots, f_*z_k) = \det\left( \varphi^i (f_* z_j)\right) = \\
+f^*(\varphi^1 \wedge \ldots \wedge\varphi^k)(z_1, \ldots, z_k) &= (\varphi^1 \wedge \ldots \wedge \varphi^k)(f_* z_1, \ldots, f_*z_k) = \det\left( \varphi^i (f_* z_j)\right) = \\
 &= \det \left( f^* \varphi^i(z_j) \right) = (f^* \varphi^1)\wedge \ldots \wedge (f^* \varphi^k) \, (z_1, \ldots, z_k) \, .
 \end{align*}
 \item If $z$ is a vector field and $dx^i$ is an element of the dual basis (in particular, $dx^i(e_j) = \frac{\partial}{\partial x^j} x^i$), we have
-$$f^*dx^i(z) = dx^i(f_* z) = z(f^*x^i) = df^i(z)$$
-where in the last inequality we used the def. \ref{differential} of differential.
+$$f^*dx^i(z) = dx^i(f_* z) \overset{(A)}{=} z(f^i) = df^i(z)$$
+where in (A) we used: 
+\[ dx^i(f_* z) = f_* z(x^i) \text{ because of the definition } df(v) = v(f)\, . \]
+Moreover,
+\[ f_* z(x^i) = f_*(z \circ x^i) = z(x^i \circ f) \text{ by the property } f_*(v \circ h) = v(h \circ f) \, .\]
+Finally,
+\[ z(x^i \circ f) = z(f^i) \, . \]
+In the last equality we used the def. \ref{differential} of differential. 
 Now,
 \begin{align*}
-df^*(\omega) &= df^* \left(\sum\limits_{i_1 < \ldots i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k} \right) = \\
-&= d \, \sum\limits_{i_1 < \ldots i_k} f^* (a_{i_1 \cdots i_k}) f^*(dx^{i_1}) \wedge \ldots \wedge f^*(dx^{i_k}) \overset{(1)}{=} \\
-&=\sum\limits_{i_1 < \ldots i_k} df^*(a_{i_1 \cdots i_k}) df^{i_1} \wedge \ldots \wedge df^{i_k} \overset{(2)}{=} \\
+df^*(\omega) &= df^* \left(\sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k} \right) = \\
+&= d \, \sum\limits_{i_1 < \ldots < i_k} f^* (a_{i_1 \cdots i_k}) f^*(dx^{i_1}) \wedge \ldots \wedge f^*(dx^{i_k}) \overset{(1)}{=} \\
+&=\sum\limits_{i_1 < \ldots < i_k} df^*(a_{i_1 \cdots i_k}) \wedge df^{i_1} \wedge \ldots \wedge df^{i_k} \overset{(2)}{=} \\
 &= f^* d \omega
 \end{align*}
-Where we used: (1) $f^*dx^i = df^i$ (i-th coordinate), the product rule and the fact that $d^2 = 0$, (2) given $h \equiv a_{i_1 \cdots i_k} \in C^1(\rfield^n)$, then $df^* h(z) = z(f^*h) = dh(f_* z) = f_*z(h) = f^*dh(z)$. \qedhere
+Where we used: (1) $f^*dx^i = df^i$ (i-th coordinate), the product rule and the fact that $d^2 = 0$, (2) given $h \equiv a_{i_1 \cdots i_k} \in C^1(\rfield^n)$, then 
+\[ d(f^* h)(z) = z(f^* h) = z(h \circ f) = f_* (z \circ h), \text{ using } f_*(v \circ h) = v(h \circ f) \text{ in the last step.} \]
+And
+\[ f_*(z \circ h) = (f_*z)(h) = dh(f_* z) = f^* dh(z) \, . \] \qedhere
 \end{enumerate}
 \end{proof}
 
-\begin{remarkbox}\begin{remark}
+\begin{remarkbox}\begin{remark} \label{effectivepullback}
 We can express the pullback of a differential form in the following way:
 \begin{align*}
 (f^* \omega)(p) &= \sum\limits_{1 \le i_1 < i_2 < \cdots < i_k \le n} (f^*a_{i_1, \ldots i_k} (p)) f^*dy^{i_1} \wedge f^* dy^{i_2} \wedge \cdots \wedge f^* dy^{i_k} = \\
@@ -1474,11 +1483,11 @@ By fixing either the time or the starting point of the flow, we can consider two
 \end{definition}
 
 \begin{definition}[Lie derivative of a vector field]
-Let $u, v \in \mathfrak{X}(\rfield^n)$. The Lie derivative of $v$ in direction $u$ is
+Let $u, v \in \mathfrak{X}(\rfield^n)$. Let $\phi$ be the flow of $u$. The Lie derivative of $v$ in direction $u$ is
 \begin{equation}
   L_u v \equiv \restrict{\frac{d}{dt}( \phi_t^* v)}{t=0}
 \end{equation}
-(Remember: $\phi\colon (t, p) \mapsto \phi(t, p),$ whereas $ \phi_t^*v \colon (t, p) \mapsto v(\phi (t, p))$).
+(Remember: $\phi\colon (t, p) \mapsto \phi(t, p),$ whereas $ \phi^* v \colon (t, p) \mapsto v(\phi (t, p))$).
 \end{definition}
 
 \begin{lemma} \label{lemmadiff1}
@@ -1577,7 +1586,7 @@ Then, the proof uses the naturality of the pullback "$f^*d = df^*$" and the resu
   \end{equation}
 \end{corollary}
 \begin{proof}
-	$\int df = \int \nabla f \cdot dx$ because $\nabla f = \frac{df}{dt} dt = \frac{\partial f}{\partial x^i}$ and $dx^i = \frac{dx^i}{dt}dt$. Moreover, thanks to the Stokes' theorem, we have $\int df  = f(B) - f(A)$.
+	$\int df = \int \nabla f \cdot dx$ because $\nabla f \cdot dx = \frac{\partial f}{\partial x^i} dx^i = df$. Moreover, thanks to the Stokes' theorem, we have $\int df  = f(B) - f(A)$.
 \end{proof}
 
 \begin{corollary}[Curl theorem or Classical Stokes theorem]
@@ -1588,7 +1597,7 @@ Then, the proof uses the naturality of the pullback "$f^*d = df^*$" and the resu
   where $n$ is the normal vector on the surface at each point.
 \end{corollary}
 \begin{proof}
-Let $\alpha$ be a 1-form in $\rfield^3$. Since the Euclidean metric gives an isomorphism between $\rfield^3$ and its dual space (see also eq. \eqref{dualisomorph}), we can always write $\alpha$ as $\alpha = g(v, \cdot)$, for a certain $v \in \rfield^3$, where $g$ is the Euclidean metric, i.e. $g(x, y)$ is the standard dot product between $x$ and $y$. So, $\alpha = g(v, \cdot) = \delta_{ij} v^j dx^i = v_i dx^i$. Then: $d \alpha = (\partial_{x^j} v_i) dx^j \wedge dx^i \overset{(1)}{=} \partial_{x^j} v_i \varepsilon^{ji}_k n^k dS$. Where in (1) we used that $dx^j \wedge dx^i$ is the oriented surface generated by $dx^j$ and $dx^i$ (see also the second point of the example \ref{orarea}). Then we used that the oriented surface area can be expressed using the Levi-Civita tensor $\varepsilon$, the normal vector $n$ and the unoriented area element $dS$. Hence, using that $\nabla \times v = \partial_{x^j} v_i \varepsilon^{ji}_k$:
+Let $\alpha$ be a 1-form in $\rfield^3$. Since the Euclidean metric gives an isomorphism between $\rfield^3$ and its dual space (see also eq. \eqref{dualisomorph}), we can always write $\alpha$ as $\alpha = g(v, \cdot)$, for a certain $v \in \rfield^3$, where $g$ is the Euclidean metric, i.e. $g(x, y)$ is the standard dot product between $x$ and $y$. So, $\alpha = g(v, \cdot) = \delta_{ij} v^j dx^i = v_i dx^i$ in the dual basis $\{dx^i\}$. Then: $d \alpha = (\partial_{x^j} v_i) dx^j \wedge dx^i \overset{(1)}{=} \partial_{x^j} v_i \varepsilon^{ji}_k n^k dS$. Where in (1) we used that $dx^j \wedge dx^i$ is the oriented surface generated by $dx^j$ and $dx^i$ (see also the second point of the example \ref{orarea}). Then we used that the oriented surface area can be expressed using the Levi-Civita tensor $\varepsilon$, the normal vector $n$ and the unoriented area element $dS$. Hence, using that $\nabla \times v = \partial_{x^j} v_i \varepsilon^{ji}_k$:
 $$\int_S n \cdot (\nabla \times v) \, dS = \int_S d\alpha \overset{(2)}{=} \int_{\partial S} \alpha = \int_{\partial S} v_i dx^i = \int_{\partial S} v \cdot dx$$
 using the Stokes' theorem in (2).
 \end{proof}
@@ -1622,7 +1631,7 @@ First, $(1) \Rightarrow (2)$ because of Stokes' theorem. Moreover, $(2) \Rightar
 $$0 = \int_{\gamma} \omega = \int_{\gamma_1} \omega - \int_{\gamma_2} \omega$$
 where the minus sign comes from the orientation of the curves.
 Then: $\int_{\gamma_1} \omega = \int_{\gamma_2} \omega$ where $\gamma_1$ and $\gamma_2$ are any two curves with the same endpoints. It means that we can consider the integral of $\omega$ on any curve and the result  wouldn't change, \textbf{if} the new curve has the same endpoints of the initial curve.
-\begin{figure}[h] \label{Fig:closedcurve}
+\begin{figure}[H] \label{Fig:closedcurve}
      \centering
      \includegraphics[width=0.3\textwidth]{Images/closedcurve.pdf}
      \caption{Union of $\gamma_1$ and $\gamma_2$}
@@ -1638,11 +1647,11 @@ where $x = x(p')$ is the coordinate given by a point $p'$ (i.e. $x$ gives a para
 &= \lim\limits_{t \to 0} \frac{1}{t} \int_{\Delta \gamma} \omega = \lim\limits_{t \to 0} \frac{1}{t} \int_0^t a_i(x(t)) dt = a_i(x)
 \end{align*}
 where we used $\int \omega = \int a_i \frac{dx^i}{dt} dt$ and the fact that every point belonging to $\Delta \gamma$ can be written as $x + t e_i$, so we have $\frac{dx^i}{dt} = 1$ on $\Delta \gamma$. Moreover, in the last equality we Taylor-expanded $a_i(x(t))$ with respect to $t$. Only the first-order term $a_i(x)$ matters because we are considering the limit as $t \to 0$. Then we have the thesis for standard forms. Then, the result holds for any form (in general we could have $a_i = 0$ for some $i$).
-\begin{figure}[h] \label{Fig:pcurve}
+\begin{figure}[H] \label{Fig:pcurve}
      \centering
      \includegraphics[width=0.24\textwidth]{Images/pp'.pdf}
-     \caption{A possible curve $\gamma$ from $p$ to $p'$}
-\end{figure}
+     \caption{A possible curve $\gamma$ from $p$ to $p'$} \qedhere
+\end{figure} 
 \end{proof}
 
 \begin{remarkbox}\begin{remark}[A closed form is not always exact]
@@ -1667,7 +1676,7 @@ where we used $\int \omega = \int a_i \frac{dx^i}{dt} dt$ and the fact that ever
   $$\int_{\gamma} \omega = \sum_i \left[ f_i(t_{i+1}) - f_i(t_i) \right ] \, .$$
   The integral of $\gamma$ is well defined because the definition is independent from the choice of our partition: if $P$ is one partition and $P'$ is a refinement of $P$ (i.e. it is the same partition plus an extra point $t' \in (t_i, t_{i+1})$ for some $i$), then:
   $$[f_i(t_{i+1}) - \cancel{f_i(t')}] + [\cancel{f_i(t')} - f_i(t_i)] = [f_i(t_{i+1}) - f_i(t_i)] \, .$$
-  Then the integral does not change if we consider a refinement. If we consider a general partition $P'$, we can add every point of the partition $P$ to $P'$, so that we get a refinement of $P'$ that we will be called $P''$. The integral on the partition $P'$ has the same value of the integral on the partition $P''$ by the above argument. Now, we can add every point of the partition $P'$ to $P$, so to get the partition $P''$ again, but now we can see $P''$ as a refinement of $P$. Then the integral on $P$ and on $P''$ are the same. Then also the integrals on $P$ and $P'$ are the same.
+  Then the integral does not change if we consider a refinement. If we consider a general partition $P'$, we can add every point of the partition $P$ to $P'$, so that we get a refinement of $P'$ that we will call $P''$. The integral on the partition $P'$ has the same value of the integral on the partition $P''$ by the above argument. Now, we can add every point of the partition $P'$ to $P$, so to get the partition $P''$ again, but now we can see $P''$ as a refinement of $P$. Then the integral on $P$ and on $P''$ are the same. Then also the integrals on $P$ and $P'$ are the same.
 \end{remark}\end{remarkbox}
 
 Now, we want to extend the above theorem to $k$-forms.
@@ -1750,14 +1759,14 @@ The following holds:
   \end{equation}
   Then:
   \begin{align*}
-  d \bar \omega = df \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_k} = \defonde{f}{t} dt \wedge dx^{i_1} \wedge \ldots dx^{i_k} + \defonde{f}{x^i} dx^i \wedge dx^{i_1} \wedge \ldots dx^{i_k} \, .
+  d \bar \omega = df \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_k} = \defonde{f}{t} dt \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_k} + \defonde{f}{x^i} dx^i \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_k} \, .
   \end{align*}
   So:
   $$I(d\bar \omega) = \int_0^1 \defonde{f}{t}(p, t) \underbrace{i_t^* dx^{i_1}}_{=dx^{i_1}} \wedge \ldots \wedge i_t^* dx^{i_k} dt = (f(p, 1) - f(p, 0)) dx^{i_1} \wedge \ldots \wedge dx^{i_k} = i_1^* \bar \omega - i_0^* \bar \omega \, .$$
   Moreover, $I\bar \omega = 0$ because $\bar \omega$ (cf. \eqref{omegacasea}) does not contain any $dt$ in this case.
   \item[case b)] Assume:
   \begin{equation} \label{omegacaseb}
-  \bar \omega  = f\, dt \wedge dx^{i_1} \wedge \ldots dx^{i_{k-1}} \, .
+  \bar \omega  = f\, dt \wedge dx^{i_1} \wedge \ldots  \wedge dx^{i_{k-1}} \, .
   \end{equation}
   Then:
   $$d \bar \omega = \defonde{f}{x^i} dx^i \wedge dt \wedge dx^{i_1} \wedge \ldots  \wedge dx^{i_{k-1}} \, .$$
@@ -1783,7 +1792,7 @@ The proof follows from the previous lemmas  \ref{lemmaform1} and \ref{lemmaform2
 $$H \circ i_1 = \id \quad \text{and} \quad H \circ i_0 = \text{const.}$$
 So:
 $$\omega = (H \circ i_1)^* \omega = i_1^* (H^* \omega) = i_1^* \bar \omega$$
-and we also have:
+and by remark \ref{effectivepullback} we know that the pullback of a $k-$form ($k > 1$) through a constant map is 0, so we also have:
 $$0 = (H \circ i_0)^* \omega = i_0^* (H^* \omega) = i_0^* \bar \omega \, .$$
 From the lemma \ref{lemmaform2}, we know that $i_1^* \bar \omega - i_0^* \bar \omega = d(I \bar \omega) + I(d \bar \omega) $. From previous computations, it means:
 $$\omega = d(I \bar \omega) + I (d \bar \omega) \, .$$
@@ -1802,14 +1811,14 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
     H(s, 0) &= \gamma_1(s), &\forall\, s \in [a, b] \\
     H(s, 1) &= \gamma_2(s), &\forall\, s \in [a, b]
   \end{align*}
-  \begin{figure}[h] \label{Fig:hom1}
+  \begin{figure}[H] \label{Fig:hom1}
      \centering
      \includegraphics[width=0.4\textwidth]{Images/homotopy1.pdf}
      \caption{Homotopy between curves}
 \end{figure}
 \end{definition}
 
-\begin{definition}[Homotopy between closed curves with same endpoints]
+\begin{definition}[Homotopy between curves with same endpoints]
   Two continuous curves $\gamma_1$ and $\gamma_2$, $\gamma_i \colon [a, b] \rightarrow U, i=1,2, U \subset \rfield^n$, with $\gamma_1(a) = \gamma_2(a)$ and $\gamma_1(b) = \gamma_2(b)$ are homotopic relatively to $\{\gamma_1(a), \gamma_2(b)\}$ if there exists a continuous map $H$
   \begin{align*}
     H \colon [a, b] &\times [0, 1] \rightarrow U &\text{ such that:}\\
@@ -1818,7 +1827,7 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
     H(a, t) &= \gamma_1(a) = \gamma_2(a), &\forall\, t \in [0, 1] \\
     H(b, t) &= \gamma_1(b) = \gamma_2(b), &\forall\, t \in [0, 1]
   \end{align*}
-  \begin{figure}[h] \label{Fig:hom2}
+  \begin{figure}[H] \label{Fig:hom2}
      \centering
      \includegraphics[width=0.4\textwidth]{Images/homotopy2.pdf}
      \caption{Homotopy between curves with same endpoints}
@@ -1834,9 +1843,9 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
 \begin{proof}
 Let's suppose the two curves do not intersect each other.
 We can go through $\gamma_1$ backwards. Let $I$ be the interior of the space bounded by the two curves.
-\begin{figure}[h] \label{Fig:hom4}
+\begin{figure}[H] \label{Fig:hom4}
      \centering
-     \includegraphics[width=0.2\textwidth]{Images/homotopy4.pdf}
+     \includegraphics[width=0.18\textwidth]{Images/homotopy4.pdf}
 \end{figure}
 $I$ is contractible, then by Poincarè lemma \ref{poinclemma}, $\omega$ is exact in $I$. Using Stokes's theorem and denoting the curve $\gamma_1$ with reversed orientation by $\hat \gamma_1$:
 $$\int_{\hat \gamma_1 + \gamma_2} \omega = \int_I d \omega = 0$$
@@ -1853,7 +1862,7 @@ $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are 
   H(s, 1) &= \gamma_2(s), &\forall\, s \in [a, b] \\
   H(a, t) &= H(b, t), &\forall\, t \in [0, 1]
 \end{align*}
- \begin{figure}[h] \label{Fig:hom3}
+ \begin{figure}[H] \label{Fig:hom3}
      \centering
      \includegraphics[width=0.3\textwidth]{Images/homotopy3.pdf}
      \caption{Homotopy between closed curves}
@@ -1948,7 +1957,7 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
   \omega \sim \omega' \Leftrightarrow \omega - \omega' \in \im(d_k) \Leftrightarrow \omega - \omega' = d\alpha \text{ for some (} k-1 \text{)-form } \alpha \, .
   \end{equation}
   From the above definition, we see that two closed forms $\omega, \omega'$ are in the same equivalence class (so they are said to be \textbf{cohomologous}) if they differ by an exact form.
-  Obviously, if $\omega$ and $\omega'$ are exact, we have $\omega = dF$ and $\omega'=dG$ for some ($k-1$)-forms $F$ and $G$. So, the two forms are cohomologous because the $\alpha$ that we need in the definition \eqref{cohomol} is $\alpha = F - G$. All the exact forms are identified with the 0 element of $H^k(U, \rfield)$, because 0 is value of $d_k\omega$ if $\omega$ is an exact ($k-1$)-form.
+  Obviously, if $\omega$ and $\omega'$ are exact, we have $\omega = dF$ and $\omega'=dG$ for some ($k-1$)-forms $F$ and $G$. So, the two forms are cohomologous because the $\alpha$ that we need in the definition \eqref{cohomol} is $\alpha = F - G$. All the exact forms are identified with the 0 element of $H^k(U, \rfield)$, because $d_k\omega \sim 0$ (in particular, $d_k\omega = 0$) if $\omega$ is an exact ($k-1$)-form.
   To read more about quotient spaces, see also the example \ref{quotientexample}.
 \end{remark}\end{remarkbox}
 
@@ -2009,8 +2018,8 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
  \begin{tcolorbox}\begin{example}
    Let's consider the following examples:
    \begin{itemize}
-     \item We call "homotopy inverse" the inverse of a function up to a homotopy. Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point),
-     \item A circle is homotopy equivalent to $\rfield^2 \setminus \{0\}$,
+     \item We call "homotopy inverse" the inverse of a function up to a homotopy. Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point). So, the concept of "homomorphism" between sets is stronger than the concept of "homotopy equivalence",
+     \item $S^1$ is homotopy equivalent to $\rfield^2 \setminus \{0\}$,
      \item $S^{n-1}$ is homotopy equivalent to $\rfield^n \setminus \{0\}$,
      \item A solid torus is homotopy equivalent to a tea cup.
    \end{itemize}
@@ -2229,7 +2238,7 @@ Let's consider the Jacobian matrix:
 \defonde{F^{n-m}}{x^1} & \ldots & \defonde{F^{n-m}}{x^{m+1}} & \ldots & \tikzmark{right}{\defonde{F^{n-m}}{x^n}}
 \end{matrix} \right)
 \DrawBox[thick] \]
-Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ if and only if $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m), \, (x_1, \ldots, x_m) \in U'$. Then, $g$ is the graph of definition (d).
+Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U' $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ if and only if $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m), \, (x_1, \ldots, x_m) \in U'$. Then, $g$ is the graph of definition (d).
 \item[(d) $\Rightarrow$ (a):] From (d), we know that $g \colon \rfield^m \supset U \rightarrow \rfield^{n-m}$. Then:
 \begin{align*}
 \phi \colon U &\rightarrow \rfield^n = \rfield^m \times \rfield^{m-n} \\
@@ -2559,7 +2568,7 @@ Now, if $f \colon M \rightarrow \rfield$, we can consider $f_i = \varphi_i f \co
 \begin{definition} [Orientable manifold]
   $M$ is orientable if there exists an atlas $\mathcal{A} = \{\phi_{\alpha}, U_{\alpha}\}$ such that for each pair $\alpha, \beta$ with $\phi_{\alpha}(U_{\alpha}) \cap \phi_{\beta}(U_{\beta}) \not = \emptyset$, the differential
   $$
-    (\phi_{\beta}^{-1} \circ \phi_{\alpha})_* \colon  U_{\beta} \rightarrow U_{\alpha}
+    (\phi_{\beta}^{-1} \circ \phi_{\alpha})_* \colon  U_{\alpha} \rightarrow U_{\beta}
   $$
   has positive determinant. Example of a non-orientable manifold: Möbius strip.
 \end{definition}
@@ -2584,7 +2593,7 @@ Let $\{ W_{\alpha} \}$ be another covering of $M$ and $\{\psi_j\}_{j=1, \ldots, 
   a covering of $M$ and
   \[ \left(\varphi_i \psi_j \right)_{\substack{i=1, \ldots, m \\ j=1, \ldots, m'}}\]
   is a partition of unity subordinate to $\{W_{\alpha} \cap V_{\beta}\}$. Thus:
-\[ \sum\limits_{i=1}^m \int_M \varphi_i \omega = \sum\limits_{i=1}^m \sum_{j=1}^{m'} \int_M \varphi_i \psi_j \omega = \sum\limits_{j=1}^{m'} \int_M \psi_j \left( \sum\limits_{j=1}^{m'} \varphi_i \omega \right) = \sum\limits_{j=1}^{m'} \int_M \psi_j \omega \]
+\[ \sum\limits_{i=1}^m \int_M \varphi_i \omega = \sum\limits_{i=1}^m \sum_{j=1}^{m'} \int_M \varphi_i \psi_j \omega = \sum\limits_{j=1}^{m'} \int_M \psi_j \left( \sum\limits_{i=1}^{m} \varphi_i \omega \right) = \sum\limits_{j=1}^{m'} \int_M \psi_j \omega \]
 where we could swap the sums since they are finite (they are finite because $M$ is compact by assumption).
 \end{proof}
 
@@ -2626,11 +2635,11 @@ When is a point on the boundary of a manifold?
 \end{lemma}
 \begin{proof}
 The proof is by contradiction.
-Let $\phi_1 \colon U_1 \rightarrow M, U_1 \subset H^n$ such that $\phi_1(0, x^2, \ldots, x^n)=p$ for some $x^2, \ldots, x^n$. Assume there exists $\phi_2 \colon U_2 \rightarrow M$ parametrization around $p$ such that $\phi_2^{-1}(p) = q = (x^1, \ldots x^n)$ with $x^1 \not = 0$. Let $\omega = \phi_1(U_1) \cap \phi(U_2)$. Then, the map:
-\[\left ( \phi_1^{-1} \circ \phi_2 \right) \colon \phi_2^{-1}(\omega) \rightarrow \phi_1^{-1}(\omega)\]
-is a diffeomorphism (by definition of manifold). Since $x^1 \not = 0$, there exists a neighbourhood $U$ of $q$ such that $U \subset \phi_2^{-1}(\omega)$ and such that $U$ does not intersect with:
+Let $\phi_1 \colon U_1 \rightarrow M, U_1 \subset H^n$ such that $\phi_1(0, x^2, \ldots, x^n)=p$ for some $x^2, \ldots, x^n$. Assume there exists $\phi_2 \colon U_2 \rightarrow M$ parametrization around $p$ such that $\phi_2^{-1}(p) = q = (x^1, \ldots x^n)$ with $x^1 \not = 0$. Let $\Omega = \phi_1(U_1) \cap \phi_2(U_2)$. Then, the map:
+\[\left ( \phi_1^{-1} \circ \phi_2 \right) \colon \phi_2^{-1}(\Omega) \rightarrow \phi_1^{-1}(\Omega)\]
+is a diffeomorphism (by definition of manifold). Since $x^1 \not = 0$, there exists a neighbourhood $U$ of $q$ such that $U \subset \phi_2^{-1}(\Omega)$ and such that $U$ does not intersect with:
 \[\left \{ (x^1, \ldots , x^n ) \in H^n \, | \, x^1= 0 \right \} \, . \]
-The restriction of $\phi_1^{-1} \circ \phi_2$ to $U$ gives a differentiable map $U \rightarrow H^n$ such that $\det(\phi_1^{-1} \circ \phi_2)_* \not = 0$ (invertible map). Thus, $(\phi_1^{-1} \circ \phi_2)(V)$ contains points which are not in $H^n$ for some choice of $V \ni q$. But then it can't be a parametrization (contradiction!).
+The restriction of $\phi_1^{-1} \circ \phi_2$ to $U$ gives a differentiable map $U \rightarrow H^n$ such that $\det(\phi_1^{-1} \circ \phi_2)_* \not = 0$ (invertible map). Thus, $(\phi_1^{-1} \circ \phi_2)(U)$ contains points which are not in $H^n$ for some choice of $V \ni q$. But then it can't be a parametrization (contradiction!).
 \end{proof}
 
 \begin{proposition}
@@ -2654,7 +2663,7 @@ First, we prove the theorem for a rectangle and then, for a generic set, we fill
 \section[Abstract Manifolds]{\crule[red!50!white]{0.3cm}{0.4cm}  Abstract Manifolds}
 \begin{remarkbox}\begin{remark}[Non-Example of a manifold]
 The set $$M= (-\infty, 0) \cup (0, \infty) \cup \{a, b\}$$ (endowed with a particular topology that we will see later) is not a manifold. Here, $a, b$ can be seen as points of $\rfield^2$: just imagine $M$ as a subset of $\rfield^2$, consisting of a real line without the origin plus any two points in $\rfield^2$. Even if we have not defined a topology on $M$, we can feel that it doesn't look right: there are two maps $\varphi_a, \varphi_b$ identifying the subsets $U_a = M \setminus \{b\}$ and $U_b = M \setminus \{a\}$ with $\rfield$. Indeed, in the first case the 0 element is given by the point $a$, whereas in the second case the 0 is given by $b$. The transition function
-$$\varphi_b \circ \varphi_a^{-1} \colon \varphi(U_a \cap U_b) = \rfield \setminus \{0\} \rightarrow \varphi_b(U_b \cap U_a) = \rfield \setminus \{0\}$$
+$$\varphi_b \circ \varphi_a^{-1} \colon \varphi_a(U_a \cap U_b) = \rfield \setminus \{0\} \rightarrow \varphi_b(U_b \cap U_a) = \rfield \setminus \{0\}$$
 is the identity, and is smooth. \textbf{But}  a smooth function on $M$ must have the same value when evaluated at $a$ and $b$, and this does not look right (why?).
 \end{remark}\end{remarkbox}
 
@@ -2756,7 +2765,7 @@ $ $
 \begin{itemize}
 \item Instead of using $C^{\infty}(M)$ (which is a ring) we could have used the space $\mathcal{E}^{\infty}_p (M) = \faktor{C^{\infty}}{\sim}$ of germs of functions, where the equivalence relation is the following one:
 $$f \sim g \Leftrightarrow f \equiv g \text{ on a neighbourhood of } p \, .$$
-In such cases, $v(f) = v(g)$ for $v \in \tangentalg{p} M$. In fact, let's consider a smooth function $h$ with support $\overline{h^{-1}(\rfield \setminus {0})}$ (so, $h(0) = 0$) and $h \equiv 1$ near $p$. Then:
+In such cases, $v(f) = v(g)$ for $v \in \tangentalg{p} M$. In fact, let's consider a smooth function $h$ such that $h(0)=0$ and $h \equiv 1$ near $p$. Then:
 $$0 \overset{(1)} {=} v\left(h(f-g)\right) \overset{(2)}{=} v(h)\underbrace{\left(f(p) - g(p)\right)}_{=0} + \underbrace{h(p)}_{=1}\left (v(f) - v(g) \right)$$
 where we used: (1) $h(f-g) = h(0) = 0$ near $p$ and the derivative of a constant function is 0 by the Leibnitz rule: $v(1) = v(1\cdot 1) = v(1)+v(1) \Rightarrow v(1)=0$. (2) Leibnitz rule again.
 We also say that the derivation $v$ is local.
@@ -2772,7 +2781,7 @@ f(x) = f(0) + \sum\limits_i x^i f_i(x^1, \ldots, x^n) \, .
 \end{lemma}
 \begin{proof}
 \begin{equation*}
-f(x)-f(0) = \int\limits_0^1 \diondi{t} f(tx^1, \ldots, x^n)\, dt = \int\limits_0^1 \sum_i x^i \deonde{x^i} f(tx^1, \ldots, tx^n) \, dt \, .
+f(x)-f(0) = \int\limits_0^1 \diondi{t} f(tx^1, \ldots, tx^n)\, dt = \int\limits_0^1 \sum_i x^i \deonde{x^i} f(tx^1, \ldots, tx^n) \, dt \, .
 \end{equation*}
 So, the $f_i$ we are looking for are:
 \begin{equation*}
@@ -2818,7 +2827,7 @@ where $x^i$ are the coordinates around $p$ from $\varphi$.
 \item
 \begin{align}
 \tangentphys{p}M &\rightarrow \tangentgeom{p}M  \\
-v &\mapsto \left\{ \gamma_i \colon t \mapsto \varphi(\varphi^{-1}(p) + tv((U, \varphi)))\right\}
+v &\mapsto \left\{ \gamma \colon t \mapsto \varphi(\varphi^{-1}(p) + tv((U, \varphi)))\right\}
 \end{align}
 with $|t| < \varepsilon$, where we picked up a chart $(U, \varphi)$ around $p$ with coordinate $x^i$.
 \end{enumerate}
@@ -2828,7 +2837,7 @@ D_p F \colon T_pM \rightarrow T_{F(p)} N
 \end{equation}
 (sometimes we denote it by $d$ instead of $D$) where $p \in M, F \colon M \rightarrow N$ smooth:
 \begin{enumerate}
-\item $D_p^{\text{geom}} F ([\gamma]) = [F \circ \gamma]$, where the right-hand side is an equivalence class of equivalence curves on $N$,
+\item $D_p^{\text{geom}} F ([\gamma]) = [F \circ \gamma]$, where the right-hand side is an equivalence class of curves on $N$,
 \item $D_p^{\text{alg}} F (v) = \left \{C^{\infty}(N) \ni f \mapsto v(f \circ F) \right \}$,
 \item $D_p^{\text{phys}} F(v) = \{ (V, \psi) \rightarrow D_p^{\text{phys}} (\psi \circ F \circ \varphi^{-1})\, v(U, \varphi)\}$, where $(V, \psi)$ is any chart of $N$ near $F(p)$.
 \end{enumerate}
@@ -2849,7 +2858,7 @@ Let $M_0, M_1, M_2$ be smooth manifolds, and $f_0 \colon M_0 \rightarrow M_1, f_
 \begin{proof}
 Using the geometric definition:
 \begin{equation*}
-[D(f_1 \circ f_0)][\gamma] = [(f_1 \circ f_0) \circ \gamma] = [f_1 \circ (f_0 \circ \gamma)] = (Df_1 \circ Df_0)[\gamma] \, .
+D(f_1 \circ f_0)[\gamma] = [(f_1 \circ f_0) \circ \gamma] = [f_1 \circ (f_0 \circ \gamma)] = (Df_1 \circ Df_0)[\gamma] \, .
 \end{equation*}
 \end{proof}
 
@@ -2865,11 +2874,11 @@ This map is the bundle projection of the tangent bundle $TM$. Notice that we are
 $TM$ is a manifold, if equipped with the following structure. Pick an atlas $(U_i, \varphi_i)_{i \in I}$ of $M$ (remember: $\varphi \colon M \supset U_i \rightarrow \rfield^n, U_i$ open). Thanks to the second-countability property, we can take $I$ as a countable set without loss of generality. Then, one defines local coordinates (i.e. a local parametrization) on $\pr^{-1}(U_i)$ via
 \begin{align} \label{TMmap}
 \hat{\varphi_i} \colon TM \supset \pr^{-1}(U_i) &\longrightarrow \varphi_i(U_i) \times \rfield^n \\
-v &\longmapsto \left ( \varphi(\pr(v)),\, v(U_i, \varphi_i) \right ) \, . \nonumber
+v &\longmapsto \left ( \varphi_i(\pr(v)),\, v(U_i, \varphi_i) \right ) \, . \nonumber
 \end{align}
 This is a bijective map, and we define the topology on $TM$ as the topology so that $\hat{\varphi_i}$ is a homeomorphism for all $i$. This topology is Hausdorff, indeed: let $v_1, v_2 \in TM$. If $p_1 = \pr v_1 \not = \pr v_2 = p_2$, then there exist open sets $V_j \ni p_j, j =1, 2$ which are disjoint and open (because $M$ is Hausdorff). Let $U_{i(p_1)}, U_{i(p_2)}$ be charts around $p_1, p_2$. Then:
 \[ \pr^{-1} \left( U_{i(p_1)} \cap V_1 \right) \cap \pr^{-1} \left( U_{i(p_2)} \cap V_2 \right) = \emptyset \, . \]
-On the other hand, if $\pr v_1 = \pr v_2$, let $\left( U_{i(v_1)}, \varphi_{i(v_1)} \right)$ be a chart containing $\pr v_1$. Then $\hat \varphi_i(v_1), \hat \varphi_i (v_2)$ differ in the second entry in $\rfield^n$: pick disjoint open sets $W_1, W_2$ of $\rfield^n$ separating those entries and consider the open sets $\hat{\varphi_i}^{-1} \left( \varphi_i(U_i) \times W_j \right), j =1, 2$.
+On the other hand, if $\pr v_1 = \pr v_2$, let $\left( U_{i(v_1)}, \varphi_{i(v_1)} \right)$ be a chart containing $\pr v_1$. Then $\hat \varphi_i(v_1), \hat \varphi_i (v_2)$ differ in the second entry in $\rfield^n$: pick disjoint open sets $W_1, W_2$ of $\rfield^n$ separating those entries and consider the open sets $\hat{\varphi_i}^{-1} \left( \varphi_i(U_i) \times W_j \right), j =1, 2$. So, we get an empty intersection as in the previous case.
 
 Moreover, the topology is second countable. Finally, we need to check the smoothness of the transition functions $\hat \varphi_j \circ \hat \varphi_i^{-1}$. Note that $\hat \varphi_i \left( \pr^{-1}(U_i) \cap \pr^{-1}(U_j) \right) = \varphi_i (U_i \cap U_j) \times \rfield^n$. By the transformation rule \eqref{phystransf}, and using \eqref{TMmap}:
 $$\hat \varphi_j \circ \hat \varphi_i^{-1} \left (x, w = (w^1, \ldots, w^n) \right) = (\varphi_j \circ \varphi_i^{-1}(x), D_x(\varphi_j \circ \varphi_i^{-1}) (w))$$
@@ -3204,12 +3213,12 @@ Let $M$ be a smooth manifold, oriented. Let's consider the projection map
 \begin{equation}
 \pi \colon M \times \rfield \rightarrow M \, .
 \end{equation}
-Given $\omega \in \Omega^k(M), \pi^*\omega$ is not compactly supported in general. However, we can define a map
+Given $\omega \in \Omega_c^k(M), \pi^*\omega$ is not compactly supported in general. However, we can define a map
 \begin{equation}
 \pi_* \colon \Omega_c^k(M \times \rfield) \rightarrow \Omega_c^{k-1}(M)
 \end{equation}
 defined in such a way that $\pi_* \omega$ still has compact support. Such a map is called \textit{integration along the fiber}. We used the notation of the pushforward because it is indeed another way to write the pushforward of a $k$-form.
-We also notice that every $k$-form on $M \times \rfield$ can be written as sum (more than two summands in general) of two types of $k$-forms:
+We also notice that, because of a generalized version of lemma \ref{lemmaform1}, every $k$-form on $M \times \rfield$ can be written as sum (more than two summands in general) of two types of $k$-forms:
 \begin{description}
 \item[$\bullet $ Type A)] $\omega = f(x, t) \, \pi^* \eta, \quad \eta \in \Omega^k(M)$,
 \item[$\bullet$ Type B)] $\omega = f(x, t)\, \pi^*\eta \wedge dt, \quad \eta \in \Omega^{k-1}(M)$.
@@ -3240,7 +3249,7 @@ We prove the lemma for (type A) and (type B) forms, thus it is proved for any fo
 \pi_* \circ d \left ( f(x, t) \,\pi^* \eta \right ) &= \pi_* \left ( \underbrace{\defonde{f}{x}(t, x) dx \wedge \pi^* \eta}_{\text{type A}} + \underbrace{\defonde{f}{t}(x, t)\, dt \wedge \pi^* \eta}_{\text{type B}} + \underbrace{f(x, t) \, d\pi^* \eta}_{\substack{\text{type A because } \\ d\pi^*=\pi^*d}} \right ) = \\
 &=\int_{-\infty}^{\infty} \defonde{f}{s}(x, s) ds \, \pi^* \eta = 0
 \end{align*}
-where we used the definition of $\pi^*$ for (type B) forms \eqref{typeb} and  the fact that $\pi_*(\text{type A}) = 0$. Finally, we used the fundamental theorem of integral calculus with the fact that $f$ has compact support.
+where we used the definition of $\pi_*$ for (type B) forms \eqref{typeb} and  the fact that $\pi_*(\text{type A}) = 0$. Finally, we used the fundamental theorem of integral calculus with the fact that $f$ has compact support.
 Moreover, $d \circ \pi_*( f(x, t) \, \pi^*\eta) = 0$.
 \item(Type B):
 \begin{align*}
@@ -3405,6 +3414,12 @@ Since $\partial M = \emptyset$, we have $\int_M (\omega + d \eta) = \int_M \omeg
 \begin{definition} \label{closedman}
 A manifold $M$ is closed if it is compact and $\partial M = \emptyset$.
 \end{definition}
+
+\begin{tcolorbox}
+\begin{example}
+$S^1$ is a closed manifold. A torus is closed as well.
+\end{example}
+\end{tcolorbox}
 
 \begin{theorem} \label{1dimthm}
 If $M$ is a connected, smooth manifold of dimension $n$, $\dim \left( H^n(M) \right) \le 1$. If $M$ is also closed and oriented, $H^n(M) \cong \rfield$.
@@ -3615,12 +3630,11 @@ A Riemannian metric provides an isomorphism:
 \musFlat \colon T_p M &\rightarrow (T_p M)^* \\
 v &\mapsto (\omega \mapsto g(v, w)) \, .
 \end{align*}
-And the inverse is the map $\musSharp \equiv \musFlat^{-1}$. To extend the metric from $T_p^* M$ to $\Lambda^kT_p^* M \equiv \text{Alt}^k (T_p^* M)$ we observe that there exists an isomorphism:
+And the inverse is the map $\musSharp \equiv \musFlat^{-1}$. This is called musical isomorphism and it is related to the action of "raising and index" and "lowering an index" in physics. For more info, see page 342 of \citetalias{Lee}. Such a map can be extended as $\musFlat \colon TM \rightarrow T^*M$ and so associate a 1-form to each vector field (since vector fields are sections of the tangent bundle and 1-forms are sections of the cotangent bundle). We can then further extend the isomorphism to alternating forms:  there exists a canonical isomorphism:
 \begin{align*}
-\text{Alt}^k(T_p^*M) & \overset{\sim}{\longrightarrow} (\text{Alt}^k(T_p M))^* \\
-\varphi &\longmapsto \tilde{\varphi} (x^1 \wedge \ldots \wedge x^k) = \varphi(x_1, \ldots x_k) \, .
+\text{Alt}^k(T_p^*M) & \overset{\sim}{\longrightarrow} (\text{Alt}^k(T_p M))^* \, . 
 \end{align*}
-It is an isomorphism and it is also canonical. It means that it lets us define a Lorentzian metric on forms: we use the fact that vector fields are sections of the tangent bundle, and that forms are sections of the cotangent bundle. In particular, if $e_1, \ldots, e_n$ is an orthonormal basis of $T_pM$ and $\delta^1, \ldots, \delta^n$ is the dual basis, then:
+It lets us define a Lorentzian metric on forms (in particular, to extend it from $T_p^* M$ to $\Lambda^kT_p^* M \equiv \text{Alt}^k (T_p^* M)$). A precise definition is the following one: if $e_1, \ldots, e_n$ is an orthonormal basis of $T_pM$ and $\delta^1, \ldots, \delta^n$ is the dual basis, then:
 \begin{equation*}
 \langle \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}, \delta^{\lambda_1}\wedge \ldots \wedge \delta^{\lambda_k} \rangle = \begin{cases*}
 0, & if $(\lambda_1, \ldots, \lambda_k) \not = (\mu_1, \ldots, \mu_k)$\\
