@@ -10,6 +10,9 @@ Missing parts:
 
 Last changes:
 
+06-09-20_
+- more typos corrected (in particular, in the 4 definitions of submanifolds of R^n).
+
 05-09-20:
 - typos in some proofs.
 

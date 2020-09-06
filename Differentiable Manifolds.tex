@@ -1472,8 +1472,7 @@ By fixing either the time or the starting point of the flow, we can consider two
   Useful formula (Cartan's formula): $L_z \omega = (d i_z + i_z d) \omega$.
 \end{remark}\end{remarkbox}
 \section[Lie Derivative of a Vector Field]{\crule[blue!50!white]{0.3cm}{0.4cm}  Lie Derivative of a Vector Field}
-\begin{definition}[Pullback of a vector field]
-  %(move all definitions of pullback together)
+\begin{definition}[Pullback of a vector field through a diffeomorphism] \label{pulldiffeom}
   Let $\varphi$ be a diffeomorphism of $\rfield^n$ (i.e. a differentiable and invertible map from $\rfield^n$ to $\rfield^n$, such that its inverse is differentiable as well). Let $v \in \mathfrak{X}(\rfield^n)$. Then:
   \begin{equation}
     \varphi ^* v \equiv \varphi_* ^{-1}v
@@ -1730,7 +1729,7 @@ Let's define the map
     I \colon \Omega^k(U \times \rfield) &\rightarrow \Omega^{k-1}(U) \\
     \eta &\mapsto I\eta \nonumber
   \end{align}
-  such that $$(I\eta)(z_1, \ldots, z_{k-1}) = \int_0^1 \eta(p, t)(\partial_t, i_{t^*}z_1, \ldots, i_{t^*}z_{k-1})dt$$
+  such that $$(I\eta)(z_1, \ldots, z_{k-1}) = \int_0^1 \eta(p, t)(\partial_t, i_{t}^*z_1, \ldots, i_{t}^*z_{k-1})dt$$
 where we used the inclusion map:
   \begin{align} \label{definclusion}
     i_t \colon U &\rightarrow U \times \rfield \\
@@ -1744,7 +1743,7 @@ The following holds:
   \begin{equation}
     i_1^* \bar \omega - i_0^* \bar \omega = d(I \bar \omega) + I(d\bar \omega)
   \end{equation}
-  where $i_1$ is $i_t$ for $t=1$, and $I$ is the integration defined in remark \ref{intremark}. $i^*t\colon \Omega(U \times \rfield \rightarrow \Omega(U)$ is the pullback of $i_t$.
+  where $i_1$ is $i_t$ for $t=1$, and $I$ is the integration defined in remark \ref{intremark}. $i^*_t\colon \Omega(U \times \rfield \rightarrow \Omega(U)$ is the pullback of $i_t$.
 \end{lemma}
 \begin{proof}
 %Indeed, since $H \circ i_1 = Id$ and $H \circ i_0 = p_0$, $\forall \, p \in U$ we have
@@ -1792,7 +1791,7 @@ The proof follows from the previous lemmas  \ref{lemmaform1} and \ref{lemmaform2
 $$H \circ i_1 = \id \quad \text{and} \quad H \circ i_0 = \text{const.}$$
 So:
 $$\omega = (H \circ i_1)^* \omega = i_1^* (H^* \omega) = i_1^* \bar \omega$$
-and by remark \ref{effectivepullback} we know that the pullback of a $k-$form ($k > 1$) through a constant map is 0, so we also have:
+and by remark \ref{effectivepullback} we know that the pullback of a $k-$form ($k \ge 1$) through a constant map is 0, so we also have:
 $$0 = (H \circ i_0)^* \omega = i_0^* (H^* \omega) = i_0^* \bar \omega \, .$$
 From the lemma \ref{lemmaform2}, we know that $i_1^* \bar \omega - i_0^* \bar \omega = d(I \bar \omega) + I(d \bar \omega) $. From previous computations, it means:
 $$\omega = d(I \bar \omega) + I (d \bar \omega) \, .$$
@@ -1957,7 +1956,7 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
   \omega \sim \omega' \Leftrightarrow \omega - \omega' \in \im(d_k) \Leftrightarrow \omega - \omega' = d\alpha \text{ for some (} k-1 \text{)-form } \alpha \, .
   \end{equation}
   From the above definition, we see that two closed forms $\omega, \omega'$ are in the same equivalence class (so they are said to be \textbf{cohomologous}) if they differ by an exact form.
-  Obviously, if $\omega$ and $\omega'$ are exact, we have $\omega = dF$ and $\omega'=dG$ for some ($k-1$)-forms $F$ and $G$. So, the two forms are cohomologous because the $\alpha$ that we need in the definition \eqref{cohomol} is $\alpha = F - G$. All the exact forms are identified with the 0 element of $H^k(U, \rfield)$, because $d_k\omega \sim 0$ (in particular, $d_k\omega = 0$) if $\omega$ is an exact ($k-1$)-form.
+  Obviously, if $\omega$ and $\omega'$ are exact, we have $\omega = dF$ and $\omega'=dG$ for some ($k-1$)-forms $F$ and $G$. So, the two forms are cohomologous because the $\alpha$ that we need in the definition \eqref{cohomol} is $\alpha = F - G$. All the exact forms are identified with the 0 element of $H^k(U, \rfield)$, because $\omega \sim 0$ if $\omega$ is an exact ($k-1$)-form (the difference between $\omega$ and 0 is an exact form).
   To read more about quotient spaces, see also the example \ref{quotientexample}.
 \end{remark}\end{remarkbox}
 
@@ -1998,7 +1997,7 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
 
 \begin{remarkbox}\begin{remark}
   If $\phi \colon U \rightarrow V$, $U, V$ subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$ forms. By the construction above, we can also define such pullback on $H^k$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms.
-  If $\phi$ is a diffeomorphism, then $\phi^*$ is an isomorphism. Thus, $H^k(V) \cong H^k(U)$.
+  If $\phi$ is a diffeomorphism, then $\phi^*$ is an isomorphism. Indeed, $\phi^* = \phi_*^{-1}$ which is bijective and continuous (thus, a homeomorphism) since $\phi$ is a diffeomorphism (see also def. \ref{pulldiffeom}). Thus, $H^k(V) \cong H^k(U)$.
   Question: what if $U$ and $V$ are not diffeomorphic, but only homotopy equivalent? We want to show that the final result is the same.
  \end{remark}\end{remarkbox}
 
@@ -2032,9 +2031,11 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
  We want to show that $(\phi^* - \id^*)(\omega) = d \alpha$. If it is true, $\phi^*$ and $\id^*$ map to the same equivalence class in the cohomology group, because two forms are in the same equivalence class if they differ by an exact form. Let $H \colon \rfield \times V \rightarrow V$ be the smooth homotopy between $\phi$ and $\id$ in $V$. We can consider it smooth thanks to Whitney approximation (cf. theorem \ref{whitney}). Let $\omega \in H^*(V)$. From the proof of Poincarè lemma \ref{poinclemma} we have:
  $$d(I H^* \omega) + I(d H^* \omega) = i_1^* H^* \omega - i_0^* H^* \omega$$
  with: $i_0(p) = (0, p), i_1(p) = (1, p)$ (recall the definition of the inclusion \eqref{definclusion}).
- Here, $H \circ i_0 = \restrict{\id}{V}, H \circ i_1= 0$. Thus:
+ Here, $H \circ i_0 = \restrict{\id}{V}, H \circ i_1= \restrict{\phi}{V}$. Thus, using that 
+ \[i_1^* H^* \omega = (H \circ i_1)^* \omega = \phi^* \omega \text{ and } i_0^*H^* \omega = (H \circ i_0)^* \omega = id^* \omega, \]
+ we have:
  $$(\phi^* - \id^*)(\omega) = dI (H^* \omega) + I(\underbrace{d H^* \omega}_{=H^*d \omega = 0})\, .$$
- Using the naturality of the pullback and the fact that $\omega \in H^*(V) \Rightarrow \omega$ is closed.
+ Where we used the naturality of the pullback and the fact that $\omega \in H^*(V) \Rightarrow \omega$ is closed.
  \end{proof}
 
  %\begin{theorem}
@@ -2129,7 +2130,7 @@ See also example \ref{seqexample}.
     \omega &\mapsto (f^*(\omega), g^*(\omega))
   \end{align*}
   \begin{align*}
-    (i^* - j^*) \colon \Omega^k(U) \oplus \Omega^k(V) &\rightarrow \Omega(U \cap V)\\
+    (i^* - j^*) \colon \Omega^k(U) \oplus \Omega^k(V) &\rightarrow \Omega^k(U \cap V)\\
     (\omega, \eta) &\mapsto i^* \omega - j^* \eta
   \end{align*}
   Then, for each $k$ there exists a linear map $\delta$ such that:
@@ -2139,7 +2140,7 @@ See also example \ref{seqexample}.
   is exact.
 \end{theorem}
 \section[Submanifolds of $\rfield^n$]{\crule[blue!30!white]{0.3cm}{0.4cm}  Submanifolds of $\rfield^n$}
-\textbf{Premise:} We want to go outside $\rfield^n$, and analyze more general topologies. For now, we can think about them as generalizations of curves and surface of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
+\textbf{Premise:} We want to go outside $\rfield^n$, and analyze more general topologies. For now, we can think about them as generalizations of curves and surfaces of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
 We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ in $\rfield^n$ ($m \le n$).
 \begin{definition}[Submanifold - Local parametrization] \label{sub1}
   $M \subset \rfield^n$ is a submanifold of $\rfield^n$ if $\forall \, p \in M$ there exists an open neighbourhood $V \subset \rfield^n$ of $p$ and an open set $U \subset \rfield^m$, where $m \le n$, and there exists a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
@@ -2155,8 +2156,8 @@ We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ 
 \end{definition}
 
 \begin{definition}[Submanifold - Locally flat] \label{sub2}
-  $M \subset \rfield^n$ is a submanifold of $\rfield^n$ if $\forall \, p  \,\in M$, there exists a neighbourhood $V \subset \rfield^n$ of $p$, a neighbourhood $W \subset \rfield^n$ of $0$, and a diffeomorphism $\Phi \colon W \rightarrow V$ such that:
-  \[\Phi \left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right ) = V \cap M \, .\]
+  $M \subset \rfield^n$ is a submanifold of $\rfield^n$ if $\forall \, p  \,\in M$, there exists a neighbourhood $V \subset \rfield^n$ of $p$, a neighbourhood $W \subset \rfield^n$ of $0$, and a diffeomorphism $\Phi \colon V \rightarrow W$ such that:
+  \[ \Phi(p)=0 \text{  and  } \Phi(V \cap M) = W \cap \left( \rfield^m \times \{0\}^{n-m} \right) \, .\]
   \begin{figure}[H]
   \label{Fig:submanifold2}
      \centering
@@ -2238,19 +2239,20 @@ Let's consider the Jacobian matrix:
 \defonde{F^{n-m}}{x^1} & \ldots & \defonde{F^{n-m}}{x^{m+1}} & \ldots & \tikzmark{right}{\defonde{F^{n-m}}{x^n}}
 \end{matrix} \right)
 \DrawBox[thick] \]
-Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U' $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ if and only if $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m), \, (x_1, \ldots, x_m) \in U'$. Then, $g$ is the graph of definition (d).
+Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U' $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ implies $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m)$, where $(x_1, \ldots, x_m) \in U'$. Moreover, different orderings of columns of $A$ give rise to different permutations. Then, $g$ is the graph of definition (d).
 \item[(d) $\Rightarrow$ (a):] From (d), we know that $g \colon \rfield^m \supset U \rightarrow \rfield^{n-m}$. Then:
 \begin{align*}
-\phi \colon U &\rightarrow \rfield^n = \rfield^m \times \rfield^{m-n} \\
+\phi \colon U &\rightarrow \rfield^n = \rfield^m \times \rfield^{n-m} \\
 x &\mapsto (x, g(x))
 \end{align*}
 is a local parametrization: it is a homeomorphism onto the image, and it is differentiable because $g$ is differentiable.
 \item[(a) $\Rightarrow$ (b):] Let $\phi \colon \rfield^m \supset U \rightarrow \rfield^n$ be a local parametrization with $\phi_*\colon \rfield^m \rightarrow \rfield^n$ injective. Let
-$$B \equiv \left( \left (\defonde{\phi^i}{x^j} \right)_{x=q} \right)_{i, j = 1, \ldots ,n}, \qquad q = \phi^{-1}(p), \, p \in M \cap V \, .$$
+$$B \equiv \left( \left (\defonde{\phi^i}{x^j} \right)_{x=q} \right)_{i, j = 1, \ldots ,m}, \qquad q = \phi^{-1}(p), \, p \in M \cap V \, .$$
 In general, it is not true that $\phi^1$ corresponds to the first component. But we can always reorder the coordinates so that it is true. $B$ is invertible. Let's define:
 \begin{align*}
 \Phi \colon U \times \rfield^{n-m} &\rightarrow \rfield^n= \rfield^m \times \rfield^{n-m} \\
-(x, y) &\mapsto \phi(x) + (0, y) \, .
+(x, y) &\mapsto \phi(x) + (0, y) =  \\ &= ( \phi_1(x_1, \ldots, x_m), \ldots, \phi_m(x_1, \ldots, x_m), \\
+& \phi_{m+1}(x_1, \ldots, x_m) + y_1, \ldots, \phi_n(x_1, \ldots, x_m) + y_{n-m} ) \, .
 \end{align*}
 Then:
 \[ \Phi_*(q, 0) = \left (
@@ -2259,9 +2261,9 @@ B & 0 \\
 \hline
 \text{anything} & \text{Id}
 \end{array} \right) \]
-is invertible. Thus, by the implicit function theorem, there exists a neighbourhood $W \subset (U \times \rfield^{n-m})$ of $(q, 0)$ and $V' \subset \rfield$ of $p$ such that $\Phi \colon W \rightarrow V'$ is a diffeomorphism. Furthermore:
+is invertible. Thus, by the implicit function theorem, there exists a neighbourhood $W \subset (U \times \rfield^{n-m})$ of $(q, 0)$ and $V' \subset \rfield^n$ of $p$ such that $\Phi \colon W \rightarrow V'$ is a diffeomorphism. Furthermore:
 \[ \Phi\left ( W \cap (\rfield^m \times \{0\}^{n-m}) \right) = \phi\left( W \cap (\rfield^m \times \{0\}^{n-m}) \right) \subset M \cap V \]
-because $\Phi$ acts like $\phi$ for $y=0$.
+because $\Phi$ acts like $\phi$ for $y=0$. The local inverse of $\Phi$ satisfies the definition (b).
 \end{description}
 \end{proof}
 
@@ -2270,7 +2272,7 @@ because $\Phi$ acts like $\phi$ for $y=0$.
   $$\phi \colon \rfield^m \supset U \rightarrow V \cap M$$
   $$\phi' \colon \rfield^m \supset U' \rightarrow V' \cap M$$
   be local parametrizations. Then:
-  $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (V \cap V' \cap M) \rightarrow \phi^{-1}(V \cap V' \cap M)$$
+  $$\phi^{-1} \circ \phi' \colon (\phi')^{-1} (\phi(U) \cap \phi'(U')) \rightarrow \phi^{-1}(\phi(U) \cap \phi'(U'))$$
   is a diffeomorphism. %write that they are open sets? intersection color...check
 \end{corollary}
 \begin{center}
@@ -2326,7 +2328,7 @@ because $\Phi$ acts like $\phi$ for $y=0$.
 \begin{proof}
 $\phi^{-1} \circ \phi'$ is a homeomorphism because $\phi$ and $\phi'$ are homeomorphisms. We want to show that they are smooth. Let:
 \begin{align*}
-&q' \in (\phi')^{-1}(V \cap V' \cap M) \subset U' \\
+&q' \in (\phi')^{-1}(\phi(U) \cap \phi'(U')) \subset U' \\
 &q \in \phi^{-1} \circ \phi' (q') \in U \, .
 \end{align*}
 By the proof of (a) $\Rightarrow$ (b) of the theorem \ref{allequiv}, we know that there exists a diffeomorphism $\Phi \colon \rfield^n \supset W \rightarrow V'' \subset \rfield^n$, with $(q, 0) \in W$, such that:
