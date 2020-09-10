@@ -10,7 +10,10 @@ Missing parts:
 
 Last changes:
 
-06-09-20_
+10-09-20:
+- proof of compactly supported Poincarè lemma simplified, minor typos corrected.
+
+06-09-20:
 - more typos corrected (in particular, in the 4 definitions of submanifolds of R^n).
 
 05-09-20:

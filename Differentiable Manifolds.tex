@@ -2641,7 +2641,7 @@ Let $\phi_1 \colon U_1 \rightarrow M, U_1 \subset H^n$ such that $\phi_1(0, x^2,
 \[\left ( \phi_1^{-1} \circ \phi_2 \right) \colon \phi_2^{-1}(\Omega) \rightarrow \phi_1^{-1}(\Omega)\]
 is a diffeomorphism (by definition of manifold). Since $x^1 \not = 0$, there exists a neighbourhood $U$ of $q$ such that $U \subset \phi_2^{-1}(\Omega)$ and such that $U$ does not intersect with:
 \[\left \{ (x^1, \ldots , x^n ) \in H^n \, | \, x^1= 0 \right \} \, . \]
-The restriction of $\phi_1^{-1} \circ \phi_2$ to $U$ gives a differentiable map $U \rightarrow H^n$ such that $\det(\phi_1^{-1} \circ \phi_2)_* \not = 0$ (invertible map). Thus, $(\phi_1^{-1} \circ \phi_2)(U)$ contains points which are not in $H^n$ for some choice of $V \ni q$. But then it can't be a parametrization (contradiction!).
+The restriction of $\phi_1^{-1} \circ \phi_2$ to $U$ gives a differentiable map $U \rightarrow H^n$ such that $\det(\phi_1^{-1} \circ \phi_2)_* \not = 0$ (invertible map). Thus, $H^n$ is diffeomorphic to a set that doesn't contain $\{ (x^1, \ldots, x^n) | x^1 = 0 \}$, contradiction.
 \end{proof}
 
 \begin{proposition}
@@ -2796,7 +2796,7 @@ Now, we can prove that the $\dim \tangentalg{p} M = n$. Let $v$ be a derivation 
 $$f(x) = f(0) + \sum\limits_i x^i f_i(x)$$
 and
 \[ v(f) = \underbrace{v(f(0))}_{=0} + \sum\limits_i \left( v(x^i) \underbrace{f_i(x^i)}_{=f_i(0)} + \underbrace{x^i}_{=0} v(f_i) \right) \, . \]
-Then, $v$ is defined by the way it reacts to coordinate functions around $p$. Thus, $\dim \tangentalg{p} M \le n$. Since $v_i = \deonde{x^i}$ is a derivation, we have $\dim \tangentalg{p} M = n$.
+Then, $v$ is defined by the way it reacts to coordinate functions around $p$. Thus, $\dim \tangentalg{p} M \le n$. Since a particular derivation is $v_i = \deonde{x^i}$ and since it "reacts" in $n$ different ways, we have $\dim \tangentalg{p} M = n$.
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Physicists' tangent space]
@@ -2921,7 +2921,7 @@ where the map $t \mapsto (v + tw)$ goes from $(-\varepsilon, \varepsilon) \subse
 \end{remark}\end{remarkbox}
 
 \begin{definition}
-In a manner similar to $TM$ becoming a manifold, one can define the manifold given by the cotangent bundle:
+In a similar manner to $TM$ becoming a manifold, one can define the manifold given by the cotangent bundle:
 \begin{equation}
 T^*M = \bigsqcup_{p \in M} T_p^*M \overset{\pr}{\longrightarrow} M
 \end{equation}
@@ -3225,7 +3225,7 @@ We also notice that, because of a generalized version of lemma \ref{lemmaform1},
 \item[$\bullet $ Type A)] $\omega = f(x, t) \, \pi^* \eta, \quad \eta \in \Omega^k(M)$,
 \item[$\bullet$ Type B)] $\omega = f(x, t)\, \pi^*\eta \wedge dt, \quad \eta \in \Omega^{k-1}(M)$.
 \end{description}
-where $f(x, t)$ is a compactly supported function, $dt \in \Omega^1(\rfield)$.
+where $f(x, t)$ is a compactly supported function, $dt \in \Omega^1(M \times \rfield)$.
 
 Now, we define $\pi_*$ in the way it acts on (type A) and (type B) forms:
 \begin{align}
@@ -3248,20 +3248,21 @@ We prove the lemma for (type A) and (type B) forms, thus it is proved for any fo
 \begin{itemize}
 \item(Type A):
 \begin{align*}
-\pi_* \circ d \left ( f(x, t) \,\pi^* \eta \right ) &= \pi_* \left ( \underbrace{\defonde{f}{x}(t, x) dx \wedge \pi^* \eta}_{\text{type A}} + \underbrace{\defonde{f}{t}(x, t)\, dt \wedge \pi^* \eta}_{\text{type B}} + \underbrace{f(x, t) \, d\pi^* \eta}_{\substack{\text{type A because } \\ d\pi^*=\pi^*d}} \right ) = \\
+\pi_* \circ d \left ( f(x, t) \,\pi^* \eta \right ) &= \pi_* \left ( \underbrace{\defonde{f}{x}(x, t) dx \wedge \pi^* \eta}_{\text{type A}} + \underbrace{\defonde{f}{t}(x, t)\, dt \wedge \pi^* \eta}_{\text{type B}} + \underbrace{f(x, t) \, d\pi^* \eta}_{\substack{\text{type A because } \\ d\pi^*=\pi^*d}} \right ) = \\
 &=\int_{-\infty}^{\infty} \defonde{f}{s}(x, s) ds \, \pi^* \eta = 0
 \end{align*}
-where we used the definition of $\pi_*$ for (type B) forms \eqref{typeb} and  the fact that $\pi_*(\text{type A}) = 0$. Finally, we used the fundamental theorem of integral calculus with the fact that $f$ has compact support.
+up to a sign in the computations, where we used the definition of $\pi_*$ for (type B) forms \eqref{typeb} and  the fact that $\pi_*(\text{type A}) = 0$. Finally, we used the fundamental theorem of integral calculus with the fact that $f$ has compact support.
 Moreover, $d \circ \pi_*( f(x, t) \, \pi^*\eta) = 0$.
 \item(Type B):
 \begin{align*}
 \pi_* \circ d (f(x, t) \, \pi^* \eta \wedge dt) &= \pi_* \left ( \defonde{f}{x} (x, t) dx \wedge \pi^*\eta \wedge dt + f(x, t) \pi^* d\eta \wedge dt \right)  = \\
-&=\defonde{F}{x}(x, t)dx \wedge \pi^* \eta + F(x) \, \pi^* d\eta
+&= \pi_* \left( dx \wedge \deonde{x} \left ( f(x, t) \pi^* \eta \wedge dt \right) + f(x, t) \pi^* d\eta \wedge dt  \right ) \\
+&=\defonde{F}{x}(x, t)dx \wedge  \eta + F(x) \,  d\eta
 \end{align*}
 where we used the $F$ defined in \eqref{typeb}.
 Moreover:
 \begin{align*}
-d \circ \pi_* (f(x, t) \, \pi^* \eta \wedge dt) = d(F(x)\, \pi^*\eta) = \defonde{F}{x}(x, t)dx \wedge \pi^* \eta + F(x) \, \pi^* d\eta  \, .
+d \circ \pi_* (f(x, t) \, \pi^* \eta \wedge dt) = d(F(x)\, \eta) = \defonde{F}{x}(x, t)dx \wedge \eta + F(x) \,  d\eta  \, .
 \end{align*}
 \end{itemize}
 \end{proof}
@@ -3272,7 +3273,7 @@ Consequence of lemma \ref{pichain}: $\pi_*$ defines a map
 \[ \pi_* \colon H_c^k(M \times \rfield) \rightarrow H^{k-1}_c(M) \, . \]
 We want to prove that such a map is an isomorphism. Let's construct the inverse in the following way: let $e \colon \rfield \rightarrow \rfield$ be a smooth function with compact support  such that $\int_{-\infty}^{\infty} e(s) ds = 1$. Then, we define $e_*$ as:
 \begin{align} \label{einverse}
-e_* \colon \Omega^{k-1}_c (M) &\rightarrow \Omega^k(M \times \rfield) \\
+e_* \colon \Omega^{k-1}_c (M) &\rightarrow \Omega^k_c(M \times \rfield) \\
 \eta &\mapsto e(t) \, \pi^*\eta \wedge dt \, . \nonumber
 \end{align}
 We have $\pi_* \circ e_* = \id_{\Omega_c^{k-1}(M)}$ \textbf{but} $e_* \circ \pi_* \not = \id_{\Omega_c^k(M \times \rfield)}$. Nevertheless, we just need $e_*$ to be the inverse of $\pi_*$ on $H_c^k(M \times \rfield)$, not on all $\Omega^k_c(M \times \rfield)$. This is true thanks to the two following results.
@@ -3295,7 +3296,7 @@ d \circ e_*(\eta) = d \left ( e(t)  \pi^*\eta \wedge dt \right ) = e(t) d^{M \ti
 
 \begin{proposition} \label{kprop}
 The maps $e_*, \pi_*$ are mutually inverse isomorphisms on $H_c$, since there is an operator $K \colon \Omega^k_c(M \times \rfield) \rightarrow \Omega_c^{k-1}(M)$ such that:
-\begin{equation}
+\begin{equation} \label{invequation}
 \mathbb{1} - e_* \circ \pi_* = (-1)^{k-1} (d \circ K - K \circ d)
 \end{equation}
 where:
@@ -3334,6 +3335,15 @@ Using that: (1) we can exchange integral and derivative, and remember that: $F(x
 By comparing the three results, we have the thesis.
 \end{proof}
 
+\begin{remarkbox}
+\begin{remark}
+We proved the isomorphism in $H_c^k(M)$. Indeed, if $\omega$ is closed, then the \eqref{invequation} becomes:
+\[ (\mathbb{1} - e_* \circ \pi_*)(\omega) = d \left( (-1)^{k-1} K \omega \right ) \, . \]
+So, $\omega$ and $e_* \circ \pi_*(\omega)$ differ by an exact form, i.e. they live in the same equivalence class.
+\end{remark}
+\end{remarkbox}
+
+
 Now, we are finally ready to prove the compactly supported Poincarè lemma.
 
 \begin{lemma}[Compactly supported Poincarè lemma] \label{compsupppoinclemma}
@@ -3346,15 +3356,23 @@ H_c^k(\rfield^n) \cong
 \end{equation}
 \end{lemma}
 \begin{proof}
-The proof is by induction. The map used to prove the isomorphism for the case $k = n$ is:
-\begin{equation} \label{mapn}
-[\omega] \mapsto \int_{\rfield^n} \omega
-\end{equation}
-We notice that the integral is well defined because $\omega$ is compactly supported, and the integral does not depend on the element of the equivalence class chosen. In fact, if we consider another $n$-form $\omega'$ such that $[\omega'] = [\omega]$, then it means that $\omega'$ and $\omega$ differ by an exact form: $\omega' = \omega + d \alpha, \alpha \in \Omega_c^{n-1}(\rfield^n)$. Let's suppose, without loss of generality, that $\supp \alpha, \supp \omega, \supp \omega' \subset B_{2R}(0)$. Then:
-\[ \int_{\rfield^n} \omega' = \int_{B_{2R}(0)} \omega' = \int_{B_{2R}(0)}(\omega + d \alpha) = \int_{B_{2R}(0)}\omega + \int_{B_{2R}(0)} d \alpha \overset{\text{Stokes}} = \int_{\rfield^n} \omega + \underbrace{\int_{\partial B_{2R}(0)} \alpha}_{=0} \, . \]
-For $\fbox{n=1}$, the case $k \not = 1$ coincides with the case $k=0$: we are considering compactly supported closed 0-forms, i.e. functions which are 0 everywhere. Thus, the only compactly supported closed 0-form which is not exact is the trivial one:  $H^0_c(\rfield) = 0$. As regards the case $k=1$, by the standard Poincarè lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported! Indeed let's write $\omega$ as $\omega=f(x) dx$, $f$ compactly supported function. If $\int_{\rfield} \omega = \int_{\rfield} f(x)dx = 0$, then the primitive $F(x)=\int_{-\infty}^x f(t)dt$ has compact support (for $x$ small we are outside of the support of $f$, whereas for $x$ big we integrate over all the support, i.e. it's like considering $\int_{\rfield} f(x) dx = 0$). Then $\omega$ is exact: $\omega = dF$ and $F$ has compact support $\Rightarrow [\omega]=0$. Indeed, this explains why we chose the map \eqref{mapn}: if the integral of the $n$-form is 0, the form is exact and it is the differential of a compactly supported $(n-1)$-form. In a similar way, we can choose another closed $n$-form $\eta=g(x)dx,\, g$ with compact support such that $\int_{\rfield}\eta = \int_{\rfield} g(x)dx=c \not=0$. In this case, the primitive is $G(x) = \int_{-\infty}^x g(t)dt$ and $\eta = dG$ (we already knew that such a $G$ existed, thanks to the standard Poincarè lemma), but $G$ is not compactly supported anymore (we have problems for $x$ big). Moreover, for each value of $c$ we get a different primitive. Since we can choose $g(x)$ such that we get any value of $c \in \rfield$, we have that $H_c^1(\rfield) \cong \rfield$. For $\fbox{n > 1}$: from proposition \ref{kprop}, we know that there is an isomorphism
+The proof is by induction. 
+For $\fbox{n=1}$, the case $k \not = 1$ would be the case $k=0$: we are considering closed and compactly supported 0-forms, i.e. functions which are 0 everywhere. Thus, the only closed and compactly supported 0-form which is not exact is the trivial one:  $H^0_c(\rfield) = 0$. As regards the case $k=1$, we prove that the following map is an isomorphism:
+\begin{align} \label{mapn}
+I \colon H^1_c(\rfield) &\rightarrow \rfield \\
+[\omega] &\mapsto \int_{\rfield} \omega \, . \nonumber
+\end{align}
+First of all, $I$ is well defined, i.e. the integral does not depend on the element of the chosen equivalence class. In fact, if we consider another $1$-form $\omega'$ such that $[\omega'] = [\omega]$, then it means that $\omega'$ and $\omega$ differ by an exact form: $\omega' = \omega + d \alpha, \alpha \in \Omega_c^{0}(\rfield)$. Let's suppose, without loss of generality, that $\supp \alpha, \supp \omega, \supp \omega' \subset B_{2R}(0)$. Then:
+\[ \int_{\rfield} \omega' = \int_{B_{2R}(0)} \omega' = \int_{B_{2R}(0)}(\omega + d \alpha) = \int_{B_{2R}(0)}\omega + \int_{B_{2R}(0)} d \alpha \overset{\text{Stokes}} = \int_{\rfield} \omega + \underbrace{\int_{\partial B_{2R}(0)} \alpha}_{=0} \, . \]
+
+Now, we prove that $I$ is surjective. This follows from the fact that for every $c \in \rfield$, we can choose $\omega \in H^1_c(\rfield)$ and $f$ smooth map with compact support such that $\int f \omega = c$.
+
+In order to prove that $I$ is injective, we just need to prove that $\ker I = \{0\}$ (since $I$ is linear). By the standard Poincarè lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported!
+In order to have an exact form in $H_c^1(\rfield)$, $\alpha$ should have compact support as well. But, we notice that $\omega$ is exact if $\int_{\rfield} \omega = 0$ (i.e. $\ker I = \{0\}$). Indeed let's write $\omega$ as $\omega=f(x) dx$, $f$ compactly supported function. If $\int_{\rfield} \omega = \int_{\rfield} f(x)dx = 0$, then the primitive $F(x)=\int_{-\infty}^x f(t)dt$ has compact support (for $x$ small we are outside of the support of $f$, whereas for $x$ big we integrate over all the support, i.e. it's like considering $\int_{\rfield} f(x) dx = 0$). Then $\omega$ is exact: $\omega = dF$ and $F$ has compact support $\Rightarrow [\omega]=0$. 
+So, $H^1_c(\rfield) \cong \rfield$ (in the same way, we can prove that $H^n_c(\rfield^n) \cong \rfield$).
+For $\fbox{n > 1}$: from proposition \ref{kprop}, we know that there is an isomorphism
 \begin{equation} \label{hisomorph}
-H_c^k(M \times \rfield) \,  \substack{\overset{\pi_*}{\longleftarrow} \\ \underset{e_*}{\longrightarrow}} \, H_c^{k-1}(M)
+H_c^k(M \times \rfield) \,  \substack{\overset{e_*}{\longleftarrow} \\ \underset{\pi_*}{\longrightarrow}} \, H_c^{k-1}(M)
 \end{equation}
 Let's suppose the thesis is true for $n-1$, then we can consider $M=\rfield^{n-1}$ (notice that $\rfield^n$ is an oriented manifold) and thanks to the isomorphism \eqref{hisomorph} the thesis is true also for $n$.
 \end{proof}
@@ -3388,7 +3406,7 @@ Then, we can consider a bump form $\omega_1$ in $U \cap U_1$, and we can extend 
 \begin{figure}[H] \label{Fig:bumpforms1}
      \centering
      \includegraphics[width=0.8\textwidth]{Images/bumpforms1.pdf}
-     \caption{We can cover the path between $U$ and $U'$}
+     \caption{We can cover the path between $U$ and $U'$} \qedhere
 \end{figure}
 \end{proof}
 
@@ -3443,7 +3461,7 @@ It suffices to find a bump form which is cohomologous to zero in $M$. Once we fi
 Let's find such a bump form. First, let's consider a boundary chart $(U, \varphi), \varphi \colon U \rightarrow \rfield^n \cap \{x_1 < 0\}$ (such that $\varphi(U)$ is a half-ball) and a bump form $\omega$ compactly supported in the interior of the half-ball. We will also consider the other half-ball. We will call $B_l$ the lower half-ball ($B_l = \varphi(U)$) and we will call $B_u$ the other half. We consider another bump form $\omega_u$ contained in $B_u$ such that:
 \[ \int_{B_u} \omega_u = \int_{B_l} - \omega \, . \]
 It is always possible, because bump forms can only have integral $=\pm 1$.
-Now, we consider the form $\omega_u + \omega$ and we extend it by zero. It is compactly supported in the open ball $B \equiv B_u \cup B_l$. We notice that $\int_{B} (\omega_u + \omega) = \int_B d\eta, \, \eta \in \Omega_c(B)$ by Stokes's theorem and using that $\partial B =\emptyset$. Then, by remark \ref{bumpremark} we have that $d\eta = \omega_u + \omega$. Thus:
+Now, we consider the form $\omega_u + \omega$ and we extend it by zero. It is compactly supported in the open ball $B \equiv B_u \cup B_l$. By remark \ref{bumpremark} we have that $\omega_u$ and $-\omega$ are cohomologous, so $d\eta = \omega_u + \omega$. Thus:
 \[ \restrict{d\eta}{B_l} = \restrict{\omega_u}{B_l} + \restrict{\omega}{B_l} = \restrict{\omega}{B_l} \, . \]
 Then, $\varphi^* \eta$ is a primitive of the bump form $\varphi^* \omega$. So, $\varphi^* \omega$ is the zero form we were looking for.
 \end{proof}
@@ -3536,7 +3554,7 @@ For all $f \colon M \rightarrow N$, in the hypotheses of def. \ref{degreemap}, t
 \end{theorem}
 \begin{proof}
 Let consider a regular value $p\in N$ of $f$. The value $p$ exists thanks to \href{https://en.wikipedia.org/wiki/Sard's_theorem}{Sard's theorem}. Sard's theorem states that the set of the critical values of a smooth function $f$ from a manifold to another one is a null-measure set. We can apply this theorem to our case (and whenever $f$ is not smooth we can approximate it by smooth functions if it is at least continuous). Indeed, if the set of critical values has zero measure, its complementary set (the regular values) has dimension $n$.
-In particular, $f^{-1}(q)$ is a submanifold of dimension 0 or, analogously, a submanifold of codimension $n$ (not proved). So, $f^{-1}(p)$ consists of a finite collection of points $q_1, \ldots, q_m$. By the inverse function theorem, there exists a neighbourhood $U_i$ of $q_i \in f^{-1}(p)$ such that $\restrict{f}{U_i}$ is a diffeomorphism onto its image. Let $\omega$ be a bump form supported in $\bigcap_i f(U_i) = V$. Then:
+In particular, $f^{-1}(p)$ is a submanifold of dimension 0 or, analogously, a submanifold of codimension $n$ (not proved). So, $f^{-1}(p)$ consists of a finite collection of points $q_1, \ldots, q_m$. By the inverse function theorem, there exists a neighbourhood $U_i$ of $q_i \in f^{-1}(p)$ such that $\restrict{f}{U_i}$ is a diffeomorphism onto its image. Let $\omega$ be a bump form supported in $\bigcap_i f(U_i) = V$. Then:
 $$\int_M f^* \omega = \sum\limits_i \underbrace{\int_{U_i} f^* \omega}_{\substack{=\pm \int_{f(U_i)} \omega \\ \text{depending} \\ \text{on orientation}}} = \sum\limits_i \left ( \pm \int_V \omega \right )$$
 So, the degree is an integer: the signed count of preimages of a regular value. The sign depends on the orientation (i.e. the sign of the determinant of the Jacobian at $p_i, \forall\, i$).
 \end{proof}
