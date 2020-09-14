@@ -10,6 +10,9 @@ Missing parts:
 
 Last changes:
 
+14-09-20:
+- Image of definition 16.2 (submanifold - locally flat) updated.
+
 10-09-20:
 - proof of compactly supported Poincarè lemma simplified, minor typos corrected.
 
