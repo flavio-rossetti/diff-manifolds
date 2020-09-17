@@ -23,7 +23,7 @@
 \usepackage{fancyhdr}
 \usepackage{musicography}
 \usepackage[numbers]{natbib}
-\defcitealias{Lee}{[IntroSmoothMan]}
+\defcitealias{Lee}{[Lee]}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -143,7 +143,7 @@
   \vspace{1.5cm}
  %{\Large\bfseries }\\[5pt]
  \begin{center}
- \textit{Many thanks to Raul Morral for his help to improve the script.}
+ \textit{Thanks to Janik Kruse and Ra\'ul Morral for their help to improve the script!}
  \end{center}
 
 \newpage
@@ -218,7 +218,7 @@ $(\mathbb{Z}, +)$ is a group.
 \end{example}\end{tcolorbox}
 
 \begin{tcolorbox}\begin{example}
-$(\mathbb{R}, +)$ is a group. Also: $(\mathbb{R}, \cdot)$ is a group.
+$(\mathbb{R}, +)$ is a group. Also: $(\mathbb{R} \setminus \{0\}, \cdot)$ is a group.
 \end{example}\end{tcolorbox}
 
 \begin{tcolorbox}\begin{example}
@@ -279,11 +279,11 @@ $(\mathbb{R}, +, \cdot)$ is a field.
 
 \section[Quick review: Morphisms]{\crule[blue!70!white]{0.3cm}{0.4cm}  Quick review: Morphisms}
 \begin{definition}[Homomorphism]
-A homomorphism $h$ between two sets endowed with operations (think about two groups, for instance) is a map which preserves the operations, i.e. a map
+A homomorphism $h$ between two sets endowed with structures (think about two groups, for instance) is a map which preserves the structure, i.e. a map
 \begin{equation*}
 h \colon (G, +) \longrightarrow (H, \circ)
 \end{equation*}
-such that $h(a + b) = h(a) \circ h(b), \forall\, a, b, \in G$, where $(G, +)$ and $(H, \circ)$ are two groups. The definition for rings and fields is analogous. Sometimes these maps are just called morphisms (there is some difference between morphisms and homomorphisms but it usually matters only if you are dealing with more abstract algebraic structures).
+such that $h(a + b) = h(a) \circ h(b), \forall\, a, b, \in G$, where $(G, +)$ and $(H, \circ)$ are two groups. The definition for rings and fields is analogous. People from category theory also tend to call (group) homomorphisms just (group) morphisms since the morphisms in the category \textbf{Grp} of all groups are set to be group homomorphisms.
 \end{definition}
 
 Now, we can consider some particular types of homomorphisms.
@@ -298,15 +298,13 @@ An endomorphism is a homomorphism from one algebraic structure to itself. If suc
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark} \label{homeoremark}
-Don't get confused with hom\underline{e}omorphisms! A homeomorphism is a continuous and bijective map between two topological spaces, such that its inverse is also continuous. In general it is not a homomorphism (without the \textbf{e}), because a topological space is not necessarily associated with an operation on it. (However if it has an operation, the continuity of the map implies that it is also a homomorphism).
+Don't get confused with hom\underline{e}omorphisms! A homeomorphism is a continuous and bijective map between two topological spaces, such that its inverse is also continuous. In general it is not a homomorphism (without the \textbf{e}).
 \end{remark}\end{remarkbox}
 
 \section[Quick review: Equivalence Classes, Quotient Spaces]{\crule[blue!90!white]{0.3cm}{0.4cm}  Quick review: Equivalence Classes, Quotient Spaces}
 \begin{definition}[Binary relation]
   Given a set $E$, a (binary) relation $\sim$ on $E$ is a set of couples $(a, b) \in E \times E$. In other words, a binary relation is a subset of $E \times E$. Moreover, if $(a, b) \in \, \sim\,  \subset E \times E$, we use the following notation: $a \sim b$.
 \end{definition}
-
-The mathematical definition of binary relation is usually not very helpful in the applications. Often it is more convenient not to think about $\sim$, but instead thinking about what is in relation with what. In particular, we want to consider the following definition.
 
 \begin{definition}[Equivalence relation]
   Given a set $E$, an equivalence relation $\sim$ is a binary relation which satisfies the following properties:
@@ -336,7 +334,7 @@ The mathematical definition of binary relation is usually not very helpful in th
 \end{definition}
 
 \begin{tcolorbox}\begin{example} \label{modulo4ex}
-We can examine the set of integers which differ between them (in absolute value) by a multiple of 4.
+We can examine the set of integers which differ (in absolute value) by a multiple of 4.
   If we consider the equivalence relation "$x \sim y$ if $x-y = 4n$ for some $n \in \mathbb{N} \cup \{0\}$" on the set of $\mathbb{Z}$, the equivalence class of 1 is $[1] = \{\ldots, -7, -3, 1, 5, 9, \ldots\}$. We can also write "$x-y = 4n$ for some $n$" as $x \equiv_4 y$ (congruence modulo $4$).
 \end{example}\end{tcolorbox}
 
@@ -352,7 +350,7 @@ Intuitively, we can say that the quotient space $\faktor{E}{\sim}$ is a copy of 
   Let's consider two examples:
   \begin{itemize}
     \item If we consider the example \ref{modulo4ex}, $\faktor{\mathbb{Z}}{\sim} = \{[0], [1], [2], [3]\}$. We notice that all the integers that differ from 0 by a multiple of 4 (in absolute value) are identified with one point (which is the equivalence class $[0]$). All the integers that differ from 1 by a multiple of 4 (in absolute value) are identified with one point (the equivalence class $[1]$), and so on. In this case, we also write $\faktor{\mathbb{Z}}{\sim} = \faktor{\mathbb{Z}}{4\mathbb{Z}}$.
-    \item If $V$ is a vector space and $U$ is a vector subspace of $V$, then we can consider the equivalence relation "$x \sim y$ if $x-y \in U$". We notice that $x \sim x$ for each $x \in V$ since $x-x = 0 \in U$, because $U$ is a vector space as well. Then, $\faktor{V}{\sim}$ is isomorphic to $V'$, where $V'$ is $V$ without its subspace $U$ (every element of $U$ is identified with 0 in the quotient space, because every element of $U$ is in the same equivalence class of 0).
+    \item If $V$ is a vector space and $U$ is a vector subspace of $V$, then we can consider the equivalence relation "$x \sim y$ if $x-y \in U$". We notice that $x \sim x$ for each $x \in V$ since $x-x = 0 \in U$, because $U$ is a vector space as well. If $V$ can be decomposed as a direct sum $V = U \oplus W$, where $W$ is another vector space, then $V/U$ is isomorphic to $W$.
     \item If $V$ and $U$ are just two groups instead of being vector spaces, finding the quotient space requires a bit more effort.
   \end{itemize}
 \end{example}\end{tcolorbox}
@@ -379,9 +377,9 @@ $$B=\bigcup_{j \in J} \;  \left ] c_j, d_j \right [$$
 are two open sets, then their union is still union of open intervals. Same result if we consider an arbitrary number of open sets $A, B, C, \ldots$
 \item if $A$ and $B$ as before, then their intersection is
 $$A \cap B = \bigcup_{\substack{i \in I \\ j \in J}} \; ]a_i, b_i[ \; \cap \;  ]c_j, d_j[$$
-which is still union of open intervals.
+which is still union of open intervals since the intersection of two open intervals is open.
 \end{enumerate}
-In $\rfield^n$, we can define it using the concept of basis (see the next pages).
+In $\rfield^n$, a possible definition of this topology would be through the concept of basis. Alternatively, you could define it by explicitly considering $n$ copies of $\mathbb{R}$ and then considering the product topology. These concepts will be treated in the next pages.
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark}
@@ -408,8 +406,8 @@ Requiring that the pre-image of an open set is open is different from requiring 
 \begin{tcolorbox}\begin{example} \label{topexamples}
 Given a set $M$, we can always consider two simple topologies on it:
 \begin{enumerate}
-	\item $\mathcal{O}_M =  \mathcal{P}(M)$ is a topology, where $\mathcal{P}(M)$ is the power set of $M$ (i.e. the family of all subsets of $M$). Everything is open in $M$, so it is easy to see that any function going from $(M, \mathcal{O}_M)$ to any space $(Y, \mathcal{O}_Y)$ must be continuous, where $\mathcal{O}_Y$ can be any topology on $Y$.
-	\item $\mathcal{O}_M=\{\emptyset, M\}$ is a topology: the open sets are just the two ones required by the definition \ref{top}. In this case, every function going from any space $(Y, \mathcal{O}_Y)$ to $(M, \mathcal{O}_M)$ must be continuous (the pre-image of the empty set is the empty set, and the pre-image of $M$ is $Y$).
+	\item $\mathcal{O}_M =  \mathcal{P}(M)$ is a topology, where $\mathcal{P}(M)$ is the power set of $M$ (i.e. the family of all subsets of $M$). Thus, every subset of $M$ is open, so it is easy to see that any function going from $(M, \mathcal{O}_M)$ to any space $(Y, \mathcal{O}_Y)$ is continuous, where $\mathcal{O}_Y$ can be any topology on $Y$.
+	\item $\mathcal{O}_M=\{\emptyset, M\}$ is a topology: the open sets are just the two ones required by the definition \ref{top}. In this case, every function going from any space $(Y, \mathcal{O}_Y)$ to $(M, \mathcal{O}_M)$ is continuous (the pre-image of the empty set is the empty set, and the pre-image of $M$ is $Y$).
 \end{enumerate}
 What is more, we can consider topologies on metric spaces: if $(M, d)$ is a metric space and $B_{\varepsilon}(x)$ denotes the ball of radius $\varepsilon$ around $x$, then:
 $$\mathcal{O}_d = \{U \subset M \, | \, \forall\, x \in U \, \exists\, \varepsilon > 0 \colon B_{\varepsilon}(x) \subset U \}$$
@@ -417,7 +415,7 @@ defines a topology. In particular, we say that the topology is induced by a metr
 \end{example}\end{tcolorbox}
 
 \begin{remarkbox}\begin{remark}
-If $\mathcal{O}_1, \mathcal{O}_2$ are topologies on $M$, then the intersection of the two topologies is again a topology. Therefore, given a family of subsets of $M$ one can ask for the smallest topology on $M$ which still contains a subset.
+If $\mathcal{O}_1, \mathcal{O}_2$ are topologies on $M$, then the intersection of the two topologies is again a topology. Therefore, given a family of subsets of $M$ one can ask for the smallest topology on $M$ which still contains one of those subsets (one of such topologies always exists and it is the power set topology).
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Hausdorff space]
@@ -427,13 +425,13 @@ A topological space $(M, \mathcal{O}_M)$ is Hausdorff if for all $p, q \in M$ th
 \begin{remarkbox}\begin{remark}
 Points in Hausdorff spaces are closed sets. i.e. if $M$ is Hausdorff and $x \in X$, $\{x\}$ is a closed set. In order to see that, we just need to prove that $M \setminus \{x\}$ is open. Let's suppose $M \setminus \{x\} \not = \emptyset$ (otherwise we are done, since $M = \{x\}$ and $M$ is both closed and open). Then we can find another point $y \in M \setminus \{x\}$. Since $M$ is Hausdorff, we can find two open sets $U_x, U_y$ containing $x$ and $y$ respectively, such that $U_x \cap U_y = \emptyset$. The proof is over if we prove that $M \setminus \{x\} = \cup_{y \in M \setminus \{x\}} U_y$, since it implies that $M \setminus \{x\}$ is open (arbitrary union of open sets is open), and then $\{x\}$ is closed. It is true because:
 \begin{itemize}
-\item "$M \setminus \{x\} \subseteq  \cup_{y \in M \setminus \{x\}} U_y$": for each point $z$ in $M$ different from $x$, there exists an open set $U_z$ entirely contained in $M \setminus \{x\}$ by Hausdorff assumption. The point is contained in a set which is contained in $\cup_{y \in M \setminus \{x\}} U_y$ so, in particular, the point is in $\cup_{y \in M \setminus \{x\}} U_y$.
+\item "$M \setminus \{x\} \subseteq  \cup_{y \in M \setminus \{x\}} U_y$": for each point $z$ in $M$ different from $x$, there exists an open set $U_z$ entirely contained in $M \setminus \{x\}$ by Hausdorff assumption. The point $z$ is contained in $U_z$ and $U_z$ is an element of the union $\cup_{y \in M \setminus \{x\}} U_y$.
 \item "$M \setminus \{x\} \supseteq \cup_{y \in M \setminus \{x\}} U_y$": if $z \in \cup_{y \in M \setminus \{x\}} U_y$, then $z \not = x$, otherwise there would be an intersection between an open set $U_{\bar x}$ for a fixed $\bar x$ and every open set containing $x$. This is impossible because by Hausdorff assumption there exists at least one open sets of those which does not intersect $U_{\bar x}$.
 \end{itemize}
 
 Moreover:
 \begin{itemize}
-	\item $(M, \mathcal{P}(M))$ is always Hausdorff (there are "so many" open sets that you can always find two of them containing the right points and so that they do not intersect each other).
+	\item $(M, \mathcal{P}(M))$ is always Hausdorff (for $x \ne y$, the sets $\{x\}$ and $\{y\}$ are open and disjoint).
 	\item If the topology is induced by a metric, then the topological space is Hausdorff (for instance, $\rfield^n$ with the topology induced by Euclidean metric is a Hausdorff topological space).
 \end{itemize}
 \end{remark}\end{remarkbox}
@@ -461,7 +459,7 @@ We can also use another useful characterization of the quotient topology: a set 
 \item "$(1) \Rightarrow (2)$": $U$ open in the quotient topology, then $\pi^{-1}(U)$ is open in $M$ by (1), because $\pi$ is a continuous map. If $\pi^{-1}(U)$ is open in $M$, then $U$ is open in $\faktor{M}{\sim}$ because in $(1)$ we have defined the topology on $\faktor{M}{\sim}$ as the \textit{largest} topology such that $\pi$ is continuous!
 \item "$(2) \Rightarrow (1)$: $\pi$ is obviously continuous. And the topology we get is the \textit{largest} one such that $\pi$ is continuous because if $\pi^{-1}(U)$ is not open in $M$, then $U$ is not open in the quotient space (read also below).
 \end{itemize}
-\textbf{Note that}: $f\colon X \rightarrow Y$ is continuous if the preimage of every open set of $Y$ is an open set of $X$. But if $A$ is an open set in $X$, in general it is not true that there exists an open set $U$ in $Y$ such that $A = f^{-1}(U)$. It is true when we consider the largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous, like in case $"(1) \Rightarrow (2)"$ above. The "largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous" means that the topology on $Y$ has the same open sets of the "power set topology" (i.e. every set is open, cf. remark \ref{topexamples}) except for some sets. Which sets are excluded? Let's consider the following reasoning. We were considering the "largest" topology on $Y$ such that "$f\colon X \rightarrow Y$ is continuous". In order to have the continuity assumption hold true, we need: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. Which is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of any set and we notice that such preimage is not open, than the set itself cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
+\textbf{Note that}: The "largest topology on $Y$ such that $f\colon X \rightarrow Y$ is continuous" means that the topology on $Y$ contains all subsets of $Y$ (cf. power set topology, remark \ref{topexamples}) except for the sets that cannot be open because of the continuity assumption. Indeed, the continuity assumption says: $U$ open in $Y \Rightarrow f^{-1}(U)$ open in $X$. This is equivalent to: $f^{-1}(U)$ \textbf{not} open in $X \Rightarrow U$ \textbf{not} open in $Y$. So if we take the preimage of a set $U$ and we notice that such a preimage is not an open set, then $U$ cannot be open in $Y$: it has to be removed from the topology we are considering on $Y$.
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}\begin{example}[Cofinite topology]
@@ -618,7 +616,7 @@ Such topological invariants are also useful in order to verify if two topologica
 
 \begin{definition}[Derivation] \label{derivation}
 If $a$ is a point of $\rfield^n$, a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$ is called a \textit{derivation at a} if it is linear over $\rfield$ and satisfies the following product rule:
-$$\restrict{v(fg)}{a} = \restrict{f}{a} \restrict{v(g)}{a} + \restrict{g}{a} \restrict{v(f)}{a} \, .$$
+$$\restrict{v(fg)}{a} = f(a) \restrict{v(g)}{a} + g(a) \restrict{v(f)}{a} \, .$$
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
@@ -626,7 +624,7 @@ Directional derivatives obviously satisfy the above definition, and in these cas
 \end{remark}\end{remarkbox}
 
 \begin{definition}[1-forms]
-Given a  vector space $V$ on a field $\mathbb{K}$, a 1-form (or linear form) $\varphi \colon V \rightarrow \mathbb{K}$ is a linear function from $V$ to $\mathbb{K}$. $V^*$ (also denoted by $\Lambda V^*$) is the set of all linear forms on $V$.
+Given a  vector space $V$ on a field $\mathbb{K}$, a 1-form (or linear form) $\varphi \colon V \rightarrow \mathbb{K}$ is a linear function from $V$ to $\mathbb{K}$. $V^*$ (also denoted by $\Lambda V^*$) is the set of all linear forms on $V$ and is called the dual space.
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
@@ -684,7 +682,7 @@ We could prove that the dual basis is indeed a basis of the dual space, so $\dim
 \end{matrix}
   \right)$$
   and a dual basis is given by $e^{*i}(e_j) = \frac{1}{2} \tr(e_i, e_j)$ (using the matrix product).
-  \item Quantum Mechanics: $$V = \{ f \colon \rfield^3 \rightarrow \rfield \, | \, ||f|| = \int_{\rfield^3} |f|^2 d^3x < \infty \} = L^2(\rfield^3)$$ is a vector space. If we consider the Laplacian operator $\Delta = \frac{\partial^2}{(\partial x^1)^2} + \frac{\partial^2}{(\partial x^2)^2} + \frac{\partial^2}{(\partial x^3)^2}$, then a basis is given by $\{e_n\} = \{\frac{f_n}{||f_n||}\}$, where $f_n$ eigenfunctions of $\Delta$: $\Delta f_n = \lambda_n fn$.
+  \item Quantum Mechanics: $$V = \{ f \colon \rfield^3 \rightarrow \rfield \, | \, ||f|| = \int_{\rfield^3} |f|^2 d^3x < \infty \} = L^2(\rfield^3)$$ is a vector space. If we consider the Laplacian operator $\Delta = \frac{\partial^2}{(\partial x^1)^2} + \frac{\partial^2}{(\partial x^2)^2} + \frac{\partial^2}{(\partial x^3)^2}$, then a basis is given by $\{e_n\} = \{\frac{f_n}{||f_n||}\}$, where $f_n$ eigenfunctions of $\Delta$: $\Delta f_n = \lambda_n fn$ (if we choose appropriate boundary conditions).
   A dual basis is given by $e^{*n} = \int_{\rfield^3} e_n$
   Notice that both $V$ and $V^*$ are infinite-dimensional spaces.
   Some notations:
@@ -709,7 +707,7 @@ In particular, if $\Der(\rfield^n) = \{ \text{derivations on }\rfield^n\}$ $ = \
 \begin{equation}
    \rfield^n \overset{\psi}{\longleftrightarrow}\Der(\rfield^n)
 \end{equation}
-such that $\psi(e_j) = \restrict{\partial_{x_j}}{p=0}, \forall \, e_j$ basis vector, and with $\restrict{\partial_{x_j}}{p=0}$ partial derivative with respect to the $j$-th component, defines a linear map. Indeed, it is linear because of linearity of derivations, and since we defined its behaviour on the basis vectors, it is also defined for every vector of $\rfield^n$. In general we have $\psi(v)=\restrict{\partial_{v}}{p=0}$, where $\restrict{\partial_v}{p=0}$ is the directional derivative with respect to $v$. Moreover, $\Der(\rfield^n)$ is a vector space and we used the double arrow above because $\psi$ is an isomorphism, i.e. a bijective map which preserves operations from one space to the other. Here every derivative is evaluated at $p=0$. We notice that the point $p$ itself is not important for the directional derivative (the \textit{direction} in which we differentiate is the same for every point of the space), but $p$ is meaningful when we \textit{evaluate} the derivative of the function at that point. Indeed, $\restrict{\partial_x (x^2)}{x=0} \not = \restrict{\partial_x (x^2)}{x=1}$, even if we are differentiating along the $x$-axis in both cases.
+such that $\psi(e_j) = \restrict{\partial_{x_j}}{p=0}, \forall \, e_j$ basis vector, and with $\restrict{\partial_{x_j}}{p=0}$ partial derivative with respect to the $j$-th component, defines a linear map. You can read more on page 53 of \citetalias{Lee}. In general we have $\psi(v)=\restrict{\partial_{v}}{p=0}$, where $\restrict{\partial_v}{p=0}$ is the directional derivative with respect to $v$. Moreover, $\Der(\rfield^n)$ is a vector space and we used the double arrow above because $\psi$ is an isomorphism, i.e. a bijective map which preserves operations from one space to the other. Here every derivative is evaluated at $p=0$. We notice that the point $p$ itself is not important for the directional derivative (the \textit{direction} in which we differentiate is the same for every point of the space), but $p$ is meaningful when we \textit{evaluate} the derivative of the function at that point. Indeed, $\restrict{\partial_x (x^2)}{x=0} \not = \restrict{\partial_x (x^2)}{x=1}$, even if we are differentiating along the $x$-axis in both cases.
 \end{enumerate}
 
 
@@ -1503,10 +1501,13 @@ $ $
 \item We have:
 $$\restrict{\frac{d}{ds}}{s=0} \,  \varphi^{-1} \circ \psi_s \circ \varphi (p) \overset{(1)}{=} \varphi^{-1}_* (v_{\varphi(p)}) \overset{(2)}{=} (\varphi_*^{-1} v)_p \overset{(3)}{=} (\varphi^* v)_p$$
 where we used: (1) the definition of flow for the flow $\varphi^{-1}$ of the vector field $u$ and the fact that $\psi_s$ is the flow of $v$. And we applied the definitions to the point $\varphi(p)$ instead of $p$ as usual. (2) $(F_*X)_q = dF_{F^{-1}(q)}(X_{F^{-1}(q)})$, see also page 183 \citetalias{Lee}, (3) $\varphi_*^{-1} = \varphi^*$ by definition.
-\item We have: $$\frac{d}{ds} (\varphi \circ \psi_s)(p) = \varphi_* v_{\psi_s(p)} = (\varphi_* v)_{(\varphi \circ \psi_s(p))}$$
-and so, in a similar way:
-$$\frac{d}{ds}(\psi_s \circ \varphi) = v_{\psi_s \circ \varphi} = \frac{d}{ds} (\varphi \circ \psi_s) + O(s)$$
-where in the last step we Taylor-expanded with respect to $s$, using the fact that for $s=0$ we have $\psi_0 = \mathbb{1}$, so the thesis is verified. Then we can proceed in the same way for each order of the expansion.
+\item ($\Leftarrow$): if $\varphi \circ \psi_s = \psi_s \circ \varphi$ then, by using the previous point:
+\[ \varphi^* v = \restrict{\deonde{s}}{s=0} \varphi^{-1} \circ \psi_s \circ \varphi = \restrict{\deonde{s}}{s=0} \psi_s = v \, . \]
+($\Rightarrow$): if $\varphi^* v = v$, we use the previous point again:
+\[ \restrict{\deonde{s}}{s=0} \psi_s = v = \restrict{\deonde{s}}{s=0} \varphi^{-1} \circ \psi_s \circ \varphi \, . \]
+Now, the solution of such differential equation is unique because of the regularity assumptions on the flows. Then:
+\[ \psi_s = \varphi^{-1} \circ \psi_s \circ \varphi \]
+which implies the thesis.
 \item $(\Leftarrow)$: follows from the previous point, and using the definition of Lie derivative for a vector field. $(\Rightarrow)$:
 $$\frac{d}{dt} \phi_t^* v = \restrict{\frac{d}{d\varepsilon}}{\varepsilon=0} \phi^*_{t + \varepsilon} v \overset{(1)}{=} \phi_t^* \restrict{\frac{d}{d \varepsilon}}{\varepsilon=0} \phi^*_{\varepsilon} v = \phi_t^* L_u v = 0, \forall \, t$$
 where in (1) we used that $\phi^*_{t + \varepsilon} = \phi_t^* \circ \phi^*_{\varepsilon}$.
@@ -2452,7 +2453,7 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
   \end{equation*}
   we can consider
   \begin{equation*}
-    h(x) = 1 - \frac{a(x)}{a(x) + a(1-x)} \, .
+    g(x) = 1 - \frac{a(x)}{a(x) + a(1-x)} \, .
   \end{equation*}
   \begin{figure}[H]
   \centering
@@ -2464,10 +2465,10 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
   \begin{subfigure}{.5\textwidth}
     \centering
     \includegraphics[width=.9\linewidth]{Images/cutoff_2}
-    \caption{$h(x)$}
+    \caption{$g(x)$}
   \end{subfigure}
   \end{figure}
-  Then we use the function
+  Then we use the function 
   \begin{equation*}
     h_{\epsilon}(x) \equiv h \left (\frac{x}{\epsilon} \right) =
     \begin{cases*}

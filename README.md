@@ -10,6 +10,10 @@ Missing parts:
 
 Last changes:
 
+17-09-20:
+- more mistakes corrected in the first 7 sections,
+- proof of lemma 12.3, second part (commuting flows) corrected.
+
 14-09-20:
 - Image of definition 16.2 (submanifold - locally flat) updated.
 
