@@ -807,7 +807,7 @@ We also notice that the mathematical object $e_i$ is not much different from $\r
 \section[Exterior Product and Generalisation]{\crule[red!50!white]{0.3cm}{0.4cm}  Exterior Product and Generalisation}
 
 \begin{definition} [Exterior form of degree $k$]
-Given a vector space $V$ on a field $\mathbb{K}$, with $\dim(V) = n$, and with $k \le n$, an \textit{exterior form of degree $k$} (or $k$-linear form, or $k$-form) is a map $\omega$:
+Given a vector space $V$ on a field $\mathbb{K}$, with $\dim(V) = n$, and with $k \le n$, an \textit{exterior form of degree $k$} (or $k$-linear form, or $k$-form) is a multi-$\mathbb{K}$-linear map
 \begin{equation*}
 \omega \colon \underbrace{V \times \ldots \times V}_{\text{k times}} \rightarrow \mathbb{K}
 \end{equation*}
@@ -815,7 +815,7 @@ such that
 \begin{equation}
 \omega(v_1, \ldots, v_k) = \sgn(\pi)\,\omega(v_{\pi(1)}, \ldots, v_{\pi(k)})
 \end{equation}
-and such that $\omega$ is multilinear. Where $\pi$ is a permutation of $k$ elements, i.e. $\pi \in S_k$, and $\sgn(\pi)$ is the sign of the permutation.
+for all permutations $\pi$ of $k$ elements, i.e. $\pi \in S_k$, where $\sgn(\pi)$ is the sign of the permutation.
 We will also write $\omega \in \Lambda ^k V^*$.
 \end{definition}
 
@@ -873,19 +873,17 @@ and we can use that $dx^i(e_j) = \delta^i_j$. For instance, we can verify that t
 \begin{proof}[Proof]
 In the statement we implicitly assumed that the elements of $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}$ are defined as usual, for instance $e^{*i_1}(e_{j_1}) = \delta^{i_1}_{j_1}$. In order to prove that it is a basis, we need to prove that the elements of the basis are linearly independent and that they span the entire space.
 \begin{itemize}
-\item Linear independence: If
-$$0 = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} (e^{*i_1} \wedge \ldots \wedge e^{*i_k})(e_{j_1}, \ldots, e_{j_k}), \quad \forall \, (e_{j_1}, \ldots, e_{j_k})$$
-then $a_{i_1 \cdots i_k} = 0, \forall\, i_1, \ldots, i_k$. Indeed, if it is true $\forall \, (e_{j_1}, \ldots, e_{j_k})$, then we can choose $e_{j_1}, \ldots, e_{j_k}$ such that $a_{i_1 \cdots i_k} = 0, \forall\, i_1, \ldots, i_k$. e.g.:
+\item Linear independence: We have to show that
+$$0 = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} e^{*i_1} \wedge \ldots \wedge e^{*i_k}$$
+implies $a_{i_1 \cdots i_k} = 0, \forall\, i_1, \ldots, i_k$. Indeed, if we apply $(e_{j_1}, \ldots, e_{j_k})$ on the above equation, we obtain
 \begin{align*}
-0 &= a_{i_1 \cdots i_k} \underbrace{(e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (e_{i_1}, \ldots, e_{i_k})}_{= 1} + \\
+0 &= a_{j_1 \cdots j_k} \underbrace{(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{j_1}, \ldots, e_{j_k})}_{= 1} + \\
 & + \sum\limits_{\substack{j_1 < \ldots < j_k \\
-j_1 \not = i_1, j_2 \not = i_2, \ldots}} a_{j_1 \cdots j_k} \underbrace{(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k})}_{= 0} = a_{i_1 \cdots i_k} \, .
+i_1 \not = j_1, i_2 \not = j_2, \ldots}} a_{i_1 \cdots i_k} \underbrace{(e^{*i_1} \wedge \ldots \wedge e^{*j_k}) (e_{j_1}, \ldots, e_{i_k})}_{= 0} = a_{j_1 \cdots j_k} \, .
 \end{align*}
-The second term is zero because $(e^{*j_1} \wedge \ldots \wedge e^{*j_k}) (e_{i_1}, \ldots, e_{i_k}) = \det \left (e^{*j_l} (e_{i_m}) \right)$. Indeed, the matrix $e^{*j_l} (e_{i_m})$ has null coefficients on the main diagonal (because $j_1 \not = i_1, j_2 \not = i_2, \ldots$) and one of the rows must be 0 because of  the ordering $j_1 < \ldots < j_k$ and $i_1 < \ldots < i_k$ (e.g. consider the case $j_2 = i_1, \ldots$). Thus, the determinant is 0.
-Therefore, $a_{i_1 \cdots i_k} = 0$.
-So, we proved the linear independence in case we consider the basis vectors $e_{j_1}, \ldots, e_{j_k}$. Because of multilinearity, the result holds for all vectors
- $(x_1, \ldots, x_k)$ as well.
-\item Completeness: given $\psi \in \Lambda^k V^*$, we want to prove that there exists a coefficient $a_{i_1 \cdots i_k}$ such that $\psi = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} (e^{*i_1} \wedge \ldots \wedge e^{*i_k})$, i.e. we want to prove that we can write any element of $\Lambda^k V^*$ as a linear combination of elements of $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}$. Let's consider $(v_1, \ldots v_k) \in V \times \ldots \times V$. Then:
+The second term is zero because $(e^{*i_1} \wedge \ldots \wedge e^{*i_k}) (e_{j_1}, \ldots, e_{j_k}) = \det \left (e^{*i_l} (e_{j_m}) \right)$. Indeed, the matrix $e^{*i_l} (e_{j_m})$ has null coefficients on the main diagonal (because $j_1 \not = i_1, j_2 \not = i_2, \ldots$) and one of the rows must be 0 because of  the ordering $j_1 < \ldots < j_k$ and $i_1 < \ldots < i_k$ (e.g. consider the case $j_2 = i_1, \ldots$). Thus, the determinant is 0.
+Therefore, $a_{j_1 \cdots j_k} = 0$ and the indices $j_1, \ldots, j_k$ were chosen arbitrarily.
+\item Completeness: Given $\psi \in \Lambda^k V^*$, we want to prove that there exists a coefficient $a_{i_1 \cdots i_k}$ such that $\psi = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} (e^{*i_1} \wedge \ldots \wedge e^{*i_k})$, i.e. we want to prove that we can write any element of $\Lambda^k V^*$ as a linear combination of elements of $\{e^{*i_1} \wedge \ldots \wedge e^{*i_k}\}$. Let's consider $(v_1, \ldots v_k) \in V \times \ldots \times V$. Then:
 \begin{align*}
 \psi(v_1, \ldots, v_k) &\overset{(1)}{=} \sum\limits_{i_1 = 1}^k \sum\limits_{i_2 = 1}^k \ldots \sum\limits_{i_k = 1}^k x_{i_1} \cdot \ldots \cdot x_{i_k} \psi(e_{i_1}, \ldots, e_{i_k}) \overset{(2)}{=} \\
 &= \sum\limits_{i_1 < \ldots < i_k} x_{i_1} \cdot \ldots \cdot x_{i_k} \psi(e_{i_1}, \ldots, e_{i_k}) \overset{(3)}{=} \\
@@ -922,7 +920,7 @@ Now, we want to define the exterior product between a $k$-form and a $p$-form (a
 \begin{tcolorbox}\begin{example}[Oriented area] \label{orarea}
   Let's consider the following examples:
   \begin{enumerate}
-    \item Let's suppose our space is $V = \rfield^3 \times \rfield^3$ with cartesian coordinates.
+    \item Let's suppose our space is $V = \rfield^4$ with cartesian coordinates.
     $$\varphi \equiv dx^1 \wedge dx^2 + dx^2 \wedge dx^4$$
     where $\varphi$ is a sum of two 2-forms. They are 2-forms (and not 1-forms, nor 3-forms, nor 4-forms, ...) because they are written as wedge product ("$\wedge$") of \textbf{two} elements of the dual basis. Remember that we denote the elements of the dual basis either by $e^{*i}$ or $dx^i$ for some $i$.
     Let's compute $\varphi(e_i, e_j)$. We can use the determinant formula \eqref{detformula}:
@@ -982,14 +980,14 @@ Another (equivalent) definition:
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-  To show the equivalence of the two definition of differential $k$-forms we just need to show that:
+  To show the equivalence of the two definitions of differential $k$-forms we just need to show that:
   \begin{equation}
     \omega(p)(v_1, \ldots, v_k) = \omega(v_1, \ldots, v_k)(p) \, .
   \end{equation}
   See also the exercise 1, problem sheet 3.
 \end{remark}\end{remarkbox}
 
-We want to generalize the concept of differential of a function.
+We want to generalize the concept of a differential of a function.
 \begin{definition}[Differential] \label{differential}
   Let $f$ be a function $f \colon U \subseteq \rfield^n \rightarrow \rfield$, $f$ differentiable. Let $v \in \mathfrak{X}(\rfield^n) = \Der \mathbb{F}(\rfield^n)$. The exterior derivative of $f$ is its differential $d$, defined as a 1-form such that:
   \begin{equation}
@@ -1071,12 +1069,12 @@ with $d a_{j_1, \ldots, j_k}$ differential of the function $a_{j_1, \ldots, j_k}
     $$\omega = dx^1 \wedge dx^2 + x^2 dx^1 \wedge dx^3\, .$$
     Then:
     $$d \omega = dx^2 \wedge dx^1 \wedge dx^3$$
-    where we used that "$d (dx^1 \wedge dx^2) = 0$" because there is no 3-form on a 2-dimensional space. (otherwise, we can use that $d^2=0$, but we still have to prove it!)
-    \item In $\rfield^n$, let's consider:
+    where we used that "$d (dx^1 \wedge dx^2) = 0$" because there is no non-zero 3-form on a 2-dimensional space. (otherwise, we can use that $d^2=0$, but we still have to prove it!)
+    \item In $\rfield^n, n \ge 2$, let's consider:
     $$\omega = x^2 dx^1 \, .$$
     We have:
     $$ d \omega = dx^2 \wedge dx^1$$
-    where we used the definition \ref{extder}. Moreover, if $u,v \in \mathfrak{\rfield^n}$, then by definition of exterior product we have:
+    where we used the definition \ref{extder}. Moreover, if $u,v$ are vector fields, then by definition of exterior product we have:
     $$d \omega (u, v) = dx^2(u)dx^1(v) - dx^2(v)dx^1(u)\, .$$
     On the other hand, using that $d g(v) = v(g)$ for a function $g$ and a vector field $v$, we have:
     \begin{align*}
@@ -1157,7 +1155,7 @@ Now some properties for interior derivatives.
 \begin{proof}[Sketch of the proof]
 $ $
 \begin{itemize}
-\item First, we assume $k+p \le n$, otherwise $\omega \wedge \eta$ would be 0. Then, let's consider a basis $\mathcal{B} = \{e_1, \ldots, e_n\}$ in $\rfield^n$ which is positively oriented (i.e. if $A$ is the matrix that we use to change coordinates from the canonical basis to $\mathcal{B}$, we have $\det A > 0$). Let's choose $\mathcal{B}$ such that the vector field $e_1$ is the tangent vector to the vector field $z$ in one point (we will make a pointwise reasoning). Moreover, $\{dx^l\}_{l=1}^n$ is the dual basis with respect to the canonical basis, and $\{e^{*l}\}_{l=1}^n$ is the dual basis with respect to $\mathcal{B}$. We have
+\item First, we assume $k+p \le n$, otherwise both sides of the equation are $0$ and we would be already done. Then, let's consider a basis $\mathcal{B} = \{e_1, \ldots, e_n\}$ in $\rfield^n$ which is positively oriented (i.e. if $A$ is the matrix that we use to change coordinates from the canonical basis to $\mathcal{B}$, we have $\det A > 0$). Let's choose $\mathcal{B}$ such that the vector field $e_1$ is the tangent vector to the vector field $z$ in one point (we will make a pointwise reasoning). Moreover, $\{dx^l\}_{l=1}^n$ is the dual basis with respect to the canonical basis, and $\{e^{*l}\}_{l=1}^n$ is the dual basis with respect to $\mathcal{B}$. We have
 $$\omega = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k}$$
 and
 $$\omega \wedge \eta = \sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p }} a_{i_1 \cdots i_k} b_{j_1 \cdots j_p} dx^{i_1} \wedge \ldots \wedge dx^{i_k} \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_p} \, .$$
@@ -1169,7 +1167,7 @@ Then either:
 \end{enumerate}
 So, $i_z (\omega \wedge \eta) = (\omega \wedge \eta)(z, \ldots)$ is either equal to:
 \begin{enumerate}
-\item $\sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p }} a_{i_1 \cdots i_k} b_{j_1 \cdots j_p} i_z \left( dx^{i_1} \wedge \ldots \wedge dx^{i_k} \right ) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_p}$, because the only non-zero term comes from $i_z(e^{*1}) = e^{*1}(z) = e^{*1}(e_1) = 1$ (locally), and we know that the non-zero term must be hidden in the first $k$ wedge products, or
+\item $\sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p }} a_{i_1 \cdots i_k} b_{j_1 \cdots j_p} i_z \left( dx^{i_1} \wedge \ldots \wedge dx^{i_k} \right ) \wedge dx^{j_1} \wedge \ldots \wedge dx^{j_p}$, because the only non-zero term comes from $i_z(e^{*1}) = e^{*1}(z) = z_1 e^{*1}(e_1) = z_1$ (locally), and we know that the non-zero term must be hidden in the first $k$ wedge products, or
 \item $\sum\limits_{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_p }} (-1)^k a_{i_1 \cdots i_k} b_{j_1 \cdots j_p}  dx^{i_1} \wedge \ldots \wedge dx^{i_k}  \wedge i_z \left( dx^{j_1} \wedge \ldots \wedge dx^{j_p} \right)$ , for the same reason above, and we have the factor $(-1)^k$ because we moved the interior derivative $k$ times (it is like moving an entry of a $(k+p)$-form $k$ times), or
 \item 0.
 \end{enumerate}
@@ -1207,7 +1205,7 @@ Now, let's talk about \textit{pullbacks} and \textit{pushforwards} for functions
   \end{align*}
   such that
   \begin{equation*}
-    (f^* \omega)(p) (u_1, \ldots, u_k) = \omega (f(p)) (df(u_1), \ldots, df(u_k)), \quad \forall\, \, p \in \rfield^n, \forall \,\, u_i \in \mathfrak{X}(U) \, .
+    (f^* \omega)(p) (u_1, \ldots, u_k) = \omega (f(p)) (df_p(u_1), \ldots, df_p(u_k)), \quad \forall\, \, p \in \rfield^n, \forall \,\, u_i \in \mathfrak{X}(U) \, .
   \end{equation*}
 \end{definition}
 
@@ -1223,9 +1221,10 @@ Now, we want to give another name to the differential of a function.
 
 \begin{remarkbox}\begin{remark}[Pushforward of composition of functions] \label{pushfcomposition}
 In our mind, we'll think of the pushforward as the differential of a map: $df_p = (f_*)_p$, at least until this concept is generalized.
-By definition of differential: $df_p(v) = v(f)$, where $v$ is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v(f)$ is the directional derivative of $f$ with respect to $v$ (not evaluated at any point, for now!). In particular, if we apply the definition to a point $h(q)$, where $h \in C^{\infty}(\rfield^n, \rfield^m)$ and $q \in \rfield^n$, we have (cf. also pag. 55 Lee \citetalias{Lee}):
-$$\restrict{(f_*)_p (v)(h)}{q} \overset{(1)}{=} \restrict{v(h \circ f)}{q}  = \restrict{v(h(f))}{q} \overset{(2)}{=} \restrict{v (f^* h) }{q}$$
-where we used: (1) $(f_*)_p (v)(h)  = v(h \circ f)$, it can be proved that it is the right expression in a similar way to what we did to prove that $(f_*)_p (v)= v(f)$ is the right expression (cf. remark \ref{diffcoordremark}), (2) the expression of the pullback for a differentiable function, which is completely legal since we defined it for differentiable $k$-forms, and a differentiable function is just a 0-form.
+By definition of differential: $df_p(v) = v_p(f)$, where $v_p$ %p's added (and below)
+is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v_p(f)$ is the directional derivative of $f$ with respect to $v_p$ (not evaluated at any point, for now!). In particular, if we apply the definition to function $h \in C^{\infty}(\rfield^n, \rfield^m)$, we have (cf. also p. 55 \citetalias{Lee}): 
+$$(f_*)_p (v)(h) \overset{(1)}{=} v(h \circ f) = v(h(f)) \overset{(2)}{=} v (f^* h) $$
+where we used: (1) $(f_*)_p (v)(h)  = v_p(h \circ f)$, it can be proved that it is the right expression in a similar way to what we did to prove that $(f_*)_p (v)= v_p(f)$ is the right expression (cf. remark \ref{diffcoordremark}), (2) the expression of the pullback for a differentiable function, which is completely legal since we defined it for differentiable $k$-forms, and a differentiable function is just a 0-form.
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark}
@@ -1252,8 +1251,8 @@ Now, some properties of the pullback.
 $ $
 \begin{enumerate}
 \item \begin{align*}
-f^*(\omega + \varphi) &= (\omega + \varphi)(f(p)) (f_*(u_1), \ldots, f_*(u_k)) =\\
-& = \omega(f(p)) (f_*(u_1), \ldots, f_*(u_k)) + \varphi(f(p)) (f_*(u_1), \ldots, f_*(u_k)) = \\
+f^*(\omega + \varphi) &= (\omega + \varphi) (f_*(u_1), \ldots, f_*(u_k)) =\\
+& = \omega (f_*(u_1), \ldots, f_*(u_k)) + \varphi (f_*(u_1), \ldots, f_*(u_k)) = \\
 &=  f^*(\omega) + f^*(\varphi) \, .
 \end{align*}
 \item $f^*(h \omega) (z_1, \ldots, z_k)(p) = h(f(p))\, \omega (f_* z_1, \ldots, f_* z_k) (f(p)) = f^*(h)f^*(\omega)$.
@@ -1553,14 +1552,14 @@ The property (5) of lemma \ref{commlemma} is called the \textbf{naturality} of t
 \begin{itemize}
   \item For a function $f$ (i.e. a 0-form) on $[a, b] \subset \rfield$ we have $\int_a^b df = \int_a^b \partial_x f dx = f(b) - f(a)$ (fundamental theorem of calculus).
   \item for $\omega = a_i dx^i$, a 1-form on $U = [0, 1] \times [0, 1] \subset \rfield^2$ we have:
-  $$\int_S d\omega = \int_S (\partial_{x^1} a_2) dx^1 \wedge dx^2 + (\partial_{x^2} a_1) dx^2 \wedge dx^1 = \int_{\partial S} \omega$$
+  $$\int_U d\omega = \int_U (\partial_{x^1} a_2) dx^1 \wedge dx^2 + (\partial_{x^2} a_1) dx^2 \wedge dx^1 = \int_{\partial U} \omega$$
   where we used the fundamental theorem of calculus.
-  \item More generally, if $S$ is a compact subset of $\rfield^2$ with piecewise regular boundary $\partial S$ (piecewise homeomorphic to intervals in $\rfield$) then, by decomposing $S$ in terms of little squares and interpreting $\int_U d\omega$ as a Riemann sum over the square, we obtain the result
+  \item More generally, if $U$ is a compact subset of $\rfield^2$ with piecewise regular boundary $\partial U$ (piecewise homeomorphic to intervals in $\rfield$) then, by decomposing $S$ in terms of little squares and interpreting $\int_U d\omega$ as a Riemann sum over the square, we obtain the result
   $$\int_U d\omega = \int_{\partial U} \omega \, .$$
   This result generalizes immediately to compact co-dimension zero subsets of $\rfield^n$ with piecewise regulary boundary.
   \item If $M$ is a compact subset of dimension $m \le n$ in $\rfield^n$ (with piecewise regular boundary $\partial M$), diffeomorphic to a compact subset of $U \subset \rfield^m$ (i.e. $M = f(U)$) and $\omega \in \Omega^{m-1}(M)$, then:
   $$\int_M d\omega = \int_U f^* d\omega = \int_U df^* \omega = \int_{\partial U} f^* \omega = \int_{\partial M} \omega \, .$$
-  \item More generally, the parametrization of $\partial M$ may be different from that induced by $M$. Then we have:
+  \item More generally, the parametrization of $\partial M$ may be different from the one induced by $M$. Then we have:
   $$\int_M d\omega = \int_{\partial M} i^* \omega$$
   where $i \colon \partial M \rightarrow M$ is the inclusion map of $\partial M$ into $M$.
 \end{itemize}
@@ -1568,7 +1567,7 @@ The property (5) of lemma \ref{commlemma} is called the \textbf{naturality} of t
 So, the most general result that we achieved is the following:
 
 \begin{theorem}[Stokes]
-  Let $\omega \in \Omega^{m-1}(\rfield^n)$. Let $M$ be a compact subset of $\rfield^n$, $dim(M) = m \le n$, such that $M$ is homeomorphic to a closed subset $U \subset \rfield^m$. $\partial M$ is the boundary of $M$ and $i \colon \partial M \rightarrow M$ is the inclusion map of $\partial M$ into $M$. Then:
+  Let $\omega \in \Omega^{m-1}(\rfield^n)$. Let $M$ be a compact subset of $\rfield^n$, $\dim(M) = m \le n$, such that $M$ is homeomorphic to a closed subset $U \subset \rfield^m$. $\partial M$ is the boundary of $M$ and $i \colon \partial M \rightarrow M$ is the inclusion map of $\partial M$ into $M$. Then:
   \begin{equation}
     \int_{\partial M} i^* \omega = \int_M d\omega \, .
   \end{equation}
@@ -1582,7 +1581,7 @@ Then, the proof uses the naturality of the pullback "$f^*d = df^*$" and the resu
   Let $f$ be a smooth function defined near an oriented curve $C$ in $\rfield^n$, with endpoints $A$ and $B$.
   Then:
   \begin{equation}
-    \int \nabla f \cdot dx = f(B)-f(A) \, . % TODO: add parametrization
+    \int_C \nabla f \cdot dx = f(B)-f(A) \, . % TODO: add parametrization
   \end{equation}
 \end{corollary}
 \begin{proof}
@@ -1655,13 +1654,13 @@ where we used $\int \omega = \int a_i \frac{dx^i}{dt} dt$ and the fact that ever
 \end{proof}
 
 \begin{remarkbox}\begin{remark}[A closed form is not always exact]
-  If $\omega$ is exact, then it is closed (because $d^2=0$). But not every closed form in $\Omega^1(U), U$ open subset of $\rfield^n$ is exact. Cf. $\omega = - \frac{y}{x^2 + y^2} dx + \frac{x}{x^2+y^2}dy$ in $\rfield^2$ minus the non-negative $x$-axis. If $\gamma$ is a closed curve around the origin of $\rfield^2$, we have:
+  If $\omega$ is exact, then it is closed (because $d^2=0$). But not every closed form in $\Omega^1(U), U$ open subset of $\rfield^n$ is exact. Cf. $\omega = - \frac{y}{x^2 + y^2} dx + \frac{x}{x^2+y^2}dy$ in $\rfield^2$ minus the origin. If $\gamma$ is a closed curve around the origin of $\rfield^2$, we have:
   $$\int_{\gamma} \omega = \int_{\gamma} d\theta = 2\pi$$
   and therefore $\omega$ cannot be exact by the previous proposition. However, we notice that we have problems only with the origin of $\rfield^2$. If we consider a subset of $\rfield^2$ which is far enough from the origin, the form would be an exact form in such subset. Indeed, we say that $\omega$ is locally exact, and the general result follows from the next theorem.
 \end{remark}\end{remarkbox}
 
 \begin{theorem}[Poincarè theorem for 1-forms on $\rfield^n$]
-  Let $\omega \in \Omega^1(U), U \subset \rfield^n, U$ open. Then $d\omega = 0$ if and only if for each $p \in U$ there is a neighbourhood $V \subset U$ of $p$ and a differentiable function $f \colon V \rightarrow \rfield$ such that $\omega = df$.
+  Let $\omega \in \Omega^1(U), U \subset \rfield^n, U$ open. Then $d\omega = 0$ if and only if for each $p \in U$ there is a neighbourhood $V \subset U$ of $p$ and a differentiable function $f \colon V \rightarrow \rfield$ such that $\omega = df$, i.e. $\omega$ is closed if and only if $\omega$ is locally exact.
 \end{theorem}
 
 \begin{remarkbox}\begin{remark}
@@ -1703,8 +1702,7 @@ $$H(p, t) = p_0 + t(p- p_0) \, .$$
   Conversely, we can associate a $k$-form $\omega \in \Omega^k(U)$ to each $\bar \omega \in \Omega^k(U \times \rfield)$ with the help of the inclusion map
   \begin{align}
     i_t \colon U &\rightarrow U \times \rfield \\
-    p &\mapsto i_t(p) = (p,t)\nonumber
-  \end{align}
+    p &\mapsto i_t(p) = (p,t)\nonumber  \end{align}
   Then, $i_t^* \bar \omega \in \Omega^k(U)$ if $\bar \omega \in \Omega^k(U \times \rfield)$.
  \end{remark}\end{remarkbox}
 
@@ -1718,9 +1716,9 @@ $$H(p, t) = p_0 + t(p- p_0) \, .$$
 
 
 \begin{proof}
-  Let's choose coordinates $\{x^1, \ldots, x^n, t\}$ for $U \times \rfield$. Then we write $\bar \omega$ on the basis:
+  Let's choose coordinates $\{x^1, \ldots, x^n, t\}$ for $U \times \rfield$. Then we write $\bar \omega$ in the basis:
   $$\bar \omega = \sum\limits_{i_1 < \ldots < i_k} a_{i_1 \cdots i_k} dx^{i_1} \wedge \ldots \wedge dx^{i_k} + \sum_{i_1 < \ldots < i_{k-1}} b_{i_1 \ldots i_{k-1}} dt \wedge dx^{i_1} \wedge \ldots \wedge dx^{i_{k-1}} \, .$$
-  (We can always do this, the coefficients could also be trivial). Obviously, we have $i_{\partial_t} \omega_1 = 0$ and $i_{\partial_t} \eta = 0$ by definition of dual basis: $dx^{j} (\partial_t) = 0, \forall \, j$, $dt(\partial_t) = 1$.
+  (We can always do this, the coefficients could also be trivial). We set $\omega_1$ to be the first and $dt \wedge \eta$ to be the second summand. Obviously, we have $i_{\partial_t} \omega_1 = 0$ and $i_{\partial_t} \eta = 0$ by the definition of the dual basis: $dx^{j} (\partial_t) = 0, \forall \, j$, $dt(\partial_t) = 1$. This decomposition is unique since it is independent of the coordinates chosen on $U$.
 \end{proof}
 
 \begin{remarkbox} \begin{remark} \label{intremark}
@@ -1730,7 +1728,7 @@ Let's define the map
     I \colon \Omega^k(U \times \rfield) &\rightarrow \Omega^{k-1}(U) \\
     \eta &\mapsto I\eta \nonumber
   \end{align}
-  such that $$(I\eta)(z_1, \ldots, z_{k-1}) = \int_0^1 \eta(p, t)(\partial_t, i_{t}^*z_1, \ldots, i_{t}^*z_{k-1})dt$$
+  such that $$(I\eta)_p(z_1, \ldots, z_{k-1}) = \int_0^1 \eta(p, t)(\partial_t, i_{t}^*z_1, \ldots, i_{t}^*z_{k-1})dt$$
 where we used the inclusion map:
   \begin{align} \label{definclusion}
     i_t \colon U &\rightarrow U \times \rfield \\
@@ -1751,7 +1749,7 @@ The following holds:
   %$$\omega = (H \circ i_1)^* \omega = i_1^* \bar \omega$$
   %and
   %$$0 = (H \circ i_0)^* \omega = i_0^* \bar \omega$$
-  Let's consider $p \in U$ with coordinates $x^1, \ldots, x^n$. Since everything is linear, we just need to check the thesis for the single terms in the sum $\bar \omega = \omega_1 + dt \wedge \eta$.
+  Let's consider $p \in U$ with coordinates $x^1, \ldots, x^n$. It suffices to check the claim for the summands in the decomposition $\bar \omega = \omega_1 + dt \wedge \eta$ due to linearity.
   \begin{description}
   \item[case a)] Assume:
   \begin{equation} \label{omegacasea}
@@ -1763,7 +1761,7 @@ The following holds:
   \end{align*}
   So:
   $$I(d\bar \omega) = \int_0^1 \defonde{f}{t}(p, t) \underbrace{i_t^* dx^{i_1}}_{=dx^{i_1}} \wedge \ldots \wedge i_t^* dx^{i_k} dt = (f(p, 1) - f(p, 0)) dx^{i_1} \wedge \ldots \wedge dx^{i_k} = i_1^* \bar \omega - i_0^* \bar \omega \, .$$
-  Moreover, $I\bar \omega = 0$ because $\bar \omega$ (cf. \eqref{omegacasea}) does not contain any $dt$ in this case.
+  Moreover, $I\bar \omega = 0$ because $\bar \omega$ does not contain any $dt$ in this case.
   \item[case b)] Assume:
   \begin{equation} \label{omegacaseb}
   \bar \omega  = f\, dt \wedge dx^{i_1} \wedge \ldots  \wedge dx^{i_{k-1}} \, .
@@ -1835,7 +1833,7 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
 \end{definition}
 
 \begin{theorem}
-  Let $\omega \in \Omega^1(U)$, with $d \omega = 0$ (closed), and $\gamma_1, \gamma_2$ be two homotopic curves with same endpoints. then:
+  Let $U$ be an open, contractible set. Let $\omega \in \Omega^1(U)$, with $d \omega = 0$ (closed), and $\gamma_1, \gamma_2$ be two homotopic curves in $U$ with the same endpoints. then:
   \begin{equation}
     \int_{\gamma_1} \omega = \int_{\gamma_2} \omega \, .
   \end{equation}
@@ -1870,7 +1868,7 @@ $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are 
 \end{definition}
 
 \begin{proposition}
-  If $\omega$ is a closed 1-form on $U$, $\gamma_1$ and $\gamma_2$ two closed curves, freely homotopic in $U$, then:
+  Let $U$ be an open, contractible set. If $\omega$ is a closed 1-form on $U$, $\gamma_1$ and $\gamma_2$ two closed curves, freely homotopic in $U$, then:
   \begin{equation}
     \int_{\gamma_1} \omega = \int_{\gamma_2} \omega \, .
   \end{equation}
@@ -1903,12 +1901,12 @@ We can limit ourselves to consider continuous curves, thanks to the two followin
 \end{theorem}
 
 \begin{theorem}
-  If $\gamma_1$ and $\gamma_2$ are homotopic maps between $U$ and $V$ then they are smoothly homotopic. %TO CHECK
+  If $\gamma_1$ and $\gamma_2$ are homotopic maps between $U$ and $V$, then they are smoothly homotopic. %TO CHECK
 \end{theorem}
 \section[De Rham Cohomology]{\crule[green!50!white]{0.3cm}{0.4cm}  De Rham Cohomology}
 
 
-Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vector space over $\rfield$. Indeed, if $\alpha, \beta \in \Omega^k(U)$, then $a \alpha + b \beta \in \Omega^k(U), \forall\, a, b, \in \rfield$. Also the remaining properties of a vector space are satisfied.
+Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vector space over $\rfield$. Indeed, if $\alpha, \beta \in \Omega^k(U)$, then $a \alpha + b \beta \in \Omega^k(U), \forall\, a, b \in \rfield$. Also the remaining properties of a vector space are satisfied.
 
 \begin{remarkbox}\begin{remark}
   We say that $\Omega^k(U, \mathbb{Z}) = \{k\text{-forms on } U \text{ with coefficients in } \mathbb{Z}\}$  forms a group (and not a vector space) since $\mathbb{Z}$ is not a field. In contrast, $\Omega^k(U, \rfield)$ is a vector space. We will often denote $\Omega^k(U, \rfield)$ just by $\Omega^k(U)$.
@@ -1917,28 +1915,29 @@ Let $U$ be an open subset of $\rfield^n$. We can think of $\Omega^k(U)$ as a vec
 Now, we want to introduce some concepts of cohomology theory (see also page 460, \citetalias{Lee}).
 
 \begin{definition}[Complex]
-Let $\mathcal{R}$ be a commutative ring (let's suppose $\mathcal{R} = \rfield$ because it is the case we are interested in). Let's consider the sequence
+Let's consider the sequence
 \[ \cdots  \longrightarrow A^{k-1} \overset{d}{\longrightarrow} A^k \overset{d}{\longrightarrow}A^{k+1} \longrightarrow \cdots \]
 where for every $k$, $A^k$ is a vector space on $\rfield$ and the maps $d$ are linear maps. Such a sequence is said to be a complex if the composition of any two successive applications of $d$ is the zero map:
 \[ d \circ d = 0 \colon A^k \rightarrow A^{k+2} \text{ for each } k\, . \]
 Sometimes it is also called a cochain complex, whereas it is called a chain complex if the arrows go in the opposite direction.
 Sometimes we use the notation $d_k \colon A^{k-1} \rightarrow A^k$ to denote the position of the map in the sequence.
-It's easy to see that such a definition implies that $\im(d_k) \subset \ker(d_{k+1})$.
+The property $d_{k+1} \circ d_k=0$ implies $\im(d_k) \subset \ker(d_{k+1})$.
 \end{definition}
 
 \begin{definition}[Exact sequence]
-Let $A^*$ be a complex. It is called an exact sequence if $\im(d_k) = \ker(d_{k+1})$.
+Let $A^*$ be a complex. It is called an exact sequence if $\im(d_k) = \ker(d_{k+1})$ for each $k$.
 \end{definition}
 
 \begin{definition}[K-th cohomology group]
 Let $A^*$ be a complex. We define the k-th cohomology group of $A^*$ to be the quotient module
 \[H^k(A^*) \equiv \faktor{\ker(d_{k+1})}{\im(d_k)}\, . \]
-It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cochain complex. If we are dealing with a chain complex, it is called homology group instead of cohomology group. The linear map $d$ can be any map, but when $d$ is the exterior derivative and the complex is given by a sequence of the vector spaces $\Omega^k(U)$, the cohomology group gives us information about the failure of exactness at $\Omega^k(U)$ (it is an information about the space, not about the forms).
+It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cochain complex. If we are dealing with a chain complex, it is called homology group instead of cohomology group. 
+The $k$-th cohomology group is a quantitative measure for the failure of exactness at $A^k$.
 \end{definition}
 
 \begin{definition}[de Rham complex]
   The de Rham complex is the sequence
-  $$\cdots \overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0 $$
+  $$0 \overset{d}{\longrightarrow} \Omega^0 \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow}   \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0 $$
   where $d$ is the exterior derivative now. It is well defined since we know that $d^2 = d \circ d = 0$ from the properties of the exterior derivative. Thus, $\im(d_k) \subset \ker(d_{k+1})$. Notice that we wrote $\Omega^k$ instead of $\Omega^k(U)$ for the sake of simplicity, and that the sequence stops at $\Omega^n$ because $U \subset \rfield^n$.
 \end{definition}
 
@@ -1952,7 +1951,7 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Cohomologous forms]
-  $H^k(U, \rfield)$ contains the closed $k$-forms defined on $U$ which are not exact. Indeed, remember the definition of $d_k\colon \Omega^{k-1} \rightarrow \Omega^k $. The set $\ker(d_{k+1})$ contains all the $k$ forms that are closed. The set $\im(d_k)$ contains the exact forms. As usual when we deal with vector spaces, the equivalence relation is:
+  The set $\ker(d_{k+1})$ contains all the $k$ forms that are closed. The set $\im(d_k)$ contains the exact forms. As usual when we deal with vector spaces, the equivalence relation is:
   \begin{equation} \label{cohomol}
   \omega \sim \omega' \Leftrightarrow \omega - \omega' \in \im(d_k) \Leftrightarrow \omega - \omega' = d\alpha \text{ for some (} k-1 \text{)-form } \alpha \, .
   \end{equation}
@@ -1984,7 +1983,7 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
 \begin{remarkbox}\begin{remark} [Exact sequence] \label{exsequence}
   If $H^k(M, \rfield) = 0$ for $k=1, \ldots, n$, then
     $$\cdots \overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
-    is an exact sequence because every closed form is exact, so $\ker(d_{k+1}) = \im(d_k)$. Notice that for $k=0$, $\Omega^0 = \{\text{functions}\}$, then $H^0 \ne 0$.
+    is an exact sequence because every closed form is exact, so $\ker(d_{k+1}) = \im(d_k)$. Notice that for $k=0$, $\Omega^0 = \{\text{functions}\}$, we have $H^0 \ne 0$. So, the sequence can't be exact in this case.
 \end{remark} \end{remarkbox}
 
 \begin{definition}[de Rham cohomology ring]
@@ -1997,8 +1996,11 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
 \end{example}\end{tcolorbox}
 
 \begin{remarkbox}\begin{remark}
-  If $\phi \colon U \rightarrow V$, $U, V$ subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$ forms. By the construction above, we can also define such pullback on $H^k$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms.
-  If $\phi$ is a diffeomorphism, then $\phi^*$ is an isomorphism. Indeed, $\phi^* = \phi_*^{-1}$ which is bijective and continuous (thus, a homeomorphism) since $\phi$ is a diffeomorphism (see also def. \ref{pulldiffeom}). Thus, $H^k(V) \cong H^k(U)$.
+  If $\phi \colon U \rightarrow V$, $U, V$ open 
+  subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$-forms.
+  By the construction above, we can also define such pullbacks 
+  on $H^k$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms due to the naturality of the pullback. 
+  If $\phi$ is a diffeomorphism, then the pushforward $\phi_*$ is an isomorphism and hence also $\phi^*$ due to $\phi^* = \phi_*^{-1}$.
   Question: what if $U$ and $V$ are not diffeomorphic, but only homotopy equivalent? We want to show that the final result is the same.
  \end{remark}\end{remarkbox}
 
@@ -2011,14 +2013,14 @@ It is well defined since $\im(d_k) \subset \ker(d_{k+1})$ by definition of cocha
   \end{align*}
 \end{definition}
 
- \begin{definition}[Homotopy equivalence between sets]
+ \begin{definition}[Homotopy equivalence]
    Two subsets $U$ and $V$ of $\rfield^n$ are homotopy equivalent if there exist continuous maps $f \colon U \rightarrow V$ and $g \colon V \rightarrow U$ such that the compositions $g \circ f$ and $f \circ g$ are homotopic to the identity in $U$ and $V$, respectively. $f$ and $g$ are called homotopy equivalences.
  \end{definition}
 
  \begin{tcolorbox}\begin{example}
    Let's consider the following examples:
    \begin{itemize}
-     \item We call "homotopy inverse" the inverse of a function up to a homotopy. Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point). So, the concept of "homomorphism" between sets is stronger than the concept of "homotopy equivalence",
+     \item We call "homotopy inverse" the inverse of a function up to a homotopy. Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point). So, the concept of "homeomorphism" between sets is stronger than the concept of "homotopy equivalence",
      \item $S^1$ is homotopy equivalent to $\rfield^2 \setminus \{0\}$,
      \item $S^{n-1}$ is homotopy equivalent to $\rfield^n \setminus \{0\}$,
      \item A solid torus is homotopy equivalent to a tea cup.
@@ -2100,7 +2102,7 @@ Since the cochain maps commute with $d$, every small square is a commuting diagr
 \end{example}\end{tcolorbox}
 
 \begin{lemma}[Zig-zag lemma]
-  Let's consider $\phi^*, \psi^*$ as in the previous definitions. Then there exists a linear map $\delta$ such that:
+  Let's consider $\phi^*, \psi^*$ as in the previous definitions. Then there exists a linear map $\delta$, called the connecting homomorphism, such that:
   \begin{align*}
     \ldots \longrightarrow &H^{n-1}(C^*) \overset{\delta}{\longrightarrow} H^n(A^*) \overset{\phi^*}{\longrightarrow} H^n(B^*) \overset{\psi^*}{\longrightarrow} \\
     \overset{\psi^*}{\longrightarrow} &H^n(C^*) \overset{\delta}{\longrightarrow} H^{n+1}(A^*) \overset{\phi^*}{\longrightarrow} \ldots

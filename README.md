@@ -10,6 +10,9 @@ Missing parts:
 
 Last changes:
 
+19-09-20:
+- corrections in section 8, 9, 13, 14 and 15.
+
 17-09-20:
 - more mistakes corrected in the first 7 sections,
 - proof of lemma 12.3, second part (commuting flows) corrected.
