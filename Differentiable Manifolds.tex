@@ -1344,10 +1344,12 @@ i.e. $f(D)$ is the lower-right triangle of the square $D$. In particular, we can
 
 \section[Tangent Bundles, Flows of Vector Fields]{\crule[gray!50!white]{0.3cm}{0.4cm}  Tangent Bundles, Flows of Vector Fields}
 \begin{definition}[Tangent space]
-  Let $U \subset \rfield^n, U$ open set. Given $p \in U$, then the set of all derivations of $C^\infty(U)$ (cf. def \ref{derivation}) is called tangent space to $U$ at $p$ and is denoted by $T_p U$. An element of $T_p U$ is called a tangent vector at $p$, and it is often denoted by $v_p$.
+  Let $U \subset \rfield^n, U$ open set. Given $p \in U$
+  the set of all derivations of $C^\infty(U)$ at $p$ 
+  (cf. def \ref{derivation}) is called tangent space to $U$ at $p$ and is denoted by $T_p U$. An element of $T_p U$ is called a tangent vector at $p$, and it is often denoted by $(p,v)$, $v_p$, or just $v$.
 \end{definition}
 
-There are alternative equivalent definitions of the tangent space. All of them will be analyzed in the next sections.
+There are alternative equivalent definitions of the tangent space. Some of them will be analyzed in the next sections.
 
 
 \begin{definition}[Tangent bundle]
@@ -1366,7 +1368,8 @@ which sends each vector in $T_pU$ to the point $p$ at which it is tangent.
 \end{definition}
 
 \begin{remarkbox}\begin{remark} \label{disjointrem}
-  In the previous definition, the "$\sqcup$" symbol denotes a disjoint union. "Disjoint" here means that, if we consider the disjoint union of two elements $x$ and $y$ such that $x=y$, the union is the set $\{x, y\}$ and not $\{x\} = \{y\}$ as in normal unions. The mathematical operator doesn't know if two elements are equal. Since we are not mathematical operators, we can enumerate the elements like: $\{(1, x), (2, y)\} = \{(1, x), (2, x)\} = \{(1, y), (2, y)\}$ in order to distinguish them.
+  In the previous definition, the "$\sqcup$" symbol denotes a disjoint union. 
+  The disjoint union of two elements $x,y$ can be written as $\{(1, x), (2, y)\}$, where we introduced an artificial index in order to distinguish $(1,x)$ from $(2,y)$ even if $x=y$.
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Alternative definition of vector field]
@@ -1378,7 +1381,7 @@ which sends each vector in $T_pU$ to the point $p$ at which it is tangent.
 \end{definition}
 
 \begin{remarkbox}\begin{remark} [Space of sections]
-  The set of all vector fields $\mathfrak{X}(U) \equiv \{ C^\infty(U, TU) \, | \\ \, \pr(v_p) = p \}$ is also called the space of sections in $TU$. Thus, a section of $TU$ is a vector field.
+  The set of all vector fields $\mathfrak{X}(U) \equiv \{v \in C^\infty(U, TU) \, | \, \pr(v_p) = p \}$ is also called the space of sections in $TU$. Thus, a section of $TU$ is a vector field.
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Cotangent space] \label{cotangentspace}
@@ -1404,7 +1407,7 @@ Now, let's talk about about Lie algebras.
     \item $[\cdot , \, \cdot]$ is bilinear,
     \item $[\cdot , \, \cdot]$ is antisymmetric ($[u, v] = -[v, u], \forall \, u, v \in V$),
     \item $[\cdot , \, \cdot]$ satisfies the \textit{Jacobi identity}:
-    $$[[u, v], z] + [[z, u], v] + [[v, z], u] = 0 \, .$$
+    $$[[u, v], z] + [[z, u], v] + [[v, z], u] = 0 \, \forall \, u,v,w \in V \, .$$
   \end{itemize}
 \end{definition}
 
@@ -1412,13 +1415,44 @@ Now, let's talk about about Lie algebras.
   How to remember Jacobi identity: remember $[[u, v], z]$ and then  permute cyclically.
 \end{remark}\end{remarkbox}
 
-\begin{proposition}
-  $\mathfrak{X}(\rfield^n)$ is an (infinite dimensional) Lie algebra with $[u, v](f) = u(v(f)) - v(u(f))$, for $u, v \in \mathfrak{X}(\rfield^n), f \in C^\infty(\rfield^n)$. (Note that $u$ and $v$ are vector fields and $[u, v]$ is still a vector field).
-\end{proposition}
+\begin{tcolorbox}
+\begin{example}
+	$\rfield^3$ equipped with the usual vector product and the vector space of matrices with the matrix commutator $[A,B] = AB-BA$ are typical Lie algebras.
+\end{example}
+\end{tcolorbox}
+
+\begin{remarkbox}
+	\begin{remark}[Lie bracket for vector fields]
+		The vector space $V=\mathfrak{X}(\rfield^n)$ can be equipped with a canonical Lie bracket. For $u,v \in \mathfrak{X}(\rfield^n)$ we set for $f \in C^\infty(\rfield^n)$
+		\begin{align*}
+			[u,v](f) = uv(f) - vu(f).
+		\end{align*}
+		In fact, $[u,v]$ is a vector field as it satisfies the Leibniz rule:
+		\begin{align*}
+			[u,v](fg) &= uv(fg) - vu(fg) \\
+			&= u(gv(f) + fv(g)) - v(gu(f) + fu(g)) \\
+			&= g uv(f) + f uv(g) - gvu(f) - fvu(f) \\
+			&= g [u,v](f) + f[u,v](g)
+		\end{align*}
+		It is easily verified that $(\mathfrak{X}(\rfield^n), [\cdot,\cdot])$ is indeed a Lie algebra.
+	\end{remark}
+\end{remarkbox}
 
 \begin{definition}[Integral curve]
   An integral curve for a vector field $v$ is a smooth curve $\phi \colon (a, b) \rightarrow \rfield^n$ satisfying $\dot\phi(t) = v_{\phi(t)}$ ($v_{\phi(t)}$ is the vector tangent at $\phi(t)$ for $t$ fixed, remember the previous notation!). Let us suppose $0 \in (a, b)$. Then, $\phi(0)$ is called the starting point of $\phi$.
 \end{definition}
+
+\begin{lemma}[Translation lemma]
+	If $\phi \colon (a, b) \rightarrow \rfield^n$ is an integral curve of the vector field $v$, then for all $c\in \rfield^n$ the curve $\tilde{\phi} \colon (a+c, b+c) \rightarrow \rfield^n$ defined by $\tilde{\phi}(t) = \phi(t+c)$ is also an integral curve of $v$.
+\end{lemma}
+
+\begin{proof}
+	We simply check the defining property of an integral curve
+	\begin{align*}
+		\dot{\tilde{\phi}}(t) = \dot{\phi}(t+c) = v_{\phi(t+c)} = v_{\tilde{\phi}(t)}
+	\end{align*}
+	where in the second step we used that $\phi$ is an integral curve for $v$.
+\end{proof}
 
 We can also visualize the family of integral curves in the following way.
 
@@ -1428,14 +1462,21 @@ We can also visualize the family of integral curves in the following way.
     \theta \colon \rfield \times \rfield^n &\rightarrow \rfield^n \\
     (t, p) &\mapsto \theta_t(p) \nonumber
   \end{align}
-  such that $\dot\theta_t(p) = v_{\theta_t(p)}$ is the flow of the vector field $v$ where, if we fix $p$, $\theta_t(p)$ is the integral curve which passes through $p$ at $t=0 \in (a, b)$.
-  So the flow satisfies two conditions:
+  such that $\dot\theta_t(p) = v_{\theta_t(p)}$ is the flow of the vector field $v$ where, if we fix $p$, $\theta_t(p)$ is the integral curve which passes through $p$ at $t=0 \in (a, b)$,
+  i.e. for all $p \in \mathbb{R}^n$ the flow $\theta$ satisfies 
   \begin{align}
-    \dot\theta_t(p) &= v_{\theta_t(p)} , \, &\forall \, p \in \rfield^n \\
-    \theta_0(p) &= p, \, &\forall \, p \in \rfield^n
+    \dot\theta_t(p) &= v_{\theta_t(p)} \\
+    \theta_0(p) &= p.
   \end{align}
+ \end{definition}
+ 
 Under the right hypotheses (e.g. Lipschitz hypothesis and smoothness of $v$) we can prove existence and uniqueness of the solution of such ODEs ($\forall\, p \in \rfield^n$).
 By fixing either the time or the starting point of the flow, we can consider two maps:
+\begin{itemize}
+\item $p \mapsto \theta_t(p)$, for each fixed $t$ (we are observing several integral curves at the same time $t$),
+\item $t \mapsto \theta_t(p)$, for each fixed $p$ (we are observing the integral curve starting from $p$, for all times).
+\end{itemize}
+
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.45\textwidth}
@@ -1450,21 +1491,32 @@ By fixing either the time or the starting point of the flow, we can consider two
      \caption{the map $p \mapsto \theta_t(p)$ selects all the curves evaluated at the same time $t$} \label{Fig:integralcurve_2}
 \end{subfigure}
 \end{figure}
-\begin{itemize}
-\item $p \mapsto \theta_t(p)$, for each fixed $t$ (we are observing several integral curves at the same time $t$),
-\item $t \mapsto \theta_t(p)$, for each fixed $p$ (we are observing the integral curve starting from $p$, for all times).
-\end{itemize}
-\end{definition}
+
+\begin{remarkbox}
+	\begin{remark}
+		The translation lemma above implies that $t \mapsto \theta_{t+s}(p)$ is an integral curve starting at $q = \theta_s(p)$. By uniqueness of the integral curve we obtain $\theta_t(q) = \theta_{t+s}(p)$, i.e. $\theta_t \circ \theta_s = \theta_{t+s}$. This property together with $\theta_0(p) = p$ for all $p$ can be used as a definition of the flow. 
+	\end{remark}
+\end{remarkbox}
+
+\begin{remarkbox}
+	\begin{remark}
+		Each flow defines locally a vector field $v$ given pointwise by
+		\begin{align*}
+			v_p = \restrict{\frac{d}{dt}}{t=0} \theta_t(p).
+		\end{align*}
+		The vector field $v$ is called the infinitesimal generator of $\theta$. For fixed $p$ each curve $\theta_t(p)$ is an integral curve for $v$.
+	\end{remark}
+\end{remarkbox}
 
 \begin{definition}[Lie derivative of a $k$-form]
-  Let $z \in \mathfrak{X}(\rfield^n)$ be a differentiable vector field, $\phi_t$ its flow and $\omega \in \Omega^k(\rfield^n)$. Then the Lie derivative of $\omega$ is defined as
+  Let $z \in \mathfrak{X}(\rfield^n)$ be a differentiable vector field, $\theta_t$ its flow and $\omega \in \Omega^k(\rfield^n)$. Then the Lie derivative of $\omega$ is defined as
   \begin{equation}
-    L_z \omega = \restrict{\frac{d}{dt}(\phi_t^* \omega)}{t=0} \, .
+    L_z \omega = \restrict{\frac{d}{dt}(\theta_t^* \omega)}{t=0} \, .
   \end{equation}
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-  We denoted the flow by the symbol $\phi_t$ and not $\phi$. What we are doing here is not caring about $p$: $\phi^*_t \omega (\cdot) = \omega(\phi_t(\cdot))$.
+  We denoted the flow by the symbol $\theta_t$ and not $\theta$. What we are doing here is not caring about $p$: $\theta^*_t \omega (\cdot) = \omega(\theta_t(\cdot))$.
   %In components we have: ...to do
   Useful formula (Cartan's formula): $L_z \omega = (d i_z + i_z d) \omega$.
 \end{remark}\end{remarkbox}
@@ -1475,7 +1527,7 @@ By fixing either the time or the starting point of the flow, we can consider two
     \varphi ^* v \equiv \varphi_* ^{-1}v
   \end{equation}
   is the pullback of $v$ with $\varphi$.
-  In particular, given a flow $\phi$ and $t$ fixed, $\phi(t, \cdot) = \phi_t(\cdot)$ is a diffeomorphism on $\rfield^n$ with $\phi^{-1} = \phi(-t, \cdot) = \phi_{-t}(\cdot)$.
+  In particular, given a flow $\phi$ and $t$ fixed, $\phi(t, \cdot) = \phi_t(\cdot)$ is a diffeomorphism on $\rfield^n$ with $\phi^{-1} (t, \cdot) = \phi(-t, \cdot) = \phi_{-t}(\cdot)$.
 \end{definition}
 
 \begin{definition}[Lie derivative of a vector field]
@@ -1487,7 +1539,7 @@ Let $u, v \in \mathfrak{X}(\rfield^n)$. Let $\phi$ be the flow of $u$. The Lie d
 \end{definition}
 
 \begin{lemma} \label{lemmadiff1}
-  Let $u, v$ be smooth vector fields on $\rfield^n$ and $\varphi \in \Diff(\rfield^n)$. Let $\phi_t$ be the flow of $u$ and let $\psi_s$ be the flow of $v$. Then
+  Let $u, v$ be smooth vector fields on $\rfield^n$ and $\varphi \in \Diff(\rfield^n)$. Let $\phi$ be the flow of $u$ and let $\psi$ be the flow of $v$. Then
   \begin{itemize}
     \item $\varphi^*v = \restrict{\frac{d}{ds}}{s=0} \varphi^{-1} \circ \psi_s \circ \varphi$,
     \item $\varphi^*v = v \Leftrightarrow \varphi \circ \psi_s = \psi_s \circ \varphi$ for all $s$,
@@ -1510,7 +1562,7 @@ which implies the thesis.
 \item $(\Leftarrow)$: follows from the previous point, and using the definition of Lie derivative for a vector field. $(\Rightarrow)$:
 $$\frac{d}{dt} \phi_t^* v = \restrict{\frac{d}{d\varepsilon}}{\varepsilon=0} \phi^*_{t + \varepsilon} v \overset{(1)}{=} \phi_t^* \restrict{\frac{d}{d \varepsilon}}{\varepsilon=0} \phi^*_{\varepsilon} v = \phi_t^* L_u v = 0, \forall \, t$$
 where in (1) we used that $\phi^*_{t + \varepsilon} = \phi_t^* \circ \phi^*_{\varepsilon}$.
-Thus $\phi_t^* v = v \forall \, t$, and by the previous point we have the thesis. \qedhere
+Thus $\phi_t^* v = v \, \forall \, t$, and by the previous point we have the thesis. \qedhere
 \end{itemize}
 \end{proof}
 
@@ -1524,10 +1576,16 @@ Thus $\phi_t^* v = v \forall \, t$, and by the previous point we have the thesis
 \begin{proof}[Sketch of the proof]
 $ $
 \begin{itemize}
-\item $\frac{d}{dt}\phi_t^* v = \frac{\partial}{\partial t} \frac{\partial}{\partial s} \phi_{-t} \circ \psi_s \circ \phi_t$ by the first point of the lemma \ref{lemmadiff1}, where we put $\varphi^* = \phi_t$.
+\item $\frac{d}{dt}\phi_t^* v = \frac{\partial}{\partial t} \frac{\partial}{\partial s} \phi_{-t} \circ \psi_s \circ \phi_t$ by the first point of the lemma \ref{lemmadiff1}, where we put $\varphi = \phi_t$.
 \item See problem sheet 4, exercise 4. \qedhere
 \end{itemize}
 \end{proof}
+
+\begin{remarkbox}
+	\begin{remark}
+		The above lemmata show that two vector fields $u,v$ commute, i.e. $[u,v] = 0$, if and only if their corresponding flows $\phi, \psi$ commute, i.e. $\phi_t \circ \psi_s = \psi_s \circ \phi_t$ for all $s,t \in \rfield$.
+	\end{remark}
+\end{remarkbox}
 
 \begin{lemma} \label{commlemma}
   Let $u, v$ be smooth vector fields on $\rfield^n$ and $\varphi \in \Diff(\rfield^n)$. Then:
@@ -1546,6 +1604,17 @@ See problem sheet 4, exercise 4.
 \begin{remarkbox} \begin{remark}[Naturality of the Lie bracket]
 The property (5) of lemma \ref{commlemma} is called the \textbf{naturality} of the commutator. It implies that if $u, v$ are vector fields tangent to some space, then $[u, v]$ is tangent to the same space. See also problem sheet 12, ex. 3.
 \end{remark} \end{remarkbox}
+
+\begin{remarkbox}
+	\begin{remark}
+		From lemma \ref{commlemma} and the correspondence $L_u v = [u,v]$ one can easily obtain non-trivial properties for the Lie derivative, e.g. (notation as above)
+		\begin{enumerate}
+			\item $L_u v = -L_v u$,
+			\item $L_u(fv) = fL_u v + u(f)v$,
+			\item $\varphi^* L_u v = L_{\varphi^* u} (\varphi^*v)$.
+		\end{enumerate}
+	\end{remark}
+\end{remarkbox}
 
   \section[Stokes' Theorem on $\rfield^n$]{\crule[black!50!white]{0.3cm}{0.4cm}  Stokes' Theorem on $\rfield^n$}
 
@@ -1659,13 +1728,13 @@ where we used $\int \omega = \int a_i \frac{dx^i}{dt} dt$ and the fact that ever
   and therefore $\omega$ cannot be exact by the previous proposition. However, we notice that we have problems only with the origin of $\rfield^2$. If we consider a subset of $\rfield^2$ which is far enough from the origin, the form would be an exact form in such subset. Indeed, we say that $\omega$ is locally exact, and the general result follows from the next theorem.
 \end{remark}\end{remarkbox}
 
-\begin{theorem}[Poincarè theorem for 1-forms on $\rfield^n$]
+\begin{theorem}[Poincaré theorem for 1-forms on $\rfield^n$]
   Let $\omega \in \Omega^1(U), U \subset \rfield^n, U$ open. Then $d\omega = 0$ if and only if for each $p \in U$ there is a neighbourhood $V \subset U$ of $p$ and a differentiable function $f \colon V \rightarrow \rfield$ such that $\omega = df$, i.e. $\omega$ is closed if and only if $\omega$ is locally exact.
 \end{theorem}
 
 \begin{remarkbox}\begin{remark}
   We will not prove this theorem, because it follows from the more general case for $k$-forms, that we will analyze in the next pages.
-  Using the Poincarè theorem for 1-forms, we can extend the definition of the integral of a closed 1-form along a \textbf{continuous} path (until now, we have always assumed the our paths were piecewise differentiable). In fact, assume that $ \omega \in \Omega^1(U), d \omega = 0$, and $\gamma$ such that:
+  Using the Poincaré theorem for 1-forms, we can extend the definition of the integral of a closed 1-form along a \textbf{continuous} path (until now, we have always assumed the our paths were piecewise differentiable). In fact, assume that $ \omega \in \Omega^1(U), d \omega = 0$, and $\gamma$ such that:
   $$\gamma \colon [0, 1] \rightarrow U$$ is a differentiable map.
   Now, we choose a partition of $[0, 1]$, i.e. a collection of points $0 = t_0 < t_1 < \ldots < t_k < t_{k+1} = 1$ such that the restriction of $\gamma$ to the interval $(t_i, t_{i+1})$ is contained in a ball $B_i$ where $\omega$ is exact. In particular:
   $$\omega = df_i, \text{ for } f_i \colon B_i \rightarrow \rfield \, .$$
@@ -1781,8 +1850,8 @@ The following holds:
 
 \end{proof}
 
-Then we can extend Poincarè lemma to $k$-forms:
-\begin{theorem} [Poincarè Lemma] \label{poinclemma}
+Then we can extend Poincaré lemma to $k$-forms:
+\begin{theorem} [Poincaré Lemma] \label{poinclemma}
   Let $k \ge 1$. Let $U$ be a contractible, open subset of $\rfield^n$ and $\omega \in \Omega^k(U)$ with $d\omega = 0$. Then there exists a $(k-1)$-form $\alpha \in \Omega^{k-1} (U)$ such that $\omega = d\alpha$.
 \end{theorem}
 \begin{proof}
@@ -1845,7 +1914,7 @@ We can go through $\gamma_1$ backwards. Let $I$ be the interior of the space bou
      \centering
      \includegraphics[width=0.18\textwidth]{Images/homotopy4.pdf}
 \end{figure}
-$I$ is contractible, then by Poincarè lemma \ref{poinclemma}, $\omega$ is exact in $I$. Using Stokes's theorem and denoting the curve $\gamma_1$ with reversed orientation by $\hat \gamma_1$:
+$I$ is contractible, then by Poincaré lemma \ref{poinclemma}, $\omega$ is exact in $I$. Using Stokes's theorem and denoting the curve $\gamma_1$ with reversed orientation by $\hat \gamma_1$:
 $$\int_{\hat \gamma_1 + \gamma_2} \omega = \int_I d \omega = 0$$
 where last equality follows from the exactness of $\omega$: $d\omega = d^2 \alpha=0$ for some 0-form $\alpha$.
 On the other hand, if the two curves intersect each other, we split the curves for each intersection and apply the previous proof for each one of them.
@@ -1963,7 +2032,7 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
 \begin{tcolorbox}\begin{example}
   Let's consider the following examples:
   \begin{itemize}
-    \item If $U$ is contractible, then $H^k(U, \rfield) = \{0\}$ by Poincarè lemma,
+    \item If $U$ is contractible, then $H^k(U, \rfield) = \{0\}$ by Poincaré lemma,
     \item $U=\rfield^2 \setminus \{0\}$, $H^0(\rfield^2 \setminus \{0\}, \rfield) = \rfield$ (constant functions),
     \item $H^1(\rfield^2 \setminus \{0\}, \rfield) = \rfield$,
     \item $H^2(\rfield^2 \setminus \{0\}, \rfield) = \{0\}$,
@@ -1983,7 +2052,7 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
 \begin{remarkbox}\begin{remark} [Exact sequence] \label{exsequence}
   If $H^k(M, \rfield) = 0$ for $k=1, \ldots, n$, then
     $$\cdots \overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
-    is an exact sequence because every closed form is exact, so $\ker(d_{k+1}) = \im(d_k)$. Notice that for $k=0$, $\Omega^0 = \{\text{functions}\}$, we have $H^0 \ne 0$. So, the sequence can't be exact in this case.
+    is such that $\ker(d_{k+1}) = \im(d_k)$ for every $k=1, \ldots, n$. Notice that for $k=0$, $\Omega^0 = \{\text{functions}\}$, we have $H^0 \ne 0$. So, it doesn't hold for $k=0$.
 \end{remark} \end{remarkbox}
 
 \begin{definition}[de Rham cohomology ring]
@@ -2031,7 +2100,7 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
    Let $\phi, \id \colon V \rightarrow V$ be two smoothly homotopic maps. Then $\restrict{\phi^*}{H^*(V, \rfield)} = \restrict{\id^*}{H^*(V, \rfield)}$.
  \end{lemma}
  \begin{proof}
- We want to show that $(\phi^* - \id^*)(\omega) = d \alpha$. If it is true, $\phi^*$ and $\id^*$ map to the same equivalence class in the cohomology group, because two forms are in the same equivalence class if they differ by an exact form. Let $H \colon \rfield \times V \rightarrow V$ be the smooth homotopy between $\phi$ and $\id$ in $V$. We can consider it smooth thanks to Whitney approximation (cf. theorem \ref{whitney}). Let $\omega \in H^*(V)$. From the proof of Poincarè lemma \ref{poinclemma} we have:
+ We want to show that $(\phi^* - \id^*)(\omega) = d \alpha$. If it is true, $\phi^*$ and $\id^*$ map to the same equivalence class in the cohomology group, because two forms are in the same equivalence class if they differ by an exact form. Let $H \colon \rfield \times V \rightarrow V$ be the smooth homotopy between $\phi$ and $\id$ in $V$. We can consider it smooth thanks to Whitney approximation (cf. theorem \ref{whitney}). Let $\omega \in H^*(V)$. From the proof of Poincaré lemma \ref{poinclemma} we have:
  $$d(I H^* \omega) + I(d H^* \omega) = i_1^* H^* \omega - i_0^* H^* \omega$$
  with: $i_0(p) = (0, p), i_1(p) = (1, p)$ (recall the definition of the inclusion \eqref{definclusion}).
  Here, $H \circ i_0 = \restrict{\id}{V}, H \circ i_1= \restrict{\phi}{V}$. Thus, using that 
@@ -2573,7 +2642,7 @@ Now, if $f \colon M \rightarrow \rfield$, we can consider $f_i = \varphi_i f \co
 \begin{definition} [Orientable manifold]
   $M$ is orientable if there exists an atlas $\mathcal{A} = \{\phi_{\alpha}, U_{\alpha}\}$ such that for each pair $\alpha, \beta$ with $\phi_{\alpha}(U_{\alpha}) \cap \phi_{\beta}(U_{\beta}) \not = \emptyset$, the differential
   $$
-    (\phi_{\beta}^{-1} \circ \phi_{\alpha})_* \colon  U_{\alpha} \rightarrow U_{\beta}
+    (\phi_{\beta}^{-1} \circ \phi_{\alpha})_* \colon  U_{\alpha} \cap U_{\beta} \rightarrow U_{\alpha} \cap U_{\beta}
   $$
   has positive determinant. Example of a non-orientable manifold: Möbius strip.
 \end{definition}
@@ -2755,7 +2824,7 @@ Let's analyze def. \ref{geomtangent}: it is an intuitive definition of the tange
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Derivation - pt.2]
-A derivation $v_p$ on smooth functions $C^{\infty}(M)$ at $p$ is a $\rfield-$linear map $v_p \colon C^{\infty}(M) \rightarrow \rfield$ which satisfies the Leibnitz rule $\restrict{v(fg)}{p} = \restrict{v(f)}{p} \restrict{g}{p} + \restrict{f}{p}\restrict{v(g)}{p}$.
+A derivation $v_p$ on smooth functions $C^{\infty}(M)$ at $p$ is a $\rfield-$linear map $v_p \colon C^{\infty}(M) \rightarrow \rfield$ which satisfies the Leibnitz rule $\restrict{v(fg)}{p} = \restrict{v(f)}{p} g(p) + f(p)\restrict{v(g)}{p}$.
 \end{definition}
 
 \begin{definition}[Alg. tangent space]
@@ -3182,7 +3251,7 @@ Let $M$ be a manifold with or without boundary. We have already seen (remark \re
 \begin{equation}
 H^k(M) \equiv H_{dR}^k(M) = \frac{\ker ( d_{k+1} \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M))  )}{\im ( d_k \colon \Omega^{k-1}(M) \rightarrow \Omega^k(M))  ) }
 \end{equation}
-And we have already considered the Poincarè lemma \ref{poinclemma}:
+And we have already considered the Poincaré lemma \ref{poinclemma}:
 \begin{equation} \label{poinclemmashort}
 H^k(\rfield^n) \cong
 \begin{cases*}
@@ -3210,7 +3279,7 @@ For the compactly supported case, we can't do that anymore, because if $\omega$ 
 \end{remark}
 \end{remarkbox}
 
-Now, we want to prove a compactly supported version of the Poincarè lemma. In order to do that, we need some general result on manifolds.
+Now, we want to prove a compactly supported version of the Poincaré lemma. In order to do that, we need some general result on manifolds.
 
 \begin{remarkbox}
 \begin{remark}[Integration over the fiber] \label{intfiberrem}
@@ -3347,9 +3416,9 @@ So, $\omega$ and $e_* \circ \pi_*(\omega)$ differ by an exact form, i.e. they li
 \end{remarkbox}
 
 
-Now, we are finally ready to prove the compactly supported Poincarè lemma.
+Now, we are finally ready to prove the compactly supported Poincaré lemma.
 
-\begin{lemma}[Compactly supported Poincarè lemma] \label{compsupppoinclemma}
+\begin{lemma}[Compactly supported Poincaré lemma] \label{compsupppoinclemma}
 \begin{equation}
 H_c^k(\rfield^n) \cong
 \begin{cases*}
@@ -3370,7 +3439,7 @@ First of all, $I$ is well defined, i.e. the integral does not depend on the elem
 
 Now, we prove that $I$ is surjective. This follows from the fact that for every $c \in \rfield$, we can choose $\omega \in H^1_c(\rfield)$ and $f$ smooth map with compact support such that $\int f \omega = c$.
 
-In order to prove that $I$ is injective, we just need to prove that $\ker I = \{0\}$ (since $I$ is linear). By the standard Poincarè lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported!
+In order to prove that $I$ is injective, we just need to prove that $\ker I = \{0\}$ (since $I$ is linear). By the standard Poincaré lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported!
 In order to have an exact form in $H_c^1(\rfield)$, $\alpha$ should have compact support as well. But, we notice that $\omega$ is exact if $\int_{\rfield} \omega = 0$ (i.e. $\ker I = \{0\}$). Indeed let's write $\omega$ as $\omega=f(x) dx$, $f$ compactly supported function. If $\int_{\rfield} \omega = \int_{\rfield} f(x)dx = 0$, then the primitive $F(x)=\int_{-\infty}^x f(t)dt$ has compact support (for $x$ small we are outside of the support of $f$, whereas for $x$ big we integrate over all the support, i.e. it's like considering $\int_{\rfield} f(x) dx = 0$). Then $\omega$ is exact: $\omega = dF$ and $F$ has compact support $\Rightarrow [\omega]=0$. 
 So, $H^1_c(\rfield) \cong \rfield$ (in the same way, we can prove that $H^n_c(\rfield^n) \cong \rfield$).
 For $\fbox{n > 1}$: from proposition \ref{kprop}, we know that there is an isomorphism
@@ -3382,22 +3451,22 @@ Let's suppose the thesis is true for $n-1$, then we can consider $M=\rfield^{n-1
 
 \begin{remarkbox}
 \begin{remark}
-The Poincarè lemma \ref{compsupppoinclemma} is valid for $\rfield^n$, but it also holds for open subsets of manifolds which are diffeomorphic to $\rfield^n$. For instance, we can consider the convex subsets $U$ contained in a manifold. The form $\eta \in \Omega_c^{n-1}(U)$ with $d\eta=\omega$ produced in the proof of the Poincarè lemma for a compactly supported form $\omega$ can be extended by zero to a smooth form on the entire manifold. We will not make any distinction between the extended form and the form on $U$.
+The Poincaré lemma \ref{compsupppoinclemma} is valid for $\rfield^n$, but it also holds for open subsets of manifolds which are diffeomorphic to $\rfield^n$. For instance, we can consider the convex subsets $U$ contained in a manifold. The form $\eta \in \Omega_c^{n-1}(U)$ with $d\eta=\omega$ produced in the proof of the Poincaré lemma for a compactly supported form $\omega$ can be extended by zero to a smooth form on the entire manifold. We will not make any distinction between the extended form and the form on $U$.
 \end{remark}
 \end{remarkbox}
 
-We will now analyze some consequences of the compactly supported Poincarè lemma.
+We will now analyze some consequences of the compactly supported Poincaré lemma.
 
 \begin{definition}[Bump form] \label{bumpform}
 A bump form on $M^n$ (manifold of dimension $n$) is a compactly supported $n$-form $\omega = \rho \, dx^1 \wedge \ldots \wedge dx^n$ in a coordinate domain $(U, \varphi), \varphi \colon U \rightarrow \varphi(U) \subseteq \rfield^n $ so that $\left | \int_U \omega \right | = 1$.
 \end{definition}
 
 \begin{remarkbox}\begin{remark} [Cohomologous bump forms] \label{bumpremark}
-We know that two forms are cohomologous in $H^k(U)$ if and only if they differ by an exact form (see remark \ref{cohomol}). The Poincarè lemma tells us that bump forms are cohomologous on $U$ if their integral on $U$ is the same. Given $\omega, \omega'$ bump forms in $U$, then:
+We know that two forms are cohomologous in $H^k(U)$ if and only if they differ by an exact form (see remark \ref{cohomol}). The Poincaré lemma tells us that bump forms are cohomologous on $U$ if their integral on $U$ is the same. Given $\omega, \omega'$ bump forms in $U$, then:
 \begin{equation}
 \omega = \omega' + d \eta,\, \eta \in \Omega_c^{n-1}(U) \Longleftrightarrow \int_U \omega = \int_U \omega'
 \end{equation}
-Indeed, the "$\Rightarrow$" is always true thanks to Stokes's theorem, whereas the "$\Leftarrow$" follows from the proof of the Poincarè lemma \ref{compsupppoinclemma}, because bump forms are $n$-forms in a $n$-dimensional manifold and the equality between the integrals implies that $[\omega] = [\omega']$ (because the isomorphism used in the proof is given by the integral map \eqref{mapn}). Thus, the two forms differ by an exact form.
+Indeed, the "$\Rightarrow$" is always true thanks to Stokes's theorem, whereas the "$\Leftarrow$" follows from the proof of the Poincaré lemma \ref{compsupppoinclemma}, because bump forms are $n$-forms in a $n$-dimensional manifold and the equality between the integrals implies that $[\omega] = [\omega']$ (because the isomorphism used in the proof is given by the integral map \eqref{mapn}). Thus, the two forms differ by an exact form.
 \end{remark}\end{remarkbox}
 
 \begin{proposition} \label{prop2bumpforms}
@@ -3448,7 +3517,7 @@ $S^1$ is a closed manifold. A torus is closed as well.
 If $M$ is a connected, smooth manifold of dimension $n$, $\dim \left( H^n(M) \right) \le 1$. If $M$ is also closed and oriented, $H^n(M) \cong \rfield$.
 \end{theorem}
 \begin{proof}
-Using the previous theorem \ref{surjintegral}, we just need to verify how many values $\int_U \omega$ can have, where $U$ open subset of $M$ diffeomorphic to $\rfield^n$ (Notice: $\partial U = \emptyset$ because $U$ is open). Now, every element of $H^n(M)$ is cohomologous to a (real) multiple of  a bump form in a fixed chart $(U, \varphi)$. Bump forms have integral $ =\pm 1$. Therefore, the value of the integral of a closed-but-not-exact $n$-form in $H^n(M)$ can be any real number. Since the map \eqref{surjmap} is surjective, we have the first thesis. If $M$ is also closed, then the map \eqref{surjmap} given by integration is also injective. The proof of this is on page 454, \citetalias{Lee}, using that $H^k(M)=H_c^k(M)$ if $M$ is compact.
+Using the previous theorem \ref{surjintegral}, we just need to verify how many values $\int_U \omega$ can have, where $U$ open subset of $M$ diffeomorphic to $\rfield^n$ (Notice: $\partial U = \emptyset$ because $U$ is open). Now, every element of $H^n(M)$ is cohomologous to a (real) multiple of  a bump form in a fixed chart $(U, \varphi)$. Bump forms have integral $ =\pm 1$. Therefore, the value of the integral of a closed-but-not-exact $n$-form in $H^n(M)$ can be any real number. Then the first part is proved. If $M$ is also closed, then the map \eqref{surjmap} given by integration is both surjective and injective. The proof of this is on page 454, \citetalias{Lee}, using that $H^k(M)=H_c^k(M)$ if $M$ is compact.
 \end{proof}
 
 \begin{theorem}
@@ -3514,7 +3583,7 @@ Let's now consider the map: $\iota \colon S^{n-1} \rightarrow \overline{B_1(0)}$
 $$\id_{S^{n-1}}^* = \iota^* \circ F^* \quad \oast$$
 where we consider $F^*$ acting on closed-but-not-exact forms: $F^* \colon H^*(S^{n-1}) \rightarrow H^*(\overline{B_1(0)})$. If $* = n-1$, the map:
 $$F^* \colon \underbrace{H^{n-1}(S^{n-1})}_{\cong \rfield} \longrightarrow \underbrace{H^{n-1}(\overline{B_1(0)})}_{\cong \,0}$$
-has to be injective because of $\oast$ (if the composition of maps is injective, the first map acting is injective). But this is impossible because $H^{n-1}(S^{n-1}) \cong \rfield$ (maybe it was proved in the exercise sheets?) and $H^{n-1}(\overline{B_1(0)}) \cong 0$, with $B_1(0)$ $n$-dimensional ball. In order to prove the latter, we can't use the Poincarè lemma because $\overline{B_1(0)}$ is not homeomorphic to $\rfield^n$ (one is compact and the other is not, and compactness is left invariant under homeomorphisms). But we can prove that $\id \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ is homotopy equivalent to the map $\text{zero} \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ that sends every element of $\overline{B_1(0)}$ to $0 \in \overline{B_1(0)}$. Once we do this, we use the fact that the space itself is homotopy equivalent to the trivial set (for $n \ge 2$) and then the de Rham cohomology must be trivial as well.
+has to be injective because of $\oast$ (if the composition of maps is injective, the first map acting is injective). But this is impossible because $H^{n-1}(S^{n-1}) \cong \rfield$ (maybe it was proved in the exercise sheets?) and $H^{n-1}(\overline{B_1(0)}) \cong 0$, with $B_1(0)$ $n$-dimensional ball. In order to prove the latter, we can't use the Poincaré lemma because $\overline{B_1(0)}$ is not homeomorphic to $\rfield^n$ (one is compact and the other is not, and compactness is left invariant under homeomorphisms). But we can prove that $\id \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ is homotopy equivalent to the map $\text{zero} \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ that sends every element of $\overline{B_1(0)}$ to $0 \in \overline{B_1(0)}$. Once we do this, we use the fact that the space itself is homotopy equivalent to the trivial set (for $n \ge 2$) and then the de Rham cohomology must be trivial as well.
 \end{proof}
 
 \begin{remarkbox}\begin{remark}
@@ -3522,14 +3591,14 @@ The important assumption of the Brouwer theorem \ref{brouwerthm} is that the ent
 \end{remark}\end{remarkbox}
 
 \begin{definition}[degree of a map] \label{degreemap}
-Let $f \colon M \rightarrow  N$ be smooth, $N, M$ closed manifolds (see def.  \ref{closedman}), orientable and of the same dimension. Then, the degree of $f$ is
+Let $f \colon M \rightarrow  N$ be smooth, let $N, M$ be closed, connected and orientable manifolds of the same dimension. Then, the degree of $f$ is
 \begin{equation}
 \deg(f) = \frac{\int_M f^* \omega}{\int_N \omega}, \quad \text{for a form } \omega \in \Omega^n(N) \text{ s.t. } \int_N\omega \not = 0 \, .
 \end{equation}
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-The definition \ref{degreemap} does not depend on the $\omega$ chosen: if $\omega_1, \omega_2$ are $n$-forms with the same integral, they are cohomologous by the proof of theorem \ref{1dimthm} (the isomorphism is given by integration). Then we can write $\omega_1 = \omega_2 + d\eta$ and we get the same degree by using the naturality of the pullback ($f^* d \eta = d f^* \eta$) and Stokes's theorem. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
+The definition \ref{degreemap} does not depend on the $\omega$ chosen: the proof is in the first lines of page 458 of \citetalias{Lee}. It is proved that the number $\deg f$ exists and the proof does not depend on $\omega$. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}
@@ -3556,13 +3625,13 @@ where we used that $\varphi$ is the angular coordinate, so $f(e^{i\varphi}) = e^
 For all $f \colon M \rightarrow N$, in the hypotheses of def. \ref{degreemap}, the degree of $f$ is an integer. In particular, it is the signed count of preimages of a regular value.
 \end{theorem}
 \begin{proof}
-Let consider a regular value $p\in N$ of $f$. The value $p$ exists thanks to \href{https://en.wikipedia.org/wiki/Sard's_theorem}{Sard's theorem}. Sard's theorem states that the set of the critical values of a smooth function $f$ from a manifold to another one is a null-measure set. We can apply this theorem to our case (and whenever $f$ is not smooth we can approximate it by smooth functions if it is at least continuous). Indeed, if the set of critical values has zero measure, its complementary set (the regular values) has dimension $n$.
-In particular, $f^{-1}(p)$ is a submanifold of dimension 0 or, analogously, a submanifold of codimension $n$ (not proved). So, $f^{-1}(p)$ consists of a finite collection of points $q_1, \ldots, q_m$. By the inverse function theorem, there exists a neighbourhood $U_i$ of $q_i \in f^{-1}(p)$ such that $\restrict{f}{U_i}$ is a diffeomorphism onto its image. Let $\omega$ be a bump form supported in $\bigcap_i f(U_i) = V$. Then:
-$$\int_M f^* \omega = \sum\limits_i \underbrace{\int_{U_i} f^* \omega}_{\substack{=\pm \int_{f(U_i)} \omega \\ \text{depending} \\ \text{on orientation}}} = \sum\limits_i \left ( \pm \int_V \omega \right )$$
+Let us consider a regular value $p\in N$ of $f$. The value $p$ exists thanks to \href{https://en.wikipedia.org/wiki/Sard's_theorem}{Sard's theorem}. Sard's theorem states that the set of the critical values of a smooth function $f$ from a manifold to another one is a null-measure set. We can apply this theorem to our case (and whenever $f$ is only continuous we can approximate it by smooth functions). Indeed, if the set of critical values has zero measure, its complementary set (the regular values) has dimension $n$.
+In particular, $f^{-1}(p)$ is a submanifold of dimension 0 by definition \ref{sub3}. So, $f^{-1}(p)$ consists of a finite collection of points $q_1, \ldots, q_m$. By the inverse function theorem, there exists a neighbourhood $U_i$ of $q_i \in f^{-1}(p)$ such that $\restrict{f}{U_i}$ is a diffeomorphism onto its image. Let $\omega$ be a bump form supported in $\bigcap_i f(U_i) = V$. Then:
+$$\int_M f^* \omega = \sum\limits_i \underbrace{\int_{U_i} f^* \omega}_{\substack{=\pm \int_{f(U_i)} \omega \\ \text{depending} \\ \text{on orientation}}} = \left (\sum\limits_i  \pm 1 \right ) \int_V \omega $$
 So, the degree is an integer: the signed count of preimages of a regular value. The sign depends on the orientation (i.e. the sign of the determinant of the Jacobian at $p_i, \forall\, i$).
 \end{proof}
 
-\section[Poincarè Duality]{\crule[blue!70!white]{0.3cm}{0.4cm}  Poincarè Duality}
+\section[Poincaré Duality]{\crule[blue!70!white]{0.3cm}{0.4cm}  Poincaré Duality}
 
 In the last section, we studied the degree of a map. It is not always possible to find a map of non-vanishing degree between manifolds of the same dimension. For instance, every smooth map $S^2 \rightarrow T^2 = S^1 \times S^1$ has degree 0.
 
@@ -3602,7 +3671,7 @@ f_0 \sim f_1 \colon M \rightarrow S^n \Leftrightarrow \deg(f_0) = \deg(f_1)
 \end{equation}
 \end{theorem}
 
-\begin{theorem}[Poincarè Duality]
+\begin{theorem}[Poincaré Duality]
 Let $M$ be an oriented, connected, $n$-dimensional manifold with $\partial M = \emptyset$. We define the map:
 \begin{align}
 \text{PD} \colon H^k(M) \times H^{n-k}_c (M) &\rightarrow \rfield \\

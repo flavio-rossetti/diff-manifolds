@@ -10,6 +10,11 @@ Missing parts:
 
 Last changes:
 
+20-09-20:
+- corrections in the def. of degree of a map, and in the subsequent proof. Corrections in the proof of "dim(H^n(M)) \le 1".
+- Poincarè <-> Poincaré,
+- corrections in sections 11, 12.
+
 19-09-20:
 - corrections in section 8, 9, 13, 14 and 15.
 
