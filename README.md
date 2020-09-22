@@ -10,6 +10,11 @@ Missing parts:
 
 Last changes:
 
+22-09-20:
+- typos and mistakes corrected from section 20 onwards, in particular
+- proof of surjectivity of $I$ corrected (in Poincaré lemma and in the claim for top degree cohomology),
+- definition of $F$ in the proof of Brouwer theorem corrected.
+
 20-09-20:
 - corrections in the def. of degree of a map, and in the subsequent proof. Corrections in the proof of "dim(H^n(M)) \le 1".
 - Poincarè <-> Poincaré,

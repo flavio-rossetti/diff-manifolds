@@ -3249,7 +3249,7 @@ The hypothesis of connection is necessary for theorem \ref{connliegroup}.
 
 Let $M$ be a manifold with or without boundary. We have already seen (remark \ref{drremark}) that the $k$-th de Rham cohomology of $M$ is
 \begin{equation}
-H^k(M) \equiv H_{dR}^k(M) = \frac{\ker ( d_{k+1} \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M))  )}{\im ( d_k \colon \Omega^{k-1}(M) \rightarrow \Omega^k(M))  ) }
+H^k(M) \equiv H_{dR}^k(M) = \frac{\ker ( d_{k+1} \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M))  }{\im ( d_k \colon \Omega^{k-1}(M) \rightarrow \Omega^k(M))   }
 \end{equation}
 And we have already considered the Poincaré lemma \ref{poinclemma}:
 \begin{equation} \label{poinclemmashort}
@@ -3260,7 +3260,7 @@ H^k(\rfield^n) \cong
 \end{cases*}
 \end{equation}
 Indeed, in \eqref{poinclemmashort} we used that $\rfield^n$ is contractible (case $k \not = 0$) and that the only exact 0-forms (i.e. functions) are the constant ones (case $k=0$).
-Now, we want to discuss about $k$-forms with compact support (i.e. when the function $a$ of the definition \eqref{kformdef} has compact support). First, we notice that the exterior derivative $d$ maps forms with compact support to forms with compact support. Then, it is natural to define the following.
+Now, we want to discuss about $k$-forms with compact support. We define the support of $\omega$ as $\supp(\omega) \equiv \overline{ \{ p \in M \, | \, \omega(p) \ne 0\} }$. So, a $k$-form $\omega$ has compact support if $\supp (\omega)$ is a compact set. First, we notice that the exterior derivative $d$ maps forms with compact support to forms with compact support. Then, it is natural to define the following.
 \begin{definition}[Compactly supported de Rham cohomology]
 We define the compactly supported de Rham cohomology of a manifold $M$ as:
 \begin{equation}
@@ -3291,8 +3291,8 @@ Given $\omega \in \Omega_c^k(M), \pi^*\omega$ is not compactly supported in gene
 \begin{equation}
 \pi_* \colon \Omega_c^k(M \times \rfield) \rightarrow \Omega_c^{k-1}(M)
 \end{equation}
-defined in such a way that $\pi_* \omega$ still has compact support. Such a map is called \textit{integration along the fiber}. We used the notation of the pushforward because it is indeed another way to write the pushforward of a $k$-form.
-We also notice that, because of a generalized version of lemma \ref{lemmaform1}, every $k$-form on $M \times \rfield$ can be written as sum (more than two summands in general) of two types of $k$-forms:
+which actually maps compactly supported forms to compactly supported forms. So, if now $\omega \in \Omega^k_c(M \times \rfield)$, then $\pi_* \omega$ has compact support as a $(k-1)$-form in $M$. Such a map is called \textit{integration along the fiber}. We used the notation of the pushforward because it is indeed another way to write the pushforward of a $k$-form.
+We also notice that, because of a generalized version of lemma \ref{lemmaform1}, every $k$-form on $M \times \rfield$ can be written as a sum (with more than two summands in general) of two types of $k$-forms:
 \begin{description}
 \item[$\bullet $ Type A)] $\omega = f(x, t) \, \pi^* \eta, \quad \eta \in \Omega^k(M)$,
 \item[$\bullet$ Type B)] $\omega = f(x, t)\, \pi^*\eta \wedge dt, \quad \eta \in \Omega^{k-1}(M)$.
@@ -3320,10 +3320,10 @@ We prove the lemma for (type A) and (type B) forms, thus it is proved for any fo
 \begin{itemize}
 \item(Type A):
 \begin{align*}
-\pi_* \circ d \left ( f(x, t) \,\pi^* \eta \right ) &= \pi_* \left ( \underbrace{\defonde{f}{x}(x, t) dx \wedge \pi^* \eta}_{\text{type A}} + \underbrace{\defonde{f}{t}(x, t)\, dt \wedge \pi^* \eta}_{\text{type B}} + \underbrace{f(x, t) \, d\pi^* \eta}_{\substack{\text{type A because } \\ d\pi^*=\pi^*d}} \right ) = \\
+\pi_* \circ d \left ( f(x, t) \,\pi^* \eta \right ) &= \pi_* \left ( \underbrace{\defonde{f}{x}(x, t) dx \wedge \pi^* \eta}_{\text{type A}} + \underbrace{\defonde{f}{t}(x, t)\, dt \wedge \pi^* \eta}_{\text{type B}} + \underbrace{f(x, t) \, d\pi^* \eta}_{\substack{\text{type A because } \\ d\pi^*=\pi^*d}} \right ) \overset{(1)}{=} \\
 &=\int_{-\infty}^{\infty} \defonde{f}{s}(x, s) ds \, \pi^* \eta = 0
 \end{align*}
-up to a sign in the computations, where we used the definition of $\pi_*$ for (type B) forms \eqref{typeb} and  the fact that $\pi_*(\text{type A}) = 0$. Finally, we used the fundamental theorem of integral calculus with the fact that $f$ has compact support.
+where (1) is true up to a sign (but in the end the sign doesn't matter), and we used the definition of $\pi_*$ for (type B) forms \eqref{typeb} and  the fact that $\pi_*(\text{type A}) = 0$. Finally, we used the fundamental theorem of integral calculus with the fact that $f$ has compact support.
 Moreover, $d \circ \pi_*( f(x, t) \, \pi^*\eta) = 0$.
 \item(Type B):
 \begin{align*}
@@ -3437,16 +3437,16 @@ I \colon H^1_c(\rfield) &\rightarrow \rfield \\
 First of all, $I$ is well defined, i.e. the integral does not depend on the element of the chosen equivalence class. In fact, if we consider another $1$-form $\omega'$ such that $[\omega'] = [\omega]$, then it means that $\omega'$ and $\omega$ differ by an exact form: $\omega' = \omega + d \alpha, \alpha \in \Omega_c^{0}(\rfield)$. Let's suppose, without loss of generality, that $\supp \alpha, \supp \omega, \supp \omega' \subset B_{2R}(0)$. Then:
 \[ \int_{\rfield} \omega' = \int_{B_{2R}(0)} \omega' = \int_{B_{2R}(0)}(\omega + d \alpha) = \int_{B_{2R}(0)}\omega + \int_{B_{2R}(0)} d \alpha \overset{\text{Stokes}} = \int_{\rfield} \omega + \underbrace{\int_{\partial B_{2R}(0)} \alpha}_{=0} \, . \]
 
-Now, we prove that $I$ is surjective. This follows from the fact that for every $c \in \rfield$, we can choose $\omega \in H^1_c(\rfield)$ and $f$ smooth map with compact support such that $\int f \omega = c$.
+Now, we prove that I is surjective. Indeed, given a function $f > 0$ on $\rfield$ with compact support, let's consider $\eta = f(x) dx \in H^1_c(\rfield)$. We have that $\int_{\rfield} \eta = d > 0$. So, for every $c \in \rfield$ the form $\omega \equiv \frac{c}{d} \, \eta$ is such that $\int_{\rfield} \omega = c$. Thus, $I$ is surjective.
 
 In order to prove that $I$ is injective, we just need to prove that $\ker I = \{0\}$ (since $I$ is linear). By the standard Poincaré lemma \eqref{poinclemma} we know that every closed 1-form on $\rfield$ is exact, i.e. $\omega = d\alpha$, but $\alpha$ might not be compactly supported!
 In order to have an exact form in $H_c^1(\rfield)$, $\alpha$ should have compact support as well. But, we notice that $\omega$ is exact if $\int_{\rfield} \omega = 0$ (i.e. $\ker I = \{0\}$). Indeed let's write $\omega$ as $\omega=f(x) dx$, $f$ compactly supported function. If $\int_{\rfield} \omega = \int_{\rfield} f(x)dx = 0$, then the primitive $F(x)=\int_{-\infty}^x f(t)dt$ has compact support (for $x$ small we are outside of the support of $f$, whereas for $x$ big we integrate over all the support, i.e. it's like considering $\int_{\rfield} f(x) dx = 0$). Then $\omega$ is exact: $\omega = dF$ and $F$ has compact support $\Rightarrow [\omega]=0$. 
-So, $H^1_c(\rfield) \cong \rfield$ (in the same way, we can prove that $H^n_c(\rfield^n) \cong \rfield$).
+So, $H^1_c(\rfield) \cong \rfield$.
 For $\fbox{n > 1}$: from proposition \ref{kprop}, we know that there is an isomorphism
 \begin{equation} \label{hisomorph}
 H_c^k(M \times \rfield) \,  \substack{\overset{e_*}{\longleftarrow} \\ \underset{\pi_*}{\longrightarrow}} \, H_c^{k-1}(M)
 \end{equation}
-Let's suppose the thesis is true for $n-1$, then we can consider $M=\rfield^{n-1}$ (notice that $\rfield^n$ is an oriented manifold) and thanks to the isomorphism \eqref{hisomorph} the thesis is true also for $n$.
+Let's suppose the claim is true for $n-1$, then we can consider $M=\rfield^{n-1}$ (notice that $\rfield^n$ is an oriented manifold) and thanks to the isomorphism \eqref{hisomorph} the claim is true also for $n$.
 \end{proof}
 
 \begin{remarkbox}
@@ -3458,7 +3458,7 @@ The Poincaré lemma \ref{compsupppoinclemma} is valid for $\rfield^n$, but it al
 We will now analyze some consequences of the compactly supported Poincaré lemma.
 
 \begin{definition}[Bump form] \label{bumpform}
-A bump form on $M^n$ (manifold of dimension $n$) is a compactly supported $n$-form $\omega = \rho \, dx^1 \wedge \ldots \wedge dx^n$ in a coordinate domain $(U, \varphi), \varphi \colon U \rightarrow \varphi(U) \subseteq \rfield^n $ so that $\left | \int_U \omega \right | = 1$.
+A bump form on $M^n$ (manifold of dimension $n$) is a compactly supported $n$-form $\omega = \rho \, dx^1 \wedge \ldots \wedge dx^n$ supported in a coordinate domain $(U, \varphi), \varphi \colon U \rightarrow \varphi(U) \subseteq \rfield^n $ so that $\left | \int_U \omega \right | = 1$.
 \end{definition}
 
 \begin{remarkbox}\begin{remark} [Cohomologous bump forms] \label{bumpremark}
@@ -3497,10 +3497,10 @@ If $M$ is a connected, smooth manifold of dimension $n$, such that $\partial M =
 H^n(M) &\rightarrow \rfield \\
 [\omega] &\mapsto \int_M \omega \nonumber
 \end{align}
-is well defined and surjective.
+is well-defined and surjective.
 \end{theorem}
 \begin{proof}
-Since $\partial M = \emptyset$, we have $\int_M (\omega + d \eta) = \int_M \omega$ by Stokes's theorem. So, the definition does not depend on the element of the equivalence class chosen. Moreover, let $(U_i, \varphi_i)$  be a chart from the oriented atlas, and let $\omega=f(x_1, \ldots, x_n) dx^1 \wedge \ldots \wedge dx^n$ in $U_i$, with $f$ smooth function, $f > 0$. Then, $\int_M \omega > 0$. Since $\omega$ and $c \, \omega$ are cohomologous $\forall \, c \in \rfield$, we have that for every real number $\lambda$ we can consider a $n$-form $c\,  \omega$ such that $\int_M c\, \omega = \lambda$. So, the map is surjective.
+Since $\partial M = \emptyset$, we have $\int_M (\omega + d \eta) = \int_M \omega$ by Stokes's theorem. So, the definition does not depend on the element of the equivalence class chosen. Now, let $c$ be a real number. Moreover, let $(U_i, \varphi_i)$  be a chart from the oriented atlas, and let's consider $\alpha=f(x_1, \ldots, x_n) dx^1 \wedge \ldots \wedge dx^n$ in $U_i$, with $f$ smooth function, $f > 0$. Then, $\int_M \alpha = d > 0$. Now, $\omega \equiv \frac{c}{d} \, \alpha \in H^{n}(M)$ and $\int_M \omega = c$. So, for every $c \in \rfield$ we can find a form $\omega$ such that $\int_M \omega = c$, i.e. the map is surjective.
 \end{proof}
 
 \begin{definition} \label{closedman}
@@ -3571,8 +3571,9 @@ Let $f \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)} \subset \rfield^n$
 Let's prove it for $f$ smooth. If $f$ is continuous but not smooth, we can approximate it using smooth maps (Weierstrass approximation). Moreover, we will prove it for $n \ge 2$ (for $n=0, 1$ it is a consequence of the intermediate value theorem).
 By contradiction: let's assume $f$ has no fixed point. Then we consider the map
 \begin{align*}F \colon \overline{B_1(0)} &\rightarrow \partial \overline{B_1(0)} = S^{n-1} \\
-x &\mapsto \substack{\text{unique intersection with }S^{n-1} \\ \text{ of the ray passing through }x \text{ and } f(x)}
+x &\mapsto \substack{\text{ intersection point with }S^{n-1} \\ \text{ of the ray passing through }x \text{ and } f(x)}
 \end{align*}
+(Notice that: when both $x$ and $f(x)$ belong to the border of the sphere the intersection is not unique. In that case we choose the point $x$).
 $F$ is a smooth function: we will not verify it because it is not interesting for the proof. Moreover, we notice that if $y \in \partial \overline{B_1(0)} \Rightarrow F(y) = y$.
 \begin{figure}[H] \label{Fig:ball10}
      \centering
@@ -3720,13 +3721,13 @@ A Riemannian metric assigns lengths to vectors, angles between vectors...we want
 A Riemannian metric provides an isomorphism:
 \begin{align*}
 \musFlat \colon T_p M &\rightarrow (T_p M)^* \\
-v &\mapsto (\omega \mapsto g(v, w)) \, .
+v &\mapsto (w \mapsto g(v, w)) \, .
 \end{align*}
-And the inverse is the map $\musSharp \equiv \musFlat^{-1}$. This is called musical isomorphism and it is related to the action of "raising and index" and "lowering an index" in physics. For more info, see page 342 of \citetalias{Lee}. Such a map can be extended as $\musFlat \colon TM \rightarrow T^*M$ and so associate a 1-form to each vector field (since vector fields are sections of the tangent bundle and 1-forms are sections of the cotangent bundle). We can then further extend the isomorphism to alternating forms:  there exists a canonical isomorphism:
+And the inverse is the map $\musSharp \equiv \musFlat^{-1}$. This is called musical isomorphism and it is related to the action of "raising an index" and "lowering an index" in physics. For more info, see page 342 of \citetalias{Lee}. Such a map can be extended as $\musFlat \colon TM \rightarrow T^*M$ and so associate a 1-form to each vector field (since vector fields are sections of the tangent bundle and 1-forms are sections of the cotangent bundle). We can then further extend the isomorphism to alternating forms:  there exists a canonical isomorphism:
 \begin{align*}
 \text{Alt}^k(T_p^*M) & \overset{\sim}{\longrightarrow} (\text{Alt}^k(T_p M))^* \, . 
 \end{align*}
-It lets us define a Lorentzian metric on forms (in particular, to extend it from $T_p^* M$ to $\Lambda^kT_p^* M \equiv \text{Alt}^k (T_p^* M)$). A precise definition is the following one: if $e_1, \ldots, e_n$ is an orthonormal basis of $T_pM$ and $\delta^1, \ldots, \delta^n$ is the dual basis, then:
+So, we can now define a Lorentzian metric on forms (in particular, we can extend the concept from $T_p^* M$ to $\Lambda^kT_p^* M \equiv \text{Alt}^k (T_p^* M)$). A precise definition is the following one: if $e_1, \ldots, e_n$ is an orthonormal basis of $T_pM$ and $\delta^1, \ldots, \delta^n$ is the dual basis, then:
 \begin{equation*}
 \langle \delta^{\mu_1} \wedge \ldots \wedge \delta^{\mu_k}, \delta^{\lambda_1}\wedge \ldots \wedge \delta^{\lambda_k} \rangle = \begin{cases*}
 0, & if $(\lambda_1, \ldots, \lambda_k) \not = (\mu_1, \ldots, \mu_k)$\\
@@ -3887,11 +3888,11 @@ $$d_k \colon \Omega^k(M) \rightarrow \Omega^{k+1}(M)$$
 $$\delta_k \colon \Omega^{n-k}(M) \rightarrow \Omega^{n-k-1} (M)$$
 \textbf{Notice that} in the first part of the course the first map above was called $d_{k+1}$ and not $d_k$! We are changing notation here with respect to the notations used in the course.
 Then:
-$$(-1)^k \delta_k \star = \star \delta_k$$
+$$(-1)^k \delta_k \star = \star d_k$$
 and $-\delta_k$ is the formal adjoint of $d_{n-k-1}$ (via $\langle \cdot, \cdot \rangle_M$).  In addition, $(-1)^k \delta_k$ is conjugate to $d_k$ (via $\star$).
 Let's look again at the adjointness condition:
 \begin{equation} \label{adjcondition}
-\oast \quad \langle d_k \eta, \zeta \rangle _m + \langle \eta, \delta_{n-k-1} \zeta \rangle _M = 0 \, .
+\oast \quad \langle d_k \eta, \zeta \rangle _M + \langle \eta, \delta_{n-k-1} \zeta \rangle _M = 0 \, .
 \end{equation}
 \textbf{Fact}: From $\oast$, it follows that $\ker d_k \subset (\im \delta_{n-k-1})^{\bot}$. Actually, also $\supset$ holds. Furthermore: $\ker \delta_{n-k} = (\im d_{k-1})^{\bot}$.
 For finite-dimensional vector spaces, this would imply:
@@ -3907,7 +3908,7 @@ The expression $\ocdot$ above is an orthogonal direct sum decomposition.
 
 \begin{corollary} The following holds:
 \begin{align}
-\ker d_k &= \Omega^k(M) \cap \ker d_k = \left ( \ker (\delta_{n-k} \oplus \im(d_{k-1}) \right ) \cap \ker d_k = \\
+\ker d_k &= \Omega^k(M) \cap \ker d_k = \left ( \ker (\delta_{n-k}) \oplus \im(d_{k-1}) \right ) \cap \ker d_k = \\
 &= \left ( (\ker \delta_{n-k}) \cap \ker d_k \right) \oplus \im d_{k-1} \, . \nonumber
 \end{align}
 Comparing first and last term, and remembering that the de Rham cohomology of $M$ is $H^{k}(M) = \faktor{\ker d_k}{\im d_{k-1}}$, we have that $H^{k}(M) \cong \left ( (\ker \delta_{n-k}) \cap \ker d_k \right)$. In a similar way:
