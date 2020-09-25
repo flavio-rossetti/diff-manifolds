@@ -1,16 +1,12 @@
 %&pdflatex
-\documentclass[a4paper,11pt,titlepage, article, oneside]{memoir}
-%\semiisopage
+\documentclass[a4paper,11pt, article, oneside]{memoir}
+
 
 \usepackage[margin=3cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
-% usare latin1 con windows
 \usepackage[utf8]{inputenc}
-% usare utf8 con linux
-%\usepackage[uft8]{inputenc}
-\usepackage{color, graphicx}%per scrivere con diversi colori
-\usepackage{hyperref}
+\usepackage{color, graphicx}
 \usepackage{faktor}
 \usepackage{hyperref}
 \usepackage[makeroom]{cancel}
@@ -43,19 +39,6 @@
 
 \newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
 
-%%% Definizione degli ambienti tipo "Teorema"
-%\newtheorem{theorem}{Theorem}[chapter]
-
-%\theoremstyle{theorem}
-%\newtheorem{lemma}[theorem]{Lemma}
-%\newtheorem{proposition}[theorem]{Proposition}
-%\newtheorem{corollary}[theorem]{Corollary}
-%\theoremstyle{definition}
-%\newtheorem{definition}[theorem]{Definition}
-%\theoremstyle{remark}
-%\newtheorem{remark}[theorem]{Remark}
-%\newtheorem{example}[theorem]{Example}
-
 \numberwithin{equation}{section}
 \counterwithout{section}{chapter}
 
@@ -72,9 +55,7 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 
-
-
-% aumenta la spaziatura
+% it increases spacing
 \linespread{1.2}
 
 \DeclareMathOperator{\id}{id}
@@ -90,8 +71,6 @@
 % \DeclareMathOperator{i}{i}
 \newcommand{\rfield}{\mathbb{R}}
 \newcommand{\lie}[1]{\mathfrak{#1}}
-
-%\renewenvironment{proof}[1][\proofname]{\textit{#1.}}{\qed}
 
 
 \newcommand\oast{\stackMath\mathbin{\stackinset{c}{0ex}{c}{0ex}{\ast}{\bigcirc}}}
@@ -126,7 +105,7 @@
       ($(right)+(3em,-1.0em)$);}
 }
 
-
+\usepackage{hyperref}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -135,7 +114,7 @@
 
 
 \newpage
- {These notes are based on the content of the course \textit{Differentiable Manifolds} held at LMU during the Winter Semester 2019/2020. Some additional content from books and from my own studies was also added. These notes are neither complete nor accurate. They might contain typos and mistakes. You can send an email to \href{mailto:flaviorossetti@outlook.com}{\nolinkurl{flaviorossetti@outlook.com}} to help me improve these notes. Any help would be greatly appreciated!\\[13pt]}
+ These notes are based on the content of the course \textit{Differentiable Manifolds} held at LMU during the Winter Semester 2019/2020. Some additional content from books and from my own studies was also added. These notes are neither complete nor accurate. They might contain typos and mistakes. You can send an email to \href{mailto:flaviorossetti@outlook.com}{\nolinkurl{flaviorossetti@outlook.com}} to help me improve these notes. Any help would be greatly appreciated!\\[13pt]
 
  {These notes were compiled on \today. For the last version, check \url{https://github.com/fla-io/diff-manifolds}.}
 
@@ -149,7 +128,6 @@
 \newpage
 
 \pagenumbering{Roman}
-% indice
 
 \tableofcontents
 \clearpage
@@ -3361,7 +3339,7 @@ where, again, the differential in the left-hand side acts on $M \times \rfield$ 
 \end{lemma}
 \begin{proof}
 Let $\eta \in \Omega^{k-1}_c(M)$.
-\begin{equation*}
+\begin{equation*} 
 d \circ e_*(\eta) = d \left ( e(t)  \pi^*\eta \wedge dt \right ) = e(t) d^{M \times \rfield} \pi^*\eta \wedge dt = e(t) \pi^*(d^M \eta) \wedge dt = e_* d \eta \, . \qedhere
 \end{equation*}
 \end{proof}
@@ -3462,11 +3440,13 @@ A bump form on $M^n$ (manifold of dimension $n$) is a compactly supported $n$-fo
 \end{definition}
 
 \begin{remarkbox}\begin{remark} [Cohomologous bump forms] \label{bumpremark}
-We know that two forms are cohomologous in $H^k(U)$ if and only if they differ by an exact form (see remark \ref{cohomol}). The Poincaré lemma tells us that bump forms are cohomologous on $U$ if their integral on $U$ is the same. Given $\omega, \omega'$ bump forms in $U$, then:
+We know that two forms are cohomologous in $H^k(U)$ if and only if they differ by an exact form (see remark \ref{cohomol}). The Poincaré lemma tells us that bump forms are cohomologous in $H^n_c(U)$ if their integral on $U$ is the same. Given $\omega, \omega'$ bump forms in $U$, then:
 \begin{equation}
 \omega = \omega' + d \eta,\, \eta \in \Omega_c^{n-1}(U) \Longleftrightarrow \int_U \omega = \int_U \omega'
 \end{equation}
-Indeed, the "$\Rightarrow$" is always true thanks to Stokes's theorem, whereas the "$\Leftarrow$" follows from the proof of the Poincaré lemma \ref{compsupppoinclemma}, because bump forms are $n$-forms in a $n$-dimensional manifold and the equality between the integrals implies that $[\omega] = [\omega']$ (because the isomorphism used in the proof is given by the integral map \eqref{mapn}). Thus, the two forms differ by an exact form.
+Indeed, the "$\Rightarrow$" is always true thanks to Stokes's theorem, whereas the "$\Leftarrow$" follows from the proof of the Poincaré lemma \ref{compsupppoinclemma}, because bump forms are $n$-forms in a $n$-dimensional manifold and the equality between the integrals implies that $[\omega] = [\omega']$ (because the isomorphism used in the proof is given by the integral map \eqref{mapn}). Thus, the two forms differ by an exact form, and such a form is compactly supported. 
+
+In the next pages we will come across bump forms which are cohomologous to the $0$-form, even if their integrals are different. That is not a contradiction, since these compactly supported forms will be proved to be cohomologous in the cohomology $H^n(M)$ (and not $H^n_c(M)!$). i.e. their difference will be an exact $(n-1)$-form, but such a form will not be compactly supported. So, the above remark doesn't apply. 
 \end{remark}\end{remarkbox}
 
 \begin{proposition} \label{prop2bumpforms}
@@ -3923,7 +3903,7 @@ Elements of $\mathcal{H}^k(M) \equiv \ker d_k \cap \ker \delta_{n-k}$ are closed
 \mathcal{H}^k(M) = \ker \left ( \restrict{\Delta}{\Omega^k(M)} \right ) \, .
 \end{equation}
 \end{lemma}
-\begin{proof}[Proof of \ref{deltaeqn}]
+\begin{proof}[Proof of equation \eqref{deltaeqn}]
 $\eta, \zeta \in \Omega^k(M)$.
 \begin{description}
 \item["$\subseteq$":] trivial by definition of $\Delta$,

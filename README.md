@@ -10,6 +10,10 @@ Missing parts:
 
 Last changes:
 
+25-09-20:
+- A couple of lines added to remark 20.12,
+- Typo corrected in the last pages.
+
 22-09-20:
 - typos and mistakes corrected from section 20 onwards, in particular
 - proof of surjectivity of $I$ corrected (in Poincaré lemma and in the claim for top degree cohomology),
