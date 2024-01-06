@@ -10,6 +10,9 @@ Missing parts:
 
 Last changes:
 
+07-01-24:
+- Some typos corrected, some aesthetic changes
+
 25-09-20:
 - A couple of lines added to remark 20.12,
 - Typo corrected in the last pages.
