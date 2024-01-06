@@ -9,6 +9,12 @@
 \usepackage{color, graphicx}
 \usepackage{faktor}
 \usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    pdftitle={Differentiable Manifolds - Notes},
+    pdfpagemode=FullScreen,
+    }
+    
 \usepackage[makeroom]{cancel}
 \usepackage{pgfplots}
 \usepgfplotslibrary{patchplots}
@@ -30,10 +36,10 @@
 
 
 \usepackage{tcolorbox}
-\tcbuselibrary{breakable}
-\tcbset{breakable, colback=gray!8!white,colframe=gray!15!white}
+\tcbuselibrary{skins, breakable}
+\tcbset{breakable, enhanced, colback=gray!8!white,colframe=gray!15!white}
 
-\newtcolorbox{remarkbox}{breakable,   colback=white,colframe=gray}
+\newtcolorbox{remarkbox}{breakable, enhanced, colback=white,colframe=gray}
 
 \newtcolorbox{eqnbox}{colback=blue!5!white,colframe=blue!20!black, sharp corners}
 
@@ -114,9 +120,9 @@
 
 
 \newpage
- These notes are based on the content of the course \textit{Differentiable Manifolds} held at LMU during the Winter Semester 2019/2020. Some additional content from books and from my own studies was also added. These notes are neither complete nor accurate. They might contain typos and mistakes. You can send an email to \href{mailto:flaviorossetti@outlook.com}{\nolinkurl{flaviorossetti@outlook.com}} to help me improve these notes. Any help would be greatly appreciated!\\[13pt]
+ These (unofficial) notes are based on the content of the course \textit{Differentiable Manifolds} held at LMU during the Winter Semester 2019/2020 and taught by Prof. \href{https://homepages.physik.uni-muenchen.de/~Ivo.Sachs/}{Ivo Sachs} and Prof. \href{https://www.mathematik.uni-muenchen.de/~tvogel/}{Thomas Vogel}.  Some additional content from books and from my own studies was also added. These notes are neither complete nor accurate. They might contain typos and mistakes. \\[13pt]
 
- {These notes were compiled on \today. For the last version, check \url{https://github.com/fla-io/diff-manifolds}.}
+ {The first version of these notes was compiled on March 3, 2020. This version of the notes was compiled on \today. For the last version, check \url{https://github.com/fla-io/diff-manifolds}.}
 
   \vfill
   \vspace{1.5cm}
@@ -261,7 +267,7 @@ A homomorphism $h$ between two sets endowed with structures (think about two gro
 \begin{equation*}
 h \colon (G, +) \longrightarrow (H, \circ)
 \end{equation*}
-such that $h(a + b) = h(a) \circ h(b), \forall\, a, b, \in G$, where $(G, +)$ and $(H, \circ)$ are two groups. The definition for rings and fields is analogous. People from category theory also tend to call (group) homomorphisms just (group) morphisms since the morphisms in the category \textbf{Grp} of all groups are set to be group homomorphisms.
+such that $h(a + b) = h(a) \circ h(b), \forall\, a, b, \in G$, where $(G, +)$ and $(H, \circ)$ are two groups. The definition for rings and fields is analogous. In category theory, (group) homomorphisms are often called (group) morphisms since the morphisms in the category \textbf{Grp} of all groups are set to be group homomorphisms.
 \end{definition}
 
 Now, we can consider some particular types of homomorphisms.
@@ -288,8 +294,8 @@ Don't get confused with hom\underline{e}omorphisms! A homeomorphism is a continu
   Given a set $E$, an equivalence relation $\sim$ is a binary relation which satisfies the following properties:
   \begin{itemize}
     \item $a \sim a, \forall\, a \in E$, \hspace*{\fill}\textit{(reflexive property)}
-    \item $a \sim b \Rightarrow b \sim a, \forall\, a, b \in E$, \hspace*{\fill}\textit{(symmetric property)}
-    \item $a \sim b, b \sim c \Rightarrow a \sim c, \forall \, a, b, c \in E$. \hspace*{\fill}\textit{(transitive property)}
+    \item If $a \sim b$ for $a, b \in E$ $\Rightarrow b \sim a$, \hspace*{\fill}\textit{(symmetric property)}
+    \item If $a \sim b, b \sim c $ for $a, b, c \in E$ $ \Rightarrow a \sim c$. \hspace*{\fill}\textit{(transitive property)}
   \end{itemize}
 \end{definition}
 
@@ -340,7 +346,7 @@ A topology on a set $M$ is a subset $\mathcal{O} \subset \mathcal{P}(M)$, where 
 \begin{enumerate}
 	\item $\emptyset, M \in \mathcal{O}$,
 	\item $\mathcal{O}$ is closed under arbitrary unions: $U_i \in \mathcal{O}, i \in I$, then $\bigcup\limits_{i \in I} U_i \in \mathcal{O}$,
-	\item $\mathcal{O}$ is closed under finite intersections: $U_1, \ldots, U_k \in \mathcal{O}$, then $U_1 \cap \ldots \cap U_k \in \mathcal{O}$.
+	\item $\mathcal{O}$ is closed under finite intersections: $U_1, \ldots, U_k \in \mathcal{O}$ for $k \in \mathbb{N}$, then $U_1 \cap \ldots \cap U_k \in \mathcal{O}$.
 \end{enumerate}
 Sets in $\mathcal{O}$ are called open sets. A set $A \subset M$ is closed if $M \setminus A$ is open. A subset $V \subset M$ containing $p$ is a neighbourhood of $p$ if there is an open set $U \subset V$ containing $p$. Sometimes we will denote the topology on a set $X$ by the symbol $\mathcal{O}_X$.
 \end{definition}
@@ -404,7 +410,7 @@ A topological space $(M, \mathcal{O}_M)$ is Hausdorff if for all $p, q \in M$ th
 Points in Hausdorff spaces are closed sets. i.e. if $M$ is Hausdorff and $x \in X$, $\{x\}$ is a closed set. In order to see that, we just need to prove that $M \setminus \{x\}$ is open. Let's suppose $M \setminus \{x\} \not = \emptyset$ (otherwise we are done, since $M = \{x\}$ and $M$ is both closed and open). Then we can find another point $y \in M \setminus \{x\}$. Since $M$ is Hausdorff, we can find two open sets $U_x, U_y$ containing $x$ and $y$ respectively, such that $U_x \cap U_y = \emptyset$. The proof is over if we prove that $M \setminus \{x\} = \cup_{y \in M \setminus \{x\}} U_y$, since it implies that $M \setminus \{x\}$ is open (arbitrary union of open sets is open), and then $\{x\}$ is closed. It is true because:
 \begin{itemize}
 \item "$M \setminus \{x\} \subseteq  \cup_{y \in M \setminus \{x\}} U_y$": for each point $z$ in $M$ different from $x$, there exists an open set $U_z$ entirely contained in $M \setminus \{x\}$ by Hausdorff assumption. The point $z$ is contained in $U_z$ and $U_z$ is an element of the union $\cup_{y \in M \setminus \{x\}} U_y$.
-\item "$M \setminus \{x\} \supseteq \cup_{y \in M \setminus \{x\}} U_y$": if $z \in \cup_{y \in M \setminus \{x\}} U_y$, then $z \not = x$, otherwise there would be an intersection between an open set $U_{\bar x}$ for a fixed $\bar x$ and every open set containing $x$. This is impossible because by Hausdorff assumption there exists at least one open sets of those which does not intersect $U_{\bar x}$.
+\item "$M \setminus \{x\} \supseteq \cup_{y \in M \setminus \{x\}} U_y$": if $z \in \cup_{y \in M \setminus \{x\}} U_y$, then $z \not = x$, otherwise there would be an intersection between an open set $U_{\bar x}$ for a fixed $\bar x$ and every open set containing $x$. This is impossible because by Hausdorff assumption there exists at least one open set in this family that does not intersect $U_{\bar x}$.
 \end{itemize}
 
 Moreover:
@@ -415,7 +421,7 @@ Moreover:
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Product topology]
-Let $(M_i, \mathcal{O}_i), i \in I$ be topological spaces. Then the product topology on $\prod_{i \in I} M_i$ is the smallest topology such that all projections
+Let $(M_i, \mathcal{O}_i), i \in I$ be topological spaces. Then the product topology on $\prod_{i \in I} M_i$ is the smallest topology such that the projections
 $$
 \pi_j \colon \prod_{i \in I} M_i \rightarrow M_j
 $$
@@ -443,7 +449,7 @@ We can also use another useful characterization of the quotient topology: a set 
 \begin{tcolorbox}\begin{example}[Cofinite topology]
 Let $M$ be a set. We define the following topology: the open sets are $\emptyset$ and the sets $U \subset M$ such that $U \not = \emptyset$ and that their complement in $M$ is finite. Another way to define the same topology is using closed sets: the only closed sets in this topology are $M$ and the finite sets. This topology is called cofinite topology.
 $M$ with this topology is not Hausdorff if $M$ is an infinite set.
-Why? Because\footnote{the proof is easier to follow if you think of the space $M$ as $\rfield$.}: given $x, y$ in $M$, with $ x \not = y$, if $U_a$ and $U_b$ are open sets that contain $a$ and $b$ respectively, the complements of $U_a$ and $U_b$ must be finite (so, $U_a$ and $U_b$ must be infinite, because the bigger space $M$ is infinite).
+Why? Because\footnote{the proof is easier to follow if you think of the space $M$ as $\rfield$.}: given $a, b$ in $M$, with $ a \not = b$, if $U_a$ and $U_b$ are open sets that contain $a$ and $b$ respectively, the complements of $U_a$ and $U_b$ must be finite (so, $U_a$ and $U_b$ must be infinite, because the bigger space $M$ is infinite).
 But then $U_a \cap U_b \not = \emptyset$. Indeed, the complement of $U_a$ in $M$ is $M \setminus U_a$ and it must be finite because $U_a$ is open.
 If we assume $U_a \cap U_b = \emptyset$, then $U_b$ must be contained in the complement of $U_a$. But then $U_b$ (which is an infinite set, because it is open) would be contained in $M \setminus U_a$ (which is a finite set). Contradiction!
 \end{example}\end{tcolorbox}
@@ -555,10 +561,10 @@ A topological space $X$ is connected if it cannot be written as a union of two n
 
 \begin{remarkbox}
 \begin{remark}[Equivalent definitions of connected space]
-Sometimes it is useful to consider equivalent definitions of connection: a topological space $X$ is connected if:
+Sometimes it is useful to consider equivalent definitions of connection. A topological space $X$ is connected if:
 \begin{itemize}
-\item It cannot be written as union of two non-empty, disjoint closed sets,
-\item $X = A \cup B$ with $A, B$ disjoint and open sets implies that $A= \emptyset$ or $B = \emptyset$,
+\item It cannot be written as union of two non-empty, disjoint closed sets, or
+\item $X = A \cup B$ with $A, B$ disjoint and open sets implies that $A= \emptyset$ or $B = \emptyset$, or
 \item The only sets in $X$ that can be both open and closed are $X$ and $\emptyset$.
 \end{itemize}
 \end{remark}
@@ -594,7 +600,7 @@ Such topological invariants are also useful in order to verify if two topologica
 
 \begin{definition}[Derivation] \label{derivation}
 If $a$ is a point of $\rfield^n$, a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$ is called a \textit{derivation at a} if it is linear over $\rfield$ and satisfies the following product rule:
-$$\restrict{v(fg)}{a} = f(a) \restrict{v(g)}{a} + g(a) \restrict{v(f)}{a} \, .$$
+$$\restrict{v(fg)}{a} = f(a) \restrict{v(g)}{a} + g(a) \restrict{v(f)}{a} \, , \quad \forall\, f, g \in C^{\infty}(\rfield^n).$$
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
@@ -635,7 +641,7 @@ We could prove that the dual basis is indeed a basis of the dual space, so $\dim
       g \colon V_p &\rightarrow V_p^* \\
       x &\mapsto g(x, \cdot) \nonumber
     \end{align}
-    where $g$ is the Euclidean metric in $\rfield^3$ (in the sense of General Relativity), which in $\rfield^n$ coincides with the standard dot product: $g(x, y) = \sum_i x^i y^i$.
+    where $g$ is the Euclidean metric in $\rfield^3$ (in the sense of Riemannian geometry), which in $\rfield^n$ coincides with the standard dot product: $g(x, y) = \sum_i x^i y^i$.
     \item $V = \left \{ M \in M_2(\mathbb{C}) \, | \, M^{\dagger} = M, \tr(M) = 0 \right \}$ is a vector field on $\rfield$, where
     $$M= \left ( \begin{matrix}
     a &b \\
@@ -659,19 +665,19 @@ We could prove that the dual basis is indeed a basis of the dual space, so $\dim
   0 &-1
 \end{matrix}
   \right)$$
-  and a dual basis is given by $e^{*i}(e_j) = \frac{1}{2} \tr(e_i, e_j)$ (using the matrix product).
-  \item Quantum Mechanics: $$V = \{ f \colon \rfield^3 \rightarrow \rfield \, | \, ||f|| = \int_{\rfield^3} |f|^2 d^3x < \infty \} = L^2(\rfield^3)$$ is a vector space. If we consider the Laplacian operator $\Delta = \frac{\partial^2}{(\partial x^1)^2} + \frac{\partial^2}{(\partial x^2)^2} + \frac{\partial^2}{(\partial x^3)^2}$, then a basis is given by $\{e_n\} = \{\frac{f_n}{||f_n||}\}$, where $f_n$ eigenfunctions of $\Delta$: $\Delta f_n = \lambda_n fn$ (if we choose appropriate boundary conditions).
-  A dual basis is given by $e^{*n} = \int_{\rfield^3} e_n$
+  and a dual basis is given by $e^{*i}(\cdot) = \frac{1}{2} \tr(e_i, \cdot)$ (using the matrix product).
+  \item Quantum Mechanics: $$V = \{ f \colon \rfield^3 \rightarrow \rfield \, | \, \|f\|^2 = \int_{\rfield^3} |f|^2 d^3x < \infty \} = L^2(\rfield^3)$$ is a vector space. If we consider the Laplacian operator $\Delta = \frac{\partial^2}{(\partial x^1)^2} + \frac{\partial^2}{(\partial x^2)^2} + \frac{\partial^2}{(\partial x^3)^2}$, then a basis is given by $\{e_n\} = \{\frac{f_n}{||f_n||}\}$, where $f_n$ are eigenfunctions of $\Delta$: $\Delta f_n = \lambda_n fn$ (if we choose appropriate boundary conditions).
+  A dual basis is given by $e^{*n}(\cdot) = \int_{\rfield^3} e_n (\cdot)$
   Notice that both $V$ and $V^*$ are infinite-dimensional spaces.
-  Some notations:
-  $$e_n = |f_n \rangle,\quad e^{*n} = \langle f_n |,\quad e^{*n}(e_m) = \braket{f_n | f_m}$$
+  In quantum mechanics the following notations are also used:
+  $$e_n = |f_n \rangle,\quad e^{*n} = \langle f_n |,\quad e^{*n}(e_m) = \braket{f_n | f_m}.$$
   \end{enumerate}
 \end{example}\end{tcolorbox}
 
 
 \begin{remarkbox}\begin{remark}\label{vectorasder}
-Every vector in $\rfield^n$ about a point $p \in \rfield^n$ (i.e. such that its origin is the point $p$) "can be seen" as a derivation (cf. def. \ref{derivation}), i.e. as a directional derivative of a function evaluated at the point $p$. For the sake of simplicity, we think $p=0$ (but the following results are true $\forall \, p \in \rfield^n$).
-The sentence "can be seen" means that there is an isomorphism $\psi$ associating such vectors to such linear forms. Let's construct this isomorphism in the following steps:
+Every vector in $\rfield^n$ about a point $p \in \rfield^n$ (i.e. such that its origin is the point $p$) "can be seen" as a derivation (cf. def. \ref{derivation}), i.e. as a directional derivative of a function evaluated at the point $p$. For the sake of simplicity, let us now consider $p=0$ (but the following results are true $\forall \, p \in \rfield^n$).
+By "can be seen" we mean that there is an isomorphism $\psi$ associating such vectors to such linear forms. Let's construct this isomorphism in the following steps:
 
 \begin{enumerate}
 \item Because of linearity, we just need to define the isomorphism for the basis vectors $\{ e_i \}_{i=1,\ldots,n}$ of $\rfield^n$.
@@ -681,11 +687,11 @@ The sentence "can be seen" means that there is an isomorphism $\psi$ associating
 f &\mapsto \restrict{\frac{\partial}{\partial x_j}}{0} (f) \equiv \frac{\partial f}{\partial x_j} (0) \nonumber \, .
 \end{align}
 
-In particular, if $\Der(\rfield^n) = \{ \text{derivations on }\rfield^n\}$ $ = \{ v\colon C^{\infty}\rightarrow \rfield, \\ \text{satisfying Leibnitz rule}\}$, then the map:
+In particular, if $\Der(\rfield^n) = \{ \text{derivations on }\rfield^n \text{ at } 0\}$ $ = \{ v|_0 \colon C^{\infty}\rightarrow \rfield, \\ \text{satisfying Leibnitz rule}\}$, then the map:
 \begin{equation}
    \rfield^n \overset{\psi}{\longleftrightarrow}\Der(\rfield^n)
 \end{equation}
-such that $\psi(e_j) = \restrict{\partial_{x_j}}{p=0}, \forall \, e_j$ basis vector, and with $\restrict{\partial_{x_j}}{p=0}$ partial derivative with respect to the $j$-th component, defines a linear map. You can read more on page 53 of \citetalias{Lee}. In general we have $\psi(v)=\restrict{\partial_{v}}{p=0}$, where $\restrict{\partial_v}{p=0}$ is the directional derivative with respect to $v$. Moreover, $\Der(\rfield^n)$ is a vector space and we used the double arrow above because $\psi$ is an isomorphism, i.e. a bijective map which preserves operations from one space to the other. Here every derivative is evaluated at $p=0$. We notice that the point $p$ itself is not important for the directional derivative (the \textit{direction} in which we differentiate is the same for every point of the space), but $p$ is meaningful when we \textit{evaluate} the derivative of the function at that point. Indeed, $\restrict{\partial_x (x^2)}{x=0} \not = \restrict{\partial_x (x^2)}{x=1}$, even if we are differentiating along the $x$-axis in both cases.
+such that $\psi(e_j) = \restrict{\partial_{x_j}}{p=0}, \forall \, e_j$ basis vector, and with $\restrict{\partial_{x_j}}{p=0}$ partial derivative with respect to the $j$-th component, defines a linear map. You can read more about this on page 53 of \citetalias{Lee}. In general we have $\psi(v)=\restrict{\partial_{v}}{p=0}$, where $\restrict{\partial_v}{p=0}$ is the directional derivative with respect to $v$. Moreover, $\Der(\rfield^n)$ is a vector space and we used the double arrow above because $\psi$ is an isomorphism, i.e. a bijective map which preserves operations from one space to the other. Here every derivative is evaluated at $p=0$. We notice that the point $p$ itself is not important for the directional derivative (the \textit{direction} in which we differentiate is the same for every point of the space), but $p$ is meaningful when we \textit{evaluate} the derivative of the function at that point. Indeed, $\restrict{\partial_x (x^2)}{x=0} \not = \restrict{\partial_x (x^2)}{x=1}$, even if we are differentiating along the $x$-axis in both cases.
 \end{enumerate}
 
 
@@ -706,7 +712,7 @@ Now, let's just define
 \begin{equation} \label{dualdef}
 e^{*i}\left( \restrict{\frac{\partial}{\partial x^j}}{0} \right) \equiv \restrict{\frac{\partial}{\partial x^j}}{0} x_i =\restrict{\frac{\partial}{\partial x^j} x_i}{0} = \delta_j^i
 \end{equation}
-where $x_i$ is the coordinate function defined above (remember: $\partial_{x_j}$ is a derivation, so it must be applied to functions!). Now, it might seem that $e^{*i}$ does not take a vector as argument, but rather a function. Actually, this problem is solved by the isomorphism between vectors and directional derivatives proved above. If $\psi$ is the name of such isomorphism, we could slightly change the definition \eqref{dualdef} in order to solve this ambiguity:
+where $x_i$ is the coordinate function defined above (remember: $\partial_{x_j}$ is a derivation, so it must be applied to functions!). Now, it might seem that $e^{*i}$ does not take a vector as argument, but rather a function. Actually, this problem is solved by the isomorphism between vectors and directional derivatives proved above. Moreover, if $\psi$ is the name of such isomorphism, we could write \eqref{dualdef} as follows:
 \begin{equation}
 e^{*i}(e_j) \equiv \psi(e_j) (x_i)
 \end{equation}
@@ -743,8 +749,8 @@ where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}
 \begin{remarkbox}\begin{remark} [Fields vs. Derivations] \label{fieldsvsder}
   If $v$ is a vector field in $\rfield^n$, then $v$ assigns a vector to another vector of $\rfield^n$. So $v \colon \rfield^n \rightarrow \rfield^n$. So, the set of all vector fields should be (we will use a different symbol to denote it):
   $$X(\rfield^n) = \left \{ v \colon \rfield^n \rightarrow \rfield^n \right \}$$
-  However, the definition \ref{setsfields} is a bit different. Why?
-  The fact is, we can consider a vector of $\rfield^n$ as a directional derivative, cf. remark \ref{vectorasder} (we are not considering any fixed point here, but the results do not change). Now a derivation, as defined in def. \ref{derivation}, is a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$, i.e. we can say that a derivation is a very smooth element of $\mathbb{F}(\rfield^n) = \{ \text{functions } f \colon \rfield^n \rightarrow \rfield\}$. So, $\mathfrak{X}(\rfield^n) \cong X(\rfield^n)$ because we can associate a derivation of $\mathfrak{X}(\rfield^n)$ to each vector of $X(\rfield^n)$, and vice versa. Then we also explained why in the definition of $\mathfrak{X}( \rfield^n)$ every element must be $\rfield$-linear and satisfy the Leibnitz rule: it follows from the definition of derivations.
+  However, definition \ref{setsfields} is a bit different. Why?
+  The fact is, we can consider a vector of $\rfield^n$ as a directional derivative, cf. remark \ref{vectorasder} again (we are not considering any fixed point here, but the results do not change). Now, a derivation, as defined in def. \ref{derivation}, is a map $v \colon C^{\infty}(\rfield^n) \rightarrow \rfield$, i.e. we can say that a derivation is a very smooth element of $\mathbb{F}(\rfield^n) = \{ \text{functions } f \colon \rfield^n \rightarrow \rfield\}$. Hence, there exists a correspondence between $\mathfrak{X}(\rfield^n)$ and $X(\rfield^n)$, modulo the required regularity.
 
   Now, a question arises: given $v$ vector field, should we write $v(p)$ (i.e. it takes vectors as argument) or should we write $v(f)$ (i.e. it takes smooth functions as arguments)? The answer is: it depends on the case, since they are two different "$v$"s. Which is, we will use vectors when we think of $v$ as a function who takes elements of $\rfield^n$, and we will use functions in the other case. And we can choose which case to use, since we can identify every vector field with a derivation, and every derivation with a vector field (for more info, see pag. 181 of \citetalias{Lee}). Now, let us analyze how $v(f)$ is made in the latter case.
   Given $v \in \mathfrak{X}(\rfield^n), f: \rfield^n \rightarrow \rfield$, we define the function $v(f)$ as
@@ -756,13 +762,13 @@ where $\mathbb{F} \equiv \{$ functions $f\colon \rfield^n \rightarrow \rfield \}
   \begin{equation} \label{vfieldincoord}
     v(f)(p) = v_p f = v^i(p)(e_i)_p f = v^i(p) \restrict{\frac{\partial}{\partial x^i}}{p} f = v^i(p) \frac{\partial f}{\partial x^i} (p)
   \end{equation}
-  where we used summation convention, and the fact that every basis vector $e_i$ can be seen as $\restrict{\partial_{x_i}}{p}$. We defined it in the right way because, as expected, we found that $v_p(f)$ is the directional derivative of $f$ in the direction of $v$, evaluated at $p$. So, in brief:
+  where we used  the summation convention, and the fact that every basis vector $e_i$ can be seen as $\restrict{\partial_{x_i}}{p}$. We defined it in the right way because, as expected, we found that $v_p(f)$ is the directional derivative of $f$ in the direction of $v$, evaluated at $p$. So, in brief:
   \begin{itemize}
     \item $v(f)(p)$ is a number
     \item $v(f)(\cdot)$ is a function from $\rfield^n$ to $\rfield$
     \item $v(\cdot)$ is a function from $\mathbb{F}(\rfield^n)$ to $\mathbb{F}(\rfield^n)$
   \end{itemize}
-We also notice that the mathematical object $e_i$ is not much different from $\restrict{(e_i)}{p}$ in this case: there is no difference if we think about them as directions, but it makes a difference if we think about them as directional derivatives, because the latter notation gives info about the point in which the derivative is evaluated. So, we add the pedix "$p$" in order to make the isomorphism between vectors and directional derivatives more explicit. Check also the remark \ref{pointorvec}.
+We also notice that the mathematical object $e_i$ is not much different from $\restrict{(e_i)}{p}$ in this case: there is no difference if we think about them as directions, but it makes a difference if we think about them as directional derivatives, because the latter notation gives info about the point in which the derivative is evaluated. So, we add the pedix "$p$" in order to make the isomorphism between vectors and directional derivatives more explicit. Check also remark \ref{pointorvec}.
 \end{remark}\end{remarkbox}
 
 \begin{figure}[H]
@@ -917,7 +923,7 @@ Now, we want to define the exterior product between a $k$-form and a $p$-form (a
 
 \end{example}\end{tcolorbox}
 
-There are some interesting properties about $k$-forms:
+Here are some interesting properties of $k$-forms:
 \begin{proposition}
   $\alpha \in \Lambda^k V^*, \beta \in \Lambda^p V^*, \gamma \in \Lambda ^q V^*$, then:
   \begin{enumerate}
@@ -929,7 +935,7 @@ There are some interesting properties about $k$-forms:
 \begin{proof}[Sketch of the proof]
 $ $
 	\begin{enumerate}
-	\item Writing the forms in terms of the basis, we only need to prove that the property (1) holds for the elements of the dual basis. Moreover, by multilinearity, we just need to prove it for the elements of the dual basis applied to a basis $\{e_i\}$ of $V$. Thus, the proof for (1) is over because this property is true for the determinant: when we compute it, we can start from any row or column.
+	\item Writing the forms in terms of the basis, we only need to prove that property (1) holds for the elements of the dual basis. Moreover, by multilinearity, we just need to prove it for the elements of the dual basis applied to a basis $\{e_i\}$ of $V$. Thus, the proof for (1) is over because this property is true for the determinant: when we compute it, we can start from any row or column.
 	\item By writing the forms in terms of the basis as before.
 	\item  Again, by writing the forms in terms of the basis we have a sequence of wedge products like
 	$$e^{*i_1} \wedge \ldots \wedge e^{*i_k} \wedge e^{*j_1} \wedge \ldots \wedge e^{*j_p}\, .$$
@@ -962,7 +968,7 @@ Another (equivalent) definition:
   \begin{equation}
     \omega(p)(v_1, \ldots, v_k) = \omega(v_1, \ldots, v_k)(p) \, .
   \end{equation}
-  See also the exercise 1, problem sheet 3.
+  See also exercise 1, problem sheet 3.
 \end{remark}\end{remarkbox}
 
 We want to generalize the concept of a differential of a function.
@@ -1010,18 +1016,16 @@ We want to generalize the concept of a differential of a function.
    \begin{equation}
      df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p\, .
    \end{equation}
-   Applying the definition to $f = x^j$ (coordinate function, as defined in \eqref{coofunc}), we get:
+   On the other hand, if we apply the above to $f = x^j$ (coordinate function, as defined in \eqref{coofunc}), we get:
    \begin{equation}
-     df_p = \frac{\partial f}{\partial x^i} (p) (\lambda^i)_p = \frac{\partial f}{\partial x^i} (p) (dx^i)_p \, .
+     (dx^j)_p = \frac{\partial x^j}{\partial x^i} (p) \restrict{(\lambda^i)}{p} = \delta^i_j \restrict{(\lambda^i)}{p} = \restrict{(\lambda^j)}{p} \, .
    \end{equation}
    And then:
    \begin{equation}
      df = \frac{\partial f}{\partial x^i} dx^i\, .
    \end{equation}
-   Indeed, if $f = x^j$ then, as before:
-   \begin{equation}
-     (dx^j)_p = \frac{\partial x^j}{\partial x^i} (p) \restrict{(\lambda^i)}{p} = \delta^i_j \restrict{(\lambda^i)}{p} = \restrict{(\lambda^j)}{p} \, .
-   \end{equation}
+
+   
 Pay attention: what we did here is a bit different from what we did for the definition $\ref{vfpdef}$ of a vector field applied to a function. In this case, $p$ is the point where we fixed our vector, whereas in the other case $p$ was the point where we wanted to evaluate the directional derivative of $f$.
 \end{remark}\end{remarkbox}
 
@@ -1097,7 +1101,7 @@ $ $
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark}
-  The exterior derivative increases the degree of a $k$-form by 1 (the $k$-form becomes a ($k+1$)-form). Can we get backwards, which is, can we decrease the degree of a $k$-form? Yes, using the interior derivative.
+  The exterior derivative increases the degree of a $k$-form by 1 (the $k$-form becomes a ($k+1$)-form). Can we get backwards, which is, can we decrease the degree of a $k$-form? The answer is yes, and is given by the interior derivative, which we now introduce.
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Interior derivative] \label{intder}
@@ -1107,12 +1111,12 @@ $ $
     \omega &\mapsto i_z(\omega) \equiv i_z \omega \nonumber
   \end{align}
   such that
-  $$(i_z \omega) (v_1, \ldots, v_{k-1}) = \omega(z, v_1, \ldots, v_{k-1}), \forall \, v_i \in \mathfrak{X}(\rfield^n) \, .$$
+  $$(i_z \omega) (v_1, \ldots, v_{k-1}) = \omega(z, v_1, \ldots, v_{k-1}), \quad \forall \, v_1, \ldots, v_{k-1} \in \mathfrak{X}(\rfield^n) \, .$$
   $i_z \omega$ is also called  \textit{contraction} or \textit{interior multiplication}. Another notation for $i_z \omega$ is $z \, \lrcorner \, \omega$.
 \end{definition}
 
 \begin{tcolorbox}\begin{example}[Some computations]
-  In $\rfield^2$, Let $e_x, e_y$ be the basis vectors (that can be seen as vector fields). Then we have:
+  In $\rfield^2$, let $e_x, e_y$ be the basis vectors (that can be seen as vector fields). Then, we have:
   $$i_{e_x}(dx \wedge dy) = dy,$$
   $$i_{e_y}(dx \wedge dy) = - dx \, .$$
 \end{example}\end{tcolorbox}
@@ -1156,7 +1160,7 @@ $$i_z \left( i_z(\omega) \right) (v_1, \ldots, v_{k-2}) = i_z \omega (z, v_1, \l
 \end{proof}
 
 \begin{remarkbox}\begin{remark}
-  In the above proposition there is a little abuse of notation when we claimed $i_z(i_z \omega) = 0$, see also the remark \ref{abusenot1}.
+  In the above proposition there is a little abuse of notation when we claimed $i_z(i_z \omega) = 0$, see also remark \ref{abusenot1}.
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Nondegenerate 2-form]
@@ -1183,11 +1187,11 @@ Now, let's talk about \textit{pullbacks} and \textit{pushforwards} for functions
   \end{align*}
   such that
   \begin{equation*}
-    (f^* \omega)(p) (u_1, \ldots, u_k) = \omega (f(p)) (df_p(u_1), \ldots, df_p(u_k)), \quad \forall\, \, p \in \rfield^n, \forall \,\, u_i \in \mathfrak{X}(U) \, .
+    (f^* \omega)(p) (u_1, \ldots, u_k) = \omega (f(p)) (df_p(u_1), \ldots, df_p(u_k)), \quad \forall\, \, p \in \rfield^n, \forall \, u_1, \ldots, u_k \in \mathfrak{X}(U) \, .
   \end{equation*}
 \end{definition}
 
-Now, we want to give another name to the differential of a function.
+Now, we want to generalize the concept of differential of a function.
 \begin{definition}[Pushforward]
   Given $f \colon U \rightarrow V$ as before, we will also call the differential of $f$ at $p \in \rfield^n$, i.e. $df_p = df(p)$, as the \textit{pushforward} of $f$ at $p$, and it will be denoted by the symbol $(f_*)_p$.
   So, the pushforward map is:
@@ -1200,9 +1204,9 @@ Now, we want to give another name to the differential of a function.
 \begin{remarkbox}\begin{remark}[Pushforward of composition of functions] \label{pushfcomposition}
 In our mind, we'll think of the pushforward as the differential of a map: $df_p = (f_*)_p$, at least until this concept is generalized.
 By definition of differential: $df_p(v) = v_p(f)$, where $v_p$ %p's added (and below)
-is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v_p(f)$ is the directional derivative of $f$ with respect to $v_p$ (not evaluated at any point, for now!). In particular, if we apply the definition to function $h \in C^{\infty}(\rfield^n, \rfield^m)$, we have (cf. also p. 55 \citetalias{Lee}): 
+is a vector tangent to $\rfield^n$ at $p$. Since vectors are like directional derivatives, $v_p(f)$ is the directional derivative of $f$ with respect to $v_p$ (not evaluated at any point, for now!). In particular, if we apply the definition to a function $h \in C^{\infty}(\rfield^n, \rfield^m)$, we have (cf. also p. 55 \citetalias{Lee}): 
 $$(f_*)_p (v)(h) \overset{(1)}{=} v(h \circ f) = v(h(f)) \overset{(2)}{=} v (f^* h) $$
-where we used: (1) $(f_*)_p (v)(h)  = v_p(h \circ f)$, it can be proved that it is the right expression in a similar way to what we did to prove that $(f_*)_p (v)= v_p(f)$ is the right expression (cf. remark \ref{diffcoordremark}), (2) the expression of the pullback for a differentiable function, which is completely legal since we defined it for differentiable $k$-forms, and a differentiable function is just a 0-form.
+where we used: (1) $(f_*)_p (v)(h)  = v_p(h \circ f)$, it can be proved that it is the right expression in a similar way to what we did to prove that $(f_*)_p (v)= v_p(f)$ is the right expression (cf. remark \ref{diffcoordremark}), (2) the expression of the pullback for a differentiable function (i.e. a 0-form).
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark}
@@ -1322,7 +1326,7 @@ i.e. $f(D)$ is the lower-right triangle of the square $D$. In particular, we can
 
 \section[Tangent Bundles, Flows of Vector Fields]{\crule[gray!50!white]{0.3cm}{0.4cm}  Tangent Bundles, Flows of Vector Fields}
 \begin{definition}[Tangent space]
-  Let $U \subset \rfield^n, U$ open set. Given $p \in U$
+  Let $U \subset \rfield^n, U$ open set. Given $p \in U$,
   the set of all derivations of $C^\infty(U)$ at $p$ 
   (cf. def \ref{derivation}) is called tangent space to $U$ at $p$ and is denoted by $T_p U$. An element of $T_p U$ is called a tangent vector at $p$, and it is often denoted by $(p,v)$, $v_p$, or just $v$.
 \end{definition}
@@ -1417,7 +1421,7 @@ Now, let's talk about about Lie algebras.
 \end{remarkbox}
 
 \begin{definition}[Integral curve]
-  An integral curve for a vector field $v$ is a smooth curve $\phi \colon (a, b) \rightarrow \rfield^n$ satisfying $\dot\phi(t) = v_{\phi(t)}$ ($v_{\phi(t)}$ is the vector tangent at $\phi(t)$ for $t$ fixed, remember the previous notation!). Let us suppose $0 \in (a, b)$. Then, $\phi(0)$ is called the starting point of $\phi$.
+  An integral curve for a vector field $v$ is a smooth curve $\phi \colon (a, b) \rightarrow \rfield^n$ satisfying $\dot\phi(t) = v_{\phi(t)}$ ($v_{\phi(t)}$ is the vector tangent at $\phi(t)$ for $t$ fixed, remember the previous notation!).
 \end{definition}
 
 \begin{lemma}[Translation lemma]
@@ -1661,11 +1665,11 @@ See problem sheet 5, exercise 3.
 
 \section[Closed and Exact $k$-forms]{\crule[brown!50!white]{0.3cm}{0.4cm}  Closed and Exact $k$-forms}
 \begin{definition} [Closed and exact forms]
-  If $\omega \in \Omega^{k}(U)$ such that $d\omega = 0$, then $\omega$ is closed. If there exists $\alpha \in \Omega ^{k-1}(V), V \subset U$ such that $\omega = d\alpha$ in $V$ then $\omega$ is exact.
+  If $\omega \in \Omega^{k}(U)$ such that $d\omega = 0$, then $\omega$ is closed. If there exists $\alpha \in \Omega ^{k-1}(V), V \subset U$ such that $\omega = d\alpha$ in $V$, then $\omega$ is exact.
 \end{definition}
 
 \begin{proposition} \label{propex1forms}
-  The following are equivalent (\textbf{note that we are considering just 1-forms!}):
+  The following are equivalent (\textbf{note that we are considering 1-forms!}):
   \begin{enumerate}
     \item $\omega \in \Omega^1(U)$ is exact in a connected open subset $V \subset U$,
     \item For any curve $\gamma \colon (a, b) \rightarrow U, \int_{\gamma} \omega$ depends only on the endpoints $\gamma(a)$ and $\gamma(b)$,
@@ -1673,14 +1677,14 @@ See problem sheet 5, exercise 3.
   \end{enumerate}
 \end{proposition}
 \begin{proof}[Sketch of the proof]
-First, $(1) \Rightarrow (2)$ because of Stokes' theorem. Moreover, $(2) \Rightarrow (3)$ using Stokes' theorem again. Now, $(3) \Rightarrow (2):$ the curve made of the union of $\gamma_1$ and $\gamma_2$ is a closed curve. Then, if $\gamma$ is the name of such a closed curve:
+First, $(1) \Rightarrow (2)$ because of Stokes' theorem. Moreover, $(2) \Rightarrow (3)$ using Stokes' theorem again. Now, $(3) \Rightarrow (2):$ the curve made of the union of $\gamma_1$ and $\gamma_2$ is a closed curve (see Fig. \ref{Fig:closedcurve}). Then, if $\gamma$ is the name of such a closed curve:
 $$0 = \int_{\gamma} \omega = \int_{\gamma_1} \omega - \int_{\gamma_2} \omega$$
 where the minus sign comes from the orientation of the curves.
-Then: $\int_{\gamma_1} \omega = \int_{\gamma_2} \omega$ where $\gamma_1$ and $\gamma_2$ are any two curves with the same endpoints. It means that we can consider the integral of $\omega$ on any curve and the result  wouldn't change, \textbf{if} the new curve has the same endpoints of the initial curve.
-\begin{figure}[H] \label{Fig:closedcurve}
+Then: $\int_{\gamma_1} \omega = \int_{\gamma_2} \omega$ where $\gamma_1$ and $\gamma_2$ are any two curves with the same endpoints. It means that we can consider the integral of $\omega$ on any curve and the result  doesn't change \textbf{if} the new curve has the same endpoints of the initial curve.
+\begin{figure}[H] 
      \centering
      \includegraphics[width=0.3\textwidth]{Images/closedcurve.pdf}
-     \caption{Union of $\gamma_1$ and $\gamma_2$}
+     \caption{Union of $\gamma_1$ and $\gamma_2$} \label{Fig:closedcurve}
 \end{figure}
 $(2) \Rightarrow (1)$: Let's consider the 1-form $\omega = a_i dx^i$ (when $\omega$ has this form, we call it a \textit{standard form}). Let's fix a point $p \in V$ and define a function
 \begin{align*}
@@ -1720,9 +1724,9 @@ where we used $\int \omega = \int a_i \frac{dx^i}{dt} dt$ and the fact that ever
   $$\int_{\gamma} \omega = \sum_i \left[ f_i(t_{i+1}) - f_i(t_i) \right ] \, .$$
   If $\gamma$ is only continuous, we could still consider such a partition, and still define
   $$\int_{\gamma} \omega = \sum_i \left[ f_i(t_{i+1}) - f_i(t_i) \right ] \, .$$
-  The integral of $\gamma$ is well defined because the definition is independent from the choice of our partition: if $P$ is one partition and $P'$ is a refinement of $P$ (i.e. it is the same partition plus an extra point $t' \in (t_i, t_{i+1})$ for some $i$), then:
+  The integral of $\gamma$ is well defined because the definition is independent from the choice of our partition: if $P$ is a partition and $P'$ is a refinement of $P$ (i.e. it is the same partition plus an extra point $t' \in (t_i, t_{i+1})$ for some $i$), then:
   $$[f_i(t_{i+1}) - \cancel{f_i(t')}] + [\cancel{f_i(t')} - f_i(t_i)] = [f_i(t_{i+1}) - f_i(t_i)] \, .$$
-  Then the integral does not change if we consider a refinement. If we consider a general partition $P'$, we can add every point of the partition $P$ to $P'$, so that we get a refinement of $P'$ that we will call $P''$. The integral on the partition $P'$ has the same value of the integral on the partition $P''$ by the above argument. Now, we can add every point of the partition $P'$ to $P$, so to get the partition $P''$ again, but now we can see $P''$ as a refinement of $P$. Then the integral on $P$ and on $P''$ are the same. Then also the integrals on $P$ and $P'$ are the same.
+  Then the integral does not change if we consider a refinement. If we consider a general partition $P'$, we can add every point of the partition $P$ to $P'$, so that we get a refinement of $P'$ that we will call $P''$. The integral on the partition $P'$ has the same value of the integral on the partition $P''$ by the above argument. Now, we can add every point of the partition $P'$ to $P$, so to get the partition $P''$ again, but now we can see $P''$ as a refinement of $P$. Then the integral on $P$ and on $P''$ are the same. Then, the integrals on $P$ and $P'$ are also the same.
 \end{remark}\end{remarkbox}
 
 Now, we want to extend the above theorem to $k$-forms.
@@ -1828,12 +1832,12 @@ The following holds:
 
 \end{proof}
 
-Then we can extend Poincaré lemma to $k$-forms:
+Then, we can extend the Poincaré lemma to $k$-forms:
 \begin{theorem} [Poincaré Lemma] \label{poinclemma}
   Let $k \ge 1$. Let $U$ be a contractible, open subset of $\rfield^n$ and $\omega \in \Omega^k(U)$ with $d\omega = 0$. Then there exists a $(k-1)$-form $\alpha \in \Omega^{k-1} (U)$ such that $\omega = d\alpha$.
 \end{theorem}
 \begin{proof}
-The proof follows from the previous lemmas  \ref{lemmaform1} and \ref{lemmaform2}. In fact, in the hypotheses of the theorem, the $\alpha$ that we need is $\alpha = I \bar \omega$. Indeed: given $\omega \in \Omega^k(U)$, we can define $\bar \omega = H^* \omega \in \Omega^k(U \times \rfield)$, where $H$ is the map that can contract $U$ to a point. If we consider the map $i_t$ defined in \eqref{definclusion}, we have:
+The proof follows from the previous lemmas  \ref{lemmaform1} and \ref{lemmaform2}. In fact, in the hypotheses of the theorem, the $\alpha$ that we need is $\alpha = I \bar \omega$. Indeed: given $\omega \in \Omega^k(U)$, we can define $\bar \omega = H^* \omega \in \Omega^k(U \times \rfield)$, where $H$ is the map that contracts $U$ to a point. If we consider the map $i_t$ defined in \eqref{definclusion}, we have:
 $$H \circ i_1 = \id \quad \text{and} \quad H \circ i_0 = \text{const.}$$
 So:
 $$\omega = (H \circ i_1)^* \omega = i_1^* (H^* \omega) = i_1^* \bar \omega$$
@@ -1850,7 +1854,7 @@ Then, $\omega = d(I \bar \omega)$.
 Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independent of the choice of $\gamma$?
 
 \begin{definition}[Homotopy between curves]
-  Two continuous curves $\gamma_1$ and $\gamma_2$, $\gamma_i \colon [a, b] \rightarrow U, i=1,2, U \subset \rfield^n$ are freely homotopic if there exists a continuous map $H$
+  Two continuous curves $\gamma_1$ and $\gamma_2$, $\gamma_i \colon [a, b] \rightarrow U, i=1,2, U \subset \rfield^n$ are freely homotopic if there exists a continuous map $H$,
   \begin{align*}
     H \colon [a, b] &\times [0, 1] \rightarrow U &\text{ such that:}\\
     H(s, 0) &= \gamma_1(s), &\forall\, s \in [a, b] \\
@@ -1864,7 +1868,7 @@ Question: For $\omega \in \Omega^1(U)$, when is $\int_{\gamma}\omega$ independen
 \end{definition}
 
 \begin{definition}[Homotopy between curves with same endpoints]
-  Two continuous curves $\gamma_1$ and $\gamma_2$, $\gamma_i \colon [a, b] \rightarrow U, i=1,2, U \subset \rfield^n$, with $\gamma_1(a) = \gamma_2(a)$ and $\gamma_1(b) = \gamma_2(b)$ are homotopic relatively to $\{\gamma_1(a), \gamma_2(b)\}$ if there exists a continuous map $H$
+  Two continuous curves $\gamma_1$ and $\gamma_2$, $\gamma_i \colon [a, b] \rightarrow U, i=1,2, U \subset \rfield^n$, with $\gamma_1(a) = \gamma_2(a)$ and $\gamma_1(b) = \gamma_2(b)$ are homotopic relatively to $\{\gamma_1(a), \gamma_2(b)\}$ if there exists a continuous map $H$,
   \begin{align*}
     H \colon [a, b] &\times [0, 1] \rightarrow U &\text{ such that:}\\
     H(s, 0) &= \gamma_1(s), &\forall\, s \in [a, b] \\
@@ -1919,10 +1923,10 @@ $\gamma_1, \gamma_2 \colon [a, b] \rightarrow U$, $\gamma_i$ closed curves, are 
   \begin{equation}
     \int_{\gamma_1} \omega = \int_{\gamma_2} \omega \, .
   \end{equation}
-  In particular, if $\gamma_1$ is freely homotopic to a point, then $\int_{\gamma_1} \omega = 0$
+  In particular, if $\gamma_1$ is freely homotopic to a point, then $\int_{\gamma_1} \omega = 0$.
 \end{proposition}
 \begin{proof}[Idea of the proof]
-We can decompose the space in small squares and use the Stokes' theorem for each of them.
+We can decompose the space into small squares and use the Stokes' theorem for each of them.
 \end{proof}
 
 \begin{definition}[Simply connected set] \label{closedinsimplyconn}
@@ -1985,7 +1989,7 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
 \begin{definition}[de Rham complex]
   The de Rham complex is the sequence
   $$0 \overset{d}{\longrightarrow} \Omega^0 \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow}   \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots \overset{d}{\longrightarrow} \Omega^{n} \overset{d}{\longrightarrow} 0 $$
-  where $d$ is the exterior derivative now. It is well defined since we know that $d^2 = d \circ d = 0$ from the properties of the exterior derivative. Thus, $\im(d_k) \subset \ker(d_{k+1})$. Notice that we wrote $\Omega^k$ instead of $\Omega^k(U)$ for the sake of simplicity, and that the sequence stops at $\Omega^n$ because $U \subset \rfield^n$.
+  where $d$ is the exterior derivative now. It is well defined since we know that $d^2 = d \circ d = 0$ from the properties of the exterior derivative. Thus, $\im(d_k) \subset \ker(d_{k+1})$. Notice that we wrote $\Omega^k$ instead of $\Omega^k(U)$ for the sake of simplicity, and that the sequence stops at $\Omega^n$ because we are assuming $U \subset \rfield^n$.
 \end{definition}
 
 \begin{definition}[de Rham cohomology group] \label{drremark}
@@ -1998,7 +2002,7 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Cohomologous forms]
-  The set $\ker(d_{k+1})$ contains all the $k$ forms that are closed. The set $\im(d_k)$ contains the exact forms. As usual when we deal with vector spaces, the equivalence relation is:
+  The set $\ker(d_{k+1})$ contains all the $k$ forms that are closed. The set $\im(d_k)$ contains the exact forms. As usual when we deal with vector spaces, the equivalence relation of the quotient module we considered is:
   \begin{equation} \label{cohomol}
   \omega \sim \omega' \Leftrightarrow \omega - \omega' \in \im(d_k) \Leftrightarrow \omega - \omega' = d\alpha \text{ for some (} k-1 \text{)-form } \alpha \, .
   \end{equation}
@@ -2010,11 +2014,11 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
 \begin{tcolorbox}\begin{example}
   Let's consider the following examples:
   \begin{itemize}
-    \item If $U$ is contractible, then $H^k(U, \rfield) = \{0\}$ by Poincaré lemma,
+    \item If $U$ is contractible, then $H^k(U, \rfield) = \{0\}$ by the Poincaré lemma,
     \item $U=\rfield^2 \setminus \{0\}$, $H^0(\rfield^2 \setminus \{0\}, \rfield) = \rfield$ (constant functions),
     \item $H^1(\rfield^2 \setminus \{0\}, \rfield) = \rfield$,
     \item $H^2(\rfield^2 \setminus \{0\}, \rfield) = \{0\}$,
-    \item Torus $T$: $H^0(T) = \rfield$,  $H^1(T) = \rfield \oplus \rfield$, $H^2(T) = \rfield$.
+    \item Two-dimensional torus $T^2$: $H^0(T^2) = \rfield$,  $H^1(T^2) = \rfield \oplus \rfield$, $H^2(T^2) = \rfield$.
   \end{itemize}
 \end{example}\end{tcolorbox}
 
@@ -2028,18 +2032,18 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
 \end{remark}\end{remarkbox}
 
 \begin{remarkbox}\begin{remark} [Exact sequence] \label{exsequence}
-  If $H^k(M, \rfield) = 0$ for $k=1, \ldots, n$, then
+  If $M \subset \rfield^n$ and $H^k(M, \rfield) = 0$ for $k=1, \ldots, n$, then
     $$\cdots \overset{d}{\longrightarrow} \Omega^{k-1} \overset{d}{\longrightarrow} \Omega^{k} \overset{d}{\longrightarrow} \Omega^{k+1} \overset{d}{\longrightarrow} \cdots $$
-    is such that $\ker(d_{k+1}) = \im(d_k)$ for every $k=1, \ldots, n$. Notice that for $k=0$, $\Omega^0 = \{\text{functions}\}$, we have $H^0 \ne 0$. So, it doesn't hold for $k=0$.
+    is such that $\ker(d_{k+1}) = \im(d_k)$ for every $k=1, \ldots, n$. Notice that for $k=0$, $\Omega^0 = \{\text{functions}\}$, we have $H^0 \ne 0$. 
 \end{remark} \end{remarkbox}
 
 \begin{definition}[de Rham cohomology ring]
-  The de Rham cohomology ring is defined as
+  Let $M \subset \mathbb{R}^n$. The de Rham cohomology ring is defined as
   \[ H^*(M, \rfield) = \bigoplus_{k=0}^n H^k(M, \rfield) \, .\]
 \end{definition}
 
 \begin{tcolorbox}\begin{example}
-  $H^*(T^2, \rfield) = \rfield \oplus \rfield$, where $T^2$ is the torus.
+  $H^*(T^2, \rfield) = \rfield \oplus \rfield$, where $T^2$ is the two-dimensional torus.
 \end{example}\end{tcolorbox}
 
 \begin{remarkbox}\begin{remark}
@@ -2047,7 +2051,7 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
   subsets of $\rfield^n$, $\phi$ diffeomorphism, then $\phi^* \colon \Omega^k(V) \rightarrow \Omega^k(U)$ is the pullback of $\phi$ on $k$-forms.
   By the construction above, we can also define such pullbacks 
   on $H^k$, as $\phi^* \colon H^k(V) \rightarrow H^k(U)$, which maps closed-but-not-exact forms to closed-but-not-exact forms due to the naturality of the pullback. 
-  If $\phi$ is a diffeomorphism, then the pushforward $\phi_*$ is an isomorphism and hence also $\phi^*$ due to $\phi^* = \phi_*^{-1}$.
+  If $\phi$ is a diffeomorphism, then the pushforward $\phi_*$ is an isomorphism and so is $\phi^*$, due to the fact that $\phi^* = \phi_*^{-1}$.
   Question: what if $U$ and $V$ are not diffeomorphic, but only homotopy equivalent? We want to show that the final result is the same.
  \end{remark}\end{remarkbox}
 
@@ -2070,7 +2074,7 @@ The $k$-th cohomology group is a quantitative measure for the failure of exactne
      \item We call "homotopy inverse" the inverse of a function up to a homotopy. Any homeomorphism $\phi \colon U \rightarrow V$ with homotopy inverse $\phi^{-1}$ is a homotopy equivalence, but the converse is not always true (a disk is homotopy equivalent to a point, but it's not homeomorphic to a point). So, the concept of "homeomorphism" between sets is stronger than the concept of "homotopy equivalence",
      \item $S^1$ is homotopy equivalent to $\rfield^2 \setminus \{0\}$,
      \item $S^{n-1}$ is homotopy equivalent to $\rfield^n \setminus \{0\}$,
-     \item A solid torus is homotopy equivalent to a tea cup.
+     \item A solid torus is \href{https://commons.wikimedia.org/wiki/File:Mug_and_Torus_morph.gif#/media/File:Mug_and_Torus_morph.gif}{homotopy equivalent to a tea cup}.
    \end{itemize}
  \end{example}\end{tcolorbox}
 
@@ -2190,7 +2194,7 @@ See also example \ref{seqexample}.
   is exact.
 \end{theorem}
 \section[Submanifolds of $\rfield^n$]{\crule[blue!30!white]{0.3cm}{0.4cm}  Submanifolds of $\rfield^n$}
-\textbf{Premise:} We want to go outside $\rfield^n$, and analyze more general topologies. For now, we can think about them as generalizations of curves and surfaces of $\rfield^n$, a proper definition will come later. Note that what we studied until now can often be extended to manifolds: with sufficient conditions, manifolds can be "embedded" in $\rfield^n$.
+\textbf{Premise:} we want to explore more general spaces than $\rfield^n$, and analyze more general topologies as well. For now, we can consider generalizations of curves and surfaces in $\rfield^n$, whereas a more abstract definition will come later. Note that what we studied until now can often be extended to manifolds: under some conditions, manifolds can be "embedded" in $\rfield^n$.
 We will give four equivalent definitions of a submanifold $M$ of dimensions $m$ in $\rfield^n$ ($m \le n$).
 \begin{definition}[Submanifold - Local parametrization] \label{sub1}
   $M \subset \rfield^n$ is a submanifold of $\rfield^n$ if $\forall \, p \in M$ there exists an open neighbourhood $V \subset \rfield^n$ of $p$ and an open set $U \subset \rfield^m$, where $m \le n$, and there exists a smooth map $\phi \colon U \rightarrow \rfield^n$ such that:
@@ -2250,7 +2254,7 @@ $\forall \, p \in M$ there exists an open neighbourhood $V \subset \rfield^n$ of
 \begin{remarkbox}\begin{remark}[4 definitions]
 Let's analyze two of the four definitions of a submanifold of $\rfield^n$.
 \begin{description}
-\item[\ref{sub1})] The homeomorphism hypothesis is quite intuitive: we want our space to be locally similar to $\rfield^n$. In fact, the fact that $\phi$ is an isomorphism make the vector field given by the differential of $\phi$ well-defined. Indeed, the map $\phi$ can define a vector field on $M$ through its differential $d\phi=\phi_*$, if $\phi_*$ is a bijective map.
+\item[\ref{sub1})] The homeomorphism hypothesis is quite intuitive: we want our space to be locally similar to $\rfield^n$. Indeed, the fact that $\phi$ is an isomorphism makes the vector field given by the differential of $\phi$ well-defined: the map $\phi$ determines a vector field on $M$ through its differential $d\phi=\phi_*$, if $\phi_*$ is a bijective map.
 \begin{center}
 \begin{minipage}{0.9\textwidth}
 \vspace{1em}
@@ -2262,8 +2266,8 @@ Let's analyze two of the four definitions of a submanifold of $\rfield^n$.
 \end{center}
 If $\phi$ is not injective, we would have some points on $M$ such that the tangent vector about these points is not unique: the physical meaning would be lost, and also the vector field given by the differential would not be well defined since it assigns more than one element to the initial vector.
 If $\phi$ is not surjective, we would have some points on $M$ that have no tangent vector at all.
-Moreover, we have the hypothesis of injectivity of $\phi_*$. It means that $\phi$ is a smooth embedding (see also the def. \ref{smoothembedd} that will be given in the next sections). Being a smooth embedding means that $U$ is being included in $V \cap M$. In fact, the Rank theorem (page 81 \citetalias{Lee}) says that a such a map behaves like an inclusion ($U$ is "injected" in $V \cap M$).
-\item[\ref{sub3})] The hypothesis of surjectivity is required because of what we previously said about the Rank theorem. In particular, we require $F$ to be a smooth submersion (see also the def. \ref{smoothsubm} that will be given in the next sections). Using the Rank theorem, it means that the map $F$ behaves like a projection ($V \cap M$ is projected into the zero set). Notice that in this case we don't care about vector fields, so $F$ doesn't have to be bijective!
+Moreover, we have the hypothesis of injectivity of $\phi_*$. It means that $\phi$ is a smooth embedding (see also def. \ref{smoothembedd}, which will be given in the next sections). Being a smooth embedding means that $U$ is being included in $V \cap M$. In fact, the Rank theorem (page 81 \citetalias{Lee}) says that a such a map behaves like an inclusion ($U$ is "injected" in $V \cap M$).
+\item[\ref{sub3})] The hypothesis of surjectivity is required because of what we previously said about the Rank theorem. In particular, we require $F$ to be a smooth submersion (see also the def. \ref{smoothsubm} that will be given in the next sections). Using the Rank theorem, it means that the map $F$ behaves like a projection ($V \cap M$ is projected into the zero set). Notice that in this case we don't deal with vector fields, so $F$ doesn't have to be bijective!
 \end{description}
 \end{remark}\end{remarkbox}
 
@@ -2289,7 +2293,7 @@ Let's consider the Jacobian matrix:
 \defonde{F^{n-m}}{x^1} & \ldots & \defonde{F^{n-m}}{x^{m+1}} & \ldots & \tikzmark{right}{\defonde{F^{n-m}}{x^n}}
 \end{matrix} \right)
 \DrawBox[thick] \]
-Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U' $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ implies $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m)$, where $(x_1, \ldots, x_m) \in U'$. Moreover, different orderings of columns of $A$ give rise to different permutations. Then, $g$ is the graph of definition (d).
+Let $A \in \rfield^{(n-m) \times (n-m)}$ be the submatrix denoted by the rectangle. $A$ is invertible because $F$ is surjective. Then, by Dini's theorem (or implicit function theorem): $\exists\, U' \subset \rfield^m, U' $ open, $a \in U'$ and a map $g \colon U' \rightarrow \rfield^{n-m}$ such that $F(x_1, \ldots, x_m, x_{m+1}, \ldots, x_n)=0$ implies $(x_{m+1}, \ldots, x_n) = g(x_1, \ldots, x_m)$, where $(x_1, \ldots, x_m) \in U'$. Moreover, different orderings of columns of $A$ give rise to different permutations. Then, $g$ is the graph of definition (d).
 \item[(d) $\Rightarrow$ (a):] From (d), we know that $g \colon \rfield^m \supset U \rightarrow \rfield^{n-m}$. Then:
 \begin{align*}
 \phi \colon U &\rightarrow \rfield^n = \rfield^m \times \rfield^{n-m} \\
@@ -2381,11 +2385,11 @@ $\phi^{-1} \circ \phi'$ is a homeomorphism because $\phi$ and $\phi'$ are homeom
 &q' \in (\phi')^{-1}(\phi(U) \cap \phi'(U')) \subset U' \\
 &q \in \phi^{-1} \circ \phi' (q') \in U \, .
 \end{align*}
-By the proof of (a) $\Rightarrow$ (b) of the theorem \ref{allequiv}, we know that there exists a diffeomorphism $\Phi \colon \rfield^n \supset W \rightarrow V'' \subset \rfield^n$, with $(q, 0) \in W$, such that:
+By the proof of (a) $\Rightarrow$ (b) of theorem \ref{allequiv}, we know that there exists a diffeomorphism $\Phi \colon \rfield^n \supset W \rightarrow V'' \subset \rfield^n$, with $(q, 0) \in W$, such that:
 \[ \restrict{\Phi}{W \cap \rfield^m} = \restrict{\phi}{W \cap \rfield^m} \, . \]
 Thus:
 \[\restrict{\phi^{-1} \circ \phi'}{(\phi')^{-1} \circ \phi(W \cap \rfield^m)} = \restrict{\Phi^{-1} \circ \phi'}{(\phi')^{-1} \circ \phi(W \cap \rfield^m)} \]
-where the right-hand side is smooth. We can prove the same result the other way round.
+where the right-hand side is smooth. We can prove the same result the other way around.
 \end{proof}
 
 \begin{tcolorbox}\begin{example}[Submanifolds of $\rfield^n$]
@@ -2414,7 +2418,7 @@ where the right-hand side is smooth. We can prove the same result the other way 
   \end{enumerate}
 \end{example}\end{tcolorbox}
 
-Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanifold} in order to introduce the concept of manifold.
+Now, we want to use diffeomorphisms like those in corollary \ref{corsubmanifold} in order to introduce the concept of manifold.
 
 \begin{definition}[Atlas] \label{atlasdef}
   An (n-dimensional, smooth) atlas $\mathcal{A}$ on a set $M$ is a collection of maps (called charts)
@@ -2441,7 +2445,7 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-  The definition \ref{manifoldprel} above is "\textit{preliminary}" because we have not specified anything about the topology yet (we are still working on Euclidean topology). Moreover, in every equivalence class there exists a unique maximal atlas (i.e. such that, if combined with an other atlas, it can't get any bigger). We also notice that if the charts are smooth enough, we can pullback "everything" (e.g. all our vector fields, differential forms, etc. defined for subset of $\rfield^n$). However, in that case, everything is defined \textit{locally}. In order to patch them all together, we need some other result (like the partition of unity, coming soon).
+  The definition \ref{manifoldprel} above is "\textit{preliminary}" because we have not specified anything about the topology yet (we are still working in the Euclidean topology setting). Moreover, in every equivalence class there exists a unique maximal atlas (i.e. such that, if combined with an other atlas, it can't get any larger). We also notice that if the charts are smooth enough, we can pullback "everything" (e.g. all our vector fields, differential forms, etc.) to $\rfield^n$. However, in that case, everything is defined \textit{locally}. In order to patch them all together, we need some other result (like the partition of unity, see below).
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}\begin{example}[Projective space]
@@ -2458,7 +2462,7 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
     (x_0, \ldots, x_{i-1}, x_{i+1}, \ldots, x_n) &\mapsto [x_0, \ldots, x_{i-1}, 1, x_{i+1}, \ldots, x_n]
   \end{align*}
   And $\phi_i(\mathbb{K}^n) = \left\{[x_0, \ldots, x_n] \in \mathbb{K}P^n \, | \, \text{ i-th entry is } \not = 0 \right \}$.
-  We notice that $\mathcal{A}$ is an atlas because $\phi_i$ satisfies the properties of the definition \ref{atlasdef}:
+  We notice that $\mathcal{A}$ is an atlas because $\phi_i$ satisfies the properties of  definition \ref{atlasdef}:
   \begin{itemize}
     \item $\phi$ is a bijection and its inverse is
     \begin{align*}
@@ -2475,7 +2479,7 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
 \end{example}\end{tcolorbox}
 
 \begin{remarkbox}\begin{remark}[Extension of analysis to manifolds]
-  The existence of an atlas allows us to define concepts from analysis to manifolds. For instance, we can define continuous and smooth functions on manifolds using the concepts of continuity and smoothness that we use in $\rfield^n$.
+  The existence of an atlas allows us to define concepts of vector-space analysis in the setting given by manifolds. For instance, we can define continuous and smooth functions on manifolds using the concepts of continuity and smoothness that we use in $\rfield^n$.
 \end{remark}\end{remarkbox}
 
 \begin{definition}[Continuous/smooth function on a manifold]
@@ -2517,7 +2521,7 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
     \caption{$g(x)$}
   \end{subfigure}
   \end{figure}
-  Then we use the function 
+  Then, we define the function 
   \begin{equation*}
     h_{\epsilon}(x) \equiv h \left (\frac{x}{\epsilon} \right) =
     \begin{cases*}
@@ -2572,7 +2576,7 @@ Now, we want to use diffeomorphisms like those in the corollary \ref{corsubmanif
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[Representation of $v$ in $U_{\alpha}$, local coordinates]
-  Everything is done in $\rfield^n$. Indeed, if $(\phi_{\alpha}, U_{\alpha})$ is a chart, with $U_{\alpha} \subset \rfield^n$, $\phi_{\alpha}$ is called a local coordinate map. Then, the representation of a vector field $v$ in $U_{\alpha}$ is:
+  If $(\phi_{\alpha}, U_{\alpha})$ is a chart, with $U_{\alpha} \subset \rfield^n$, $\phi_{\alpha}$ is called a local coordinate map. Then, the representation of a vector field $v$ in $U_{\alpha}$ is:
   $$v_{(\alpha)} = v_{(\alpha)}^i \partial_{x_i}$$
   where
   $$v_{(\alpha)}^i(x) = v^i \circ \phi_{\alpha}(x) \, .$$
@@ -2626,7 +2630,7 @@ Now, if $f \colon M \rightarrow \rfield$, we can consider $f_i = \varphi_i f \co
 \end{definition}
 
 \begin{remarkbox}\begin{remark}[How to integrate]
-Let $\omega \in \Omega^n(M), M \text{ compact manifold }, \dim M=n$. Pick a partition of unity subordinate to a covering $\{V_{\alpha} \}$ (i.e. pick some maps $\varphi_i, i=1, \ldots, n, 0 \le \varphi_i \le 1, \sum_{i=1}^m \varphi_i \equiv 1, \text{ supp}(\varphi_i) \subset V_{\alpha(i)}$ for some $\alpha = \alpha(i)$). Then:
+Let $\omega \in \Omega^n(M), M \text{ compact manifold}, \dim M=n$. Pick a partition of unity subordinate to a covering $\{V_{\alpha} \}$ (i.e. pick some maps $\varphi_i, i=1, \ldots, n, 0 \le \varphi_i \le 1, \sum_{i=1}^m \varphi_i \equiv 1, \text{ supp}(\varphi_i) \subset V_{\alpha(i)}$ for some $\alpha = \alpha(i)$). Then:
 \begin{align}
   \int\limits_M \omega &= \int\limits_M \sum_{i=1}^m \varphi_i \omega = \sum_i \int\limits_M (\varphi_i \omega) = \sum_i \int\limits_{V_{\alpha(i)}} (\varphi_i \omega) = \nonumber \\
   & = \sum_i \int\limits_{U_{\alpha(i)}} \phi^*_{\alpha(i)} (\varphi_i \omega)
@@ -2669,7 +2673,7 @@ where we could swap the sums since they are finite (they are finite because $M$ 
 \end{definition}
 
 \begin{definition}[\textbf{Preliminary} definition of diff. manifold with boundary]
-  An $n$-dimensional differentiable manifold with a regular boundary is a set $M$ with an equivalence class of atlases, as usual, but with the difference that $\rfield^n$ in the definition \ref{atlasdef} is replaced by $H^n$ everywhere. The boundary is "regular" if it is described by a regular curve (no intersection, etc...).
+  An $n$-dimensional differentiable manifold with a regular boundary is a set $M$ with an equivalence class of atlases, as usual, but with the difference that $\rfield^n$ in the definition \ref{atlasdef} is replaced by $H^n$ everywhere. The boundary is "regular" if it is described by a regular curve (no intersections, etc...).
 \end{definition}
 
 When is a point on the boundary of a manifold?
@@ -2709,23 +2713,25 @@ $ $
   \end{equation}
 \end{theorem}
 \begin{proof}[Idea of the proof]
-First, we prove the theorem for a rectangle and then, for a generic set, we fill the set itself with rectangles.
+First, we prove the theorem for a rectangle and then, for a generic set, we approximate with rectangles.
 \end{proof}
 
 \section[Abstract Manifolds]{\crule[red!50!white]{0.3cm}{0.4cm}  Abstract Manifolds}
-\begin{remarkbox}\begin{remark}[Non-Example of a manifold]
-The set $$M= (-\infty, 0) \cup (0, \infty) \cup \{a, b\}$$ (endowed with a particular topology that we will see later) is not a manifold. Here, $a, b$ can be seen as points of $\rfield^2$: just imagine $M$ as a subset of $\rfield^2$, consisting of a real line without the origin plus any two points in $\rfield^2$. Even if we have not defined a topology on $M$, we can feel that it doesn't look right: there are two maps $\varphi_a, \varphi_b$ identifying the subsets $U_a = M \setminus \{b\}$ and $U_b = M \setminus \{a\}$ with $\rfield$. Indeed, in the first case the 0 element is given by the point $a$, whereas in the second case the 0 is given by $b$. The transition function
-$$\varphi_b \circ \varphi_a^{-1} \colon \varphi_a(U_a \cap U_b) = \rfield \setminus \{0\} \rightarrow \varphi_b(U_b \cap U_a) = \rfield \setminus \{0\}$$
-is the identity, and is smooth. \textbf{But}  a smooth function on $M$ must have the same value when evaluated at $a$ and $b$, and this does not look right (why?).
-\end{remark}\end{remarkbox}
+%\begin{remarkbox}\begin{remark}[Non-Example of a manifold]
+%The set $$M= (-\infty, 0) \cup (0, \infty) \cup \{a, b\}$$ (endowed with a particular topology that we will see later) is not a manifold. Here, $a, b$ can be seen as points of $\rfield^2$: just imagine $M$ as a subset of $\rfield^2$, consisting of a real line without the origin plus any two points in $\rfield^2$. Even if we have not defined a topology on $M$, we can feel that it doesn't look right: there are two maps $\varphi_a, \varphi_b$ identifying the subsets $U_a = M \setminus \{b\}$ and $U_b = M \setminus \{a\}$ with $\rfield$. Indeed, in the first case the 0 element is given by the point $a$, whereas in the second case the 0 is given by $b$. The transition function
+%$$\varphi_b \circ \varphi_a^{-1} \colon \varphi_a(U_a \cap U_b) = \rfield \setminus \{0\} \rightarrow \varphi_b(U_b \cap U_a) = \rfield \setminus \{0\}$$
+%is the identity, and is smooth. \textbf{But}  a smooth function on $M$ must have the same value when evaluated at $a$ and $b$, and this does not look right (why?).
+%\end{remark}\end{remarkbox}
 
 
 
 \begin{definition}[Manifold]
 A manifold $M$ of dimension $n$ is a topological space which is Hausdorff, second countable and admits an (equivalence class of) atlas(es) $\varphi_i \colon U_i \rightarrow V_i$, where the
 $\varphi_i$ are homeomorphisms, $U_i \subset M$ is open and $V_i \subset \rfield^n$ is also open, so that the transition functions
-$$\varphi_i \circ \varphi_j^{-1} \colon \varphi_j(U_i \cap U_j) \rightarrow \varphi_i (U_i \cap U_j)$$ are smooth (i.e. $C^{\infty}$). Sometimes we consider $\varphi$ going from $\rfield^n$ to $M$ instead that the other way around, without any loss of generality. Notice that we are considering equivalence classes of atlases. We recall that the equivalence relation is the following one: two atlases are equivalent if their union is still a smooth atlas.
+$$\varphi_i \circ \varphi_j^{-1} \colon \varphi_j(U_i \cap U_j) \rightarrow \varphi_i (U_i \cap U_j)$$ are smooth (i.e. $C^{\infty}$). 
 \end{definition}
+
+Sometimes we consider $\varphi$ going from $\rfield^n$ to $M$ instead of the other way around, without any loss of generality. Notice that we are considering equivalence classes of atlases. We recall that the equivalence relation is the following one: two atlases are equivalent if their union is still a smooth atlas.
 
 \begin{remarkbox} \begin{remark}[2nd countable hypothesis for a manifold]
 We require the hypothesis of second countability for manifolds in order to apply several theorems or lemmas, e.g. Sard's theorem.
@@ -2808,7 +2814,7 @@ A derivation $v_p$ on smooth functions $C^{\infty}(M)$ at $p$ is a $\rfield-$lin
 \begin{definition}[Alg. tangent space]
 We define the algebraic tangent space at $p$ as:
 \begin{equation*}
-\tangentalg{p} M = \{\text{derivations of } p \} \, .
+\tangentalg{p} M = \{\text{derivations at } p \} \, .
 \end{equation*}
 \end{definition}
 
@@ -2852,9 +2858,9 @@ Then, $v$ is defined by the way it reacts to coordinate functions around $p$. Th
 \begin{definition}[Physicists' tangent space]
 Let $M$ be a manifold of dimension $n$, then a tangent vector is a map
 \begin{equation}
-v \colon \{ \text{ charts } (U, \varphi) \text{ around } p \} \rightarrow \rfield^n
+v \colon \{ \text{charts } (U, \varphi) \text{ around } p \} \rightarrow \rfield^n
 \end{equation}
-where $v$ is defined such that if we change charts we have:
+where $v$ is defined such that, for every couple of charts $(V, \psi)$ and $(U, \varphi)$ around $p$:
 \begin{equation} \label{phystransf}
 v(V, \psi) = D_p (\psi \circ \varphi^{-1})\, v(U, \varphi) \, .
 \end{equation}
@@ -2862,7 +2868,7 @@ The space of such maps is called tangent space (according to the physicists' def
 \end{definition}
 
 \begin{remarkbox}\begin{remark} \label{equivremark}
-The three previous definitions of tangent space are all equivalent, indeed we can find isomorphisms between such tangent spaces.
+The three previous definitions of tangent space are all equivalent, indeed we can find isomorphisms between such spaces.
 \begin{enumerate}
 \item
 \begin{align}
@@ -2993,7 +2999,7 @@ so that $\pr \circ \alpha = \id_M$ (it is a section of the cotangent bundle). $k
 As a short summary: given two manifolds $M$ and $N$ and a map $f \colon M \rightarrow N$, we have:
 \begin{itemize}
 \item The pushforward of $f$ is a map $f_* \colon TM \rightarrow TN$. When evaluated at a point $p \in M$, it is a map $T_p M \rightarrow T_{f(p)}N$,
-\item The pullback of $f$ is a map $f^* \colon \Omega^k(N) \rightarrow \Omega^k(M)$.
+\item The pullback of $f$ is a map $f^* \colon \Omega^k(N) \rightarrow \Omega^k(M)$, for some $k \in \mathbb{N}$, $k \le \dim M$.
 \end{itemize}
 \end{remark} \end{remarkbox}
 
@@ -3092,7 +3098,7 @@ It is an isomorphism since it is linear, i.e. $(X + Y)_e = X_e + Y_e$, and we ca
 $$X_h = (l_{h*})_e X_e= (Dl_h)_e(X_e) \quad \oast$$
 by left-invariance. In fact, we can analyze and prove $\oast$ in the following way: the left-invariance condition $D l_g X = l_{g*}X = X$ means that
 $$D(l_g)_{g'}\, (X_{g'}) = X_{g g'}, \, \forall\, g, g' \in G$$
-where $D(l_g)_{g'}$ means that the derivation is computed at $g'$ (we use this notation instead of $D_{g'}(l_g)$) and $g'$ is also the point at which we consider our vector field $X$. In the right-hand side the product $gg'$ must be interpreted using the operation of the group $G$. Then, by left-invariance, we have that:
+where $D(l_g)_{g'}$ means that the derivation is computed at $g'$ (we use this notation instead of $D_{g'}(l_g)$) and $g'$ is also the point at which we consider our vector field $X$. At the right-hand side, the product $gg'$ must be interpreted using the operation of the group $G$. Then, by left-invariance, we have that:
 $$D(l_h)_e\, (X_e) = X_{e h} = X_h$$
 which is what we wanted to prove.
 So, we have $\lie{g} \cong T_e G$. In order to prove that $\lie{g}$ is a Lie algebra, we need Lie brackets that satisfy Lie algebra properties. In order to solve the problem, we notice that $l_g$ is not only a homomorphism, but also a diffeomorphism. By lemma \ref{commlemma}, point 5, and by recalling that the commutator of vector fields is still a vector field:
@@ -3123,7 +3129,7 @@ Assume that  $G \subset GL(n, \rfield)$. Then $\lie{g} \cong T_e G \subset \text
 \begin{equation} \label{expmatrix}
 \alpha^X(t) = \sum\limits_{j=0}^{\infty} \frac{t^j X^j}{j!}
 \end{equation}
-What if we want to compute the commutator of two left-invariant vector fields? We have that $[X, Y] = \text{ad}(X)(Y)$, where "$\text{ad}$" is the map defined in \eqref{grouphom2}. This is true in general, not only for $G \subset GL(n, \rfield)$. In fact, let's recall the maps defined in the remark \ref{autremark}:
+What if we want to compute the commutator of two left-invariant vector fields? We have that $[X, Y] = \text{ad}(X)(Y)$, where "$\text{ad}$" is the map defined in \eqref{grouphom2}. This is true in general, not only for $G \subset GL(n, \rfield)$. In fact, let's recall the maps defined in remark \ref{autremark}:
 \begin{enumerate}
 \item \begin{align}
 c_g \colon G &\rightarrow G \\
@@ -3202,7 +3208,7 @@ is a diffeomorphism. Thus, on $\mathcal{U}$ the $f$ is defined by:
 $$f = \exp^H \circ Df \circ \left(\restrict{\exp^G}{\mathfrak{U}}\right)^{-1} \, .$$
 Since the Lie group is connected, this is enough to prove the thesis. Indeed every neighbourhood $\mathcal{U}$ of $e$ in $G$ generates $G$ itself if it is connected. This fact can be proved in the following way, let's consider:
 $$V \equiv \mathcal{U} \cap \mathcal{U}^{-1} \, .$$
-It is an open neighbourhood, because intersection of open sets, with
+It is an open neighbourhood, since it is an intersection of open sets, with
 $\mathcal{U}^{-1} = \left \{u^{-1} \, | \, u \in \mathcal{U} \right \}$. Moreover,
 $$G^V \equiv \bigcup_{j=0}^{\infty} V^j, \qquad V^j \equiv \left \{v_1 \cdot \ldots \cdot v_j \, | \, v_i \in V \right \} \, .$$
 $G^V$ is a subgroup of $G$, and it is open because every element of the union is open: $V$ is open, $V^2 = \bigcup_{v \in V} v V$ is open, etc... We will now show that also the complement is open. First, we have that:
@@ -3357,7 +3363,7 @@ where:
 &K(f(x, t)\, \pi^* \eta \wedge dt) = \int_{-\infty}^t f(x, s) ds\, \pi^* \eta - F(x) \left ( \int_{-\infty}^t e(s)ds \right) \pi^* \eta \, \, \text{on (type B) forms.}
 \end{align}
 where $\eta$ is a $k$-form in the first case, and it is a ($k-1$)-form in the second case.
-\item $K$ is not a chain map (otherwise the right-hand side would be 0).
+\item $K$ is not a chain map (otherwise the right-hand side above would be 0).
 \end{itemize}
 \end{proposition}
 \begin{proof}
@@ -3387,7 +3393,7 @@ By comparing the three results, we have the thesis.
 
 \begin{remarkbox}
 \begin{remark}
-We proved the isomorphism in $H_c^k(M)$. Indeed, if $\omega$ is closed, then the \eqref{invequation} becomes:
+We proved the isomorphism in $H_c^k(M)$. Indeed, if $\omega$ is closed, then \eqref{invequation} becomes:
 \[ (\mathbb{1} - e_* \circ \pi_*)(\omega) = d \left( (-1)^{k-1} K \omega \right ) \, . \]
 So, $\omega$ and $e_* \circ \pi_*(\omega)$ differ by an exact form, i.e. they live in the same equivalence class.
 \end{remark}
@@ -3407,7 +3413,7 @@ H_c^k(\rfield^n) \cong
 \end{lemma}
 \begin{proof}
 The proof is by induction. 
-For $\fbox{n=1}$, the case $k \not = 1$ would be the case $k=0$: we are considering closed and compactly supported 0-forms, i.e. functions which are 0 everywhere. Thus, the only closed and compactly supported 0-form which is not exact is the trivial one:  $H^0_c(\rfield) = 0$. As regards the case $k=1$, we prove that the following map is an isomorphism:
+For $\fbox{n=1}$, the case $k \not = 1$ corresponds to the case $k=0$: we are considering closed and compactly supported 0-forms, i.e. functions which are 0 everywhere. Thus, the only closed and compactly supported 0-form which is not exact is the trivial one:  $H^0_c(\rfield) = 0$. As regards the case $k=1$, we prove that the following map is an isomorphism:
 \begin{align} \label{mapn}
 I \colon H^1_c(\rfield) &\rightarrow \rfield \\
 [\omega] &\mapsto \int_{\rfield} \omega \, . \nonumber
@@ -3518,7 +3524,7 @@ Now, we consider the form $\omega_u + \omega$ and we extend it by zero. It is co
 Then, $\varphi^* \eta$ is a primitive of the bump form $\varphi^* \omega$. So, $\varphi^* \omega$ is the zero form we were looking for.
 \end{proof}
 
-What if we remove orientation? Recall that we can't compute integrals without orientation.
+What if we remove the orientation property? Recall that we can't compute integrals without orientation.
 \begin{theorem}
 Let $M$ be a connected but not orientable manifold of dimension $n$. Then: $H^n(M) = 0$.
 \end{theorem}
@@ -3553,7 +3559,7 @@ By contradiction: let's assume $f$ has no fixed point. Then we consider the map
 \begin{align*}F \colon \overline{B_1(0)} &\rightarrow \partial \overline{B_1(0)} = S^{n-1} \\
 x &\mapsto \substack{\text{ intersection point with }S^{n-1} \\ \text{ of the ray passing through }x \text{ and } f(x)}
 \end{align*}
-(Notice that: when both $x$ and $f(x)$ belong to the border of the sphere the intersection is not unique. In that case we choose the point $x$).
+(Notice that two intersection points can be considered: we define $F$ so that one of the two points is chosen for each $x$).
 $F$ is a smooth function: we will not verify it because it is not interesting for the proof. Moreover, we notice that if $y \in \partial \overline{B_1(0)} \Rightarrow F(y) = y$.
 \begin{figure}[H] \label{Fig:ball10}
      \centering
@@ -3564,7 +3570,7 @@ Let's now consider the map: $\iota \colon S^{n-1} \rightarrow \overline{B_1(0)}$
 $$\id_{S^{n-1}}^* = \iota^* \circ F^* \quad \oast$$
 where we consider $F^*$ acting on closed-but-not-exact forms: $F^* \colon H^*(S^{n-1}) \rightarrow H^*(\overline{B_1(0)})$. If $* = n-1$, the map:
 $$F^* \colon \underbrace{H^{n-1}(S^{n-1})}_{\cong \rfield} \longrightarrow \underbrace{H^{n-1}(\overline{B_1(0)})}_{\cong \,0}$$
-has to be injective because of $\oast$ (if the composition of maps is injective, the first map acting is injective). But this is impossible because $H^{n-1}(S^{n-1}) \cong \rfield$ (maybe it was proved in the exercise sheets?) and $H^{n-1}(\overline{B_1(0)}) \cong 0$, with $B_1(0)$ $n$-dimensional ball. In order to prove the latter, we can't use the Poincaré lemma because $\overline{B_1(0)}$ is not homeomorphic to $\rfield^n$ (one is compact and the other is not, and compactness is left invariant under homeomorphisms). But we can prove that $\id \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ is homotopy equivalent to the map $\text{zero} \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ that sends every element of $\overline{B_1(0)}$ to $0 \in \overline{B_1(0)}$. Once we do this, we use the fact that the space itself is homotopy equivalent to the trivial set (for $n \ge 2$) and then the de Rham cohomology must be trivial as well.
+has to be injective because of $\oast$ (if the composition of maps is injective, the first map acting is injective). But this is impossible because $H^{n-1}(S^{n-1}) \cong \rfield$ (can be seen e.g. using the Mayer-Vietoris theorem) and $H^{n-1}(\overline{B_1(0)}) \cong 0$, with $B_1(0)$ $n$-dimensional ball. In order to prove the latter, we can't use the Poincaré lemma because $\overline{B_1(0)}$ is not homeomorphic to $\rfield^n$ (one is compact and the other is not, and compactness is left invariant under homeomorphisms). But we can prove that $\id \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ is homotopy equivalent to the map $\text{zero} \colon \overline{B_1(0)} \rightarrow \overline{B_1(0)}$ that sends every element of $\overline{B_1(0)}$ to $0 \in \overline{B_1(0)}$. Once we do this, we use the fact that the space itself is homotopy equivalent to the trivial set (for $n \ge 2$) and then the de Rham cohomology must be trivial as well.
 \end{proof}
 
 \begin{remarkbox}\begin{remark}
@@ -3579,7 +3585,7 @@ Let $f \colon M \rightarrow  N$ be smooth, let $N, M$ be closed, connected and o
 \end{definition}
 
 \begin{remarkbox}\begin{remark}
-The definition \ref{degreemap} does not depend on the $\omega$ chosen: the proof is in the first lines of page 458 of \citetalias{Lee}. It is proved that the number $\deg f$ exists and the proof does not depend on $\omega$. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
+Definition \ref{degreemap} does not depend on the $\omega$ chosen: the proof is in the first lines of page 458 of \citetalias{Lee}. It is proved that the number $\deg f$ exists and the proof does not depend on $\omega$. Moreover, the degree of a map is homotopy invariant: if $f_0, f_1 \colon M \rightarrow N$ are two homotopic maps, then $f_0^* = f_1^*$, so $f_0$ and $f_1$ have the same degree.
 \end{remark}\end{remarkbox}
 
 \begin{tcolorbox}
@@ -3594,7 +3600,7 @@ $ $
 f_k \colon S^1 &\rightarrow S^1 \subset \mathbb{C} \\
 e^{i \varphi} = z &\mapsto z^k
 \end{align*}
-Then we have $\deg(f_k) = k$, indeed we can consider $\omega = d\varphi, \varphi$ angular coordinate on $S^1$ (cf. example \ref{angexample}). We stress out that $d\varphi$ is not exact (it is just a bad notation) because $\varphi$ is not a well defined function (it is well defined up to a $2\pi$ angle). Then, we have:
+Then we have $\deg(f_k) = k$, indeed we can consider $\omega = d\varphi, \varphi$ angular coordinate on $S^1$ (cf. example \ref{angexample}). We stress that $d\varphi$ is not exact (it is just a bad notation) because $\varphi$ is not a well defined function (it is well defined up to a $2\pi$ angle). Then, we have:
 $$\int_{S^1} \omega = 2\pi, \quad \int_{S^1} f_k^* d\varphi = \int_{S^1} k \,d\varphi = 2\pi k \, \Rightarrow \,  \deg(f_k)=k$$
 where we used that $\varphi$ is the angular coordinate, so $f(e^{i\varphi}) = e^{i k \varphi}$,
 \item For the next theorem, we introduce the concept of critical value and regular value of a function $f$. A critical value is the image of a critical point. A point $p$ is a regular value for $f$ if $D_q f$ is a surjective map for every $q \in f^{-1}(p)$: in a simpler way, $p$ is a regular value if it is not a critical value.
@@ -3637,7 +3643,7 @@ We choose $\omega \equiv (\pr_1^* d \varphi_1) \wedge (\pr_2^* d\varphi_2)$. We 
 $$\int_{S^1 \times S^1} \omega = \int_{S^1} d\varphi_1 \int_{S^1} d\varphi_2 = 4 \pi^2$$
 Now, we have:
 $$f^* \omega = \underbrace{\left ( (\pr_1 \circ f)^* d \varphi_1 \right )}_{\text{closed 1-form on }S^2} \wedge \underbrace{\left( \pr_2 \circ f)^* d \varphi_2 \right)}_{\text{also closed}}$$
- because we used the proposition \ref{pullbackprop}, point 3, and because of the naturality of the pullback. Now, $H^1(S^2)=0$ (not proved, but it can be computed using the Mayer-Vietoris theorem \ref{mvthm}). So, every closed form on $S^2$ is exact. Thus, the two closed 1-forms above are actually exact forms.
+ due to proposition \ref{pullbackprop}, point 3, and to the naturality of the pullback. Now, $H^1(S^2)=0$ (not proved, but it can be computed using the Mayer-Vietoris theorem \ref{mvthm}). So, every closed form on $S^2$ is exact. Thus, the two closed 1-forms above are actually exact forms.
 So, $(\pr_1\circ f)^*d\varphi_1 = d g$ and we have that
 $$f^*\omega = dg \wedge \left( (\pr_2 \circ f)^* d \varphi_2 \right)$$ is exact because the product between an exact form  and a closed one is an exact form. Finally:
 $$\int_{S^2} f^* \omega = 0$$
@@ -3683,17 +3689,17 @@ Let's analyze the definition \ref{riemmetric}. The term "fiber" denotes the prei
 \end{remark}\end{remarkbox}
 
 \begin{theorem}
-Every smooth manifold admits a Riemannian metric,
+Every smooth manifold admits a Riemannian metric.
 \end{theorem}
 \begin{proof}
-Let's cover $M$ with charts $(U_i, \varphi_i)$ and pick a subordinate partition of unity $\phi_j \colon V_j \subset U_{i(\ldots)}\rightarrow \rfield$. We can do that because our manifold is second-countable and paracompact (the latter one is actually a necessary hypothesis). On each set $V_j$ there is a metric $g_j$ coming from the coordinates. Then, $g = \sum\limits_j \lambda_j g_j$ is a Riemannian metric (easy to verify). The key point is that a convex combination of positive definite is still positive definite).
+Let's cover $M$ with charts $(U_i, \varphi_i)$ and pick a subordinate partition of unity $\phi_j \colon V_j \subset U_{i(\ldots)}\rightarrow \rfield$. We can do that because our manifold is second-countable and paracompact (the latter one is actually a necessary hypothesis for the theorem). On each set $V_j$ there is a metric $g_j$ coming from the coordinates. Then, $g = \sum\limits_j \lambda_j g_j$ is a Riemannian metric (easy to verify). The key point is that the positive-definiteness property is preserved under convex combinations.
 \end{proof}
 
 \begin{remarkbox}\begin{remark}[Counter-example for Lorentzian metric]
 It is not true that every manifold admits a Lorentzian metric. For instance, $S^{2n}$ does not.
 \end{remark}\end{remarkbox}
 
-A Riemannian metric assigns lengths to vectors, angles between vectors...we want to extend this (or, analogously, a Lorentzian metric) to alternating forms.
+A Riemannian metric assigns lengths to vectors, angles between vectors, etc. We want to extend the concept of metric (or, analogously, of Lorentzian metric) to alternating forms.
 \newline
 \begin{remarkbox}
 %[label=genmetricremark]
